@@ -1,0 +1,115 @@
+.form-content{
+  position: relative;
+  margin: 90px auto;
+  
+ }
+ .login-container{
+   position: relative;
+   margin: 80px auto;
+   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
+   width: 510px;
+   height: 450px;
+   border-radius: 10px;
+ }
+ .form-success {
+     text-align: center;
+     font-size: 24px;
+     margin-top: 80px;
+     color: black;
+    
+ }
+ 
+ .form-login{
+   padding: 12%;
+   width:900px;
+ }
+ .form {
+     padding: 4%;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     width:900px;
+     height: 100%;
+  
+   }
+ h1 {
+     font-size: 20px;
+     text-align: start;
+     width: 80%;
+     margin-top: 15px;
+     margin-bottom: 1rem;
+     color:rgb(8, 32, 139);
+   }
+ .form-iput-line {
+       display: flex;
+       width: 70%;
+       justify-content: flex-start;
+       align-items: center;
+   }
+ .form-input-login{
+     width: 50%;
+   }
+ .form-iput-line-email{
+       width: 74%;
+   }
+ .form-inputs {
+     display: inline-block;
+     margin-bottom: 0.5rem;
+     width: 100%;
+   }
+   
+ .form-inputs p {
+     font-size: 0.8rem;
+     margin-top: 0.5rem;
+     color: #f00e0e;
+   }  
+ 
+   
+ .form-label {
+     display: inline-block;
+     font-size: 0.8rem;
+     margin-bottom: 6px;
+     color:black;
+   }
+   
+ .form-input {
+     display: block;
+     padding: 10px;
+     outline: none;
+     border-radius: 10px;
+     height: 40px;
+     width: 90%;
+     border: none;
+     background-color:rgba(102, 102, 235, 0.24);
+     color: #595959;
+     font-size: 12px;
+   }
+ .forgot-pswd a{
+     text-decoration: none;
+     color:rgb(8, 32, 139);
+     font-size: 0.8rem;
+   }
+   
+ .form-input-btn {
+     outline: none;
+     border-radius: 10px;
+     margin-top: 3rem;
+     height: 40px;
+     width: 32%;
+     font-size: 17px;
+     border: none;
+     text-align: center;
+     justify-content: center;
+     align-items: center;
+     background:rgba(12, 12, 109, 0.644);
+     color: #fff;
+   }
+   
+ .form-input-btn:hover {
+     cursor: pointer;
+     background-color:rgba(102, 102, 235, 0.24);
+     color:rgb(8, 32, 139);
+     transition: all 0.4s ease-out;
+   }
+   
