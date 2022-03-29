@@ -1,0 +1,165 @@
+/* Css de header simple*/
+
+.Header-for-interface{
+    box-shadow: 2px 1px #9dacb63d;
+    padding: 0.8%;
+    width: 80%;
+    float: right;
+    font-size: 15px;
+}
+.nav-container{
+    display: flex;
+    width: 23%;
+    float: right;
+    align-items: center;
+}
+.nav-elem{
+    display: block;
+    padding-left: 5%;
+    align-items: center;
+    color: #040718a4;
+    text-align:left;
+}
+.elem{
+    display: flex;
+    align-items: center;
+}
+.prfl{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: #040718a4;
+
+}
+.icon{
+    width: 17px;
+    height: 17px;
+    color: #040718cb;
+    padding-left: 2px;
+    padding-right:5px;
+}
+/*Css du menu descendant du profil*/
+.profil-content{
+    background-color:rgba(102, 102, 235, 0.24);
+    border-radius: 15px;
+    padding: 0.8%;
+    width: 18%;
+    float: right;
+    font-size: 15px;
+    margin-right: 4%;
+}
+
+.profil-info{
+    text-align: center;
+    padding-top: 15%;
+    padding-bottom: 10%;
+    border-bottom:solid 1px #9dacb63d;
+}
+.profil-info .prfl{
+    height: 50px;
+    width: 50px;
+}
+
+.profile , .log-out{
+    display: flex;
+   
+    
+    padding: 5%;
+    margin: 5%;
+    align-items: center;
+}
+
+.profile a, .log-out a {
+    text-decoration: none; 
+    color:#040718;
+}
+.profile{
+  
+    border-bottom:solid 1px #9dacb63d; 
+}
+
+.icon-profil-menu{
+    padding-right: 5%;
+}
+
+.profile:hover , .log-out:hover{
+    background-color:#040718a4;
+    border-radius: 10px;
+    cursor: pointer;
+}
+/* Css de la bare à gauche the logo is perfect adjust please the other elements */
+
+.left-nav-container{
+    background-color: #040718;
+    color: white;
+    padding: 0.8%;
+    font-size: 15px ;
+    width: 20%;
+    float: left;
+    height: 100%;
+    position: fixed;
+    
+}
+
+.lg {   
+    width: 90%;
+    height:90%; 
+    margin-bottom: 10%;   
+}
+
+.left-elements{
+    display: block;
+    padding: 1% 1% 1% 2%;
+    box-shadow: 0px 1px #9dacb63d;
+    width: 98%;
+    font-size: 15px;
+    
+    
+
+}
+
+.link { 
+    display: flex;
+    padding: 5%;
+    margin: 5%;
+    color: rgba(255, 255, 255, 0.452);
+    align-items: center;
+    text-decoration: none;
+}
+.active{
+ 
+    display: flex;
+    padding: 5%; 
+    margin: 5%;
+    color: rgba(255, 255, 255, 0.452);
+    align-items: center;
+    border-radius: 10px;
+    background-color:#4545464f;
+    cursor: pointer;  
+    text-decoration: none;
+  
+}
+
+.link:hover { 
+   border-radius: 10px;
+   background-color:#4545464f;
+   color: #040718;
+   cursor: pointer;
+}
+
+.link p{
+  
+    color: rgba(255, 255, 255, 0.452);
+    padding-left: 5%;
+    
+}
+.active p{
+  
+    color: rgba(255, 255, 255, 0.452);
+    padding-left: 5%;
+    
+}
+
+.active .icon-left{
+    color: #040718;
+}
