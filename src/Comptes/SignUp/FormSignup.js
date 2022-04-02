@@ -17,7 +17,7 @@ const [pswd1,setpswd1] = useState("");
 
 const signup = () => {
 
-    axios.post("http://localhost:2000/signup", {
+    axios.post("http://localhost:2000/admin/create", {
         nom:values.nom,
         prenom:values.prenom,
         email:values.email,
