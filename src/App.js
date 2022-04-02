@@ -9,9 +9,9 @@ function App() {
   return (
     <>
      <Routes>
-        <Route path="/Admin" element={ <CreateComp/> } />
-        <Route path="/Connect" element={ <FormConnect/> } />
-        <Route path="/Create" element={ <FormCreat/> } />
+        <Route path="/Admin/create" element={ <CreateComp/> } />
+        <Route path="/auth/Connect" element={ <FormConnect/> } />
+        <Route path="/auth/signup" element={ <FormCreat/> } />
       </Routes>
     </>
 

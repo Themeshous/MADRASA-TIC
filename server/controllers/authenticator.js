@@ -1,15 +1,18 @@
-const {db, saveUser } = require('../../db/Gateway');
+//@ts-check
+const { findUser } = require('../../db/Gateway');
 
-async function signUp(req, res) {
-    const Nom = req.body.nom;
-    const Prenom = req.body.prenom;
-    const Email = req.body.email;
-    const Role = req.body.role;
-    const Profession = req.body.profession;
-    const Password = req.body.password;
-    const Password1 = req.body.password1;
+async function login(req, res) {
+    const email = req.body.email;
+    const password = req.body.password;
 
-    await saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1);
+    console.log(req.body);
+
+   const data =  await findUser(email, password);
+   if (!data) {
+    res.json({ msg: "Email not found/or password incorrect" });
+    return;
+   } else 
+    res.json({ data });
 }
 
-module.exports = {signUp}
+module.exports = { login }

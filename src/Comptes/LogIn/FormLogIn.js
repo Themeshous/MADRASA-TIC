@@ -12,14 +12,13 @@ const FormLogIn = ({connectForm}) => {
   const [email,setemail] = useState("");
   const [pswd,setpswd] = useState("");
 
-  const login = () => {
-    axios.post("http://localhost:2000/login", {
+  const login = async () => {
+    const result = await axios.post("http://localhost:2000/auth/connect",  {
         email:val.email,
         password:val.pswd,
+    })
 
-    }).then((errors)=>{
-        console.log(errors);
-    });
+    console.log(result);
 
 };
 
