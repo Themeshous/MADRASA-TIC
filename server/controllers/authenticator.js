@@ -7,12 +7,25 @@ async function login(req, res) {
 
     console.log(req.body);
 
-   const data =  await findUser(email, password);
-   if (!data) {
-    res.json({ msg: "Email not found/or password incorrect" });
-    return;
-   } else 
-    res.json({ data });
+    const data = await findUser(email, password);
+    if (!data)
+        res.json({connected: false, message: "Email not found/or password incorrect" });
+    else if (!data.isActive)
+        res.json({connected: false, message: "the user is disactivated by the admin" });
+    else
+        res.json(createToken(data));
+
+}
+
+function createToken(user) {
+    return {
+        nom: user.Nom,
+        prenom: user.Prenom,
+        email: user.Email,
+        role: user.Role,
+        profession: user.Profession,
+        connected: true
+    };
 }
 
 module.exports = { login }
