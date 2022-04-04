@@ -1,5 +1,5 @@
 //@ts-check
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const bcrypt = require('../server/node_modules/bcryptjs');
 //const Account = require('../models/Account');
 //require('dotenv').config();
@@ -19,6 +19,8 @@ db.connect(function (err) {
   console.log("BDD Connected!");
 });
 
+const connection = db.promise();
+
 async function saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1) {
   const hashpswd = await bcrypt.hash(Password, 8);
 
@@ -30,25 +32,9 @@ async function saveUser(Nom, Prenom, Email, Role, Profession, Password, Password
 }
 
 async function findUser(Email, Password) {
-  let data;
   const selectQuery = "SELECT * FROM users WHERE Email = ? AND Password1 = ?";
-  db.query(selectQuery, [Email, Password], (err, result) => {
-      console.log(result);
-      if (err) {
-        console.log(err);
-      }
-      if ((result.length == 0) || (!bcrypt.compare(Password, result[0].Password1))) {
-        // if user not found
-        console.log("Email not found/or password incorrect");
-      }
-      else {
-        // Cas parfait
-        console.log('Welcome to your profile');
-        data = result;
-      }
-    }
-  )
-  return data;
+  const [[result]] = await connection.query(selectQuery, [Email, Password]);// destruct two time to get Account object
+  return result;
 }
 
 async function setActiveUser(email, value) {
