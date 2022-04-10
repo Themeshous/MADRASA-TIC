@@ -13,6 +13,7 @@ const FormLogIn = ({connectForm}) => {
   const [pswd,setpswd] = useState("");
 
   const login = () => {
+    
     axios.post("http://localhost:2000/login", {
         email:val.email,
         password:val.pswd,
@@ -70,7 +71,7 @@ const FormLogIn = ({connectForm}) => {
              
            </div>
            
-           <button className='form-input-btn' type='submit'onClick={login}>
+           <button className='form-input-btn' type='submit' onClick={login}>
            <strong> Connecter </strong>
            </button> 
             </div>
