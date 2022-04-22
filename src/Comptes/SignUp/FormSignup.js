@@ -7,13 +7,6 @@ import { useState } from 'react';
 
 const FormSignup = ({submitForm}) => {
 
-const [nom,setnom] = useState("");
-const [prenom,setprenom] = useState("");
-const [email,setemail] = useState("");
-const [role,setrole] = useState("");
-const [profession,setprofession] = useState("");
-const [pswd,setpswd] = useState("");
-const [pswd1,setpswd1] = useState("");
 
 const signup = () => {
 
@@ -165,7 +158,7 @@ const signup = () => {
          
           
            <button className='form-input-btn' type='submit' onClick={signup}>
-           <strong> Créer le compte  </strong>
+           <p> Créer le compte  </p>
            </button>
         
        </form>
