@@ -16,7 +16,7 @@ function createUserTokenForAdmin(user) {
         email: user.Email,
         role: user.Role,
         profession: user.Profession,
-        isActive: user.isActive
+        isActive: user.isActive,
     };
 }
 

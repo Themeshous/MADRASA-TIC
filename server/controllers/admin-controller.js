@@ -1,8 +1,8 @@
 const {createUserTokenForAdmin} =  require("../utils/create-token");
 
-const {saveUser, getAllUsers } = require('../../db/Gateway');
+const {saveUser, getAllUsers, setActiveUser} = require('../../db/Gateway');
 
-async function createUser(req, res) {
+async function createUser(req) {
     const Nom = req.body.nom;
     const Prenom = req.body.prenom;
     const Email = req.body.email;
@@ -19,8 +19,14 @@ async function getAllUserTokens() {
     return hideSensitiveInformations(result);
 }
 
-function hideSensitiveInformations(result) {
-    return result.map(createUserTokenForAdmin);
+    function hideSensitiveInformations(result) {
+        return result.map(createUserTokenForAdmin);
+    }
+
+async function activateOrDeactivateUser(request) {
+    const email = request.body.email;
+    const isActivated = request.body.isActive;
+    await setActiveUser(email, isActivated? 1: 0);
 }
 
-module.exports = {createUser, getAllUserTokens}
+module.exports = {createUser, getAllUserTokens, activateOrDeactivateUser}
