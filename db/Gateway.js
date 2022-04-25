@@ -10,7 +10,7 @@ const { MYSQL_DB, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_USER } = process.env;
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'Beginning database design solutions',
+  password: '123456789',
   database: 'registration'
 });
 

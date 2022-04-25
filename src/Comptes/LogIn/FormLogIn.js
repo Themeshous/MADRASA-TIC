@@ -66,14 +66,14 @@ const FormLogIn = ({ connectForm }) => {
             {errors.pswd && <p>{errors.pswd}</p>}
           </div>
           <div className='forgot-pswd' >
-            <a href='/Reset'>
+            <a href='/Forget-password'>
               Avez vous oublié votre mot de pase ?
             </a>
 
           </div>
 
           <button className='form-input-btn' type='submit' onClick={login}>
-            <strong> Connecter </strong>
+            <p> Connecter </p>
           </button>
         </div>
       </form>
