@@ -1,6 +1,6 @@
 .form-content{
   position: absolute;
-  margin-left:60%;
+  margin-left:1000px;
   margin-top: 5%;
   
  }
@@ -18,13 +18,18 @@
      color: black;
     
  }
- 
+ .form-content-right{
+  margin-left: 30%;
+  width: 60%;
+ }
  .form-login{
    padding: 12%;
    width:900px;
  }
  .form {
      padding: 4%;
+     margin-top: 20px;
+     margin-left:100px;
      position: absolute;
      top: 50%;
      left: 50%;
@@ -39,7 +44,7 @@
      width: 80%;
      margin-top: 12px;
      margin-bottom: 1.5rem;
-     color:#040718;
+     color:#020930;
    }
  .form-iput-line {
        display: flex;
@@ -81,7 +86,7 @@
      height: 40px;
      width: 90%;
      border: none;
-     background-color:rgba(102, 102, 235, 0.24);
+     background-color:#f2f2f2;;
      color: #595959;
      font-size: 12px;
    }
@@ -103,7 +108,7 @@
      text-align: center;
      justify-content: center;
      align-items: center;
-     background:#040718;
+     background:#020930;
      color: rgba(255, 255, 255, 0.836);
    }
   .form-input-forget-btn{
@@ -117,12 +122,12 @@
      text-align: center;
      justify-content: center;
      align-items: center;
-     background:#040718;
+     background:#020930;
      color: rgba(255, 255, 255, 0.836);
  }
  .form-input-forget-btn:hover,.form-input-btn:hover {
      cursor: pointer;
-     background-color:rgba(102, 102, 235, 0.24);
-     color:#040718;
+     background-color:#f2f2f2;;
+     color:#020930;
      transition: all 0.4s ease-out;
    }

@@ -33,7 +33,7 @@ async function saveUser(Nom, Prenom, Email, Role, Profession, Password, Password
 
 async function findUser(Email, Password) {
   const selectQuery = "SELECT * FROM users WHERE Email = ? AND Password1 = ?";
-  const [[result]] = await connection.query(selectQuery, [Email, Password]);// destruct two time to get Account object
+  const [result] = await connection.query(selectQuery, [Email, Password]);// destruct two time to get Account object , i deleted the insider  [] from result!!
   return result;
 }
 
