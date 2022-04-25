@@ -10,7 +10,7 @@ const { MYSQL_DB, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_USER } = process.env;
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '123456789',
+  password: 'Beginning database design solutions',
   database: 'registration'
 });
 
@@ -37,6 +37,12 @@ async function findUser(Email, Password) {
   return result;
 }
 
+async function getAllUsers() {
+  const query = "SELECT * FROM users";
+  const [result] = await connection.query(query);
+  return result;
+}
+
 async function setActiveUser(email, value) {
   const activationQuery = "UPDATE users SET isActive = ? WHERE Email = ?";
   db.query(activationQuery, [value, email], (err, result) => {
@@ -44,4 +50,4 @@ async function setActiveUser(email, value) {
   });
 }
 
-module.exports = { saveUser, findUser, setActiveUser};
+module.exports = { saveUser, findUser, setActiveUser, getAllUsers};

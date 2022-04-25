@@ -1,4 +1,5 @@
 //@ts-check
+const {createToken} =  require("../utils/create-token");
 const { findUser } = require('../../db/Gateway');
 
 async function login(req, res) {
@@ -15,17 +16,6 @@ async function login(req, res) {
     else
         res.json(createToken(data));
 
-}
-
-function createToken(user) {
-    return {
-        nom: user.Nom,
-        prenom: user.Prenom,
-        email: user.Email,
-        role: user.Role,
-        profession: user.Profession,
-        requestSucceeded: true
-    };
 }
 
 module.exports = { login }
