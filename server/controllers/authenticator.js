@@ -9,9 +9,9 @@ async function login(req, res) {
 
     const data = await findUser(email, password);
     if (!data)
-        res.json({connected: false, message: "Email not found/or password incorrect" });
+        res.json({requestSucceeded: false, message: "Email not found/or password incorrect" });
     else if (!data.isActive)
-        res.json({connected: false, message: "the user is disactivated by the admin" });
+        res.json({requestSucceeded: false, message: "the user is disactivated by the admin" });
     else
         res.json(createToken(data));
 
@@ -24,7 +24,7 @@ function createToken(user) {
         email: user.Email,
         role: user.Role,
         profession: user.Profession,
-        connected: true
+        requestSucceeded: true
     };
 }
 

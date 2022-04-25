@@ -18,7 +18,7 @@ const FormLogIn = ({ connectForm }) => {
     };
     const { data } = await axios.post("http://localhost:2000/auth/connect", loginUser)
 
-    if(data.connected)
+    if(data.requestSucceeded )
       console.log(data.role);
     else
       console.log(data.message);
