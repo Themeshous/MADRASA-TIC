@@ -24,7 +24,7 @@ const UseLogin= (callback ,ValidateLog) => {
 
   useEffect(
     () => {
-      if (Object.keys(errors).length === 0 && isConnecting ) {
+      if (Object.keys(errors).length === 0 && isConnecting) {
         callback();
       }
     },

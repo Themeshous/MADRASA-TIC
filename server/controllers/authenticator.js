@@ -5,9 +5,11 @@ async function login(req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
-    console.log(req.body);
+    console.log("here it is the data insereted");
+    //console.log(req.body);
 
     const data = await findUser(email, password);
+    console.log(data);
     if (!data)
         res.json({connected: false, message: "Email not found/or password incorrect" });
     else if (!data.isActive)

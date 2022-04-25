@@ -1,5 +1,4 @@
-//@ts-check
-const mysql = require('mysql');
+const mysql = require('../server/node_modules/mysql2');
 const bcrypt = require('../server/node_modules/bcryptjs');
 //const Account = require('../models/Account');
 //require('dotenv').config();
@@ -10,7 +9,7 @@ const { MYSQL_DB, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_USER } = process.env;
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'rootroot',
+  password: 'root',
   database: 'registration'
 });
 
