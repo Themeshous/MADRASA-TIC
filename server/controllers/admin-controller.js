@@ -2,21 +2,22 @@ const {createUserTokenForAdmin} =  require("../utils/create-token");
 
 const {saveUser, getAllUsers, setActiveUser} = require('../../db/Gateway');
 
-async function createUser(req) {
-    const Nom = req.body.nom;
-    const Prenom = req.body.prenom;
-    const Email = req.body.email;
-    const Role = req.body.role;
-    const Profession = req.body.profession;
-    const Password = req.body.password;
-    const Password1 = req.body.password1;
+async function createUser(request, response) {
+    const Nom = request.body.nom;
+    const Prenom = request.body.prenom;
+    const Email = request.body.email;
+    const Role = request.body.role;
+    const Profession = request.body.profession;
+    const Password = request.body.password;
+    const Password1 = request.body.password1;
 
-    await saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1);
+    const result = await saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1);
+    response.json({result});
 }
 
-async function getAllUserTokens() {
+async function getAllUserTokens(req, res) {
     const result = await getAllUsers();
-    return hideSensitiveInformations(result);
+    res.json({users: hideSensitiveInformations(result) });
 }
 
     function hideSensitiveInformations(result) {

@@ -13,6 +13,7 @@ describe("admin test", () => {
         await admin.activateOrDeactivateUser(request);
         const result = await admin.getAllUserTokens();
         expect(result[0].email).toBe(email);
-        expect(result[0].isActive).toBe(0);
+        expect(result[0].Etat).toBe(0);
     });
+
 })

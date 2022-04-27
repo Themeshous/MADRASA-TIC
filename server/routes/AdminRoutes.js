@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 router.post('/create',  createUser);
-router.get('/users', getAllUserTokens);
+router.get('/ConsulterComptes', getAllUserTokens);
 
 
 
