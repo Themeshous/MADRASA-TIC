@@ -9,11 +9,9 @@ async function login(req, res) {
     const data = await findUser(email, password);
     console.log(data);
     if (!data.emailFound)
-        res.json({requestSucceeded: false, message: "Email not found" });
+        res.json({requestSucceeded: false, emailFound: false });
     else if (!data.passowrdFound)
-        res.json({requestSucceeded: false, message: "Password incorrect" });
-    else if (!data.isActive)
-        res.json({requestSucceeded: false, message: "the user is dis-activated by the admin" });
+        res.json({requestSucceeded: false, passwordIncorrect: true  });
     else
         res.json(createToken(data));
 

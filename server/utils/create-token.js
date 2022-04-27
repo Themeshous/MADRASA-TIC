@@ -5,6 +5,7 @@ function createToken(user) {
         email: user.Email,
         role: user.Role,
         profession: user.Profession,
+        isActive: user.isActive,
         requestSucceeded: true
     };
 }
