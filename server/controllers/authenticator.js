@@ -1,5 +1,28 @@
-//@ts-check
-const { findUser } = require('../../db/Gateway');
+const nodemailer = require('nodemailer');
+const mysql = require('mysql2');
+const jwt = require('jsonwebtoken');
+const {createToken} =  require("../utils/create-token");
+
+const { findUser, saveUser, Newpassword} = require('../../db/Gateway');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'registration'
+});
+
+db.connect(function (err) {
+  if (err) throw err;
+  console.log("BDD Connected!");
+});
+
+// @ts-ignore
+const connection = db.promise();
+
+
 
 async function login(req, res) {
     const email = req.body.email;
@@ -11,23 +34,65 @@ async function login(req, res) {
     const data = await findUser(email, password);
     console.log(data);
     if (!data)
-        res.json({connected: false, message: "Email not found/or password incorrect" });
+        res.json({requestSucceeded: false, message: "Email not found/or password incorrect" });
     else if (!data.isActive)
-        res.json({connected: false, message: "the user is disactivated by the admin" });
+        res.json({requestSucceeded: false, message: "the user is dis-activated by the admin" });
     else
         res.json(createToken(data));
 
 }
 
-function createToken(user) {
-    return {
-        nom: user.Nom,
-        prenom: user.Prenom,
-        email: user.Email,
-        role: user.Role,
-        profession: user.Profession,
-        connected: true
-    };
+async function signup(req, res) {
+        const Nom = req.body.nom;
+        const Prenom = req.body.prenom;
+        const Email = req.body.email;
+        const Role = req.body.role;
+        const Profession = "req.body.profession";
+        const Password = req.body.password;
+        const Password1 = "req.body.password1";
+
+        await saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1);
 }
 
-module.exports = { login }
+async function reset(req, res) {
+
+  console.log("here it is the data to update");
+  console.log(req.body.email);
+ // console.log(req.body);
+  
+  await Newpassword(req.body.password1,req.body.email);
+  return res.json({status: 'ok', message: 'Password reset. Please login with your new password.'});
+}
+
+async function forgetpassword(req,res){
+    console.log("here it is the email who to reset his password");
+    console.log(req.body.email);
+
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user:'houssemsaidoune@gmail.com',//process.env.REACT_APP_EMAIL,
+        pass: 'ah15042002' //process.env.REACT_APP_EMAIL_PASS,
+      },
+    });
+    
+    var mailOptions = {
+      from: 'adminesi@gmail.com',
+      to: "a.saidoune@esi-sba.dz",//req.body.email
+      subject: `The subject goes here`,
+      text: 'To reset your password, please click the link below.\n\nhttp://localhost:3000/auth/reset',
+      html: `The body of the email goes here in HTML`,
+    }
+      
+    
+    transporter.sendMail(mailOptions, function (err, info) {
+      if (err) {
+        res.json(err);
+      } else {
+        res.json(info);
+      }
+    });
+    
+}
+
+module.exports = { login,signup,reset,forgetpassword}

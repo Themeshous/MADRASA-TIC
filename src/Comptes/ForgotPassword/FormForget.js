@@ -1,9 +1,22 @@
 import React from 'react'
 import validateForget from './ValidateForget'
 import UseForget from './UseForget'
+import axios from 'axios';
 import '../SignUp/FormLog.css'
 
 const FormForget = ({forgetForm}) => {
+    const forget = () => {
+
+        axios.post("http://localhost:2000/auth/forget", {
+           
+            email:email,
+    
+        }).then((Response)=>{
+            console.log(Response);
+        });
+        console.log("chouf M3a el backend");
+    
+    };
 
     const {HandleForget, email, HandleChange, errors} = UseForget(forgetForm, validateForget);
     return (
@@ -28,7 +41,7 @@ const FormForget = ({forgetForm}) => {
                         {errors.email && <p>{errors.email}</p>}
                     </div>
                
-                    <button className='form-input-forget-btn' type='submit'>
+                    <button className='form-input-forget-btn' type='submit'onClick={forget}>
                         <p> Envoyer le lien </p>
                     </button>
                 </div>
@@ -39,9 +52,3 @@ const FormForget = ({forgetForm}) => {
 }
 
 export default FormForget  
-
-/*  <div className='forgot-pswd' >
-                        <a href='/Connect'>
-                            Vous avez déja un compte?
-                        </a>
-                    </div> */

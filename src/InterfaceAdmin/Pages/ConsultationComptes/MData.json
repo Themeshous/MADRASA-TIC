@@ -1,0 +1,12 @@
+[{"nom":"Khedir" , "prenom":"meriem" , "role":"administrateur-secondaire" , "profession":"directeur-adjoint" , "Etat":1},
+    {"nom":"Mouro" , "prenom":"chiheb" , "role":"responsable d'aiguillage" , "profession":"simple emplyé" , "Etat":1},
+    {"nom":"Khedir" , "prenom":"meriem" , "role":"responsable d'aiguillage" , "profession":"SG" , "Etat":0},
+    {"nom":"bouchouka" , "prenom":"hidaya" , "role":"chef de service" , "profession":"SG" , "Etat":1},
+    {"nom":"Khedir" , "prenom":"meriem" , "role":"administrateur-secondaire" , "profession":"directeur" , "Etat":0},
+    {"nom":"Khedir" , "prenom":"meriem" , "role":"responsable d'aiguillage" , "profession":"simple emplyé" , "Etat":1},
+    {"nom":"Saidoune" , "prenom":"houssem" , "role":"responsable des relations extérieures" , "profession":"SG" , "Etat":1},
+    {"nom":"Khedir" , "prenom":"meriem" , "role":"chef de service" , "profession":"simple emplyé" , "Etat":1},
+    {"nom":"chergui" , "prenom":"majid" , "role":"chef de service" , "profession":"SG" , "Etat":1},
+    {"nom":"idk" , "prenom":"idk" , "role":"responsable d'aiguillage" , "profession":"simple emplyé" , "Etat":0},
+    {"nom":"jnsp" , "prenom":"jnsp" , "role":"responsable des relations extérieures" , "profession":"simple emplyé" , "Etat":1},
+    {"nom":"Khedir" , "prenom":"meriem" , "role":"chef de service" , "profession":"simple emplyé" , "Etat":1}]

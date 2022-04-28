@@ -17,12 +17,11 @@ const FormLogIn = ({ connectForm }) => {
       password: val.pswd,
     };
     const { data } = await axios.post("http://localhost:2000/auth/connect", loginUser)
-
-    if(data.connected)
+    console.log(data);
+    if(data.requestSucceeded)
       console.log(data.role);
     else
       console.log(data.message);
-
   };
 
   const { handlechange, val, HandleConnect, errors } = UseLogin(connectForm, ValidateLog);

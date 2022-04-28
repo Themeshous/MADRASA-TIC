@@ -1,10 +1,5 @@
 const mysql = require('../server/node_modules/mysql2');
 const bcrypt = require('../server/node_modules/bcryptjs');
-//const Account = require('../models/Account');
-//require('dotenv').config();
-const { MYSQL_DB, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_USER } = process.env;
-
-
 
 const db = mysql.createConnection({
   host: 'localhost',
@@ -33,7 +28,13 @@ async function saveUser(Nom, Prenom, Email, Role, Profession, Password, Password
 
 async function findUser(Email, Password) {
   const selectQuery = "SELECT * FROM users WHERE Email = ? AND Password1 = ?";
-  const [[result]] = await connection.query(selectQuery, [Email, Password]);// destruct two time to get Account object
+  const [[result]] = await connection.query(selectQuery, [Email, Password]);// destruct two time to get user object
+  return result;
+}
+
+async function getAllUsers() {
+  const query = "SELECT * FROM users";
+  const [result] = await connection.query(query);
   return result;
 }
 
@@ -44,4 +45,11 @@ async function setActiveUser(email, value) {
   });
 }
 
-module.exports = { saveUser, findUser, setActiveUser};
+async function Newpassword(password, email) {
+  const sqlupdate = "UPDATE users SET Password1 = ? WHERE Email = ?";
+  db.query(sqlupdate, [password, email], (err, result) => {
+    console.log(err);
+  });
+}
+
+module.exports = { saveUser, findUser, setActiveUser, getAllUsers,Newpassword};
