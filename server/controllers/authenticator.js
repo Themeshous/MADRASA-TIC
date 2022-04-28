@@ -1,28 +1,10 @@
 const nodemailer = require('nodemailer');
-const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
 const {createToken} =  require("../utils/create-token");
 
 const { findUser, saveUser, Newpassword} = require('../../db/Gateway');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'registration'
-});
-
-db.connect(function (err) {
-  if (err) throw err;
-  console.log("BDD Connected!");
-});
-
-// @ts-ignore
-const connection = db.promise();
-
-
 
 async function login(req, res) {
     const email = req.body.email;
@@ -34,11 +16,11 @@ async function login(req, res) {
     const data = await findUser(email, password);
     console.log(data);
     if (!data.emailFound)
-        res.json({requestSucceeded: false, emailFound: false });
-    else if (!data.passowrdFound)
-        res.json({requestSucceeded: false, passwordIncorrect: true  });
+       return res.json({requestSucceeded: false, emailFound: false });
+    if (!data.passwordFound)
+       return res.json({requestSucceeded: false, emailFound: true, passwordIncorrect: true  });
     else
-        res.json(createToken(data));
+       return res.json(createToken(data));
 
 }
 
