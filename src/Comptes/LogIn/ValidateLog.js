@@ -1,6 +1,5 @@
-export default function validateLog(val){
+export default function validateLog(val , BddErrors){
     let errors = {}
-
 
     if(!val.email){
         errors.email="L'adresse email est requise"
@@ -12,6 +11,9 @@ export default function validateLog(val){
       } 
      else if (val.pswd.length < 8) {
         errors.pswd = 'Le mot de passe doit contenir 8 symboles ou plus';
+      }
+    else if (BddErrors) {
+        errors.pswd = "Le mot de passe est incorrecte oubien adresse email n'existe pas ou compte désactivé";
       }
       return errors;
     
