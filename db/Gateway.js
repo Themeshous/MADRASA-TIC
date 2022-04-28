@@ -1,17 +1,13 @@
-
 const mysql = require('mysql2');
 const bcrypt = require('../server/node_modules/bcryptjs');
-//const Account = require('../models/Account');
-//require('dotenv').config();
-const { MYSQL_DB, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_USER } = process.env;
 
 
-
+const {MYSQL_DB, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_USER} = process.env;
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '123456789',
-  database: 'registration'
+  host: MYSQL_HOST,
+  user: MYSQL_USER,
+  password: MYSQL_PASSWORD,
+  database: MYSQL_DB
 });
 
 db.connect(function (err) {
@@ -25,23 +21,43 @@ async function saveUser(Nom, Prenom, Email, Role, Profession, Password, Password
   const hashpswd = await bcrypt.hash(Password, 8);
 
   const sqlinsert = "INSERT INTO users (Nom, Prenom, Email, Role, Profession, Password, Password1) VALUES (?,?,?,?,?,?,?)";
-  db.query(sqlinsert, [Nom, Prenom, Email, Role, Profession, hashpswd, Password1], (err, result) => {
-    console.log(err);
-  });
+  try {
+    await connection.query(sqlinsert, [Nom, Prenom, Email, Role, Profession, hashpswd, Password1], (err) => {
+      if (err) console.log(err);
+    });
+  } catch(error) {
+      return {userSaved: false, message: error.sqlMessage };
+  }
   console.log("user saved");
+  return {userSaved: true};
 }
 
 async function findUser(Email, Password) {
-  const selectQuery = "SELECT * FROM users WHERE Email = ? AND Password1 = ?";
-  const [[result]] = await connection.query(selectQuery, [Email, Password]);// destruct two time to get Account object , i deleted the insider  [] from result!!
+  const selectEmailQuery = "SELECT * FROM users WHERE Email = ?";
+  const [[result]] = await connection.query(selectEmailQuery, [Email]);// destruct two time to get user object
+  if (result) {
+    const selectUserQuery = "SELECT * FROM users WHERE Email = ?  AND Password1=? ";
+    const [[result]] = await connection.query(selectUserQuery, [Email, Password]);
+    if (result)
+      return result;
+    else
+      return {emailFound: true, passowrdFound: false};
+  } else {
+    return {emailFound: false}
+  }
+}
+
+async function getAllUsers() {
+  const query = "SELECT * FROM users";
+  const [result] = await connection.query(query);
   return result;
 }
 
 async function setActiveUser(email, value) {
   const activationQuery = "UPDATE users SET isActive = ? WHERE Email = ?";
-  db.query(activationQuery, [value, email], (err, result) => {
+  db.query(activationQuery, [value, email], (err) => {
     console.log(err);
   });
 }
 
-module.exports = { saveUser, findUser, setActiveUser};
+module.exports = { saveUser, findUser, setActiveUser, getAllUsers};

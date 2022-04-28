@@ -1,9 +1,10 @@
 const express = require('express');
-const {login} = require('../controllers/authenticator');
+const {login, signup} = require('../controllers/authenticator');
 const router = express.Router();
 
 
 router.post('/Connect',  login);
+router.post('/create', signup);
 
 
 

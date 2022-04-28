@@ -1,31 +1,34 @@
 //@ts-check
-const { findUser } = require('../../db/Gateway');
+const {createToken} =  require("../utils/create-token");
+const { findUser, saveUser} = require('../../db/Gateway');
 
 async function login(req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
-    console.log(req.body);
-
     const data = await findUser(email, password);
-    if (!data)
-        res.json({connected: false, message: "Email not found/or password incorrect" });
-    else if (!data.isActive)
-        res.json({connected: false, message: "the user is disactivated by the admin" });
+    console.log(data);
+    if (!data.emailFound)
+        res.json({requestSucceeded: false, emailFound: false });
+    else if (!data.passowrdFound)
+        res.json({requestSucceeded: false, passwordIncorrect: true  });
     else
         res.json(createToken(data));
 
 }
 
-function createToken(user) {
-    return {
-        nom: user.Nom,
-        prenom: user.Prenom,
-        email: user.Email,
-        role: user.Role,
-        profession: user.Profession,
-        connected: true
-    };
+async function signup(req, res) {
+        const Nom = req.body.nom;
+        const Prenom = req.body.prenom;
+        const Email = req.body.email;
+        const Role = req.body.role;
+        const Profession = req.body.profession;
+        const Password = req.body.password;
+        const Password1 = req.body.password;
+
+        const data = await saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1);
+        console.log(data);
+        res.json({data});
 }
 
-module.exports = { login }
+module.exports = { login,signup }
