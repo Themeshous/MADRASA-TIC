@@ -16,6 +16,7 @@ const FormLogIn = ({ connectForm }) => {
       email: val.email,
       password: val.pswd,
     };
+    // fi plaset forget ndirou connect 
     const { data } = await axios.post("http://localhost:2000/auth/connect", loginUser)
     console.log(data);
     if(data.requestSucceeded)
@@ -65,7 +66,7 @@ const FormLogIn = ({ connectForm }) => {
             {errors.pswd && <p>{errors.pswd}</p>}
           </div>
           <div className='forgot-pswd' >
-            <a href='/Forget-password'>
+            <a href='/auth/forget'>
               Avez vous oublié votre mot de pase ?
             </a>
 

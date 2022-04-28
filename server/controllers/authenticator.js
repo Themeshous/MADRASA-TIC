@@ -1,28 +1,10 @@
 const nodemailer = require('nodemailer');
-const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
 const {createToken} =  require("../utils/create-token");
 
 const { findUser, saveUser, Newpassword} = require('../../db/Gateway');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'registration'
-});
-
-db.connect(function (err) {
-  if (err) throw err;
-  console.log("BDD Connected!");
-});
-
-// @ts-ignore
-const connection = db.promise();
-
-
 
 async function login(req, res) {
     const email = req.body.email;
@@ -34,11 +16,15 @@ async function login(req, res) {
     const data = await findUser(email, password);
     console.log(data);
     if (!data.emailFound)
-        res.json({requestSucceeded: false, emailFound: false });
-    else if (!data.passowrdFound)
-        res.json({requestSucceeded: false, passwordIncorrect: true  });
+       return res.json({requestSucceeded: false, emailFound: false });
+    if (!data.passwordFound)
+       return res.json({requestSucceeded: false, emailFound: true, passwordIncorrect: true  });
     else
-        res.json(createToken(data));
+       return res.json(createToken(data));
+
+}
+
+async function logout(req, res) {  
 
 }
 
@@ -73,17 +59,17 @@ async function forgetpassword(req,res){
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user:process.env.REACT_APP_EMAIL,
-        pass: process.env.REACT_APP_EMAIL_PASS,
-      },
+        user: 'esiuser22@gmail.com',
+        pass: 'rootroot',
+      }
+
     });
     
     var mailOptions = {
-      from: 'adminesi@gmail.com',
-      to: "a.saidoune@esi-sba.dz",//req.body.email
-      subject: `The subject goes here`,
+      from: 'esiuser22@gmail.com',
+      to: req.body.email,
+      subject: 'Reset password',
       text: 'To reset your password, please click the link below.\n\nhttp://localhost:3000/auth/reset',
-      html: `The body of the email goes here in HTML`,
     }
       
     
@@ -91,10 +77,10 @@ async function forgetpassword(req,res){
       if (err) {
         res.json(err);
       } else {
-        res.json(info);
+        res.json('Email sent successfully');
       }
     });
     
 }
 
-module.exports = { login,signup,reset,forgetpassword}
+module.exports = { login,logout,signup,reset,forgetpassword}

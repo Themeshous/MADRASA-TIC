@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../../Accessoirs/Header'
 import { NavGauche } from '../../Accessoirs/NavGauche'
-//import '../../Accessoirs/Admin.css'
+import '../../Accessoirs/Admin.css'
 import { TableComptes } from './TableComptes'
 const ConsulterComptes = () => {
 
@@ -12,7 +12,7 @@ const ConsulterComptes = () => {
        <NavGauche />
     </div>
     <div className='middle-content'> 
-      <TableComptes/>
+      <TableComptes/>     
     </div>
     </>
     

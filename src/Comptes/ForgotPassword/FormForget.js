@@ -14,7 +14,7 @@ const FormForget = ({forgetForm}) => {
         }).then((Response)=>{
             console.log(Response);
         });
-        console.log("chouf M3a el backend");
+        
     
     };
 

@@ -5,7 +5,8 @@ import {FormConnect} from './Comptes/LogIn/FormConnect.js';
 import CreateComp from './InterfaceAdmin/Pages/CreateComp.js'
 import {Forget} from './Comptes/ForgotPassword/Forget';
 import {Reset} from './Comptes/ForgotPassword/Reset';
-import ConsulterComptes from './InterfaceAdmin/Pages/ConsultationComptes/ConsulterComptes'
+/*import ConsulterComptes from './InterfaceAdmin/Pages/ConsultationComptes/ConsulterComptes'
+<Route path="/Admin/ConsulterComptes" element={ <ConsulterComptes/> } /> */
 import './App.css';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
     <>
      <Routes>
         <Route path="/Admin/create" element={ <CreateComp/> } />
-        <Route path="/Admin/ConsulterComptes" element={ <ConsulterComptes/> } />
+        
         <Route path="/auth/Connect" element={ <FormConnect/> } />
         <Route path="/auth/signup" element={ <FormCreat/> } />
         <Route path="/auth/Forget" element={ <Forget/> } />

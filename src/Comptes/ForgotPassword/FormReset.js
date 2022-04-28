@@ -17,7 +17,7 @@ const FormReset = ({resetForm}) => {
         }).then((Response)=>{
             console.log(Response);
         });
-        console.log("chouf M3a el backend");
+        
     
     };
 
@@ -72,7 +72,7 @@ const FormReset = ({resetForm}) => {
                         {errors.pswd1 && <p>{errors.pswd1}</p>}
                     </div>
                     <button className='form-input-btn' type='submit'onClick={reset}>
-                        <p> Confirmer </p>
+                         <p>Confirmer</p>    
                     </button>
                 </div>
             </form>

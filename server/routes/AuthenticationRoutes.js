@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/connect',  login);
 router.post('/create', signup);
 router.post('/reset', reset);
-router.put('/forget', forgetpassword);
+router.post('/forget', forgetpassword);
 
 
 

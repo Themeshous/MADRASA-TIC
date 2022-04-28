@@ -42,7 +42,7 @@ const Header = () => {
               
                 <div className='log-out'>
                 <FontAwesomeIcon icon={faSignOutAlt} className="icon-profil-menu" />   
-                           <a href='#'>Se déconnecter</a>
+                           <a href='/auth/Connect'>Se déconnecter</a>
                 </div>
 
           </div>
