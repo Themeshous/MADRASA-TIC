@@ -18,7 +18,9 @@ export const FormConnect = () => {
         
           {!isconnected?
           (<FormLogIn connectForm={connectForm} data={updata}/>
-          ) : (<Interfwelcome/>)}
+          ) : (<><Interfwelcome/>
+                 {Data}
+          </>)}
           </div>
   
     )

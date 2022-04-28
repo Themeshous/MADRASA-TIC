@@ -26,8 +26,10 @@ const [val, setval] = useState({
       password: val.pswd,
     };
     const { data } = await axios.post("http://localhost:2000/auth/connect", loginUser)
-    if (data.connected) {
+    console.log(data);
+    if(data.requestSucceeded) {
        seterrors(ValidateLog(val,false));
+       console.log(data.role)
        setrole(data.role)
     } else {
       seterrors(ValidateLog(val,true));

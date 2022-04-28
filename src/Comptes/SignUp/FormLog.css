@@ -19,8 +19,11 @@
     
  }
  .form-content-right{
-  margin-left: 30%;
-  width: 60%;
+  position: absolute;
+    width:600px;
+    height: 80%;
+    margin-top: 5%;
+    margin-left: 25%;
  }
  .form-login{
    padding: 12%;
@@ -97,6 +100,11 @@
      font-size: 0.8rem;
    }
    
+  .form-signup{
+    padding:4%;
+    width: 800px;
+ 
+  } 
  .form-input-btn  {
      outline: none;
      border-radius: 10px;

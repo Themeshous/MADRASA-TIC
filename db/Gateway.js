@@ -1,15 +1,17 @@
-const mysql = require('mysql2');
+const mysql = require('../server/node_modules/mysql2');
 const bcrypt = require('../server/node_modules/bcryptjs');
 
+const path = require('path')
+require('dotenv').config({
+  path: path.resolve(__dirname, '.env')
+})
 
-const {MYSQL_DB, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_USER} = process.env;
 const db = mysql.createConnection({
-  host: MYSQL_HOST,
-  user: MYSQL_USER,
-  password: MYSQL_PASSWORD,
-  database: MYSQL_DB
+  host: 'localhost',
+  user: 'root',
+  password: '123456789',
+  database: 'registration'
 });
-
 db.connect(function (err) {
   if (err) throw err;
   console.log("BDD Connected!");
@@ -39,9 +41,9 @@ async function findUser(Email, Password) {
     const selectUserQuery = "SELECT * FROM users WHERE Email = ?  AND Password1=? ";
     const [[result]] = await connection.query(selectUserQuery, [Email, Password]);
     if (result)
-      return result;
+      return {...result, emailFound: true, passwordFound: true};
     else
-      return {emailFound: true, passowrdFound: false};
+      return {emailFound: true, passwordFound: false};
   } else {
     return {emailFound: false}
   }
@@ -60,4 +62,11 @@ async function setActiveUser(email, value) {
   });
 }
 
-module.exports = { saveUser, findUser, setActiveUser, getAllUsers};
+async function Newpassword(password, email) {
+  const sqlupdate = "UPDATE users SET Password1 = ? WHERE Email = ?";
+  db.query(sqlupdate, [password, email], (err, result) => {
+    console.log(err);
+  });
+}
+
+module.exports = { saveUser, findUser, setActiveUser, getAllUsers,Newpassword};
