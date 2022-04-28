@@ -47,7 +47,7 @@ async function signup(req, res) {
         const Prenom = req.body.prenom;
         const Email = req.body.email;
         const Role = req.body.role;
-        const Profession = "req.body.profession";
+        const Profession = req.body.profession;
         const Password = req.body.password;
         const Password1 = req.body.password;
 

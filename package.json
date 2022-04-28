@@ -13,11 +13,7 @@
     "axios": "^0.26.1",
     "concurrency": "^0.1.4",
     "concurrently": "^7.1.0",
-<<<<<<< HEAD
-    "jsonwebtoken": "^8.5.1",
-=======
     "dotenv": "^16.0.0",
->>>>>>> 78cab6fe214ba6c8c66a5af558c4206a94870823
     "mime": "^3.0.0",
     "mysql2": "^2.3.3",
     "node": "^17.7.2",
