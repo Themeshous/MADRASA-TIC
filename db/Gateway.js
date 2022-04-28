@@ -1,13 +1,16 @@
 const mysql = require('../server/node_modules/mysql2');
 const bcrypt = require('../server/node_modules/bcryptjs');
 
-
+const path = require('path')
+require('dotenv').config({
+  path: path.resolve(__dirname, '.env')
+})
 const {MYSQL_DB, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_USER} = process.env;
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'registration'
+  host: MYSQL_HOST,
+  user: MYSQL_USER,
+  password: MYSQL_PASSWORD,
+  database: MYSQL_DB
 });
 
 db.connect(function (err) {
@@ -15,7 +18,6 @@ db.connect(function (err) {
   console.log("BDD Connected!");
 });
 
-// @ts-ignore
 const connection = db.promise();
 
 async function saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1) {
@@ -40,9 +42,9 @@ async function findUser(Email, Password) {
     const selectUserQuery = "SELECT * FROM users WHERE Email = ?  AND Password1=? ";
     const [[result]] = await connection.query(selectUserQuery, [Email, Password]);
     if (result)
-      return result;
+      return {...result, emailFound: true, passwordFound: true};
     else
-      return {emailFound: true, passowrdFound: false};
+      return {emailFound: true, passwordFound: false};
   } else {
     return {emailFound: false}
   }
