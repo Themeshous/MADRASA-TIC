@@ -1,10 +1,14 @@
 const express = require('express');
-const {login, signup} = require('../controllers/authenticator');
+const nodemailer = require('nodemailer');
+const {login, signup, reset, forgetpassword} = require('../controllers/authenticator');
 const router = express.Router();
 
 
-router.post('/Connect',  login);
+
+router.post('/connect',  login);
 router.post('/create', signup);
+router.post('/reset', reset);
+router.put('/forget', forgetpassword);
 
 
 

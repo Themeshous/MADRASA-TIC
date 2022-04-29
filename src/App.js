@@ -18,8 +18,8 @@ function App() {
         <Route path="/ResAig/consulter" element={ <ConsulterDeclr/> } />
         <Route path="/auth/Connect" element={ <FormConnect/> } />
         <Route path="/auth/signup" element={ <FormCreat/> } />
-        <Route path="/Forget-password" element={ <Forget/> } />
-        <Route path="/Reset-password" element={ <Reset/> } />
+        <Route path="/auth/Forget" element={ <Forget/> } />
+        <Route path="/auth/Reset" element={ <Reset/> } />
       </Routes>
     </>
 

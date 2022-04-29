@@ -1,7 +1,8 @@
 import React , {useState} from 'react'
 import '../SignUp/FormLog.css'
 import FormForget from './FormForget'
-import { Reset } from './Reset'
+import Interfacemail from './lienmail' 
+
 
 export const Forget = () => {
     const [isForgotten, setisForgotten] = useState(false)
@@ -14,7 +15,7 @@ export const Forget = () => {
       <div className='form-container-login'> 
           {!isForgotten?
           (<FormForget forgetForm={forgetForm}/>
-          ) :(<Reset/>
+          ) :(<Interfacemail/>
           )}
           </div>
   
