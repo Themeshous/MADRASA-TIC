@@ -29,12 +29,15 @@ const [val, setval] = useState({
     const { data } = await axios.post("http://localhost:2000/auth/connect", loginUser)
     console.log(data);
     if(data.requestSucceeded) {
-       seterrors(ValidateLog(val,false));
+       seterrors(ValidateLog(val,false,false));
        console.log(data)
        setrole(data)
     } else {
-      seterrors(ValidateLog(val,true));
-      console.log(data.message)
+      if (!data.emailFound) {
+          seterrors(ValidateLog(val,true,false));
+      } else {
+        seterrors(ValidateLog(val,false,true));
+      }
     }
     setisconnecting(true)
   }

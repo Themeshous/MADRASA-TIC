@@ -33,9 +33,9 @@ const FormParam = () => {
     }
     return (
         <form className='form-param' onSubmit={HandleSubmit}>
-            <h1 className='modification'> User Informations </h1>
+            <h2 className='modification'>Mon Compte </h2>
             <div className='form-inputs' >
-                <h2 className='titl'>Photo de profile</h2>
+                <h3 className='titl'>Photo de profile</h3>
                 <label className='form-label-param'>Ajouter une nouvelle photo de profil</label>
                 <div className='file-card'>
                     <div className='file-inputs'>
@@ -51,35 +51,37 @@ const FormParam = () => {
                             Upload
                         </button>
                     </div>
-                    <p className="main">Supported files</p>
+                    <p className="main">fichiers supportés</p>
                     <p className="info">JPG, PNG</p>
                 </div>
             </div>
             <div className='form-inputs' >
-                <h2 className='titl'>Nom</h2>
+                <h3 className='titl'>Nom</h3>
                 <label className='form-label-param'>Saisissez un nouveau nom</label>
                 <input id="Name" type="text"
                     name="nom"
                     value={values.nom}
+                    placeholder="Khedir"
                     onChange={HandleChange}
                     className='input-parametre'
                 />
                 {errors.nom && <p>{errors.nom}</p>}
             </div>
             <div className='form-inputs'>
-                <h2 className='titl'>Prenom</h2>
+                <h3 className='titl'>Prenom</h3>
                 <label className='form-label-param'>Saisissez un nouveau prenom</label>
                 <div >
                     <input id="prenom" type="text"
                         name="prenom"
                         value={values.prenom}
+                        placeholder="Meriem"
                         onChange={HandleChange}
                         className='input-parametre' />
                 </div>
                 {errors.prenom && <p>{errors.prenom}</p>}
                 </div>
             <div className='form-inputs'>
-                <h2 className='titl'>Mot de passe</h2>
+                <h3 className='titl'>Mot de passe</h3>
                 <label className='form-label-param'>Ancien mot de passe</label>
                 <input
                     name='pswd'
