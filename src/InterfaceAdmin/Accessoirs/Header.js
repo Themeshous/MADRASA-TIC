@@ -8,7 +8,6 @@ const Header = () => {
   const [showprofil, setshowprofil] = useState(false)
   return (
     <>
-  
     <nav className='Header-for-interface'>
         <div className='nav-container'>
         
@@ -37,12 +36,12 @@ const Header = () => {
                    </div>   
                     <div className='profile'>
                            <FontAwesomeIcon icon={faUserCog} className="icon-profil-menu" />   
-                           <a href='#'>Mon Compte</a>
+                           <a href='/Admin/Profile'>Mon Compte</a>
                     </div>
               
                 <div className='log-out'>
                 <FontAwesomeIcon icon={faSignOutAlt} className="icon-profil-menu" />   
-                           <a href='#'>Se déconnecter</a>
+                           <a href='/auth/Connect'>Se déconnecter</a>
                 </div>
 
           </div>

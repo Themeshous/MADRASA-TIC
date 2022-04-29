@@ -7,6 +7,7 @@ import {Forget} from './Comptes/ForgotPassword/Forget';
 import {Reset} from './Comptes/ForgotPassword/Reset';
 import ConsulterComptes from './InterfaceAdmin/Pages/ConsultationComptes/ConsulterComptes'
 import ConsulterDeclr from "./InterfaceGestAiguillage/pages/ConsulterDeclaration/ConsulterDeclr"
+import ParamComp from './InterfaceAdmin/Pages/ParamCompte.js';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/auth/signup" element={ <FormCreat/> } />
         <Route path="/auth/Forget" element={ <Forget/> } />
         <Route path="/auth/Reset" element={ <Reset/> } />
+        <Route path="/Admin/Profile" element={ <ParamComp/> } />
       </Routes>
     </>
 

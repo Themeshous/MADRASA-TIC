@@ -19,6 +19,7 @@ const [val, setval] = useState({
       [name]: value
     })
   } 
+  
   const HandleConnect = async (e) => {
     e.preventDefault();
      const loginUser = {
@@ -29,8 +30,8 @@ const [val, setval] = useState({
     console.log(data);
     if(data.requestSucceeded) {
        seterrors(ValidateLog(val,false));
-       console.log(data.role)
-       setrole(data.role)
+       console.log(data)
+       setrole(data)
     } else {
       seterrors(ValidateLog(val,true));
       console.log(data.message)

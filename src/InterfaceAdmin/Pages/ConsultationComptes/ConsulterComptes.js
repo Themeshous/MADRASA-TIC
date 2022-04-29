@@ -8,7 +8,7 @@ const ConsulterComptes = () => {
   return (
     <>
     <div className='Page-Admin'>
-       <Header/>
+       <Header />
        <NavGauche />
     </div>
     <div className='middle-content'> 

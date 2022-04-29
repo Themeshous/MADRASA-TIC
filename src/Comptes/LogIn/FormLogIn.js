@@ -3,10 +3,11 @@ import UseLogin from './UseLogin'
 import ValidateLog from './ValidateLog'
 import '../SignUp/FormLog.css'
 
-const FormLogIn = ({ connectForm,data}) => {
+const FormLogIn = ({connectForm,data}) => {
   
   const { handlechange, val, HandleConnect, errors,role} = UseLogin(connectForm, ValidateLog);
-  data(role);
+  console.log(role);
+  data(role)
   return (
     <div className='login-container'>
       <form className='form-login' onSubmit={HandleConnect} noValidate >
@@ -54,13 +55,12 @@ const FormLogIn = ({ connectForm,data}) => {
           </div>
 
           <button className='form-input-btn' type='submit'>
-            <p> Connecter</p>{console.log(role)}
+            <p> Connecter</p> 
           </button>
         </div>
       </form>
     </div>
   )
-
 }
 
 export default FormLogIn

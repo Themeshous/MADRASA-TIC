@@ -5,12 +5,14 @@ const path = require('path')
 require('dotenv').config({
   path: path.resolve(__dirname, '.env')
 })
+
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '123456789',
   database: 'registration'
 });
+
 db.connect(function (err) {
   if (err) throw err;
   console.log("BDD Connected!");
@@ -61,11 +63,11 @@ async function setActiveUser(email, value) {
   });
 }
 
-async function Newpassword(password, email) {
+async function setNewPassword(password, email) {
   const sqlupdate = "UPDATE users SET Password1 = ? WHERE Email = ?";
   db.query(sqlupdate, [password, email], (err, result) => {
     console.log(err);
   });
 }
 
-module.exports = { saveUser, findUser, setActiveUser, getAllUsers,Newpassword};
+module.exports = { saveUser, findUser, setActiveUser, getAllUsers, setNewPassword};

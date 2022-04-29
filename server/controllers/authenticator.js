@@ -2,16 +2,13 @@ const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const {createToken} =  require("../utils/create-token");
 
-const { findUser, saveUser, Newpassword} = require('../../db/Gateway');
+const { findUser, saveUser, setNewPassword} = require('../../db/Gateway');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 async function login(req, res) {
     const email = req.body.email;
     const password = req.body.password;
-
-    console.log("here it is the data insereted");
-    //console.log(req.body);
 
     const data = await findUser(email, password);
     console.log(data);
@@ -44,7 +41,7 @@ async function reset(req, res) {
   console.log(req.body.email);
  // console.log(req.body);
   
-  await Newpassword(req.body.password1,req.body.email);
+  await setNewPassword(req.body.password1,req.body.email);
   return res.json({status: 'ok', message: 'Password reset. Please login with your new password.'});
 }
 
@@ -63,9 +60,9 @@ async function forgetpassword(req,res){
     var mailOptions = {
       from: 'adminesi@gmail.com',
       to: "a.saidoune@esi-sba.dz",//req.body.email
-      subject: `The subject goes here`,
+      subject: 'The subject goes here',
       text: 'To reset your password, please click the link below.\n\nhttp://localhost:3000/auth/reset',
-      html: `The body of the email goes here in HTML`,
+      html: 'The body of the email goes here in HTML',
     }
       
     
