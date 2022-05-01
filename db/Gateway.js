@@ -6,12 +6,10 @@ require('dotenv').config({
   path: path.resolve(__dirname, '.env')
 })
 
-const {MYSQL_DB, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_USER} = process.env;
-
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: '123456789',
   database: 'registration'
 });
 
@@ -65,11 +63,11 @@ async function setActiveUser(email, value) {
   });
 }
 
-async function Newpassword(password, email) {
+async function setNewPassword(password, email) {
   const sqlupdate = "UPDATE users SET Password1 = ? WHERE Email = ?";
   db.query(sqlupdate, [password, email], (err, result) => {
     console.log(err);
   });
 }
 
-module.exports = { saveUser, findUser, setActiveUser, getAllUsers,Newpassword};
+module.exports = { saveUser, findUser, setActiveUser, getAllUsers, setNewPassword};

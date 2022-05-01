@@ -8,7 +8,6 @@ const Header = () => {
   const [showprofil, setshowprofil] = useState(false)
   return (
     <>
-  
     <nav className='Header-for-interface'>
         <div className='nav-container'>
         
@@ -20,7 +19,7 @@ const Header = () => {
                           </div>
                      <div className="nav-elem" >
                           <div className='elem' onClick={() => setshowprofil(showprofil => !showprofil)}>       
-                               <p> Nom et prénom </p>
+                               <p> Nom Prénom </p>
                                <FontAwesomeIcon icon={faCaretDown} className="icon" />
                           </div>
                     </div>
@@ -37,7 +36,7 @@ const Header = () => {
                    </div>   
                     <div className='profile'>
                            <FontAwesomeIcon icon={faUserCog} className="icon-profil-menu" />   
-                           <a href='#'>Mon Compte</a>
+                           <a href='/Admin/Profile'>Mon Compte</a>
                     </div>
               
                 <div className='log-out'>

@@ -5,6 +5,7 @@ import axios from 'axios';
 import '../SignUp/FormLog.css'
 
 const FormForget = ({forgetForm}) => {
+    const {HandleForget, email, HandleChange, errors} = UseForget(forgetForm, validateForget);
     const forget = () => {
 
         axios.post("http://localhost:2000/auth/forget", {
@@ -18,7 +19,7 @@ const FormForget = ({forgetForm}) => {
     
     };
 
-    const {HandleForget, email, HandleChange, errors} = UseForget(forgetForm, validateForget);
+    
     return (
         <div className='login-container'>
             <form className='form-login' onSubmit={HandleForget} noValidate >

@@ -83,7 +83,7 @@
 }
 
 .profile:hover , .log-out:hover{
-    background-color:#020930;
+    background-color:#4545464f;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -97,8 +97,7 @@
     width: 20%;
     float: left;
     height: 100%;
-    position: fixed;
-    
+    position: fixed;    
 }
 
 .lg {   

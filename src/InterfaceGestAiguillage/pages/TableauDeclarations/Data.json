@@ -1,0 +1,12 @@
+[
+    {"titre":"fuite d'eau","type":"technique","date":"20-02-2022" ,"etat":"validé"},
+    {"titre":"panne d'éléctricité","type":"technique","date":"14-03-2022","etat":"En cours"},
+    {"titre":"poussiere dans les classes","type":"entretien","date":"17-03-2022","etat":"rejeté"},
+    {"titre":"porte coincé","type":"sécurité","date":"14-04-2022","etat":"validé"},
+    {"titre":"fenaitre cassée","type":"sécurité","date":"2-02-2022","etat":"validé"},
+    {"titre":"fuite d'eau","type":"technique","date":"22-02-2022","etat":"En cours"},
+    {"titre":"somme d'argent trouvé","type":"objet trouvé","date":"16-04-2022","etat":"validé"},
+    {"titre":"enfet occupé","type":"entretien","date":"17-04-2022","etat":"validé"},
+    {"titre":"malade dans un etat grave","type":"santé","date":"30-04-2022","etat":"validé"}
+
+]
