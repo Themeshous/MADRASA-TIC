@@ -2,16 +2,13 @@ const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const {createToken} =  require("../utils/create-token");
 
-const { findUser, saveUser, Newpassword} = require('../../db/Gateway');
+const { findUser, saveUser, setNewPassword} = require('../../db/Gateway');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 async function login(req, res) {
     const email = req.body.email;
     const password = req.body.password;
-
-    console.log("here it is the data insereted");
-    //console.log(req.body);
 
     const data = await findUser(email, password);
     console.log(data);
@@ -48,7 +45,7 @@ async function reset(req, res) {
   console.log(req.body.email);
  // console.log(req.body);
   
-  await Newpassword(req.body.password1,req.body.email);
+  await setNewPassword(req.body.password1,req.body.email);
   return res.json({status: 'ok', message: 'Password reset. Please login with your new password.'});
 }
 

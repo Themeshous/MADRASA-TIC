@@ -13,10 +13,7 @@ export const Reset = () => {
 
     return (    
       <div className='form-container-login'> 
-          {
-          (<FormReset resetForm={resetForm}/>
-          )
-          }
+          <FormReset resetForm={resetForm}/>         
           </div>
     )
 }
