@@ -162,13 +162,3 @@
 .active .icon-left{
     color: #020930;
 }
-
-
-/* contenu du milieu*/
-.middle-content-ResAig{
-    color:#020930;
-    top:10%;
-    margin-left: 25%;
-    position:absolute;
-    width: 70%;
-}

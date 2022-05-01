@@ -17,7 +17,7 @@ export const FormConnect = () => {
      var interf;
      function redirect(valeur) {
           if (valeur=="responsable d'aiguillage") {
-              interf=<ConsulterDeclr/>
+              interf=<ConsulterDeclr />
           }else if (valeur=="responsable des relations extérieures") {
              interf=<>Bien venu responsable des relation externes</>
           }else if((valeur=="administrateur-secondaire") || (valeur=="administrateur")) {

@@ -2,6 +2,7 @@ import React , {useState} from 'react'
 import '../SignUp/FormLog.css'
 import FormReset from './FormReset'
 import { Forget } from './Forget'
+import FormLogIn from '../LogIn/FormLogIn'
 
 export const Reset = () => {
     const [isReset, setisReset] = useState(false)
@@ -12,9 +13,7 @@ export const Reset = () => {
 
     return (    
       <div className='form-container-login'> 
-          {
-          (<FormReset resetForm={resetForm}/>
-          ) }
+          <FormReset resetForm={resetForm}/>         
           </div>
     )
 }

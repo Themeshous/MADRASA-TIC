@@ -48,7 +48,7 @@ const FormLogIn = ({connectForm,data}) => {
             {errors.pswd && <p>{errors.pswd}</p>}
           </div>
           <div className='forgot-pswd' >
-            <a href='/Forget-password'>
+            <a href='/auth/forget'>
               Avez vous oublié votre mot de pase ?
             </a>
 

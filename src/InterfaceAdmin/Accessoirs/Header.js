@@ -19,7 +19,7 @@ const Header = () => {
                           </div>
                      <div className="nav-elem" >
                           <div className='elem' onClick={() => setshowprofil(showprofil => !showprofil)}>       
-                               <p> Khedir Meriem </p>
+                               <p> Nom Prénom </p>
                                <FontAwesomeIcon icon={faCaretDown} className="icon" />
                           </div>
                     </div>

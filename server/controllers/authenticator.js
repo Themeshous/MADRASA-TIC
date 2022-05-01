@@ -21,12 +21,16 @@ async function login(req, res) {
 
 }
 
+async function logout(req, res) {  
+
+}
+
 async function signup(req, res) {
         const Nom = req.body.nom;
         const Prenom = req.body.prenom;
         const Email = req.body.email;
         const Role = req.body.role;
-        const Profession = "req.body.profession";
+        const Profession = req.body.profession;
         const Password = req.body.password;
         const Password1 = req.body.password;
 
@@ -52,17 +56,17 @@ async function forgetpassword(req,res){
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user:process.env.REACT_APP_EMAIL,
-        pass: process.env.REACT_APP_EMAIL_PASS,
-      },
+        user: 'esiuser22@gmail.com',
+        pass: 'rootroot',
+      }
+
     });
     
     var mailOptions = {
-      from: 'adminesi@gmail.com',
-      to: "a.saidoune@esi-sba.dz",//req.body.email
-      subject: 'The subject goes here',
+      from: 'esiuser22@gmail.com',
+      to: req.body.email,
+      subject: 'Reset password',
       text: 'To reset your password, please click the link below.\n\nhttp://localhost:3000/auth/reset',
-      html: 'The body of the email goes here in HTML',
     }
       
     
@@ -70,10 +74,10 @@ async function forgetpassword(req,res){
       if (err) {
         res.json(err);
       } else {
-        res.json(info);
+        res.json('Email sent successfully');
       }
     });
     
 }
 
-module.exports = { login,signup,reset,forgetpassword}
+module.exports = { login,logout,signup,reset,forgetpassword}

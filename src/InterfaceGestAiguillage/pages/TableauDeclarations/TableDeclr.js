@@ -3,31 +3,13 @@ import { useTable } from 'react-table/dist/react-table.development'
 import {useGlobalFilter, useSortBy} from "react-table";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch} from '@fortawesome/free-solid-svg-icons'
-//import { useState, useEffect } from "react";
-//import axios from 'axios';
-import MData from "./MData.json"
-import { Columns } from './Columns'
-import "./Tableau.css"
+import Data from "./Data.json"
+import { Colonnes } from './Colonnes'
+import "../../../InterfaceAdmin/Pages/ConsultationComptes/Tableau.css"
 
-export const TableComptes = () => {
-
- /* const [users, setUsers] = useState([]);
-  useEffect(() => {
-    const getUsers = async () => {
-      const {data} = await axios.get("http://localhost:2000/Admin/ConsulterComptes");
-      console.log(data.users);
-      setUsers(data.users);
-    };
-    getUsers();
-    return () => {
-       console.log(users);
-      
-    };
-  }, []);*/
-  
-   
-    const columns = useMemo(()=> Columns , [])
-   const data= useMemo(()=> MData, []) 
+export const TableDeclr = () => {
+    const columns = useMemo(()=> Colonnes , [])
+    const data= useMemo(()=> Data , [])
 
     const TableInstance = useTable({
        columns,

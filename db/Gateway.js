@@ -1,7 +1,7 @@
 const mysql = require('../server/node_modules/mysql2');
 const bcrypt = require('../server/node_modules/bcryptjs');
-
 const path = require('path')
+
 require('dotenv').config({
   path: path.resolve(__dirname, '.env')
 })

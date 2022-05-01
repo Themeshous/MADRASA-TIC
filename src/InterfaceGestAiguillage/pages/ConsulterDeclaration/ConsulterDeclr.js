@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../../../InterfaceAdmin/Accessoirs/Header'
 import { NavGaucheResAig } from '../../NavGaucheResAig'
 import '../../../InterfaceAdmin/Accessoirs/Admin.css'
+import {TableDeclr} from "../TableauDeclarations/TableDeclr"
 
 const ConsulterDeclr = () => {
 
@@ -12,7 +13,7 @@ const ConsulterDeclr = () => {
        <NavGaucheResAig />
     </div>
     <div className='middle-content-ResAig'> 
-      <h1>Bien venu dans l'interface cher responsable d'aiguillage!!</h1>
+      <TableDeclr/>
     </div>
     </>
     
