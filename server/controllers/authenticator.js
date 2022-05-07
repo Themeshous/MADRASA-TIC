@@ -1,8 +1,7 @@
 const nodemailer = require('nodemailer');
-const jwt = require('jsonwebtoken');
 const {createToken} =  require("../utils/create-token");
 
-const { findUser, saveUser, setNewPassword} = require('../../db/Gateway');
+const { findUser, saveUser, setNewPassword} = require('../../db/UserGateway');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 

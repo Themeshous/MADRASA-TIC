@@ -1,4 +1,4 @@
-USE registration; 
+USE Madrasatic;
 CREATE TABLE `ResetTokens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,

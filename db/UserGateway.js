@@ -1,24 +1,5 @@
-const mysql = require('../server/node_modules/mysql2');
 const bcrypt = require('../server/node_modules/bcryptjs');
-const path = require('path')
-
-require('dotenv').config({
-  path: path.resolve(__dirname, '.env')
-})
-
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'madrasatic'
-});
-
-db.connect(function (err) {
-  if (err) throw err;
-  console.log("BDD Connected!");
-});
-
-const connection = db.promise();
+const connection = require('./connection');
 
 async function saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1) {
   const hashpswd = await bcrypt.hash(Password, 8);
@@ -58,16 +39,14 @@ async function getAllUsers() {
 
 async function setActiveUser(email, value) {
   const activationQuery = "UPDATE users SET isActive = ? WHERE Email = ?";
-  db.query(activationQuery, [value, email], (err) => {
-    console.log(err);
-  });
+  const result = await connection.query(activationQuery, [value, email]);
+  console.log(result);
 }
 
 async function setNewPassword(password, email) {
   const sqlupdate = "UPDATE users SET Password1 = ? WHERE Email = ?";
-  db.query(sqlupdate, [password, email], (err, result) => {
-    console.log(err);
-  });
+  const result = await connection.query(sqlupdate, [password, email]);
+  console.log(result);
 }
 
 module.exports = { saveUser, findUser, setActiveUser, getAllUsers, setNewPassword};
