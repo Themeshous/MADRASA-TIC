@@ -28,7 +28,7 @@ const signup = () => {
     const {handlechange,values,HandleSubmit,errors}=UseForm(submitForm,ValidateInfo);
     return (
    <div className='form-content-right'>
-       <form className='form' onSubmit={HandleSubmit} noValidate>
+       <form className='form-signup' onSubmit={HandleSubmit} noValidate>
            <h1>
                Créez un nouveau compte en remplissant ce formulaire !!
            </h1>
