@@ -1,6 +1,6 @@
 const {createUserTokenForAdmin} =  require("../utils/create-token");
 
-const {saveUser, getAllUsers, setActiveUser} = require('../../db/Gateway');
+const {saveUser, getAllUsers, setActiveUser} = require('../../db/UserGateway');
 
 async function createUser(request, response) {
     const Nom = request.body.nom;
