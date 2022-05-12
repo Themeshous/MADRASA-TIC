@@ -42,8 +42,7 @@ async function reset(req, res) {
 
   console.log("here it is the data to update");
   console.log(req.body.email);
- // console.log(req.body);
-  
+   
   await setNewPassword(req.body.password1,req.body.email);
   return res.json({status: 'ok', message: 'Password reset. Please login with your new password.'});
 }

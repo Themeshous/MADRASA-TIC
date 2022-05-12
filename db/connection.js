@@ -7,10 +7,11 @@ require('dotenv').config({
 const {MYSQL_DB, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_USER} = process.env;
 
 const db = mysql.createConnection({
-    host: MYSQL_HOST,
-    user: MYSQL_USER,
-    password: MYSQL_PASSWORD,
-    database: MYSQL_DB
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    port: '3306',
+    database: 'madrasatic'
 });
 
 db.connect(function (err) {
@@ -18,6 +19,6 @@ db.connect(function (err) {
     console.log("BDD Connected!");
 });
 
-const connection = db.promise();
+ const connection = db.promise();
 
 module.exports = connection;

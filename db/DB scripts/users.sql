@@ -1,4 +1,4 @@
-CREATE DATABASE Madrasatic;
+CREATE DATABASE if not exists Madrasatic;
 USE Madrasatic;
 
 drop table if exists `users`;
