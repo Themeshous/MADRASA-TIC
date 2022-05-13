@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const UseLogin = (callback, ValidateLog) => {
-const [role, setrole] = useState()
-const [errors, seterrors] = useState({})
 
-const [isConnecting, setisconnecting] = useState(false)
-const [val, setval] = useState({
+  const [errors, seterrors] = useState({})
+  
+  localStorage.removeItem("user")
+
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isConnecting, setisconnecting] = useState(false)
+
+  const [val, setval] = useState({
     email: '',
     pswd: ''
   })
- 
+
 
   const handlechange = e => {
     const { name, value } = e.target
@@ -18,30 +25,40 @@ const [val, setval] = useState({
       ...val,
       [name]: value
     })
-  } 
-  
+  }
+
   const HandleConnect = async (e) => {
+
     e.preventDefault();
-     const loginUser = {
+    const loginUser = {
       email: val.email,
       password: val.pswd,
     };
     const { data } = await axios.post("http://localhost:2000/auth/connect", loginUser)
-    console.log(data);
-    if(data.requestSucceeded) {
-       seterrors(ValidateLog(val,false,false));
-       console.log(data)
-       setrole(data)
+
+    if (data.requestSucceeded) {
+
+      seterrors(ValidateLog(val, false, false));
+
+      const roles = data.role
+      const name = data.nom
+      const name2 = data.prenom
+      const email = data.email
+      localStorage.setItem("user",JSON.stringify({ name, name2, email, roles }));
+      
+      const p = "/" + (roles.replace(/\s/g, ''))
+      const from = (p !== "/") ? p : location.pathname;
+      navigate(from, { replace: true })
+
     } else {
       if (!data.emailFound) {
-          seterrors(ValidateLog(val,true,false));
+        seterrors(ValidateLog(val, true, false));
       } else {
-        seterrors(ValidateLog(val,false,true));
+        seterrors(ValidateLog(val, false, true));
       }
     }
     setisconnecting(true)
   }
-
   useEffect(
     () => {
       if (Object.keys(errors).length === 0 && isConnecting) {
@@ -51,7 +68,7 @@ const [val, setval] = useState({
     [errors, callback, isConnecting]
   );
 
-  return { handlechange, val, HandleConnect, errors,role};
+  return { handlechange, val, HandleConnect, errors };
 }
 
 export default UseLogin
