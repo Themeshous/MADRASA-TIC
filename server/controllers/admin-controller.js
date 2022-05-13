@@ -17,7 +17,8 @@ async function createUser(request, response) {
 
 async function getAllUserTokens(req, res) {
     const result = await getAllUsers();
-    res.json({users: hideSensitiveInformations(result) });
+    const usersTable = hideSensitiveInformations(result);
+    res.json({ usersTable });
 }
 
     function hideSensitiveInformations(result) {
