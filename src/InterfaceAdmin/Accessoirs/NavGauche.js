@@ -18,7 +18,7 @@ export const NavGauche = () => {
          <div className="left-elements">
               
             
-                    <NavLink  to="/Admin/create"
+                    <NavLink  to="/administrateur-secondaire"
                               className={(navData) => (navData.isActive ? 'active' : 'link')}> 
                                <FontAwesomeIcon icon={faUserPlus} className="icon-left" />
                                <p>Créer un compte</p> 

@@ -24,12 +24,17 @@
     display: flex;
     align-items: center;
 }
-.prfl{
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
-    background-color: #020930a4;
 
+.profile-letters{
+    padding: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 30px;
+    background-color: #fa7528;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
 }
 .icon{
     width: 17px;
@@ -40,15 +45,25 @@
 }
 /*Css du menu descendant du profil*/
 .profil-content{
-    background-color:rgba(102, 102, 235, 0.24);
-    border-radius: 15px;
+    background-color:rgb(218, 218, 245);
+    border-radius: 5px;
     padding: 0.8%;
-    width: 18%;
+    width:16.01%;
     float: right;
     font-size: 15px;
     margin-right: 4%;
 }
-
+.profil-content::before{
+    content: '';
+    position: absolute;
+    top:9%;
+    right: 4.4%;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    background-color:rgb(218, 218, 245);
+    transform: rotate(45deg);
+}
 .profil-info{
     text-align: center;
     padding-top: 15%;
@@ -59,11 +74,13 @@
     height: 50px;
     width: 50px;
 }
+.prfl-m{
+margin-left: 40%;
+margin-bottom: 5%;
+}
 
 .profile , .log-out{
-    display: flex;
-   
-    
+    display: flex;    
     padding: 5%;
     margin: 5%;
     align-items: center;

@@ -252,3 +252,34 @@
 .info {
   font-size: 0.8rem;
 }
+
+/*** CSS de unauthorized page **/
+.unauthorized{
+  margin-top:10%;
+  margin-left: 20%;
+  width: 60%;
+}
+.unauthorized h2{
+  font-size:x-large;
+  color: #f00e0e;
+}
+
+.flexGrow-btn{
+  border-radius: 10px;
+  height: 40px;
+  width: 100px;
+  margin-top: 5%;
+  font-size: 15px;
+  border: none;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background:#020930;
+  color: rgba(255, 255, 255, 0.836);
+}
+
+
+.flexGrow-btn:hover{cursor: pointer;
+  background-color:#f2f2f2;;
+  color:#020930;
+}
