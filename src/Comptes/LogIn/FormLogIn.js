@@ -3,11 +3,9 @@ import UseLogin from './UseLogin'
 import ValidateLog from './ValidateLog'
 import '../SignUp/FormLog.css'
 
-const FormLogIn = ({connectForm,data}) => {
-  
-  const { handlechange, val, HandleConnect, errors,role} = UseLogin(connectForm, ValidateLog);
-  console.log(role);
-  data(role)
+const FormLogIn = ({connectForm}) => {
+  const { handlechange, val, HandleConnect, errors} = UseLogin(connectForm, ValidateLog);
+  console.log(localStorage.getItem("user"));
   return (
     <div className='login-container'>
       <form className='form-login' onSubmit={HandleConnect} noValidate >
@@ -60,6 +58,7 @@ const FormLogIn = ({connectForm,data}) => {
         </div>
       </form>
     </div>
+  
   )
 }
 

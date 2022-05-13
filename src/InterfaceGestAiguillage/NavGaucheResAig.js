@@ -18,7 +18,7 @@ export const NavGaucheResAig = () => {
          <div className="left-elements">
               
             
-                    <NavLink  to="/ResAig/consulter"
+                    <NavLink  to="/responsabled'aiguillage"
                               className={(navData) => (navData.isActive ? 'active' : 'link')}> 
                                <FontAwesomeIcon icon={faWarning} className="icon-left" />
                                <p>Consulter les déclarations</p> 
