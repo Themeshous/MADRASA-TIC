@@ -15,18 +15,18 @@ async function setRapport(date,titre,description,fichier,service,etat) {
     return {rapportSaved: true};
 }
 
-async function updateRapport(titre,description,fichier,service,etat) {
+async function updateRapport(titre,description,fichier,service,etat,ID) {
 
-  const sqlupdate = "UPDATE rapports SET titre = ?,description = ? ,fichier = ? , service = ?, etat= ? WHERE id_rap = 4"; //id njibouh men front 
-  const result = await connection.query(sqlupdate, [titre, description,fichier,service,etat]);
+  const sqlupdate = "UPDATE rapports SET titre = ?,description = ? ,fichier = ? , service = ?, etat= ? WHERE id_rap = ? "; //id njibouh men front 
+  const result = await connection.query(sqlupdate, [titre, description,fichier,service,etat,ID]);
   console.log("rapport updated");
 
 }
 
 async function deleteRapport(ID) {
-    const delsql = "UPDATE rapports SET Supp = true WHERE id_rap = 4"; //faut njibou id hada men fornt 
+    const delsql = "UPDATE rapports SET Supp = true WHERE id_rap = ?"; //faut njibou id hada men fornt 
     const result = await connection.query(delsql, [ID]);
-    console.log(result);
+    console.log("rapport deleted");
 }
 
 async function getRapports() {
@@ -39,6 +39,16 @@ async function getRapports() {
     }
 }
 
+async function getRapportid(ID) {
+    const selectsql = "SELECT * FROM rapports WHERE id_rap = ?";
+    const result = await connection.query(selectsql,[ID]);
+    if (result.length !== 0) {
+        return result;
+    } else {
+        return {RapportFound: false}
+    }
+}
 
 
-module.exports = { setRapport , updateRapport, deleteRapport,getRapports};
+
+module.exports = { setRapport , updateRapport, deleteRapport,getRapports,getRapportid};

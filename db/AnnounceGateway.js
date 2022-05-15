@@ -14,12 +14,12 @@ async function setAnnounce(Announce) {
     return {AnnounceSaved: true};
 }
 
-async function updateAnnounce(Announce){
-
-  const sqlupdate = "UPDATE announce SET datepost=? ,titre = ?, organisateur =? ,description = ? ,fichier = ? , img = ?, lien= ? WHERE id_post = 4"; //id njibouh men front 
-  const data = [Announce.datepost, Announce.titre, Announce.organisateur, Announce.description, Announce.fichier, Announce.img,Announce.lien]
+async function updateAnnounce(Announce,ID){
+  
+  const sqlupdate = "UPDATE announce SET datepost=? ,titre = ?, organisateur =? ,description = ? ,fichier = ? , img = ?, lien= ? WHERE id_post = ?";  //id njibouh men front 
+  const data = [Announce.datepost, Announce.titre, Announce.organisateur, Announce.description, Announce.fichier, Announce.img,Announce.lien,ID ]
   try {
-    await connection.query(sqlupdate, data);
+    await connection.query(sqlupdate, data); 
   } catch (error) {
     return {Announceupdate: false, message: error.sqlMessage};
   }
@@ -31,7 +31,7 @@ async function updateAnnounce(Announce){
 
 async function deleteAnnounce(ID){
 
-  const delsql = "UPDATE announce SET etatpost= true WHERE id_post = 4"; //id njibouh men front 
+  const delsql = "UPDATE announce SET etatpost= true WHERE id_post = ? "; //id njibouh men front 
   try{
     await connection.query(delsql, [ID]);
   } catch (error){
@@ -52,8 +52,17 @@ async function getAnnounce(){
     }
     
 }
+async function getAnnounceid(ID) {
+  const selectsql = "SELECT * FROM announce WHERE id_post = ?";
+  const result = await connection.query(selectsql,[ID]);
+  if (result.length !== 0) {
+      return result;
+  } else {
+      return {AnnounceFound: false}
+  }
+}
 
 
 
 
-module.exports = { setAnnounce , updateAnnounce, deleteAnnounce,getAnnounce};
+module.exports = { setAnnounce , updateAnnounce, deleteAnnounce,getAnnounce,getAnnounceid};
