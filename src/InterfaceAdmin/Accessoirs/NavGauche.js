@@ -6,7 +6,6 @@ import { faBell , faChartPie, faCircleExclamation,  faSliders, faUserPlus } from
 import { NavLink } from 'react-router-dom'   
    
 const user = JSON.parse(localStorage.getItem("user"));
-const pathname= "/" + (user.roles.replace(/\s/g, ''))
 export const NavGauche = () => {
   return (
        <>
@@ -20,7 +19,7 @@ export const NavGauche = () => {
          <div className="left-elements">
               
             
-                    <NavLink  to={pathname}
+                    <NavLink  to="/administrateur"
                               className={(navData) => (navData.isActive ? 'active' : 'link')}> 
                                <FontAwesomeIcon icon={faUserPlus} className="icon-left" />
                                <p>Créer un compte</p> 
