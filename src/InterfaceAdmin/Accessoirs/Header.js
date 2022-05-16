@@ -6,8 +6,8 @@ import { useState } from 'react'
 const Header = () => {
   const [showprofil, setshowprofil] = useState(false)
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user.roles);
   const d = user.name.slice(0, 1).toUpperCase();
+  const pathname= "/" + (user.roles.replace(/\s/g, ''))+"/Profile"
   return (
     <>
       <nav className='Header-for-interface'>
@@ -43,7 +43,7 @@ const Header = () => {
               </div>
               <div className='profile'>
                 <FontAwesomeIcon icon={faUserCog} className="icon-profil-menu" />
-                <a href='/Admin/Profile'>Mon Compte</a>
+                <a href={pathname}>Mon Compte</a>
               </div>
 
               <div className='log-out' >

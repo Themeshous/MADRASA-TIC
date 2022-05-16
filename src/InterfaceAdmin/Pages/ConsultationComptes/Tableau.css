@@ -39,7 +39,7 @@ table {
   
   table tr:nth-child(even){background-color: #f2f2f2;}
   
-  table tr:hover {background-color: #ddd;}
+  table tr:hover {background-color: rgba(248, 95, 7, 0.658);}
   
   table th {
     padding-top: 12px;
@@ -88,3 +88,51 @@ table {
   .toggle-switch input[type="checkbox"]:checked + .switch {
     background-color:#62df1a ;
   }
+
+
+.loading{
+  font-size: x-large;
+  color: #020930;
+  margin-left: 50%;
+  width: 65%;
+  padding-top: 10%;
+}
+
+.confirmation{
+  position:absolute;
+  background-color: #b3b8bb;
+  border-radius: 5px;
+  margin-right: 50%;
+  padding: 3%;
+  width: 350px;
+  height: 150px;
+  top:30%;
+  right: 0px;
+  left: 45%;
+  float: left;
+}
+.texte-xonfirmation{
+  padding: 6%;
+}
+.btn-conf{
+ margin-left: 25%;
+ padding: 2%;
+ border-radius: 5px;
+ border-style: none;
+}
+.annuler{
+  background-color: #62df1ac0;
+}
+.annuler:hover{
+  background-color: #62df1a;
+  color: white;
+  cursor: pointer;
+}
+.confirmer{
+  background-color: #eb32329d;
+}
+.confirmer:hover{
+  background-color: #f31c1c;
+  color: white;
+  cursor: pointer;
+}

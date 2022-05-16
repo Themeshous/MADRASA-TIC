@@ -3,10 +3,10 @@ import { useTable } from 'react-table/dist/react-table.development'
 import { useGlobalFilter, useSortBy } from "react-table";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { Colonnes } from './Colonnes'
+import { Colrapports} from './Colrapport'
 import "../../../InterfaceAdmin/Pages/ConsultationComptes/Tableau.css"
 
-export const TableDeclr = () => {
+export const TabRapports = () => {
 
   const [items, setItems] = useState([]);
   const [fetchError, setFetchError] = useState(null);
@@ -16,7 +16,7 @@ export const TableDeclr = () => {
 
     const fetchItems = async () => {
       try {
-        const response = await fetch("http://localhost:2000/declaration/consulterDeclartions");
+        const response = await fetch("http://localhost:2000/rapport/consulterRapports");
         if (!response.ok) throw Error("les données n'ont pas été reçus");
         const listItems = await response.json();
         setItems(listItems.result);
@@ -34,7 +34,7 @@ export const TableDeclr = () => {
     setTimeout(() => fetchItems(), 2000);
 
   }, [])
-  const columns = useMemo(() => Colonnes, [])
+  const columns = useMemo(() => Colrapports, [])
   const data = items
 
   const TableInstance = useTable({

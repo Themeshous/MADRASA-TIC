@@ -9,6 +9,10 @@ export const Columns = [
     Header: "Prénom",
     accessor:"prenom" 
    },
+   {
+    Header: "Email",
+    accessor:"email"
+  },
   {
     Header: "Rôle",
     accessor: "role"
@@ -20,6 +24,7 @@ export const Columns = [
   { 
     Header: "Etat",
     accessor:"Etat" ,
-    Cell:({value}) => { return ((value=="1") ?<ToggleSwitch label="true" /> :<ToggleSwitch label="false" />)}
+    
+    Cell:({value,row}) => { return ((value=="1") ? <ToggleSwitch label="true" SearchKey={row.original.email.toString()} /> :<ToggleSwitch label="false" SearchKey={row.original.email.toString()} /> )},
   }
 ]
