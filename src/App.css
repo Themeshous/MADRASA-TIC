@@ -6,3 +6,10 @@
   padding: 0;
   font-family: 'PT Sans', sans-serif;
 }
+
+.page-not-found{
+  font-size: xx-large;
+  margin-left: 37%;
+  margin-top: 10%;
+  color: red;
+}

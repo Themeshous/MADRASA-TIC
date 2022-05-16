@@ -21,11 +21,8 @@ async function saveDeclaration(declaration) {
 async function getAllDeclaration() {
     const selectQuery = "SELECT * FROM declarations";
     const [result] = await connection.query(selectQuery);
-    if (result.length !== 0) {
         return result;
-    } else {
-        return {declarationsFound: false}
-    }
+    
 }
 
 async function getDeclarationsOfTheEmail(email) {
