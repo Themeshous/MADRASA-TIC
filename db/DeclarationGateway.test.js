@@ -7,7 +7,9 @@ describe('Declaration Gateway test', () => {
         description: "mkljsdlkj",
         image: null,
         emetteur: "a.chdqer@esi-sba.dz",
-        localisation: "S1"
+        localisation: "S1",
+        type: "type",
+        etat: "etat"
     };
 
     it('should register a declaration into the DB', async function () {
@@ -21,7 +23,7 @@ describe('Declaration Gateway test', () => {
     });
 
     it('should get all declaration for a specific sender', async function () {
-        const result = await Gateway.getDeclarationsOfTheEmail("a.chdqer@esi-sba.dz");
+        const result = await Gateway.getDeclarationsOfTheEmail("a.cjmkd@esi-sba.dz");
         expect(result.length).toBeGreaterThan(0);
     });
 
@@ -29,5 +31,11 @@ describe('Declaration Gateway test', () => {
         const unexistedEmail = "a.notExists@esi-sba.dz";
         const {declarationsFound} = await Gateway.getDeclarationsOfTheEmail(unexistedEmail);
         expect(declarationsFound).toBe(false);
+    });
+
+    it('should get a declaration by id', async () => {
+        const id = 1;
+        const result = await Gateway.getDeclarationById(id);
+        expect(result.id_dec).toBe(id);
     });
 });
