@@ -39,8 +39,8 @@ async function getAllUsers() {
 
 async function setActiveUser(email, value) {
   const activationQuery = "UPDATE users SET isActive = ? WHERE Email = ?";
-  const result = await connection.query(activationQuery, [value, email]);
-  console.log(result);
+  await connection.query(activationQuery, [value, email]);
+  console.log("user state changed");
 }
 
 async function setNewPassword(password, email) {

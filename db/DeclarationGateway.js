@@ -3,12 +3,12 @@ const connection = require('./connection');
 async function saveDeclaration(declaration) {
     const sqlinsert =
         "INSERT INTO `madrasatic`.`declarations` " +
-        "(`date`, `titre`, `description`, `image`, `emetteur`, `localisation`, `etat`) " +
-        "VALUES (?, ?, ?, ?, ?, ?, ?);"
+        "(`date`, `titre`, `description`, `image`, `emetteur`, `localisation`, `type`, `etat`) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?);"
 
     const data =
         [declaration.date, declaration.titre, declaration.description,
-            declaration.image, declaration.emetteur, declaration.localisation, declaration.etat]
+            declaration.image, declaration.emetteur, declaration.localisation, declaration.type, declaration.etat]
     try {
         await connection.query(sqlinsert, data);
     } catch (error) {
@@ -25,6 +25,15 @@ async function getAllDeclaration() {
     
 }
 
+async function getDeclarationById(id) {
+    const selectQuery = "SELECT * FROM declarations WHERE id_dec = ?";
+    const [[result]] = await connection.query(selectQuery, [id]);
+    if (result)
+        return result;
+    else
+        return { declarationFound: false }
+}
+
 async function getDeclarationsOfTheEmail(email) {
     const selectQuery = "SELECT * FROM declarations WHERE emetteur = ?";
     const [result] = await connection.query(selectQuery, [email]);
@@ -35,4 +44,4 @@ async function getDeclarationsOfTheEmail(email) {
 }
 
 
-module.exports = {saveDeclaration, getAllDeclaration, getDeclarationsOfTheEmail}
+module.exports = {saveDeclaration, getAllDeclaration, getDeclarationById, getDeclarationsOfTheEmail}

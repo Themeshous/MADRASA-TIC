@@ -1,14 +1,20 @@
-const {getAllDeclaration, getDeclarationsOfTheEmail} = require('../../db/DeclarationGateway');
+const {getAllDeclaration, getDeclarationsOfTheEmail, getDeclarationById} = require('../../db/DeclarationGateway');
 
 async function fetchAllDeclarations(req, res) {
-    const result = await getAllDeclaration();
-    res.json({ result });
+    const declarations = await getAllDeclaration();
+    res.json(declarations);
 }
 
 async function fetchDeclarationsForEmail(req, res) {
     const email = req.body.email;
-    const result = await getDeclarationsOfTheEmail(email);
-    res.json({ result });
+    const declarations = await getDeclarationsOfTheEmail(email);
+    res.json(declarations);
 }
 
-module.exports = {fetchAllDeclarations,fetchDeclarationsForEmail}
+async function fetchDeclarationById(request, response) {
+    const id = request.params.id;
+    const declaration = await getDeclarationById(id);
+    response.json(declaration);
+}
+
+module.exports = {fetchAllDeclarations,fetchDeclarationsForEmail, fetchDeclarationById}
