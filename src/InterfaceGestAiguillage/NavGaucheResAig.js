@@ -4,6 +4,7 @@ import Logo from '../img/SmallerLogo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell , faChartPie, faCircleExclamation,faWarning } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom'   
+import { faEdit } from '@fortawesome/free-regular-svg-icons'
      
 export const NavGaucheResAig = () => {
   return (
@@ -23,7 +24,12 @@ export const NavGaucheResAig = () => {
                                <FontAwesomeIcon icon={faWarning} className="icon-left" />
                                <p>Consulter les déclarations</p> 
                     </NavLink>
-                 
+                   
+                    <NavLink  to="/ResAig/rapports"
+                              className={(navData) => (navData.isActive ? 'active' : 'link')}> 
+                               <FontAwesomeIcon icon={faEdit} className="icon-left" />
+                               <p>Consulter les rapports</p> 
+                    </NavLink>
 
                     
                     <NavLink  to="/ResAig/notification"

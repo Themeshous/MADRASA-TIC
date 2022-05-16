@@ -4,7 +4,8 @@ import Logo from '../../img/SmallerLogo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell , faChartPie, faCircleExclamation,  faSliders, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom'   
-     
+   
+const user = JSON.parse(localStorage.getItem("user"));
 export const NavGauche = () => {
   return (
        <>
@@ -18,7 +19,7 @@ export const NavGauche = () => {
          <div className="left-elements">
               
             
-                    <NavLink  to="/administrateur-secondaire"
+                    <NavLink  to="/administrateur"
                               className={(navData) => (navData.isActive ? 'active' : 'link')}> 
                                <FontAwesomeIcon icon={faUserPlus} className="icon-left" />
                                <p>Créer un compte</p> 

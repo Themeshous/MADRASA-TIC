@@ -2,21 +2,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPen } from '@fortawesome/free-solid-svg-icons'
 export const Colonnes = [
     {
+      Header: "ID",
+      accessor:"id_dec" 
+    },
+    {
+      Header: "Date",
+      accessor:"date" 
+     },
+    {
       Header: "Titre",
       accessor:"titre" 
     },
+    
     {
-      Header: "Type",
-      accessor:"type" 
-     },
-    {
-      Header: "Date signalement",
-      accessor: "date"
+      Header: "Emetteur",
+      accessor: "emetteur"
     },
     {
       Header: "Etat",
-      accessor: "etat",
-      Cell:({value}) => { return ((value=="En cours") ? <>En cours...<a href='/ResAig/consulter/declaration-info' ><FontAwesomeIcon icon={faPen} className="icon" /></a></>:value)}
+      accessor: "Supp"
+    },
+    {
+      Header: "Localisation",
+      accessor: "localisation",
+      Cell:({value}) => { return (<>{value}   {"  ... "}<a href="/responsabled'aiguillage/declaration-info" ><FontAwesomeIcon icon={faPen} className="icon" /></a></>)}
     }
-  ]
-  
+  ] 

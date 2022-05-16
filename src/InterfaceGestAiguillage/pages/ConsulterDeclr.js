@@ -1,8 +1,8 @@
 import React from 'react'
-import Header from '../../../InterfaceAdmin/Accessoirs/Header'
-import { NavGaucheResAig } from '../../NavGaucheResAig'
-import '../../../InterfaceAdmin/Accessoirs/Admin.css'
-import {TableDeclr} from "../TableauDeclarations/TableDeclr"
+import Header from '../../InterfaceAdmin/Accessoirs/Header'
+import { NavGaucheResAig } from '../NavGaucheResAig'
+import '../../InterfaceAdmin/Accessoirs/Admin.css'
+import {TableDeclr} from "./TableauDeclarations/TableDeclr"
 
 const ConsulterDeclr = () => {
 

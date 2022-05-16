@@ -1,4 +1,4 @@
-const {setAnnounce,updateAnnounce, deleteAnnounce,getAnnounce} = require('../../db/AnnounceGateway');
+const {setAnnounce,updateAnnounce, deleteAnnounce,getAnnounce,getAnnounceid} = require('../../db/AnnounceGateway');
 
 async function saveAnnounce(req, res) {
   
@@ -8,16 +8,16 @@ async function saveAnnounce(req, res) {
 }
 
 async function upAnnounce(req, res) {
-  
+    const ID = req.params.id;
     const Announce = req.body;    
-    const data = await updateAnnounce(Announce);
+    const data = await updateAnnounce(Announce,ID);
     res.json({data});
 }
 
 async function supAnnounce(req, res) {
-    const id_post = req.body.ID;
+    const ID = req.params.id;
        
-    const data = await deleteAnnounce(id_post);
+    const data = await deleteAnnounce(ID);
     res.json({data});
 }
 
@@ -26,6 +26,13 @@ async function fetchAnnounce(req, res) {
     res.json({ result });
 }
 
+async function showAnnounce(req,res) {
+    const ID =req.params.id;
+ 
+    const result = await getAnnounceid(ID);
+    res.json({ result });
+ 
+ }
 
 
 
@@ -35,4 +42,4 @@ async function fetchAnnounce(req, res) {
 
 
 
-module.exports = {saveAnnounce,upAnnounce,supAnnounce,fetchAnnounce}
+module.exports = {saveAnnounce,upAnnounce,supAnnounce,fetchAnnounce,showAnnounce}
