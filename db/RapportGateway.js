@@ -32,21 +32,13 @@ async function deleteRapport(ID) {
 async function getRapports() {
     const selectsql = "SELECT * FROM rapports";
     const [result] = await connection.query(selectsql);
-    if (result.length !== 0) {
         return result;
-    } else {
-        return {RapportsFound: false}
-    }
 }
 
 async function getRapportid(ID) {
     const selectsql = "SELECT * FROM rapports WHERE id_rap = ?";
-    const result = await connection.query(selectsql,[ID]);
-    if (result.length !== 0) {
-        return result;
-    } else {
-        return {RapportFound: false}
-    }
+    const [[result]]= await connection.query(selectsql,[ID]);
+    return result;
 }
 
 
