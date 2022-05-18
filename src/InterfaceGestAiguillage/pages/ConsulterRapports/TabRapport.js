@@ -11,7 +11,6 @@ export const TabRapports = () => {
   const [items, setItems] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [empty, setempty] = useState(false)
   useEffect(() => {
 
     const fetchItems = async () => {
@@ -21,9 +20,6 @@ export const TabRapports = () => {
         const listItems = await response.json();
         setItems(listItems.result);
         setFetchError(null);
-        if (listItems.declarationsFound == "false") {
-          setempty(true)
-        }
       } catch (err) {
         setFetchError(err.message);
       } finally {
@@ -57,7 +53,7 @@ export const TabRapports = () => {
   return (<>
     { isLoading?(<p className = 'loading' > Chargement...</p>):
     fetchError?(<p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>):
-    empty?(<p className = 'loading' > la table est vide!</p>):
+    (items.length === 0)?(<p className = 'loading' > la table est vide!</p>):
   <div className='milieu-consultation'>
     <div className='barre-recherche'>
       <FontAwesomeIcon icon={faSearch} className="icon" />

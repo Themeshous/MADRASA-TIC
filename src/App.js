@@ -16,6 +16,7 @@ import Unauthorized from './Comptes/LogIn/Unauthorized'
 import Layout from './Comptes/LogIn/Layout'
 import ConsulterRapports from './InterfaceGestAiguillage/pages/ConRap'
 import ParamCompREsAIg from './InterfaceGestAiguillage/pages/ParamCompResAig'
+import DetailRapport from "./InterfaceGestAiguillage/pages/DetailRapport"
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
             <Route path="/responsabled'aiguillage/declaration-info" element={<Edit />} />
             <Route path="/ResAig/rapports" element={<ConsulterRapports />} />
             <Route path="/responsabled'aiguillage/Profile" element={<ParamCompREsAIg />} />
+            <Route path='/ResAig/rapports/rapinfo/' element={<DetailRapport/>}/>
           </Route>
           <Route path="/auth/signup" element={<FormCreat />} />
 

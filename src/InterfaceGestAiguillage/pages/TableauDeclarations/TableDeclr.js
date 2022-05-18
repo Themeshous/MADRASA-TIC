@@ -11,7 +11,6 @@ export const TableDeclr = () => {
   const [items, setItems] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [empty, setempty] = useState(false)
   useEffect(() => {
 
     const fetchItems = async () => {
@@ -19,7 +18,7 @@ export const TableDeclr = () => {
         const response = await fetch("http://localhost:2000/declaration/consulterDeclartions");
         if (!response.ok) throw Error("les données n'ont pas été reçus");
         const listItems = await response.json();
-        setItems(listItems.result);
+        setItems(listItems);
         setFetchError(null);
       } catch (err) {
         setFetchError(err.message);
@@ -33,7 +32,7 @@ export const TableDeclr = () => {
   }, [])
   const columns = useMemo(() => Colonnes, [])
   const data = items
-
+ 
   const TableInstance = useTable({
     columns,
     data
