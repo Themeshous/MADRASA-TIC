@@ -42,6 +42,7 @@ async function getRapports() {
 async function getRapportid(ID) {
     const selectsql = "SELECT * FROM rapports WHERE id_rap = ?";
     const result = await connection.query(selectsql,[ID]);
+   
     if (result.length !== 0) {
         return result;
     } else {
