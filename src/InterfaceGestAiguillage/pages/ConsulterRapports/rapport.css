@@ -1,0 +1,74 @@
+.rapport-container{
+    padding-top: 7%;
+    margin-left: 25%;
+    width: 65%;
+}
+.Grand-titre{
+    font-size: xx-large;
+    color: rgb(248, 95, 7); 
+}
+.sous-titre{
+    margin-left: 10%;    
+}
+.sous-titre-elem{
+    padding: 2%;
+    display: flex;
+    font-size:x-large;
+    
+}
+.head-related-info{
+  padding-left: 3%;
+  color: rgb(83, 83, 83);
+}
+.elem-rapport{
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    display:block;
+    padding: 0.5%;
+    margin: 1%;
+}
+.titre-elem{
+    padding: 0% 0% 0% 1%;
+    font-size:large;
+    margin-bottom: 0.2%;
+}
+.related-info{
+    background-color: #ffffffa6;
+    margin-top:-2%;
+    margin: 1%;
+    padding: 10px;
+    border-radius: 5px;
+}
+.inline-items{
+    display: flex;
+    justify-content: space-between;
+}
+.icon-rapport{
+    padding: 2%;
+    color: #020930;
+}
+.icon-rapport:hover{
+cursor: pointer;
+color: #020930c0;
+}
+.btn-rapport{
+    padding: 3%;
+    display: flex;
+    justify-content: space-between;
+}
+.btn-next{
+    background-color: #020930;
+    padding: 1%;
+    border-radius: 5px;
+}
+.text-next-rapp{
+    color: aliceblue;
+    text-decoration: none;
+}
+.btn-next:hover{
+    background-color: #f2f2f2;
+    
+}
+.text-next-rapp:hover{
+    color: #020930;
+}
