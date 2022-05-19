@@ -25,6 +25,6 @@ export const Colonnes = [
     {
       Header: "Localisation",
       accessor: "localisation",
-      Cell:({value}) => { return (<>{value}   {"  ... "}<a href="/responsabled'aiguillage/declaration-info" ><FontAwesomeIcon icon={faPen} className="icon" /></a></>)}
+      Cell:({value,row}) => { return (<>{value}   {"  ... "}<a href={`/responsabled'aiguillage/declaration-info?id=${row.original.id_dec.toString()}`} ><FontAwesomeIcon icon={faPen} className="icon" /></a></>)}
     }
   ] 

@@ -8,7 +8,6 @@ import { Reset } from './Comptes/ForgotPassword/Reset';
 import ConsulterComptes from './InterfaceAdmin/Pages/ConsultationComptes/ConsulterComptes'
 import ConsulterDeclr from "./InterfaceGestAiguillage/pages/ConsulterDeclr"
 import ParamComp from './InterfaceAdmin/Pages/ParamCompte.js';
-import { Edit } from './InterfaceGestAiguillage/pages/TableauDeclarations/Editdeclr.js';
 import RequireAuth from './Comptes/LogIn/RequireAuth'
 import './App.css';
 import Content from './Landing/Content';
@@ -17,7 +16,7 @@ import Layout from './Comptes/LogIn/Layout'
 import ConsulterRapports from './InterfaceGestAiguillage/pages/ConRap'
 import ParamCompREsAIg from './InterfaceGestAiguillage/pages/ParamCompResAig'
 import DetailRapport from "./InterfaceGestAiguillage/pages/DetailRapport"
-
+import DetDeclr from "./InterfaceGestAiguillage/pages/DetDeclr"
 function App() {
   return (
     <>
@@ -45,7 +44,7 @@ function App() {
 
           <Route element={<RequireAuth allowedRoles={["responsable d'aiguillage"]} />}>
             <Route path="/responsabled'aiguillage" element={<ConsulterDeclr />} />
-            <Route path="/responsabled'aiguillage/declaration-info" element={<Edit />} />
+            <Route path="/responsabled'aiguillage/declaration-info" element={<DetDeclr/>} />
             <Route path="/ResAig/rapports" element={<ConsulterRapports />} />
             <Route path="/responsabled'aiguillage/Profile" element={<ParamCompREsAIg />} />
             <Route path='/ResAig/rapports/rapinfo/' element={<DetailRapport/>}/>
