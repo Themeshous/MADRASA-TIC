@@ -24,5 +24,5 @@ app.use('/announce',Respoevent);
 
 
 app.listen(2000);
-console.log("runing server 2000");
+console.log("running server 2000");
 

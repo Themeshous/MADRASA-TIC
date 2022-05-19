@@ -1,17 +1,17 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import "./Tableau.css";
 
-const ToggleSwitch = ({ label,SearchKey}) => {
+const ToggleSwitch =({ label,SearchKey}) => {
   const [isToggled, setIsToggled] = useState((label == 'true') ? true : false)
   const [showMenuConf, setshowMenuConf] = useState(false)
   const onToggle = () => setshowMenuConf(!showMenuConf);
   const ChangeState = () => {
      setshowMenuConf(showMenuConf => false)
      setIsToggled(!isToggled);
-     console.log(SearchKey);
-     //BDD FUNCTION TO SAVE CHANGES In the acount of the email = Searchkey
-     //IF ISTOGGLED MEANS ACTIVé save as 1
-     // ELSE MEANS DéSACTIVé save as 0
+     const requestData = {email: SearchKey, isActive: !isToggled};
+     console.log(requestData);
+      axios.patch("http://localhost:2000/admin/changeUserStat", requestData);
   }
   return (
     <>
