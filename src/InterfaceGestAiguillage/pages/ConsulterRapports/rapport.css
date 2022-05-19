@@ -72,3 +72,67 @@ color: #020930c0;
 .text-next-rapp:hover{
     color: #020930;
 }
+
+.inline-items-declaration{
+    padding: 3%;
+    display: flex;
+    justify-content:right;
+}
+.submit{
+    padding: 1%;
+    border-radius: 5px;
+    border: none;
+    margin-left: 10%;
+    font-size:medium;
+}
+.submit:hover{
+    background-color: #f2f2f2;
+    cursor: pointer;
+  
+}
+.valider{
+    background-color: #62df1a;
+}
+.rejeter{
+    background-color:#020930a6;
+}
+.confirmation-déclaration{
+    position:absolute;
+  background-color: #d7d8d8;
+  border-radius: 5px;
+  padding-top: 1%;
+  margin-right: 50%;
+  width: 350px;
+  height: 150px;
+  top:90%;
+  right: 0px;
+  left: 45%;
+  float: left;
+}
+.confirmation-déclaration-valider{
+    position:absolute;
+    background-color: #d7d8d8;
+    border-radius: 5px;
+    padding-top: 1%;
+    margin-right: 50%;
+    width: 400px;
+    height: 220px;
+    top:90%;
+    right: 0px;
+    left: 45%;
+    float: left;
+}
+.form-input-declaration{
+    display: block;
+    padding: 10px;
+    outline: none;
+    border-radius: 10px;
+    height: 40px;
+    width: 50%;
+    margin-left: 20%;
+    margin-bottom: 10%;
+    border: none;
+    background-color:#f2f2f2;;
+    color: #595959;
+    font-size: 12px;
+}
