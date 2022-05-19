@@ -7,6 +7,7 @@ CREATE TABLE `madrasatic`.`declarations`
     `image`       BLOB         NULL, /*on fera le path de l'image plus tard*/
     `emetteur`    VARCHAR(45)  NOT NULL,
     `localisation` VARCHAR(45) NOT NULL,
+    `service` VARCHAR(50) NULL,
     `type` VARCHAR(45) NOT NULL,
     `etat` VARCHAR(45) NOT NULL,
     `Supp` BOOLEAN  DEFAULT FALSE, /*faut ajouter ça pour nous aider a la suppression*/

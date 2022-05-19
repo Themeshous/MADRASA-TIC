@@ -17,17 +17,30 @@ async function saveUser(Nom, Prenom, Email, Role, Profession, Password, Password
 }
 
 async function findUser(Email, Password) {
-  const selectEmailQuery = "SELECT * FROM users WHERE Email = ?";
-  const [[result]] = await connection.query(selectEmailQuery, [Email]);// destruct two time to get user object
-  if (result) {
-    const selectUserQuery = "SELECT * FROM users WHERE Email = ?  AND Password1=? ";
-    const [[result]] = await connection.query(selectUserQuery, [Email, Password]);
+  const result = await searchUserEmailInDB();
+  if (result)
+    return await handlePasswordVirification();
+  else
+    return {emailFound: false}
+
+  async function searchUserEmailInDB() {
+    const selectEmailQuery = "SELECT * FROM users WHERE Email = ?";
+    const [[result]] = await connection.query(selectEmailQuery, [Email]);// destruct two time to get user object
+    return result;
+  }
+
+  async function handlePasswordVirification() {
+    const result = await varifyThatPasswordMatch();
     if (result)
       return {...result, emailFound: true, passwordFound: true};
     else
       return {emailFound: true, passwordFound: false};
-  } else {
-    return {emailFound: false}
+  }
+
+  async function varifyThatPasswordMatch() {
+    const selectUserQuery = "SELECT * FROM users WHERE Email = ?  AND Password1=? ";
+    const [[result]] = await connection.query(selectUserQuery, [Email, Password]);
+    return result;
   }
 }
 

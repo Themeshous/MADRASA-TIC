@@ -1,4 +1,6 @@
-const {getAllDeclaration, getDeclarationsOfTheEmail, getDeclarationById} = require('../../db/DeclarationGateway');
+const {getAllDeclaration,
+    getDeclarationsOfTheEmail,
+    getDeclarationById, changeDeclarationState, changeDeclarationService} = require('../../db/DeclarationGateway');
 
 async function fetchAllDeclarations(req, res) {
     const declarations = await getAllDeclaration();
@@ -17,4 +19,11 @@ async function fetchDeclarationById(request, response) {
     response.json(declaration);
 }
 
-module.exports = {fetchAllDeclarations,fetchDeclarationsForEmail, fetchDeclarationById}
+async function updateDeclarationState(request, response) {
+    const { id, newState, newService } = request.body;
+    await changeDeclarationState(id, newState);
+    await changeDeclarationService(id, newService);
+    response.send("declartion state has been changed");
+}
+
+module.exports = {fetchAllDeclarations,fetchDeclarationsForEmail, fetchDeclarationById, updateDeclarationState}

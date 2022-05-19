@@ -38,4 +38,20 @@ describe('Declaration Gateway test', () => {
         const result = await Gateway.getDeclarationById(id);
         expect(result.id_dec).toBe(id);
     });
+
+    it('should modify the state of declaration', async function () {
+        const id = 1;
+        const newState = "new state";
+        const [result] = await Gateway.changeDeclarationState(id, newState);
+        expect(result.affectedRows).toBe(1);
+
+    });
+
+    it('should modify the service of declaration', async function () {
+        const id = 1;
+        const service = "new service";
+        const [result] = await Gateway.changeDeclarationService(id, service);
+        expect(result.affectedRows).toBe(1);
+
+    });
 });
