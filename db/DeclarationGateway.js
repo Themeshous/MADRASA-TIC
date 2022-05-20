@@ -53,8 +53,13 @@ async function changeDeclarationService(id, service) {
     return await connection.query(updateQuery, [service, id]);
 }
 
+async function saveImagePathToDB(path, id) {
+    const updateQuery = "UPDATE declarations SET image_path = ? WHERE id_dec = ?";
+    return await connection.query(updateQuery, [path, id]);
+}
+
 
 
 module.exports = {saveDeclaration,
     getAllDeclaration, getDeclarationById, getDeclarationsOfTheEmail,
-    changeDeclarationState, changeDeclarationService}
+    changeDeclarationState, changeDeclarationService, saveImagePathToDB}

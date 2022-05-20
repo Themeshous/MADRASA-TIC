@@ -4,7 +4,7 @@ CREATE TABLE `madrasatic`.`declarations`
     `date`        VARCHAR(45)  NOT NULL,
     `titre`       VARCHAR(100) NOT NULL,
     `description` TEXT         NULL,
-    `image`       BLOB         NULL, /*on fera le path de l'image plus tard*/
+    `image_path`       varchar(255)     NULL,
     `emetteur`    VARCHAR(45)  NOT NULL,
     `localisation` VARCHAR(45) NOT NULL,
     `service` VARCHAR(50) NULL,

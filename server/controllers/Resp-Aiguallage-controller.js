@@ -1,6 +1,9 @@
 const {getAllDeclaration,
     getDeclarationsOfTheEmail,
-    getDeclarationById, changeDeclarationState, changeDeclarationService} = require('../../db/DeclarationGateway');
+    getDeclarationById, changeDeclarationState, changeDeclarationService,
+    saveImagePathToDB} = require('../../db/DeclarationGateway');
+
+const path = require('path');
 
 async function fetchAllDeclarations(req, res) {
     const declarations = await getAllDeclaration();
@@ -26,4 +29,17 @@ async function updateDeclarationState(request, response) {
     response.send("declartion state has been changed");
 }
 
-module.exports = {fetchAllDeclarations,fetchDeclarationsForEmail, fetchDeclarationById, updateDeclarationState}
+async function uplaodDeclarationImage(request, response) {
+        const declarationImage = request.files.image;
+        const id = request.body.declarationID;
+        if (!declarationImage.mimetype.startsWith('image'))
+            response.send('Please Upload Image');
+
+        const imagePath = path.join(__dirname, `../../db/declarations_images/${declarationImage.name}`);
+        await declarationImage.mv(imagePath);
+        await saveImagePathToDB(`/declarationsImages/${declarationImage.name}`, id);
+        return response.send("image has been saved");
+}
+
+module.exports = {fetchAllDeclarations,fetchDeclarationsForEmail, fetchDeclarationById,
+    updateDeclarationState, uplaodDeclarationImage}

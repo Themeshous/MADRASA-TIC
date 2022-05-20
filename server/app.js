@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 const authenticationRoutes = require('./routes/AuthenticationRoutes');
 const adminRoutes = require('./routes/AdminRoutes');
@@ -12,6 +13,7 @@ const Respoevent = require ('./routes/RespoEventRoutes');
 
 
 app.use(express.json());
+app.use(fileUpload({ useTempFiles: true }));
 app.use(cors());
 
 app.use('/admin', adminRoutes);
