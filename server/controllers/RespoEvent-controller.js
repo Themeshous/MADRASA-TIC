@@ -26,9 +26,9 @@ async function fetchAnnounce(req, res) {
     res.json({ result });
 }
 
+
 async function showAnnounce(req,res) {
     const ID =req.params.id;
- 
     const result = await getAnnounceid(ID);
     res.json({ result });
  

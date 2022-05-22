@@ -1,11 +1,12 @@
 const connection = require('./connection');
+var path = require('path');
+ 
 
-
-async function setRapport(date,titre,description,fichier,service,etat) {
+async function setRapport(date,titre,description,file,service,etat) {
 
     const sqlinsert = "INSERT INTO rapports (date, titre, description, fichier, service, etat) VALUES (?,?,?,?,?,?)";
 
-    const data = [date, titre, description, fichier, service,etat]
+    const data = [date, titre, description, file, service,etat]
     try {
         await connection.query(sqlinsert, data);
     } catch (error) {
@@ -32,24 +33,38 @@ async function deleteRapport(ID) {
 async function getRapports() {
     const selectsql = "SELECT * FROM rapports";
     const [result] = await connection.query(selectsql);
-    if (result.length !== 0) {
         return result;
-    } else {
-        return {RapportsFound: false}
-    }
+}
+
+async function getRapportservice(Service){
+    const selectsql = "SELECT * FROM rapports WHERE service = ?";
+    const [result]= await connection.query(selectsql,[Service]);
+    if (result)
+        return result;
+    else
+        return { RapportFound: false }
+
+}
+
+async function getRapportEtat(Etat){
+    const selectsql = "SELECT * FROM rapports WHERE etat = ?";
+    const [result]= await connection.query(selectsql,[Etat]);
+    if (result)
+        return result;
+    else
+        return { RapportFound: false }
+
 }
 
 async function getRapportid(ID) {
     const selectsql = "SELECT * FROM rapports WHERE id_rap = ?";
-    const result = await connection.query(selectsql,[ID]);
-   
-    if (result.length !== 0) {
+    const [[result]]= await connection.query(selectsql,[ID]);
+    if (result)
         return result;
-    } else {
-        return {RapportFound: false}
-    }
+    else
+        return { RapportFound: false }
 }
 
 
 
-module.exports = { setRapport , updateRapport, deleteRapport,getRapports,getRapportid};
+module.exports = { setRapport , updateRapport, deleteRapport,getRapports,getRapportid,getRapportservice,getRapportEtat};

@@ -52,14 +52,16 @@ async function getAnnounce(){
     }
     
 }
+
+
 async function getAnnounceid(ID) {
   const selectsql = "SELECT * FROM announce WHERE id_post = ?";
-  const result = await connection.query(selectsql,[ID]);
-  if (result.length !== 0) {
-      return result;
-  } else {
-      return {AnnounceFound: false}
-  }
+  const [[result]] = await connection.query(selectsql,[ID]);
+  if (result)
+        return result;
+    else
+        return { AnnounceFound: false }
+    
 }
 
 

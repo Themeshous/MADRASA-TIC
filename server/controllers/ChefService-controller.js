@@ -1,4 +1,6 @@
-const {setRapport,updateRapport,deleteRapport,getRapports, getRapportid} = require('../../db/RapportGateway');
+
+
+const {setRapport,updateRapport,deleteRapport,getRapports, getRapportid, getRapportservice,getRapportEtat} = require('../../db/RapportGateway');
 
 async function saveRapport(req, res) {
     const Date = req.body.date;   //champs obligatoire
@@ -38,9 +40,24 @@ async function fetchRapports(req, res) {
     res.json({ result });
 }
 
+async function showRapportservice(req,res) {
+    const Service =req.params.service;
+    const result = await getRapportservice(Service);
+    res.json({ result });
+ 
+ }
+ 
+async function showRapportEtat(req,res) {
+    const State =req.params.etat;
+    const result = await getRapportEtat(State);
+
+    res.json({ result });
+ 
+ }
+
+
 async function showRapport(req,res) {
    const ID =req.params.id;
-
    const result = await getRapportid(ID);
    res.json({ result });
 
@@ -49,4 +66,4 @@ async function showRapport(req,res) {
 
 
 
-module.exports = {saveRapport,upRapport,supRapport,fetchRapports,showRapport}
+module.exports = {saveRapport,upRapport,supRapport,fetchRapports,showRapport,showRapportservice,showRapportEtat}
