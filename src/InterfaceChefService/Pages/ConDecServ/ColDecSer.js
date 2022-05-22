@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPen } from '@fortawesome/free-solid-svg-icons'
-export const Colonnes = [
+export const ColDecSer = [
     {
       Header: "ID",
       accessor:"id_dec" 
@@ -15,16 +15,8 @@ export const Colonnes = [
     },
     
     {
-      Header: "Emetteur",
-      accessor: "emetteur"
-    },
-    {
-      Header: "Etat",
-      accessor: "Supp"
-    },
-    {
       Header: "Localisation",
       accessor: "localisation",
-      Cell:({value,row}) => { return (<>{value}   {"  ... "}<a href={`/responsabled'aiguillage/declaration-info?id=${row.original.id_dec.toString()}`} ><FontAwesomeIcon icon={faPen} className="icon" /></a></>)}
+      Cell:({value,row}) => { return (<>{value}   {"  ... "}<a href={`/chefdeservice/modifier?id=${row.original.id_dec.toString()}`} ><FontAwesomeIcon icon={faPen} className="icon" /></a></>)}
     }
   ] 

@@ -43,5 +43,27 @@ async function getDeclarationsOfTheEmail(email) {
         return {declarationsFound: false}
 }
 
+async function changeDeclarationState(id, newState) {
+    const updateQuery = "UPDATE declarations SET etat = ? WHERE id_dec = ?";
+    return await connection.query(updateQuery, [newState, id]);
+}
 
+async function changeDeclarationService(id, service) {
+    const updateQuery = "UPDATE declarations SET service = ? WHERE id_dec = ?";
+    return await connection.query(updateQuery, [service, id]);
+}
+
+async function saveImagePathToDB(path, id) {
+    const updateQuery = "UPDATE declarations SET image_path = ? WHERE id_dec = ?";
+    return await connection.query(updateQuery, [path, id]);
+}
+
+
+
+<<<<<<< HEAD
 module.exports = {saveDeclaration, getAllDeclaration, getDeclarationById, getDeclarationsOfTheEmail}
+=======
+module.exports = {saveDeclaration,
+    getAllDeclaration, getDeclarationById, getDeclarationsOfTheEmail,
+    changeDeclarationState, changeDeclarationService, saveImagePathToDB}
+>>>>>>> 09a08c8eae39cfe03c81df347b2a1e2ffc1059f0

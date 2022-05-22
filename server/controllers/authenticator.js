@@ -1,10 +1,15 @@
 const nodemailer = require('nodemailer');
-const {createToken} =  require("../utils/create-token");
+const {createToken, cleanToken} =  require("../utils/create-token");
 
+<<<<<<< HEAD
 const { findUser, saveUser, setNewPassword,updateuser} = require('../../db/UserGateway');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
+=======
+const { findUser, saveUser, setNewPassword} = require('../../db/UserGateway');
+require('sequelize');
+>>>>>>> 09a08c8eae39cfe03c81df347b2a1e2ffc1059f0
 async function login(req, res) {
     const email = req.body.email;
     const password = req.body.password;
@@ -20,8 +25,8 @@ async function login(req, res) {
 
 }
 
-async function logout(req, res) {  
-
+async function logout() {
+    cleanToken();
 }
 
 async function signup(req, res) {
