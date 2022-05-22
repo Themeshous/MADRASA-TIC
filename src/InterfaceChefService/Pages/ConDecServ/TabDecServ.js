@@ -3,10 +3,10 @@ import { useTable } from 'react-table/dist/react-table.development'
 import { useGlobalFilter, useSortBy } from "react-table";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { Colrapports} from './Colrapport'
+import { ColDecSer } from './ColDecSer';
 import "../../../InterfaceAdmin/Pages/ConsultationComptes/Tableau.css"
 
-export const TabRapports = () => {
+export const TabDecServ= () => {
 
   const [items, setItems] = useState([]);
   const [fetchError, setFetchError] = useState(null);
@@ -15,11 +15,10 @@ export const TabRapports = () => {
 
     const fetchItems = async () => {
       try {
-        const response = await fetch("http://localhost:2000/rapport/consulterRapports");
+        const response = await fetch("http://localhost:2000/declaration/consulterDeclartions");//get que les déclarations validé et service==service
         if (!response.ok) throw Error("les données n'ont pas été reçus");
         const listItems = await response.json();
-        setItems(listItems.result);
-        localStorage.setItem("legthrapaig",listItems.result.length);
+        setItems(listItems);
         setFetchError(null);
       } catch (err) {
         setFetchError(err.message);
@@ -31,9 +30,9 @@ export const TabRapports = () => {
     setTimeout(() => fetchItems(), 2000);
 
   }, [])
-  const columns = useMemo(() => Colrapports, [])
+  const columns = useMemo(() => ColDecSer, [])
   const data = items
-
+ 
   const TableInstance = useTable({
     columns,
     data
@@ -49,7 +48,7 @@ export const TabRapports = () => {
     state, //table state
     setGlobalFilter //applies global filtering to the table.
   } = TableInstance
-
+ 
   const { globalFilter } = state;
   return (<>
     { isLoading?(<p className = 'loading' > Chargement...</p>):
