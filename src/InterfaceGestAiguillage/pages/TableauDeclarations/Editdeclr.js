@@ -3,6 +3,7 @@ import "../ConsulterRapports/rapport.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareCheck, faSquareXmark } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
+import axios from "axios";
 export const Edit = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -50,22 +51,24 @@ export const Edit = () => {
   }, [])
   const [success, setsuccess] = useState(false)
   const [msg, setmsg] = useState('')
-  const ChangeStatedeclarationrej = () => {
+
+  const ChangeStatedeclarationrej = async () => {
 
     setShowconfrej(Showconfrej => false)
     setsuccess(true);
     setmsg('La déclaration a été rejetée')
-    //change etat to rejeter
-    //send to user that rejected
+    console.log(id);
+    await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
+        {id: id, newState: "rejeter", newService: values.service});
   }
 
-  const ChangeStatedeclarationval = () => {
+  const ChangeStatedeclarationval = async () => {
 
     setShowconfval(Showconfval => false)
     setsuccess(true);
     setmsg('La déclaration a été validée et envoyée au chef de service')
-    //change etat to validé en cours de traitement
-    //Send declaration to service 
+    await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
+        {id: declaration.id_dec, newState: "valider", newService: values.service});
     //Send to user la declation est prise en compte
   }
 
