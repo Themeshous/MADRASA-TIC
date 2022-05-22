@@ -36,7 +36,8 @@ export const Edit = () => {
     setTimeout(() => fetchItems(), 2000);
 
   }, [id])
-  console.log(values);
+
+  
   const handlechange = e => {
     const { name, value } = e.target
     setvalues({
@@ -44,9 +45,16 @@ export const Edit = () => {
       [name]: value
     })
   }
+  useEffect(() => {
+    setInterval(()=>{setsuccess(false);},7000)
+  }, [])
+  const [success, setsuccess] = useState(false)
+  const [msg, setmsg] = useState('')
   const ChangeStatedeclarationrej = () => {
 
     setShowconfrej(Showconfrej => false)
+    setsuccess(true);
+    setmsg('La déclaration a été rejetée')
     //change etat to rejeter
     //send to user that rejected
   }
@@ -54,6 +62,8 @@ export const Edit = () => {
   const ChangeStatedeclarationval = () => {
 
     setShowconfval(Showconfval => false)
+    setsuccess(true);
+    setmsg('La déclaration a été validée et envoyée au chef de service')
     //change etat to validé en cours de traitement
     //Send declaration to service 
     //Send to user la declation est prise en compte
@@ -157,6 +167,7 @@ export const Edit = () => {
               </div>
             </div>
             }
+             {success && <div className="alerte-msg">{msg}</div>}
           </div>}
 
     </>

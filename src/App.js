@@ -17,6 +17,14 @@ import ConsulterRapports from './InterfaceGestAiguillage/pages/ConRap'
 import ParamCompREsAIg from './InterfaceGestAiguillage/pages/ParamCompResAig'
 import DetailRapport from "./InterfaceGestAiguillage/pages/DetailRapport"
 import DetDeclr from "./InterfaceGestAiguillage/pages/DetDeclr"
+import CreateRap from "./InterfaceChefService/Pages/CreateRapport/CreateRap"
+import ParamChefSer from "./InterfaceChefService/Pages/ParamChefSer"
+import RapServ from "./InterfaceChefService/Pages/RapServ"
+import ConsRapServ from "./InterfaceChefService/Pages/ConsRapServ"
+import ModRapServ from "./InterfaceChefService/Pages/ModRapServ"
+import  TableDecServ from "./InterfaceChefService/Pages/TableDecServ"
+import  ModiDecServc from "./InterfaceChefService/Pages/ModiDecServc"
+
 function App() {
   return (
     <>
@@ -49,6 +57,17 @@ function App() {
             <Route path="/responsabled'aiguillage/Profile" element={<ParamCompREsAIg />} />
             <Route path='/ResAig/rapports/rapinfo/' element={<DetailRapport/>}/>
           </Route>
+
+          <Route element={<RequireAuth allowedRoles={["chef de service"]} />}>
+            <Route path="/chefdeservice" element={<TableDecServ />} />
+            <Route path="/chefdeservice/Create" element={<CreateRap />} />
+            <Route path='/chefdeservice/modifier' element={<ModiDecServc/>}/>
+            <Route path="/chefdeservice/Profile" element={<ParamChefSer/>} />
+            <Route path='/chefserv/consulter' element ={<ConsRapServ/>}/>
+            <Route path='/chefserv/consulter/rapinfo' element ={<RapServ/>}/>
+            <Route path='/chefserv/consulter/modifier/rapinfo' element ={<ModRapServ/>}/>
+          </Route>
+
           <Route path="/auth/signup" element={<FormCreat />} />
 
 

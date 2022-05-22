@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import ValidateParam from './ValidateParam';
 import '../SignUp/FormLog.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-const FormParam = () => {
+const FormParam = () => { 
+    const user = JSON.parse(localStorage.getItem("user"));
     const [values, setvalues] = useState({
         nom: '',
         prenom: '',
@@ -13,8 +12,8 @@ const FormParam = () => {
         pswdc: '',
     });
     const [errors, seterrors] = useState({})
-    const [fileSelected, setfileSelected] = useState(null);
-
+    const [formsucceeded, setformsucceeded] = useState(false)
+    const [alertemsg, setalertemsg] = useState(false)
     const HandleChange = e => {
         const { name, value } = e.target
         setvalues({
@@ -27,62 +26,62 @@ const FormParam = () => {
         e.preventDefault();
         seterrors(ValidateParam(values));
     }
+  
+      useEffect(() => {
+        if ((!(errors.pswd)) && !(errors.pswdc) && !(errors.pswdn)) {
+            setformsucceeded(true)
+           
+         
+         }
+         if ((errors.pswd) || (errors.pswdc) || (errors.pswdn)){
+             setformsucceeded(false)
+             setalertemsg(false)             }
+      }, [errors])
 
-    const SelectFile = e => {
-        setfileSelected(e.target.files[0])
-    }
-    const user = JSON.parse(localStorage.getItem("user"));
+        useEffect(() => {
+        setInterval(()=>{setalertemsg(false)},4000)
+      }, [])
+      console.log(formsucceeded);
+      const executesauvegarder= () => {
+          if (formsucceeded && values.pswdn) {   ///après tu rajoute que le mot de passe ancien doit etre = au mot de passe encien introduit
+               setalertemsg(true)
+                   console.log('true on enregistre dans la bdd');
+              //if formucceeded and {values.pswdn} le nouveau mot de passe ==! vide ''
+            //modifier le mot de passe de l'utilisateur avec email est {user.email}
+            //vers nouveau mot de passe= {values.pswdn} if ce nouveau mot de passe ==! vide ''
+              }
+
+          
+      }
+   
     return (
         <form className='form-param' onSubmit={HandleSubmit}>
             <h2 className='modification'>Mon Compte </h2>
-            <div className='form-inputs' >
-                <h3 className='titl'>Photo de profile</h3>
-                <label className='form-label-param'>Ajouter une nouvelle photo de profil</label>
-                <div className='file-card'>
-                    <div className='file-inputs'>
-                        <input
-                            type="file"
-                            className='profil-pic'
-                            onChange={SelectFile}
-                        />
-                        <button className='Upload-button'>
-                            <i>
-                                <FontAwesomeIcon icon={faPlus} />
-                            </i>
-                            Upload
-                        </button>
-                    </div>
-                    <p className="main">fichiers supportés</p>
-                    <p className="info">JPG, PNG</p>
-                </div>
-            </div>
-            <h3 className='titl'>Modifier le nom d'utilisateur:</h3>
-            <div className='form-iput-line-param'>
-                <div className='form-inputs' >
+            <h3 className='titl'>Nom d'utilisateur:</h3>
 
-                    <label className='form-label-param'>Saisissez un nouveau nom</label>
-                    <input id="Name" type="text"
-                        name="nom"
-                        value={values.nom}
-                        placeholder={user.name}
-                        onChange={HandleChange}
-                        className='input-parametre'
-                    />
-                    {errors.nom && <p>{errors.nom}</p>}
+            <div className='form-inputs'>
+                <div className='user-name' >{user.name} {user.name2}</div>
+            </div>
+
+
+            <h3 className='titl'>Informations supplémentaires</h3>
+            <div className='form-iput-line-param'>
+                <div className='form-inputs'>
+                    <label className='form-label-param'>Adresse email</label>
+                    <div className='data-displayed ' >{user.email}</div>
                 </div>
                 <div className='form-inputs'>
-                    <label className='form-label-param'>Saisissez un nouveau prénom</label>
-                    <div >
-                        <input id="prenom" type="text"
-                            name="prenom"
-                            value={values.prenom}
-                            placeholder={user.name2}
-                            onChange={HandleChange}
-                            className='input-parametre' />
-                    </div>
-                    {errors.prenom && <p>{errors.prenom}</p>}
+                    <label className='form-label-param'>Profession</label>
+                    <div className='data-displayed' >{user.prof}</div>
                 </div>
+                <div className='form-inputs'>
+                    <label className='form-label-param'>Role</label>
+                    <div className='data-displayed' >{user.roles}</div>
+                </div>
+
+
             </div>
+
             <h3 className='titl'>Modifier le mot de passe</h3>
             <div className='form-iput-line-param'>
                 <div className='form-inputs'>
@@ -120,9 +119,9 @@ const FormParam = () => {
                     {errors.pswdc && <p>{errors.pswdc}</p>}
                 </div>
             </div>
-            <button type='submit' className='form-input-btn-par' >
+            <button type='submit' className='submit-parametre' onClick={executesauvegarder} >
                 <p>Sauvegarder</p></button>
-
+                {alertemsg && <div className="alerte-msg">Les modifications ont été bien enregistrés</div>}
         </form>
     )
 }
