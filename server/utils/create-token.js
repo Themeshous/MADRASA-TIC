@@ -19,6 +19,10 @@ function createToken(user) {
     };
 }
 
+function cleanToken() {
+    return jwt.sign({expiresIn: 0})
+}
+
 function createJWT(user) {
     const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
     const JWT_LIFETIME = process.env.JWT_LIFETIME;
@@ -39,4 +43,4 @@ function createUserViewForAdmin(user) {
     };
 }
 
-module.exports = {createToken, createUserViewForAdmin}
+module.exports = {createToken, createUserViewForAdmin, cleanToken}
