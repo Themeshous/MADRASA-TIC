@@ -24,6 +24,7 @@ import ConsRapServ from "./InterfaceChefService/Pages/ConsRapServ"
 import ModRapServ from "./InterfaceChefService/Pages/ModRapServ"
 import  TableDecServ from "./InterfaceChefService/Pages/TableDecServ"
 import  ModiDecServc from "./InterfaceChefService/Pages/ModiDecServc"
+import StatisAdmin from './InterfaceAdmin/Pages/StatisAdmin.js';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
             <Route path="/Admin/ConsulterComptes" element={<ConsulterComptes />} />
             <Route path="/administrateur/Profile" element={<ParamComp />} />
             <Route path="/administrateur-secondaire/Profile" element={<ParamComp />} />
+            <Route path='/Admin/statistiques' element={<StatisAdmin/>}/>
           </Route>
 
           <Route element={<RequireAuth allowedRoles={["responsable d'aiguillage"]} />}>
