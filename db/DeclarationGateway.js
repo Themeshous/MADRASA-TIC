@@ -60,10 +60,6 @@ async function saveImagePathToDB(path, id) {
 
 
 
-<<<<<<< HEAD
-module.exports = {saveDeclaration, getAllDeclaration, getDeclarationById, getDeclarationsOfTheEmail}
-=======
 module.exports = {saveDeclaration,
     getAllDeclaration, getDeclarationById, getDeclarationsOfTheEmail,
     changeDeclarationState, changeDeclarationService, saveImagePathToDB}
->>>>>>> 09a08c8eae39cfe03c81df347b2a1e2ffc1059f0
