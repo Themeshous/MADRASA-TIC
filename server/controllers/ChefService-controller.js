@@ -1,6 +1,9 @@
 
 
-const {setRapport,updateRapport,deleteRapport,getRapports, getRapportid, getRapportservice,getRapportEtat} = require('../../db/RapportGateway');
+const {setRapport,updateRapport,deleteRapport,getRapports, getRapportid, getRapportservice,getRapportEtat,changeRapportEtat,upfileRapport} = require('../../db/RapportGateway');
+
+const path = require('path');
+
 
 async function saveRapport(req, res) {
     const Date = req.body.date;   //champs obligatoire
@@ -55,7 +58,6 @@ async function showRapportEtat(req,res) {
  
  }
 
-
 async function showRapport(req,res) {
    const ID =req.params.id;
    const result = await getRapportid(ID);
@@ -63,7 +65,29 @@ async function showRapport(req,res) {
 
 }
 
+async function upEtatRapport(req,res){
+    const { id, etat } = req.body;
+    await changeRapportEtat(id, etat);
+    res.send("Etat de rapport est modifie");
+}
+
+async function upRapportFile(req,res){
+        const rapportFile = req.files.fichier;
+        const id_rap = req.body.ID;
+
+        if (!rapportFile.mimetype.startsWith('fich'))
+            res.send('Please Upload file');
+
+        const fichPath = path.join(__dirname, `../../db/rapports-uploads/${rapportFile.name}`);
+
+        await rapportFile.mv(fichPath);
+
+        await upfileRapport( id_rap,`/rapportsFiles/${rapportFile.name}`);
+        return res.send("fichier sauvegarder");
+
+}
 
 
 
-module.exports = {saveRapport,upRapport,supRapport,fetchRapports,showRapport,showRapportservice,showRapportEtat}
+
+module.exports = {saveRapport,upRapport,supRapport,fetchRapports,showRapport,showRapportservice,showRapportEtat,upEtatRapport,upRapportFile}

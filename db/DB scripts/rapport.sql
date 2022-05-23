@@ -4,7 +4,8 @@ CREATE TABLE `rapports` (
     `date`        VARCHAR(45)  NOT NULL,
     `titre`       VARCHAR(100) NOT NULL,
     `description` TEXT         NULL,
-    `fichier`       BLOB         NULL, /*on fera le path du fichier plus tard*/
+    `fich_path` VARCHAR(255), /*on fera le path du fichier plus tard 
+                               ALTER TABLE rapports CHANGE fichier fich_path VARCHAR(255);*/
     `service`    VARCHAR(45)  NOT NULL,
     `etat` VARCHAR(45)
     `Supp`     BOOLEAN  DEFAULT FALSE,

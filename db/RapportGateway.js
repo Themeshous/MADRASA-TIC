@@ -4,7 +4,7 @@ var path = require('path');
 
 async function setRapport(date,titre,description,file,service,etat) {
 
-    const sqlinsert = "INSERT INTO rapports (date, titre, description, fichier, service, etat) VALUES (?,?,?,?,?,?)";
+    const sqlinsert = "INSERT INTO rapports (date, titre, description, fich_path, service, etat) VALUES (?,?,?,?,?,?)";
 
     const data = [date, titre, description, file, service,etat]
     try {
@@ -18,7 +18,7 @@ async function setRapport(date,titre,description,file,service,etat) {
 
 async function updateRapport(titre,description,fichier,service,etat,ID) {
 
-  const sqlupdate = "UPDATE rapports SET titre = ?,description = ? ,fichier = ? , service = ?, etat= ? WHERE id_rap = ? "; //id njibouh men front 
+  const sqlupdate = "UPDATE rapports SET titre = ?,description = ? ,fich_path = ? , service = ?, etat= ? WHERE id_rap = ? "; //id njibouh men front 
   const result = await connection.query(sqlupdate, [titre, description,fichier,service,etat,ID]);
   console.log("rapport updated");
 
@@ -65,6 +65,18 @@ async function getRapportid(ID) {
         return { RapportFound: false }
 }
 
+async function changeRapportEtat(id,etat){
+    const sqlupdate = "UPDATE rapports SET etat = ? WHERE id_rap = ?"; 
+    return await connection.query(sqlupdate, [etat, id]);
+
+}
+
+async function upfileRapport (id,path){
+    const sqlupdate = "UPDATE rapports SET fich_path = ? WHERE id_rap = ?";
+    return await connection.query(sqlupdate, [path, id]);
+
+}
 
 
-module.exports = { setRapport , updateRapport, deleteRapport,getRapports,getRapportid,getRapportservice,getRapportEtat};
+
+module.exports = { setRapport,upfileRapport, updateRapport, deleteRapport,getRapports,getRapportid,getRapportservice,getRapportEtat,changeRapportEtat};
