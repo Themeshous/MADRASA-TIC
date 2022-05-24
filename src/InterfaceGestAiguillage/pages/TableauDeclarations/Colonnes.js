@@ -20,7 +20,7 @@ export const Colonnes = [
     },
     {
       Header: "Etat",
-      accessor: "Supp"
+      accessor: "etat"
     },
     {
       Header: "Localisation",

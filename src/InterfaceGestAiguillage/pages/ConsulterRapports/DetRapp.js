@@ -17,9 +17,9 @@ const DetRapp = () => {
   const [showbtnright, setshowbtnright] = useState(true)
 
   const id_rap = parseInt(id)
-
+  const taille = localStorage.getItem("legthrapaig")
   function next() {
-    if (id_rap > 2) {//à changer : on remplace 1 par lataille de la table-1 
+    if (id_rap > (taille-1)) {//à changer : on remplace 1 par lataille de la table-1 
       setshowbtnright(false)
     }
     else {
@@ -52,9 +52,9 @@ const DetRapp = () => {
       }
     }
 
-    setTimeout(() => fetchItems(), 2000);
+    setTimeout(() => fetchItems(), 1000);
 
-  }, [id])
+  }, [id,rapport])
 
 
 
@@ -71,15 +71,14 @@ const DetRapp = () => {
 
             </div>
             <div className='elem-rapport'>
+              <h1 className='titre-elem'>Date</h1>
+              <div className='related-info'>{rapport.date}</div>
+            </div>
+            <div className='elem-rapport'>
               <h1 className='titre-elem'>Description</h1>
               <div className='related-info'>{rapport.description ? (rapport.description) : ("Ce rapport ne contient pas de description")}</div>
             </div>
-
-            <div className='elem-rapport'>
-              <h1 className='titre-elem'> Etat</h1>
-              <div className='related-info'>{rapport.etat}</div>
-            </div>
-
+              
             <div className='elem-rapport'>
               <div className='inline-items'>
                 <h1 className='titre-elem'> Fichier attaché</h1>

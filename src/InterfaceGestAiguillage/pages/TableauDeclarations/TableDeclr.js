@@ -27,7 +27,7 @@ export const TableDeclr = () => {
       }
     }
 
-    setTimeout(() => fetchItems(), 2000);
+    setTimeout(() => fetchItems(), 1000);
 
   }, [])
   const columns = useMemo(() => Colonnes, [])

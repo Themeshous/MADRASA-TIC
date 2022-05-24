@@ -22,7 +22,6 @@ export const Edit = () => {
         const response = await fetch("http://localhost:2000/declaration/userDeclarations/" + id);
         if (!response.ok) throw Error("les données n'ont pas été reçus");
         const listItems = await response.json();
-        setvalues({ service: listItems.type })
         setdeclaration(listItems);
 
         setFetchError(null);
@@ -34,9 +33,12 @@ export const Edit = () => {
       }
     }
 
-    setTimeout(() => fetchItems(), 2000);
+    setTimeout(() => fetchItems(), 1000);
 
-  }, [id])
+
+  }, [id,declaration])
+
+  
   const handlechange = e => {
     const { name, value } = e.target
     setvalues({
@@ -44,9 +46,17 @@ export const Edit = () => {
       [name]: value
     })
   }
+  useEffect(() => {
+    setInterval(()=>{setsuccess(false);},7000)
+  }, [])
+  const [success, setsuccess] = useState(false)
+  const [msg, setmsg] = useState('')
+
   const ChangeStatedeclarationrej = async () => {
 
     setShowconfrej(Showconfrej => false)
+    setsuccess(true);
+    setmsg('La déclaration a été rejetée')
     console.log(id);
     await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
         {id: id, newState: "rejeter", newService: values.service});
@@ -55,7 +65,8 @@ export const Edit = () => {
   const ChangeStatedeclarationval = async () => {
 
     setShowconfval(Showconfval => false)
-    console.log(declaration.id_dec);
+    setsuccess(true);
+    setmsg('La déclaration a été validée et envoyée au chef de service')
     await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
         {id: declaration.id_dec, newState: "valider", newService: values.service});
     //Send to user la declation est prise en compte
@@ -140,7 +151,7 @@ export const Edit = () => {
                   placeholder={values.service}
                   value={values.service}
                   onChange={handlechange}>
-
+                  <option value="choisir" selected>Choisir ...</option>
                   <option value="Technique">Technique</option>
                   <option value="sécurité">Sécurité</option>
                   <option value="médecin">médecin</option>
@@ -159,6 +170,7 @@ export const Edit = () => {
               </div>
             </div>
             }
+             {success && <div className="alerte-msg">{msg}</div>}
           </div>}
 
     </>

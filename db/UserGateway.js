@@ -62,4 +62,18 @@ async function setNewPassword(password, email) {
   console.log(result);
 }
 
-module.exports = { saveUser, findUser, setActiveUser, getAllUsers, setNewPassword};
+async function updateuser(User,Nom){
+  const hashpswd = await bcrypt.hash(User.Password, 8);
+  const sqlupdate = "UPDATE users SET Email=? ,Profession = ?, Password =? ,Password1 = ? WHERE Nom = ?";  
+  const data = [User.Email, User.Profession, hashpswd, User.Password, Nom ]
+  try {
+    await connection.query(sqlupdate, data); 
+  } catch (error) {
+    return {Userupdate: false, message: error.sqlMessage};
+  }
+  console.log("User updated");
+  return {Usereupdate: true};
+
+}
+
+module.exports = { saveUser, findUser, setActiveUser, getAllUsers, setNewPassword,updateuser};

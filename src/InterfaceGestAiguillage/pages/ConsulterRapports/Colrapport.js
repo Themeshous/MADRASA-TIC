@@ -16,11 +16,7 @@ export const Colrapports = [
     
     {
       Header: "Service",
-      accessor: "service"
-    },
-    {
-      Header: "Etat",
-      accessor: "etat",
+      accessor: "service",
       Cell:({value,row}) => { return (<>{value}   {"  ... "}<a href={`/ResAig/rapports/rapinfo?id=${row.original.id_rap.toString()}`} ><FontAwesomeIcon icon={faFile} className="icon" /></a></>)}
     }
   ] 

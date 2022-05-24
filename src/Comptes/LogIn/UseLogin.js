@@ -44,7 +44,8 @@ const UseLogin = (callback, ValidateLog) => {
       const name = data.nom
       const name2 = data.prenom
       const email = data.email
-      localStorage.setItem("user",JSON.stringify({ name, name2, email, roles }));
+      const prof = data.profession
+      localStorage.setItem("user",JSON.stringify({ name, name2, email, roles,prof }));
       
       const p = "/" + (roles.replace(/\s/g, ''))
       const from = (p !== "/") ? p : location.pathname;

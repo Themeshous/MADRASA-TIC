@@ -5,7 +5,6 @@ import '../SignUp/FormLog.css'
 
 const FormLogIn = ({connectForm}) => {
   const { handlechange, val, HandleConnect, errors} = UseLogin(connectForm, ValidateLog);
-  console.log(localStorage.getItem("user"));
   return (
     <div className='login-container'>
       <form className='form-login' onSubmit={HandleConnect} noValidate >

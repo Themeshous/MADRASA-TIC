@@ -18,7 +18,7 @@ const Header = () => {
                         <NavLink exact to="/4" className="nav-btn">Comment ça marche</NavLink>
                     </li>
                     <li className="nav-el">
-                        <NavLink exact to="/4" className="nav-btn">Aide</NavLink>
+                        <NavLink exact to="/aide" className="nav-btn">Aide</NavLink>
                     </li>
                     <li className="nav-el">
                         <NavLink exact to="/auth/connect" className="nav-btn">

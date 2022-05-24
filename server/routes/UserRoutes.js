@@ -6,4 +6,5 @@ const {saveDeclarationToDB} = require('../controllers/user-controller');
 router.post('/saveDeclaration',  saveDeclarationToDB);
 
 
+
 module.exports = router;
