@@ -76,4 +76,13 @@ async function forgetpassword(req,res){
     
 }
 
-module.exports = { login,logout,signup,reset,forgetpassword}
+async function updparmUser(req,res){
+    const nom = req.params.Nom;
+    const user = req.body;    
+    const data = await updateuser(user,nom);
+    res.json({data});
+
+
+}
+
+module.exports = { login,logout,signup,reset,forgetpassword,updparmUser}
