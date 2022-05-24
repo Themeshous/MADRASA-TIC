@@ -52,7 +52,7 @@ export const NavGaucheChefSer = () => {
             <div className="left-elements">
 
 
-               <NavLink to="/aide"
+               <NavLink to="/chefserv/Aide"
                   className={(navData) => (navData.isActive ? 'active' : 'link')}>
                   <FontAwesomeIcon icon={faCircleExclamation} className="icon-left" />
                   <p>Aide</p>

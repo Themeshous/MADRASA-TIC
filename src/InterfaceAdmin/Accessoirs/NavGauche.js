@@ -54,7 +54,7 @@ export const NavGauche = () => {
         <div className="left-elements">
          
                     
-                    <NavLink  to="/aide"
+                    <NavLink  to="/Admin/aide"
                               className={(navData) => (navData.isActive ? 'active' : 'link')}> 
                               <FontAwesomeIcon icon={faCircleExclamation} className="icon-left" />
                                <p>Aide</p>
