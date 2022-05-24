@@ -35,6 +35,7 @@ export const Edit = () => {
 
     setTimeout(() => fetchItems(), 1000);
 
+
   }, [id,declaration])
 
   
