@@ -16,7 +16,7 @@ const Content = () => {
                 </p>
                 <div className="btn-container">
                     <button>
-                        <a href="/">
+                        <a href="/Ensavoirplus">
                             En savoir plus
                         </a>
                     </button>

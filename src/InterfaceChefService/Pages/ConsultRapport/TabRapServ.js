@@ -7,6 +7,7 @@ import { ColRapServ} from './ColRapServ'
 import "../../../InterfaceAdmin/Pages/ConsultationComptes/Tableau.css"
 
 const TabRapServ = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
     const [items, setItems] = useState([]);
     const [fetchError, setFetchError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +15,7 @@ const TabRapServ = () => {
   
       const fetchItems = async () => {
         try {
-          const response = await fetch("http://localhost:2000/rapport/consulterRapports");//route rapport par service
+          const response = await fetch("http://localhost:2000/rapport/consultRapportService/"+user.prof.toString());//route rapport par service
           if (!response.ok) throw Error("les données n'ont pas été reçus");
          
           const listItems = await response.json();

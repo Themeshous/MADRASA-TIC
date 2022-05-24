@@ -1,0 +1,91 @@
+.CenterContent {
+    font-family: 'PT Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding-top: 3%;
+    width: 65%;
+    margin-left: 15%;
+    margin-bottom: 40px;
+    margin-right: 60px;
+}
+
+.CenterAide {
+    display: flex;
+    
+}
+
+.vide {
+    padding: 0px 25px;
+    width: 220px;
+    height: 100vh;
+}
+
+.CenterContent h2 {
+    margin-left: 3.5%;
+    font-size: 30px;
+    color: #090909;
+    font-weight: bold;
+}
+
+.CenterContent h4 {
+    font-size: 24px;
+    margin-top: 75px;
+    margin-bottom: 15px;
+    margin-left: 4%;
+    color: #151556;
+    align-items: left;
+    Vertical-align: Center;
+    font-weight: bold;
+}
+
+.CenterContent h3 {
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    margin-left: 4%;
+    color: #151556;
+    align-items: left;
+    Vertical-align: Center;
+    font-weight: bold;
+}
+
+.CenterContent p {
+    line-height: 2rem;
+    color: #42425a;
+    font-size: 16px;
+    margin-left: 6%
+}
+
+.CenterContent>.Prev-Suiv>div>button {
+    border-radius: 10px;
+    padding: 0.5em;
+    border: none;
+    outline: none;
+    color: #040718;
+    background-color: rgba(211, 213, 220, 0.77);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.4s;
+    
+}
+
+.CenterContent >.Prev-Suiv {
+    display: flex;
+    width: 85%;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 18%;
+}
+.CenterContent>.Prev-Suiv>div>button>p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.CenterContent>.Prev-Suiv>div>button:hover {
+    background-color: #5a5974a4;
+}
