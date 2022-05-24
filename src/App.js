@@ -25,7 +25,7 @@ import ModRapServ from "./InterfaceChefService/Pages/ModRapServ"
 import  TableDecServ from "./InterfaceChefService/Pages/TableDecServ"
 import  ModiDecServc from "./InterfaceChefService/Pages/ModiDecServc"
 import StatisAdmin from './InterfaceAdmin/Pages/StatisAdmin.js';
-
+import StatisRespAi from './InterfaceGestAiguillage/pages/StatisRespAi'
 function App() {
   return (
     <>
@@ -58,6 +58,7 @@ function App() {
             <Route path="/ResAig/rapports" element={<ConsulterRapports />} />
             <Route path="/responsabled'aiguillage/Profile" element={<ParamCompREsAIg />} />
             <Route path='/ResAig/rapports/rapinfo/' element={<DetailRapport/>}/>
+            <Route path='ResAig/statistiques' element={<StatisRespAi/>}/>
           </Route>
 
           <Route element={<RequireAuth allowedRoles={["chef de service"]} />}>

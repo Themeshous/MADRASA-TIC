@@ -28,7 +28,7 @@ export const ModRap = () => {
           }
         }
     
-        setTimeout(() => fetchItems(), 2000);
+        setTimeout(() => fetchItems(), 1000);
     
       }, [id])
     
@@ -62,7 +62,7 @@ export const ModRap = () => {
       }
       useEffect(() => {
         setInterval(()=>{setsucces(false);},7000)
-      }, [])
+      }, [succes])
       console.log(succes);
       const executeenreg = () => {
                   setsucces(true);

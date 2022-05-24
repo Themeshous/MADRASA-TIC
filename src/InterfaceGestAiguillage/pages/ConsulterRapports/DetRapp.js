@@ -52,9 +52,9 @@ const DetRapp = () => {
       }
     }
 
-    setTimeout(() => fetchItems(), 2000);
+    setTimeout(() => fetchItems(), 1000);
 
-  }, [id])
+  }, [id,rapport])
 
 
 

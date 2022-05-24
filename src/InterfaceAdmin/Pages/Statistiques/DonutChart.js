@@ -5,34 +5,34 @@ import "../../Accessoirs/Admin.css"
 
 const DoughnutChart = () => {
 
-    const [chart, setChart] = useState({})
+    const [chart, setChart] = useState([])
     const [fetchError, setFetchError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [empty, setempty] = useState(false)
 
     useEffect(() => {
+
         const fetchItems = async () => {
-            try {
-                const response = await fetch("http://localhost:2000/Admin/ConsulterComptes");
-                if (!response.ok) throw Error("les données n'ont pas été reçus");
-                const listItems = await response.json();
-                setChart(listItems.usersTable);
-                setFetchError(null); console.log(chart);
-                if (listItems.length == 0) {
-                    setempty(true)
-                }
-            } catch (err) {
-                setFetchError(err.message);
-            } finally {
-                setIsLoading(false);
+          try {
+            const response = await fetch("http://localhost:2000/Admin/ConsulterComptes");
+            if (!response.ok) throw Error("les données n'ont pas été reçus");
+            const listItems = await response.json();
+            setChart(listItems.usersTable);
+            setFetchError(null);
+            if (listItems.length==0) {
+              setempty(true)
             }
+          } catch (err) {
+            setFetchError(err.message);
+          } finally {
+            setIsLoading(false);
+          }
         }
+    
+        setTimeout(() => fetchItems(), 1000);
+    
+      }, [chart])
 
-        setTimeout(() => fetchItems(), 2000);
-
-    }, [])
-
- console.log(chart);
     function nombreserv(y) {
         let x = 0;
         chart.map((n) => {
@@ -66,8 +66,8 @@ const DoughnutChart = () => {
                     '#00A6B4',
                     '#A3CAE5'
                 ],
-                data: [nombreserv('administrateur'), nombreserv('administrateur-secondaire'), nombreserv('chef de service'), nombreserv('responsable des relations extérieures'), nombreserv("responsable d'aiguillage")]
-           
+              data: [nombreserv('administrateur'), nombreserv('administrateur-secondaire'), nombreserv('chef de service'), nombreserv('responsable des relations extérieures'), nombreserv("responsable d'aiguillage")]
+        
             }
         ]
 

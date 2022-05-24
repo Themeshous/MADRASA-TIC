@@ -22,7 +22,6 @@ export const Edit = () => {
         const response = await fetch("http://localhost:2000/declaration/userDeclarations/" + id);
         if (!response.ok) throw Error("les données n'ont pas été reçus");
         const listItems = await response.json();
-        setvalues({ service: listItems.type })
         setdeclaration(listItems);
 
         setFetchError(null);
@@ -34,9 +33,9 @@ export const Edit = () => {
       }
     }
 
-    setTimeout(() => fetchItems(), 2000);
+    setTimeout(() => fetchItems(), 1000);
 
-  }, [id])
+  }, [id,declaration])
 
   
   const handlechange = e => {
@@ -151,7 +150,7 @@ export const Edit = () => {
                   placeholder={values.service}
                   value={values.service}
                   onChange={handlechange}>
-
+                  <option value="choisir" selected>Choisir ...</option>
                   <option value="Technique">Technique</option>
                   <option value="sécurité">Sécurité</option>
                   <option value="médecin">médecin</option>

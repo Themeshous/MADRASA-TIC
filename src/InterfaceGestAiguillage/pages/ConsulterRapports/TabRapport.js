@@ -28,7 +28,7 @@ export const TabRapports = () => {
       }
     }
 
-    setTimeout(() => fetchItems(), 2000);
+    setTimeout(() => fetchItems(), 1000);
 
   }, [])
   const columns = useMemo(() => Colrapports, [])

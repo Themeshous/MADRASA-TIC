@@ -7,7 +7,7 @@ export const CreerRapp = () => {
       const [values, setValues] = useState({
             titre: '',
             description: '',
-            fichier: ''
+            fichier: null
       })
 
       const [errors, seterrors] = useState({})
@@ -41,11 +41,15 @@ export const CreerRapp = () => {
 
       const SelectFile = e => {
             setfileSelected(e.target.files[0])
+            setValues({
+                  ...values,
+                  fichier: fileSelected
+            })
       }
       useEffect(() => {
         setInterval(()=>{setsucces(false);},7000)
-      }, [])
-   
+      }, [succes])
+      console.log(fileSelected);
       const executeenreg = () => {
             if (!((values.description === '') && (values.titre === ''))) {
                   setsucces(true);

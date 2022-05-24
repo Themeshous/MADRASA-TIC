@@ -52,9 +52,9 @@ const DetRapServ = () => {
       }
     }
 
-    setTimeout(() => fetchItems(), 2000);
+    setTimeout(() => fetchItems(), 1000);
 
-  }, [id,next,prev])
+  }, [id,next,prev,rapport])
 
 
 

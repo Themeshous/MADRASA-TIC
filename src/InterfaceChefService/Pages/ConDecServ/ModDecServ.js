@@ -1,8 +1,9 @@
 import React from 'react'
 import "../../../InterfaceGestAiguillage/pages/ConsulterRapports/rapport.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAdd, faCheck, faClipboardUser, faDownload, faSpinner, faSquareCheck, faSquareXmark } from '@fortawesome/free-solid-svg-icons'
+import { faAdd, faCheck,faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
+import axios from "axios";
 export const ModDecServ = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -31,28 +32,34 @@ export const ModDecServ = () => {
       }
     }
 
-    setTimeout(() => fetchItems(), 2000);
+    setTimeout(() => fetchItems(), 1000);
 
-  }, [id])
+  }, [id,declaration])
   
   useEffect(() => {
     setInterval(()=>{setShowconfcour(false);setShowconftrait(false)},7000)
   }, [])
-
-  const ChangeStatedeclarationcour= () => {
+ 
+  const ChangeStatedeclarationcour=  async () => {
     setShowconfcour(true);
     setShowconftrait(ShowconfTrait => false)
+    await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
+    {id: declaration.id_dec, newState: "Encours", newService:declaration.service});
     //change etat to Encour
     //send to user that En cour de traitement
   }
 
-  const ChangeStatedeclarationtrait= () => {
+  const ChangeStatedeclarationtrait=  async () => {
     setShowconftrait(true);
     setShowconfcour(ShowconfCour => false)
+    await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
+        {id: declaration.id_dec, newState: "Traité", newService:declaration.service});
+    //Send to user la declation est prise en compte
     //change etat to traité
     //Send declaration to service 
     //Send to user la declation est prise en compte
   }
+  
 
   return (
     <>
