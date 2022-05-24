@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../CreateRapport/Rapport.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileDownload } from '@fortawesome/free-solid-svg-icons'
+import axios from "axios";
 
 export const ModRap = () => {
      //Ramener les données précédente pour pouvoir modifier
@@ -64,17 +65,24 @@ export const ModRap = () => {
         setInterval(()=>{setsucces(false);},7000)
       }, [succes])
       console.log(succes);
-      const executeenreg = () => {
+      const executeenreg = async () => {
                   setsucces(true);
                   setmsg('Le rapport a été enregistré')
+                  if (rapport.etat ===! "Envoyé") {
+                               await axios.patch('http://localhost:2000/rapport/etatRapport/changer',
+                       {id:rapport.id_rap , etat: "Enregistré"});
+                  }
+           
                   //si rapport.état === envoyé pas la penne de changer l'état sinon on enregistre les nouvelles infos
                   //ajouter le rapport si n'existe pas 
                   //modifier l'état de rapport dans la table des rapport si existe déja vers enregistré
       }
      
-      const executeenvoy = () => {
+      const executeenvoy = async ()=> {
                         setsucces(true);
                        setmsg('Le rapport a été envoyé')
+                       await axios.patch('http://localhost:2000/rapport/etatRapport/changer',
+                       {id:rapport.id_rap , etat: "Envoyé"});
                        //ajouter le rapport si n'existe pas 
                       //modifier l'état de rapport dans la table des rapport si existe déja vers envoyé
             }
