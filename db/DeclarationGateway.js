@@ -21,7 +21,7 @@ async function saveDeclaration(declaration) {
 async function getAllDeclaration() {
     const selectQuery = "SELECT * FROM declarations";
     const [result] = await connection.query(selectQuery);
-        return result;
+    return result;
     
 }
 

@@ -16,9 +16,11 @@ async function setRapport(date,titre,description,fichier,service,etat) {
 }
 
 async function updateRapport(titre,description,fichier,service,etat,ID) {
+  const sqlupdate = "UPDATE rapports SET " +
+      "titre = ?,description = ? ,fichier = ? , service = ?, etat= ? " +
+      "WHERE id_rap = ? "; //id njibouh men front
 
-  const sqlupdate = "UPDATE rapports SET titre = ?,description = ? ,fichier = ? , service = ?, etat= ? WHERE id_rap = ? "; //id njibouh men front 
-  const result = await connection.query(sqlupdate, [titre, description,fichier,service,etat,ID]);
+  const result = await connection.query(sqlupdate, [titre, description, fichier, service, etat, ID]);
   console.log("rapport updated");
 
 }
