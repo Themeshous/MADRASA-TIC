@@ -85,7 +85,8 @@ async function changeRapportEtat(id,etat){
 
 async function upfileRapport (id,path){
     const sqlupdate = "UPDATE rapports SET fich_path = ? WHERE id_rap = ?";
-    return await connection.query(sqlupdate, [path, id]);
+    const result = await connection.query(sqlupdate, [path, id]);
+    console.log("file uploaded in db");
 
 }
 

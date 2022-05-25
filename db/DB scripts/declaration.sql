@@ -11,6 +11,7 @@ CREATE TABLE `madrasatic`.`declarations`
     `type` VARCHAR(45) NOT NULL,
     `etat` VARCHAR(45) NOT NULL,
     `Supp` BOOLEAN  DEFAULT FALSE, /*faut ajouter ça pour nous aider a la suppression*/
+    `IDrap` INT NULL,
     PRIMARY KEY (`id_dec`),
     INDEX `declarer_idx` (`emetteur` ASC) VISIBLE,
     CONSTRAINT `declarer`
@@ -18,4 +19,11 @@ CREATE TABLE `madrasatic`.`declarations`
             REFERENCES `madrasatic`.`users` (`Email`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
+    INDEX `attacher_idx` (`IDrap` ASC) VISIBLE,  
+    CONSTRAINT `attacher`
+        FOREIGN KEY (`IDrap`)
+            REFERENCES `madrasatic`.`rapports` (`id_rap`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+     
 );

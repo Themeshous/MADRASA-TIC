@@ -10,7 +10,13 @@ CREATE TABLE `rapports` (
     `etat` VARCHAR(45)
     `Supp`     BOOLEAN  DEFAULT FALSE,
     `Suppint` BOOLEAN  DEFAULT FALSE, 
-    
-      PRIMARY KEY (`id_rap`)
+    `IDdec` INT NULL ,
+     PRIMARY KEY (`id_rap`),
+     INDEX `id_dec_idx` (`IDdec` ASC) VISIBLE,
+     CONSTRAINT `attacher`
+        FOREIGN KEY (`IDdec`)
+          REFERENCES `madrasatic`.`declarations` (`id_dec`)
+          ON DELETE NO ACTION
+          ON UPDATE NO ACTION
     
 );

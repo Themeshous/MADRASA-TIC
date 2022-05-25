@@ -87,9 +87,6 @@ async function upRapportFile(req,res){
         const rapportFile = req.files.fichier;
         const id_rap = req.body.ID;
 
-        if (!rapportFile.mimetype.startsWith('fich'))
-            res.send('Please Upload file');
-
         const fichPath = path.join(__dirname, `../../db/rapports-uploads/${rapportFile.name}`);
 
         await rapportFile.mv(fichPath);
