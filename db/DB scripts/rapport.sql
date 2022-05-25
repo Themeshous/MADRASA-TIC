@@ -9,6 +9,7 @@ CREATE TABLE `rapports` (
     `service`    VARCHAR(45)  NOT NULL,
     `etat` VARCHAR(45)
     `Supp`     BOOLEAN  DEFAULT FALSE,
+    `Suppint` BOOLEAN  DEFAULT FALSE, 
     
       PRIMARY KEY (`id_rap`)
     

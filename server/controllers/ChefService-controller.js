@@ -1,6 +1,6 @@
 
 
-const {setRapport,updateRapport,deleteRapport,getRapports, getRapportid, getRapportservice,getRapportEtat,changeRapportEtat,upfileRapport} = require('../../db/RapportGateway');
+const {setRapport,updateRapport,deleteRapport,deleteRapportarchive,getRapports, getRapportid, getRapportservice,getRapportEtat,changeRapportEtat,upfileRapport,getRapportsarchive} = require('../../db/RapportGateway');
 
 const path = require('path');
 
@@ -38,8 +38,20 @@ async function supRapport(req, res) {
     res.json({data});
 }
 
+async function suppRapportarchive(req, res) {
+    const ID = req.params.id;
+       
+    const data = await deleteRapportarchive(ID);
+    res.json({data});
+}
+
 async function fetchRapports(req, res) {
     const result = await getRapports();
+    res.json({ result });
+}
+
+async function fetchRapportsarchive(req, res) {
+    const result = await getRapportsarchive();
     res.json({ result });
 }
 
@@ -90,4 +102,5 @@ async function upRapportFile(req,res){
 
 
 
-module.exports = {saveRapport,upRapport,supRapport,fetchRapports,showRapport,showRapportservice,showRapportEtat,upEtatRapport,upRapportFile}
+module.exports = {saveRapport,upRapport,supRapport,suppRapportarchive,fetchRapports,showRapport,
+                  showRapportservice,showRapportEtat,upEtatRapport,upRapportFile,fetchRapportsarchive}
