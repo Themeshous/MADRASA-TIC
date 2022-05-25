@@ -119,6 +119,9 @@ const signup = () => {
                            <option value="SG">SG</option>
                            <option value="médecin de l'école">médecin de l'école</option>
                            <option value="simple emplyée">simple emplyé</option>
+                           <option value="simple emplyée">sécurité</option>
+                           <option value="simple emplyée">hygiène</option>
+                           <option value="simple emplyée">entretien</option>
                </select> 
                {errors.profession && <p>{errors.profession}</p>}
            </div>

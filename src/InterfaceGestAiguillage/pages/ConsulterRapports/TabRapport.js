@@ -15,7 +15,7 @@ export const TabRapports = () => {
 
     const fetchItems = async () => {
       try {
-        const response = await fetch("http://localhost:2000/rapport/consulterRapports");
+        const response = await fetch("http://localhost:2000/rapport/consultRapportEtat/Envoyé");
         if (!response.ok) throw Error("les données n'ont pas été reçus");
         const listItems = await response.json();
         setItems(listItems.result);
@@ -28,7 +28,7 @@ export const TabRapports = () => {
       }
     }
 
-    setTimeout(() => fetchItems(), 2000);
+    setTimeout(() => fetchItems(), 1000);
 
   }, [])
   const columns = useMemo(() => Colrapports, [])
