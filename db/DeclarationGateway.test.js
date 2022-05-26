@@ -5,7 +5,7 @@ describe('Declaration Gateway test', () => {
         date: "12/12/1212",
         titre: "titre",
         description: "mkljsdlkj",
-        image: null,
+        image: "null",
         emetteur: "a.chdqer@esi-sba.dz",
         localisation: "S1",
         type: "type",
@@ -53,5 +53,11 @@ describe('Declaration Gateway test', () => {
         const [result] = await Gateway.changeDeclarationService(id, service);
         expect(result.affectedRows).toBe(1);
 
+    });
+
+    it('should get declarations by service', async function () {
+        const service = "security";
+        const result = await Gateway.getNonRejectedDeclarationsByService(service);
+        expect(result.length).toBeGreaterThan(0);
     });
 });

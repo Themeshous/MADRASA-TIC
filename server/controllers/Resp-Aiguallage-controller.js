@@ -2,7 +2,7 @@ const {
     getAllDeclaration,
     getDeclarationsOfTheEmail,
     getDeclarationById, changeDeclarationState, changeDeclarationService,
-    saveImagePathToDB
+    saveImagePathToDB, getNonRejectedDeclarationsByService
 } = require('../../db/DeclarationGateway');
 
 const path = require('path');
@@ -22,6 +22,12 @@ async function fetchDeclarationById(request, response) {
     const id = request.params.id;
     const declaration = await getDeclarationById(id);
     response.json(declaration);
+}
+
+async function fetchDeclarationsByService(request, response) {
+    const service = request.params.service;
+    const declarations = await getNonRejectedDeclarationsByService(service);
+    response.json(declarations);
 }
 
 async function updateDeclarationState(request, response) {
@@ -50,5 +56,6 @@ async function getDeclarationImage(request, response) {
 
 module.exports = {
     fetchAllDeclarations, fetchDeclarationsForEmail, fetchDeclarationById,
-    updateDeclarationState, uplaodDeclarationImage, getDeclarationImage
+    updateDeclarationState, uplaodDeclarationImage, getDeclarationImage,
+    fetchDeclarationsByService
 }

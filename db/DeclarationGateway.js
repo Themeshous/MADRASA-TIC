@@ -3,7 +3,7 @@ const connection = require('./connection');
 async function saveDeclaration(declaration) {
     const sqlinsert =
         "INSERT INTO `madrasatic`.`declarations` " +
-        "(`date`, `titre`, `description`, `image`, `emetteur`, `localisation`, `type`, `etat`) " +
+        "(`date`, `titre`, `description`, `image_path`, `emetteur`, `localisation`, `type`, `etat`) " +
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?);"
 
     const data =
@@ -22,7 +22,6 @@ async function getAllDeclaration() {
     const selectQuery = "SELECT * FROM declarations";
     const [result] = await connection.query(selectQuery);
     return result;
-    
 }
 
 async function getDeclarationById(id) {
@@ -32,6 +31,14 @@ async function getDeclarationById(id) {
         return result;
     else
         return { declarationFound: false }
+}
+
+async function getNonRejectedDeclarationsByService(service) {
+    const selectQuery = "SELECT * FROM declarations WHERE declarations.service = ?\n" +
+        "                             AND\n" +
+        "                               declarations.etat <> ?";
+    const [result] = await connection.query(selectQuery, [service, "rejeter"]);
+    return result;
 }
 
 async function getDeclarationsOfTheEmail(email) {
@@ -62,4 +69,5 @@ async function saveImagePathToDB(path, id) {
 
 module.exports = {saveDeclaration,
     getAllDeclaration, getDeclarationById, getDeclarationsOfTheEmail,
-    changeDeclarationState, changeDeclarationService, saveImagePathToDB}
+    changeDeclarationState, changeDeclarationService, saveImagePathToDB,
+    getNonRejectedDeclarationsByService}

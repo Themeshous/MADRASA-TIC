@@ -7,7 +7,7 @@ CREATE TABLE `rapports` (
     `fich_path` VARCHAR(255), /*on fera le path du fichier plus tard 
                                ALTER TABLE rapports CHANGE fichier fich_path VARCHAR(255);*/
     `service`    VARCHAR(45)  NOT NULL,
-    `etat` VARCHAR(45)
+    `etat` VARCHAR(45),
     `Supp`     BOOLEAN  DEFAULT FALSE,
     `Suppint` BOOLEAN  DEFAULT FALSE, 
     `IDdec` INT NULL ,
