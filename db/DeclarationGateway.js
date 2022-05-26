@@ -50,9 +50,17 @@ async function getDeclarationsOfTheEmail(email) {
         return {declarationsFound: false}
 }
 
-async function changeDeclarationState(id, newState) {
-    const updateQuery = "UPDATE declarations SET etat = ? WHERE id_dec = ?";
-    return await connection.query(updateQuery, [newState, id]);
+async function changeDeclarationState(id, newState, remarque) {
+    let updateQuery
+    if(remarque) {
+        updateQuery = "UPDATE `madrasatic`.`declarations` SET `etat` = ?," +
+            " `remarques_de_responsable` = ? WHERE (`id_dec` = ?);\n";
+        return await connection.query(updateQuery, [newState, remarque ,id]);
+    }
+    else {
+        updateQuery = "UPDATE declarations SET etat = ? WHERE id_dec = ?";
+        return await connection.query(updateQuery, [newState, id]);
+    }
 }
 
 async function changeDeclarationService(id, service) {

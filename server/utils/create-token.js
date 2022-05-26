@@ -13,6 +13,7 @@ function createToken(user) {
         email: user.Email,
         role: user.Role,
         profession: user.Profession,
+        telephone: user.NumTel,
         isActive: user.isActive,
         token,
         requestSucceeded: true
@@ -39,6 +40,7 @@ function createUserViewForAdmin(user) {
         email: user.Email,
         role: user.Role,
         profession: user.Profession,
+        telephone: user.NumTel,
         Etat: user.isActive,
     };
 }
