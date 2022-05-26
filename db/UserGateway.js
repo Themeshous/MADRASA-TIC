@@ -1,12 +1,12 @@
 const bcrypt = require('../server/node_modules/bcryptjs');
 const connection = require('./connection');
 
-async function saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1) {
+async function saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1, Numero) {
   const hashpswd = await bcrypt.hash(Password, 8);
 
-  const sqlinsert = "INSERT INTO users (Nom, Prenom, Email, Role, Profession, Password, Password1) VALUES (?,?,?,?,?,?,?)";
+  const sqlinsert = "INSERT INTO users (Nom, Prenom, Email, Role, Profession, Password, Password1, NumTel) VALUES (?,?,?,?,?,?,?,?)";
   try {
-    await connection.query(sqlinsert, [Nom, Prenom, Email, Role, Profession, hashpswd, Password1], (err) => {
+    await connection.query(sqlinsert, [Nom, Prenom, Email, Role, Profession, hashpswd, Password1,Numero], (err) => {
       if (err) console.log(err);
     });
   } catch(error) {
@@ -62,10 +62,10 @@ async function setNewPassword(password, email) {
   console.log(result);
 }
 
-async function updateuser(User,Nom){
+async function updateuser(User,Id){
   const hashpswd = await bcrypt.hash(User.Password, 8);
-  const sqlupdate = "UPDATE users SET Email=? ,Profession = ?, Password =? ,Password1 = ? WHERE Nom = ?";  
-  const data = [User.Email, User.Profession, hashpswd, User.Password, Nom ]
+  const sqlupdate = "UPDATE users SET Email=? ,Profession = ?, Password =? ,Password1 = ? NumTel = ? WHERE id_user = ?";  
+  const data = [User.Email, User.Profession, hashpswd, User.Password, Id ]
   try {
     await connection.query(sqlupdate, data); 
   } catch (error) {

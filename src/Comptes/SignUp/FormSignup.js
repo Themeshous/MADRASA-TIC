@@ -14,6 +14,7 @@ const signup = () => {
         nom:values.nom,
         prenom:values.prenom,
         email:values.email,
+        numero:"0555 55 77 88",
         role:values.role,
         profession:values.profession,
         password:values.pswd,

@@ -1,0 +1,22 @@
+/* ALTER TABLE `madrasatic`.`declarations` 
+        ADD COLUMN `IDrap`INT NULL  DEFAULT NULL AFTER `Supp`,
+        ADD INDEX `attacher_idx` (`IDrap` ASC) VISIBLE;
+           ;
+        ALTER TABLE `madrasatic`.`declarations` 
+        ADD CONSTRAINT `attacher`
+        FOREIGN KEY (`IDrap`)
+        REFERENCES `madrasatic`.`rapports` (`id_rap`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION;  */   
+
+
+ /* ALTER TABLE `madrasatic`.`rapports` 
+      ADD COLUMN `IDdec` INT NULL DEFAULT NULL AFTER `Suppint`,
+      ADD INDEX `id_dec_idx` (`IDdec` ASC) VISIBLE;
+      ;
+      ALTER TABLE `madrasatic`.`rapports` 
+      ADD CONSTRAINT `attacher`
+      FOREIGN KEY (`IDdec`)
+      REFERENCES `madrasatic`.`declarations` (`id_dec`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION; */
