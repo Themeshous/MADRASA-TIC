@@ -8,13 +8,9 @@ router.post('/sauvgRapport', saveRapport);
 router.post('/majRapport/:id', upRapport);
 router.post('/suppRapport/:id', supRapport);
 
-router.post('/suppRapportarchive/:id', suppRapportarchive);
-
-
 router.post('/fichRapport',upRapportFile);
 
 router.get('/consulterRapports', fetchRapports);
-router.get('/consulterRapportsarchive', fetchRapportsarchive);
 router.get('/consultRapport/:id', showRapport);
 router.get('/consultRapportService/:service', showRapportservice);
 router.get('/consultRapportEtat/:etat', showRapportEtat);
