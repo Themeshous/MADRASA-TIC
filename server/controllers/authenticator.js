@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 const {createToken, cleanToken} =  require("../utils/create-token");
 
-const { findUser, saveUser, setNewPassword} = require('../../db/UserGateway');
+const { findUser, saveUser, setNewPassword,updateuser} = require('../../db/UserGateway');
 require('sequelize');
 async function login(req, res) {
     const email = req.body.email;
@@ -26,12 +26,13 @@ async function signup(req, res) {
         const Nom = req.body.nom;
         const Prenom = req.body.prenom;
         const Email = req.body.email;
+        const Num = req.body.numero;
         const Role = req.body.role;
         const Profession = req.body.profession;
         const Password = req.body.password;
         const Password1 = req.body.password;
 
-        const data = await saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1);
+        const data = await saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1,Num);
         console.log(data);
         res.json({data});
 }
@@ -77,9 +78,9 @@ async function forgetpassword(req,res){
 }
 
 async function updparmUser(req,res){
-    const nom = req.params.Nom;
+    const iduser= req.params.id;
     const user = req.body;    
-    const data = await updateuser(user,nom);
+    const data = await updateuser(user,iduser);
     res.json({data});
 
 

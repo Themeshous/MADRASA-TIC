@@ -14,7 +14,7 @@ export const Edit = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [Showconfrej, setShowconfrej] = useState(false);
   const [Showconfval, setShowconfval] = useState();
-  const [values, setvalues] = useState({ service: '' });
+  const [values, setvalues] = useState({ service: '', remarque: '' });
   useEffect(() => {
 
     const fetchItems = async () => {
@@ -35,9 +35,10 @@ export const Edit = () => {
 
     setTimeout(() => fetchItems(), 1000);
 
-  }, [id,declaration])
 
-  
+  }, [id, declaration])
+
+
   const handlechange = e => {
     const { name, value } = e.target
     setvalues({
@@ -46,7 +47,7 @@ export const Edit = () => {
     })
   }
   useEffect(() => {
-    setInterval(()=>{setsuccess(false);},7000)
+    setInterval(() => { setsuccess(false); }, 7000)
   }, [])
   const [success, setsuccess] = useState(false)
   const [msg, setmsg] = useState('')
@@ -58,7 +59,7 @@ export const Edit = () => {
     setmsg('La déclaration a été rejetée')
     console.log(id);
     await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
-        {id: id, newState: "rejeter", newService: values.service});
+      { id: id, newState: "rejeter", newService: values.service });
   }
 
   const ChangeStatedeclarationval = async () => {
@@ -67,7 +68,7 @@ export const Edit = () => {
     setsuccess(true);
     setmsg('La déclaration a été validée et envoyée au chef de service')
     await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
-        {id: declaration.id_dec, newState: "valider", newService: values.service});
+      { id: declaration.id_dec, newState: "valider", newService: values.service });
     //Send to user la declation est prise en compte
   }
 
@@ -81,35 +82,7 @@ export const Edit = () => {
               <h1 className='sous-titre-elem'>Lieu:
                 <p className='head-related-info'>{declaration.localisation}</p>
               </h1>
-
-            </div>
-            <div className='elem-rapport'>
-              <h1 className='titre-elem'>Emetteur</h1>
-              <div className='related-info'>{declaration.emetteur}</div>
-            </div>
-            <div className='elem-rapport'>
-              <h1 className='titre-elem'> Date</h1>
-              <div className='related-info'>{declaration.date}</div>
-            </div>
-            <div className='elem-rapport'>
-              <h1 className='titre-elem'> Type</h1>
-              <div className='related-info'>{declaration.type}</div>
-            </div>
-            <div className='elem-rapport'>
-              <h1 className='titre-elem'> Etat</h1>
-              <div className='related-info'>{declaration.etat}</div>
-            </div>
-            <div className='elem-rapport'>
-              <h1 className='titre-elem'>Description</h1>
-              <div className='related-info'>{declaration.declaration ? (declaration.declaration) : ("Cette déclaration ne contient pas de description")}</div>
-            </div>
-            <div className='elem-rapport'>
-              <h1 className='titre-elem'>Image</h1>
-              <div className='related-info'>{declaration.image ? (declaration.image) : ("Cette déclaration ne contient pas d'image")}</div>
-            </div>
-
-
-
+              
             <div className='inline-items-declaration'>
               <button className='submit rejeter' type='submit'
                 onClick={() => { setShowconfrej(true); setShowconfval(false) }} >
@@ -120,10 +93,55 @@ export const Edit = () => {
 
             </div>
 
-            {Showconfrej && <div className="confirmation-déclaration">
+            </div>
+
+
+            <div className='element-line'>
+              <div className='elem-rapport'>
+                <h1 className='titre-elem'>Emetteur</h1>
+                <div className='related-info'>{declaration.emetteur}</div>
+              </div>
+              <div className='elem-rapport'>
+                <h1 className='titre-elem'> Date</h1>
+                <div className='related-info'>{declaration.date}</div>
+              </div>
+            </div>
+            <div className='element-line'>
+              <div className='elem-rapport'>
+                <h1 className='titre-elem'> Type</h1>
+                <div className='related-info'>{declaration.type}</div>
+              </div>
+              <div className='elem-rapport'>
+                <h1 className='titre-elem'> Etat</h1>
+                <div className='related-info'>{declaration.etat}</div>
+              </div>
+            </div>
+            <div className='element-line'>
+              <div className='elem-rapport'>
+                <h1 className='titre-elem'>Description</h1>
+                <div className='related-info'>{declaration.declaration ? (declaration.declaration) : ("Cette déclaration ne contient pas de description")}</div>
+              </div>
+            </div>
+            <div className='element-line'>
+              <div className='elem-rapport'>
+                <h1 className='titre-elem'>Image</h1>
+                <div className='related-info'>{declaration.image ? (declaration.image) : ("Cette déclaration ne contient pas d'image")}</div>
+              </div>
+            </div>
+
+
+            {Showconfrej && <div className="confirmation-déclaration-valider">
               <h4 className="texte-xonfirmation">
                 Voulez vous vraiment rejeter ce compte ?
               </h4>
+              <input
+                id='remarque'
+                type="text"
+                name='remarque'
+                className='form-input-declaration-rej'
+                placeholder='Saisir pourquoi vous avez rejeté cette déclaration'
+                value={values.remarque}
+                onChange={handlechange} />
               <div className="btn-in-line">
                 <button className='btn-conf annuler' type='submit' onClick={() => setShowconfrej(Showconfrej => false)}>
                   <p> Annuler</p>
@@ -139,8 +157,8 @@ export const Edit = () => {
 
               <div className='form-inputs-declaration'>
                 <label className='form-label-declaration'>
-                <h4 className="texte-xonfirmation">La déclaration va etre réorientée vers le service :</h4>
-                  
+                  <h4 className="texte-xonfirmation">La déclaration va etre réorientée vers le service :</h4>
+
                 </label>
                 <select
                   id='Service'
@@ -169,7 +187,7 @@ export const Edit = () => {
               </div>
             </div>
             }
-             {success && <div className="alerte-msg">{msg}</div>}
+            {success && <div className="alerte-msg">{msg}</div>}
           </div>}
 
     </>

@@ -184,9 +184,11 @@ margin-bottom: 5%;
 }
 
 .chars-admin{
-    padding: 7%;
+    display: flex;
+    padding:3% 3% 0% 7%;
     margin-left: 18%;
-    width: 70%;
+    width: 82%;
+    justify-content: space-between;
 }
 .char-titre{
     font-size: larger;
@@ -194,7 +196,10 @@ margin-bottom: 5%;
     margin-bottom: 10%;
 }
 .Bar-char{
-    margin-left: 10%;
-    width: 60%;
-    height: 60%;
+   padding-top: 30px;
+   padding-left: 10px;
+   padding-right: 10px;
+    width: 450px;
+    height: 450px;
+    border: #020930 solid;
 }

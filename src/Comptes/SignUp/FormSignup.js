@@ -14,6 +14,7 @@ const signup = () => {
         nom:values.nom,
         prenom:values.prenom,
         email:values.email,
+        numero:values.numero,
         role:values.role,
         profession:values.profession,
         password:values.pswd,
@@ -65,7 +66,7 @@ const signup = () => {
                {errors.prenom && <p>{errors.prenom}</p>}
            </div>
            </div>
-           <div className='form-iput-line-email'>
+           <div className='form-iput-line'>
            <div className='form-inputs'>
                <label htmlFor='username' className='form-label'>
                 Adresse email
@@ -75,10 +76,26 @@ const signup = () => {
                        type="email" 
                        name='email'
                        className='form-input'
-                       placeholder="Saisir l'adresse email"                       value={values.email}
+                       placeholder="Saisir l'adresse email"          
+                       value={values.email}
                        onChange={handlechange}/>
                
                {errors.email && <p>{errors.email}</p>}
+           </div>
+           <div className='form-inputs'>
+               <label htmlFor='usernum' className='form-label'>
+                 Numéro de téléphone
+               </label>
+               <input  
+                       id='numero'
+                       type="text" 
+                       name='numero'
+                       className='form-input'
+                       placeholder='Saisir le numéro de téléphone'
+                       value={values.numero}
+                       onChange={handlechange}/>
+              
+               {errors.numero && <p>{errors.numero}</p>}
            </div>
            </div>
            <div className='form-iput-line'>
@@ -118,9 +135,9 @@ const signup = () => {
                            <option value="SG">SG</option>
                            <option value="médecin de l'école">médecin de l'école</option>
                            <option value="simple emplyée">simple emplyé</option>
-                           <option value="simple emplyée">sécurité</option>
-                           <option value="simple emplyée">hygiène</option>
-                           <option value="simple emplyée">entretien</option>
+                           <option value="sécurité">sécurité</option>
+                           <option value="hygiène">hygiène</option>
+                           <option value="entretien">entretien</option>
                </select> 
                {errors.profession && <p>{errors.profession}</p>}
            </div>

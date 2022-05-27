@@ -2,17 +2,19 @@ const {createUserViewForAdmin} =  require("../utils/create-token");
 
 const {saveUser, getAllUsers, setActiveUser} = require('../../db/UserGateway');
 
-async function createUser(request, response) {
-    const Nom = request.body.nom;
-    const Prenom = request.body.prenom;
-    const Email = request.body.email;
-    const Role = request.body.role;
-    const Profession = request.body.profession;
-    const Password = request.body.password;
-    const Password1 = request.body.password1;
+async function createUser(req, res) {
+        const Nom = req.body.nom;
+        const Prenom = req.body.prenom;
+        const Email = req.body.email;
+        const Num = req.body.numero;
+        const Role = req.body.role;
+        const Profession = req.body.profession;
+        const Password = req.body.password;
+        const Password1 = req.body.password;
 
-    const result = await saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1);
-    response.json({result});
+        const data = await saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1, Num);
+        console.log(data);
+        res.json({data});
 }
 
 async function getAllUserTokens(req, res) {

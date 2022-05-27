@@ -14,6 +14,10 @@ export const Columns = [
     accessor:"email"
   },
   {
+    Header: "Téléphone",
+    accessor:"numero"
+  },
+  {
     Header: "Rôle",
     accessor: "role"
   },

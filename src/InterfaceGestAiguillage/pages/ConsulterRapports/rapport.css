@@ -8,7 +8,8 @@
     color: rgb(248, 95, 7); 
 }
 .sous-titre{
-    margin-left: 10%;    
+    margin-left: 10%; 
+    display: flex;   
 }
 .sous-titre-elem{
     padding: 2%;
@@ -20,12 +21,19 @@
   padding-left: 3%;
   color: rgb(83, 83, 83);
 }
+.element-line{
+        background-color: #f2f2f2;
+        display: flex;
+        margin-bottom: 1%;
+        justify-content: space-between;
+}
 .elem-rapport{
-    background-color: #f2f2f2;
+
     border-radius: 5px;
     display:block;
     padding: 0.5%;
     margin: 1%;
+    width: 50%;
 }
 .titre-elem{
     padding: 0% 0% 0% 1%;
@@ -93,14 +101,17 @@ color: #020930c0;
     padding: 3%;
     display: flex;
     justify-content:right;
+    width: 80%;
 }
 .submit{
-    padding: 1%;
+    padding: 0% 2% 0% 2%;
     border-radius: 5px;
     border: none;
-    margin-left: 10%;
+    margin-left: 20%;
+    height: 75%;
     font-size:medium;
 }
+
 .submit:hover{
     background-color: #f2f2f2;
     cursor: pointer;
@@ -108,7 +119,14 @@ color: #020930c0;
 }
 .attacher{
     background-color:#020930;
-    margin-right: 28%;
+    padding: 0% 2% 0% 2%;
+    border-radius: 5px;
+    border: none;
+    height: 35px;
+    margin-top: 3%;
+    font-size:medium;
+    margin-bottom: 5%;
+
 }
 .traité{
     background-color: #62df1a;
@@ -143,9 +161,9 @@ color: #020930c0;
     margin-right: 50%;
     width: 400px;
     height: 220px;
-    top:90%;
+    top:30%;
     right: 0px;
-    left: 45%;
+    left: 40%;
     float: left;
 }
 .form-input-declaration{
@@ -156,6 +174,21 @@ color: #020930c0;
     height: 40px;
     width: 50%;
     margin-left: 20%;
+    margin-bottom: 10%;
+    border: none;
+    background-color:#f2f2f2;;
+    color: #595959;
+    font-size: 12px;
+}
+
+.form-input-declaration-rej{
+    display: block;
+    padding: 10px;
+    outline: none;
+    border-radius: 10px;
+    height: 50px;
+    width: 70%;
+    margin-left: 13%;
     margin-bottom: 10%;
     border: none;
     background-color:#f2f2f2;;

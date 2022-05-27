@@ -8,7 +8,7 @@ router.post('/connect', login);
 router.post('/create', signup);
 router.post('/reset', reset);
 router.post('/forget', forgetpassword);
-router.post('/updateUser/:Nom', updparmUser);
+router.post('/updateUser/:id', updparmUser);
 
 
 

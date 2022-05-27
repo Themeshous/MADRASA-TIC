@@ -12,7 +12,9 @@ export default function ValidateInfo(values){
     }else if(!/\S+\.\S+@esi-sba.dz+/.test(values.email)){
         errors.email = "Adresse email non pas valide";
     }
-
+    if (!values.numero) {
+        errors.numero="Le numéro de téléphone  est requis"  
+    }
     if(!values.role.trim()){
         errors.role="Le rôle est requis"
     }
