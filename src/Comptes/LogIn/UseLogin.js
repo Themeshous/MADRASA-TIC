@@ -34,7 +34,7 @@ const UseLogin = (callback, ValidateLog) => {
       email: val.email,
       password: val.pswd,
     };
-    const { data } = await axios.post("http://localhost:2000/auth/connect", loginUser)
+    const { data } = await axios.post("http://localhost:2000/auth/connect", loginUser);
 
     if (data.requestSucceeded) {
 
