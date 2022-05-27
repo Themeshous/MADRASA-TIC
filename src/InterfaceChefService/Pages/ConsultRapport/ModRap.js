@@ -5,37 +5,39 @@ import { faFileDownload } from '@fortawesome/free-solid-svg-icons'
 import axios from "axios";
 
 export const ModRap = () => {
-     //Ramener les données précédente pour pouvoir modifier
-     const queryString = window.location.search;
-     const urlParams = new URLSearchParams(queryString);
-     const id = urlParams.get('id')
-   
-     const [rapport, setrapport] = useState(null);
-     const [fetchError, setFetchError] = useState(null);
-     const [isLoading, setIsLoading] = useState(true);
-     useEffect(() => {
+      //Ramener les données précédente pour pouvoir modifier
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const id = urlParams.get('id')
 
-        const fetchItems = async () => {
-          try {
-            const response = await fetch("http://localhost:2000/rapport/consultRapport/" + id);//get raport id=id and service=service mais id suffit 
-            if (!response.ok) throw Error("les données n'ont pas été reçus");
-            const listItems = await response.json();
-            setrapport(listItems.result);
-            setFetchError(null);
-          } catch (err) {
-            setFetchError(err.message);
-          } finally {
-            setIsLoading(false);
-          }
-        }
-    
-        setTimeout(() => fetchItems(), 1000);
-    
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      const [rapport, setrapport] = useState(null);
+      const [fetchError, setFetchError] = useState(null);
+      const [isLoading, setIsLoading] = useState(true);
+      useEffect(() => {
+
+            const fetchItems = async () => {
+                  try {
+                        const response = await fetch("http://localhost:2000/rapport/consultRapport/" + id);//get raport id=id and service=service mais id suffit 
+                        if (!response.ok) throw Error("les données n'ont pas été reçus");
+                        const listItems = await response.json();
+                        setrapport(listItems.result);
+                        setFetchError(null);
+                  } catch (err) {
+                        setFetchError(err.message);
+                  } finally {
+                        setIsLoading(false);
+                  }
+            }
+
+            setTimeout(() => fetchItems(), 1000);
+
       }, [id])
-    
-    
-    //Meme chose que l'autre form
-    const [values, setValues] = useState({
+
+
+      //Meme chose que l'autre form
+      const [values, setValues] = useState({
             titre: '',
             description: '',
             fichier: ''
@@ -51,7 +53,7 @@ export const ModRap = () => {
             })
 
       }
-     
+
       const HandleSubmit = e => {
             e.preventDefault();
       }
@@ -62,32 +64,50 @@ export const ModRap = () => {
             setfileSelected(e.target.files[0])
       }
       useEffect(() => {
-        setInterval(()=>{setsucces(false);},7000)
+            setInterval(() => { setsucces(false); }, 7000)
       }, [succes])
       console.log(succes);
       const executeenreg = async () => {
-                  setsucces(true);
-                  setmsg('Le rapport a été enregistré')
-                  if (rapport.etat ===! "Envoyé") {
-                               await axios.patch('http://localhost:2000/rapport/etatRapport/changer',
-                       {id:rapport.id_rap , etat: "Enregistré"});
-                  }
-           
-                  //si rapport.état === envoyé pas la penne de changer l'état sinon on enregistre les nouvelles infos
-                  //ajouter le rapport si n'existe pas 
-                  //modifier l'état de rapport dans la table des rapport si existe déja vers enregistré
+            setsucces(true);
+            setmsg('Le rapport a été enregistré') 
+            console.log(values.titre);
+            console.log(values.description);
+      
+                  axios.post("http://localhost:2000/rapport/majRapport/"+id, {
+                        titre:values.titre,
+                        description:values.description,
+                        fichier:"",
+                        service:user.prof,
+                        etat:"Enregistré"
+                
+                    }).then((Response)=>{
+                        console.log(Response);
+                    });
+       
+
+            //si rapport.état === envoyé pas la penne de changer l'état sinon on enregistre les nouvelles infos
+            //ajouter le rapport si n'existe pas 
+            //modifier l'état de rapport dans la table des rapport si existe déja vers enregistré
       }
-     
-      const executeenvoy = async ()=> {
-                        setsucces(true);
-                       setmsg('Le rapport a été envoyé')
-                       await axios.patch('http://localhost:2000/rapport/etatRapport/changer',
-                       {id:rapport.id_rap , etat: "Envoyé"});
-                       //ajouter le rapport si n'existe pas 
-                      //modifier l'état de rapport dans la table des rapport si existe déja vers envoyé
-            }
-            return (
-                  <>  {isLoading ? (<p className='loading'>Chargement...</p>) :
+ 
+      const executeenvoy = async () => {
+            setsucces(true);
+            setmsg('Le rapport a été envoyé')
+            axios.post("http://localhost:2000/rapport/majRapport/"+id, {
+                  titre:values.titre,
+                  description:values.description,
+                  fichier:"",
+                  service:user.prof,
+                  etat:"Envoyé"
+          
+              }).then((Response)=>{
+                  console.log(Response);
+              });
+            //ajouter le rapport si n'existe pas 
+            //modifier l'état de rapport dans la table des rapport si existe déja vers envoyé
+      }
+      return (
+            <>  {isLoading ? (<p className='loading'>Chargement...</p>) :
                   fetchError ? (<p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>) :
                         <div>
                               <form className='form-rapp' onSubmit={HandleSubmit}>
@@ -103,7 +123,7 @@ export const ModRap = () => {
                                                       value={values.titre}
                                                       onChange={handlechange}
                                                 />
-                                        
+
                                           </div>
 
                                     </div>
@@ -142,16 +162,24 @@ export const ModRap = () => {
                                           </div>
                                     </div>
                                     <div className='form-button'>
-                                          <button type='submit' className='form-input-btn-par Enregistrer' onClick={executeenreg} >
-                                                <p> Enregistrer </p></button>
+                                          <div className='btn-inline'>
+                                                <button type='submit' className='form-input-btn-par Enregistrer' onClick={executeenreg} >
+                                                      <p> Enregistrer </p></button>
 
-                                                <button type='submit' className='form-input-btn-par Envoyer' onClick={executeenvoy} >
+                                                <button type='submit' className='form-input-btn-par Archiver' >
+                                                      <p> Archiver </p></button>
+                                          </div>
+                                          <button type='submit' className='form-input-btn-par Envoyer' onClick={executeenvoy} >
                                                 <p> Envoyer </p></button>
-                                             
+
+
+
+
                                     </div>
-                                 {succes && <div className="alerte-msg">{msg}</div>}
+
+                                    {succes && <div className="alerte-msg">{msg}</div>}
                               </form>
                         </div>}
-                  </>
-            )
-      }
+            </>
+      )
+}

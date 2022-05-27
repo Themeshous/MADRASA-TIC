@@ -87,10 +87,17 @@
     background-color: #197205;
 }
 .form-button {
-  margin-left: 50%;
+  
   margin-bottom: 8%;
+  display: flex;
 }
-
+.Archiver{
+    background-color: #ec1818;
+}
+.btn-inline{
+    display:flex;
+    margin-right: 40%;
+}
 .file-c {
     
     padding: 1em;
