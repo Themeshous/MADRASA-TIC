@@ -21,7 +21,7 @@ router.get('/consulterRapports/:service', fetchRapports);
 
 router.get('/consulterRapportsarchive/:service', fetchRapportsarchive);
 
-router.get('/consultRapportEtat/:etat/:service', showRapportEtat);
+router.get('/consultRapportEtat/:etat', showRapportEtat);
 
 router.get('/consultRapport/:id', showRapport);
 
