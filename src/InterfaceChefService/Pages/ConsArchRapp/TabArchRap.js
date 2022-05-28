@@ -3,31 +3,22 @@ import { useTable } from 'react-table/dist/react-table.development'
 import { useGlobalFilter, useSortBy } from "react-table";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { ColRapServ} from './ColRapServ'
+import { ColArch} from './ColArch'
 import "../../../InterfaceAdmin/Pages/ConsultationComptes/Tableau.css"
 
-const TabRapServ = () => {
+const TabArchRap = () => {
   const user = JSON.parse(localStorage.getItem("user"));
     const [items, setItems] = useState([]);
     const [fetchError, setFetchError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-
-    function getDeclarationsIds(items) {
-      var arr1 = [];
-      items.map((items) => arr1.push(items.id_rap) )
-      return arr1;
-    }
-
     useEffect(() => {
   
       const fetchItems = async () => {
         try {
-          const response = await fetch("http://localhost:2000/rapport/consultRapportService/"+user.prof.toString());//route rapport par service
+          const response = await fetch("http://localhost:2000/rapport/consulterRapportsarchive"+user.prof.toString());//route rapport par service
           if (!response.ok) throw Error("les données n'ont pas été reçus");
          
           const listItems = await response.json();
-          localStorage.removeItem("legthrapserv");
-           localStorage.setItem("legthrapserv",getDeclarationsIds(listItems.result));
           setItems(listItems.result);
           setFetchError(null);
         } catch (err) {
@@ -40,8 +31,7 @@ const TabRapServ = () => {
       setTimeout(() => fetchItems(), 2000);
   
     }, [])
-
-    const columns = useMemo(() => ColRapServ, [])
+    const columns = useMemo(() => ColArch, [])
     const data = items
   
     const TableInstance = useTable({
@@ -107,4 +97,4 @@ const TabRapServ = () => {
     )
 }
 
-export default TabRapServ
+export default TabArchRap

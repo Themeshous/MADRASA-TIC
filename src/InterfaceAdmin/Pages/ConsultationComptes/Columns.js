@@ -15,7 +15,7 @@ export const Columns = [
   },
   {
     Header: "Téléphone",
-    accessor:"numero"
+    accessor:"telephone"
   },
   {
     Header: "Rôle",

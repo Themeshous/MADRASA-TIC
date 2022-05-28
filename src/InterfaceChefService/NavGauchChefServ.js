@@ -29,9 +29,13 @@ export const NavGaucheChefSer = () => {
                   <FontAwesomeIcon icon={faFileCircleExclamation} className="icon-left" />
                   <p>Consulter les rapports</p>
                </NavLink>
+               
 
-
-
+               <NavLink to="/chefserv/Archive"
+                  className={(navData) => (navData.isActive ? 'active' : 'link')}>
+                  <FontAwesomeIcon icon={faFileCircleExclamation} className="icon-left" />
+                  <p>Consulter l'archive</p>
+               </NavLink>
 
 
                <NavLink to="/ChefSer/notification"

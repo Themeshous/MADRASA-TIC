@@ -59,7 +59,7 @@ export const Edit = () => {
     setmsg('La déclaration a été rejetée')
     console.log(id);
     await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
-      { id: id, newState: "rejeter", newService: values.service });
+      { id: declaration.id_dec, newState: "rejeter", newService: values.service ,remarque:values.remarque});
   }
 
   const ChangeStatedeclarationval = async () => {

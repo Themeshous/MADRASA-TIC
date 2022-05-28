@@ -69,95 +69,116 @@ export const ModRap = () => {
       console.log(succes);
       const executeenreg = async () => {
             setsucces(true);
-            setmsg('Le rapport a été enregistré') 
-            console.log(values.titre);
-            console.log(values.description);
-      
-                  axios.post("http://localhost:2000/rapport/majRapport/"+id, {
-                        titre:values.titre,
-                        description:values.description,
-                        fichier:"",
-                        service:user.prof,
-                        etat:"Enregistré"
-                
-                    }).then((Response)=>{
+            if (!(rapport.etat === "Envoyé")) {
+                  setmsg('Le rapport a été enregistré')
+                  axios.post("http://localhost:2000/rapport/majRapport/" + id, {
+                        titre:  ((values.titre)?(values.titre):(rapport.titre)),
+                        description: ((values.description)?(values.description):(rapport.description)),
+                        fichier: "",
+                        service: user.prof,
+                        etat: "Enregistré"
+
+                  }).then((Response) => {
                         console.log(Response);
-                    });
-       
+                  });
+            } else { setmsg('Le rapport a été envoyé , les modifications ne peuvent pas etre enregistrées') }
+
+
 
             //si rapport.état === envoyé pas la penne de changer l'état sinon on enregistre les nouvelles infos
             //ajouter le rapport si n'existe pas 
             //modifier l'état de rapport dans la table des rapport si existe déja vers enregistré
       }
- 
+
       const executeenvoy = async () => {
             setsucces(true);
             setmsg('Le rapport a été envoyé')
-            axios.post("http://localhost:2000/rapport/majRapport/"+id, {
-                  titre:values.titre,
-                  description:values.description,
-                  fichier:"",
-                  service:user.prof,
-                  etat:"Envoyé"
-          
-              }).then((Response)=>{
+            axios.post("http://localhost:2000/rapport/majRapport/" + id, {
+                  titre:  ((values.titre)?(values.titre):(rapport.titre)),
+                  description:((values.description)?(values.description):(rapport.description)),
+                  fichier: "",
+                  service: user.prof,
+                  etat: "Envoyé"
+
+            }).then((Response) => {
                   console.log(Response);
-              });
+            });
             //ajouter le rapport si n'existe pas 
             //modifier l'état de rapport dans la table des rapport si existe déja vers envoyé
       }
+
+      const executearch = async () => {
+            setsucces(true);
+            if (!(rapport.etat === "Envoyé")) {
+                  setmsg('Le rapport a été archivé')
+                  axios.post("http://localhost:2000/rapport/majRapport/" + id, {
+                        titre: ((values.titre)?(values.titre):(rapport.titre)),
+                        description: ((values.description)?(values.description):(rapport.description)),
+                        fichier: "",
+                        service: user.prof,
+                        etat: "Archivé"
+
+                  }).then((Response) => {
+                        console.log(Response);
+                  });
+            } else { setmsg('Le rapport a été envoyé , ne peut pas etre archivé') }
+            //archiver le rapport
+      }
+
       return (
             <>  {isLoading ? (<p className='loading'>Chargement...</p>) :
                   fetchError ? (<p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>) :
                         <div>
                               <form className='form-rapp' onSubmit={HandleSubmit}>
                                     <h2 className='form-tit'>Compte-Rendu </h2>
-                                    <h3 className='titl'> Titre rapport (*)</h3>
-                                    <div className='form-iput'>
+                                    <div className='content-form-rapp'>
+                                          <h3 className='titl'> Titre rapport (*)</h3>
+                                          <div className='form-iput'>
+                                                <div className='form-inputs' >
+                                                      <label className='form-label-rap'>Saisissez le titre de votre rapport</label>
+                                                      <input id="titre" type="text"
+                                                            name="titre"
+                                                            className='input-title'
+                                                            placeholder={rapport.titre}
+                                                            value={values.titre}
+                                                            onChange={handlechange}
+                                                      />
+
+                                                </div>
+
+                                          </div>
+                                          <h3 className='titl'>Description rapport (*)</h3>
+                                          <div className='form-iput'>
+                                                <div className='form-inputs'>
+                                                      <textarea id="description" type="text"
+                                                            name="description"
+                                                            placeholder={rapport.description}
+                                                            className='ta-description'
+                                                            value={values.description}
+                                                            onChange={handlechange}
+                                                      />
+                                                </div>
+                                          </div>
+                                          <h3 className='titl'>  Fichier attaché </h3>
                                           <div className='form-inputs' >
-                                                <label className='form-label-rap'>Saisissez le titre de votre rapport</label>
-                                                <input id="titre" type="text"
-                                                      name="titre"
-                                                      className='input-title'
-                                                      placeholder={rapport.titre}
-                                                      value={values.titre}
-                                                      onChange={handlechange}
-                                                />
+                                                <label className='form-label-rap'>Selectionner un Document <b>PDF</b> pour votre rapport</label>
+                                                <div className='file-c'>
+                                                      <div className='file-i'>
 
-                                          </div>
-
-                                    </div>
-                                    <h3 className='titl'>Description rapport (*)</h3>
-                                    <div className='form-iput'>
-                                          <div className='form-inputs'>
-                                                <textarea id="description" type="text"
-                                                      name="description"
-                                                      placeholder={rapport.description}
-                                                      className='ta-description'
-                                                      value={values.description}
-                                                      onChange={handlechange}
-                                                />
-                                          </div>
-                                    </div>
-                                    <h3 className='titl'>  Fichier attaché </h3>
-                                    <div className='form-inputs' >
-                                          <label className='form-label-rap'>Selectionner un Document <b>PDF</b> pour votre rapport</label>
-                                          <div className='file-c'>
-                                                <div className='file-i'>
-
-                                                      <button className='Upload'>
-                                                            <i>
-                                                                  <FontAwesomeIcon icon={faFileDownload} />Importer
-                                                            </i>
-                                                            <input id='fichier'
-                                                                  name='fichier'
-                                                                  type="file"
-                                                                  onChange={SelectFile}
-                                                            />
-                                                      </button>
-                                                      {fileSelected && <div className='fichier-selectionné'>
-                                                            {fileSelected.name}
-                                                      </div>}
+                                                            <button className='Upload'>
+                                                                  <i>
+                                                                        <FontAwesomeIcon icon={faFileDownload} />Importer
+                                                                  </i>
+                                                                  <input id='fichier'
+                                                                        name='fichier'
+                                                                        type="file"
+                                                                        onChange={SelectFile}
+                                                                  />
+                                                            </button>
+                                                            {fileSelected && <div className='fichier-selectionné'>
+                                                                  {fileSelected.name}
+                                                            </div>}
+                                                      </div>
                                                 </div>
                                           </div>
                                     </div>
@@ -166,8 +187,8 @@ export const ModRap = () => {
                                                 <button type='submit' className='form-input-btn-par Enregistrer' onClick={executeenreg} >
                                                       <p> Enregistrer </p></button>
 
-                                                <button type='submit' className='form-input-btn-par Archiver' >
-                                                      <p> Archiver </p></button>
+                                                <button type='submit' className='form-input-btn-par Archiver' onClick={executearch}>
+                                                      <a href='/' className='lien-archiv'> Archiver </a></button>
                                           </div>
                                           <button type='submit' className='form-input-btn-par Envoyer' onClick={executeenvoy} >
                                                 <p> Envoyer </p></button>

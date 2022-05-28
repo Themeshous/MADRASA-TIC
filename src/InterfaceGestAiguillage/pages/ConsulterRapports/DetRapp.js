@@ -17,9 +17,23 @@ const DetRapp = () => {
   const [showbtnright, setshowbtnright] = useState(true)
 
   const id_rap = parseInt(id)
-  const taille = localStorage.getItem("legthrapaig")
+  function removeItemAll(arr, value) {
+    var i = 0;
+    while (i < arr.length) {
+      if (arr[i] === value) {
+        arr.splice(i, 1);
+      } else {
+        ++i;
+      }
+    }
+    return arr;
+  }
+  const tab =removeItemAll(Array.from(localStorage.getItem("legthrapaig")),',')
+  const taille = tab.length;
+  const ind =tab.indexOf(id)
+
   function next() {
-    if (id_rap > (taille-1)) {//à changer : on remplace 1 par lataille de la table-1 
+    if (ind > (taille - 2)) {//à changer : on remplace 1 par lataille de la table-1 
       setshowbtnright(false)
     }
     else {
@@ -27,7 +41,7 @@ const DetRapp = () => {
     }
   }
   function prev() {
-    if (id_rap < 2) {
+    if (ind < 1) {
       setshowbtnleft(false)
     }
     else {
@@ -54,7 +68,7 @@ const DetRapp = () => {
 
     setTimeout(() => fetchItems(), 1000);
 
-  }, [id,rapport])
+  }, [id, rapport])
 
 
 
@@ -68,39 +82,40 @@ const DetRapp = () => {
               <h1 className='sous-titre-elem'> Service :
                 <p className='head-related-info'>{rapport.service}</p>
               </h1>
+              <h1 className='sous-titre-elem'> Date:
+                <p className='head-related-info'>{rapport.date}</p>
+              </h1>
 
             </div>
-            <div className='elem-rapport'>
-              <h1 className='titre-elem'>Date</h1>
-              <div className='related-info'>{rapport.date}</div>
-            </div>
-            <div className='elem-rapport'>
-              <h1 className='titre-elem'>Description</h1>
-              <div className='related-info'>{rapport.description ? (rapport.description) : ("Ce rapport ne contient pas de description")}</div>
-            </div>
-              
-            <div className='elem-rapport'>
-              <div className='inline-items'>
-                <h1 className='titre-elem'> Fichier attaché</h1>
-                {rapport.fichier ? (<a href="/lien de fichier" download>
-                  <FontAwesomeIcon icon={faFileDownload} className="icon-rapport" />
-                </a>) : ("")}
+            <div className='element-line'>
+              <div className='elem-rapport'>
+                <h1 className='titre-elem'>Description</h1>
+                <div className='related-info'>{rapport.description ? (rapport.description) : ("Ce rapport ne contient pas de description")}</div>
               </div>
-
-              <div className='related-info'>{rapport.fichier ? (rapport.fichier) : ("Aucun fichier attaché")}</div>
             </div>
+            <div className='element-line'>
+              <div className='elem-rapport'>
+                <div className='inline-items'>
+                  <h1 className='titre-elem'> Fichier attaché</h1>
+                  {rapport.fichier ? (<a href="/lien de fichier" download>
+                    <FontAwesomeIcon icon={faFileDownload} className="icon-rapport" />
+                  </a>) : ("")}
+                </div>
 
+                <div className='related-info'>{rapport.fichier ? (rapport.fichier) : ("Aucun fichier attaché")}</div>
+              </div>
+            </div>
             <div className='btn-rapport'>
-              {showbtnleft? (<div className='btn-next'>
-                <a href={`/ResAig/rapports/rapinfo?id=${(id_rap - 1).toString()}`} className="text-next-rapp" >
+              {showbtnleft ? (<div className='btn-next'>
+                <a href={`/ResAig/rapports/rapinfo?id=${(tab[ind-1] )}`} className="text-next-rapp" >
                   <FontAwesomeIcon icon={faChevronLeft} className="icon-next" />Précédent
                 </a>
-              </div>):(<div className="white-point"> </div>)}
-              {showbtnright? (<div className='btn-next'>
-                <a href={`/ResAig/rapports/rapinfo?id=${(id_rap + 1).toString()}`} className="text-next-rapp" >Suivant
+              </div>) : (<div className="white-point"> </div>)}
+              {showbtnright ? (<div className='btn-next'>
+                <a href={`/ResAig/rapports/rapinfo?id=${(tab[ind+1] )}`} className="text-next-rapp" >Suivant
                   <FontAwesomeIcon icon={faChevronRight} className="icon-next" />
                 </a>
-              </div>):(<div className="white-point"></div>)}
+              </div>) : (<div className="white-point"></div>)}
 
 
             </div>

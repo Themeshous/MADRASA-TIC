@@ -103,6 +103,7 @@ export const CreerRapp = () => {
                   <div>
                         <form className='form-rapp' onSubmit={HandleSubmit}>
                               <h2 className='form-tit'>Compte-Rendu </h2>
+                              <div className='content-form-rapp'>
                               <h3 className='titl'> Titre rapport (*)</h3>
                               <div className='form-iput'>
                                     <div className='form-inputs' >
@@ -152,6 +153,7 @@ export const CreerRapp = () => {
                                                 </div>}
                                           </div>
                                     </div>
+                              </div>
                               </div>
                               <div className='form-button'>
                                     <button type='submit' className='form-input-btn-par Enregistrer' onClick={executeenreg} >
