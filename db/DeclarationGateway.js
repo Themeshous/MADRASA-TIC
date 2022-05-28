@@ -3,7 +3,7 @@ const connection = require('./connection');
 async function saveDeclaration(declaration) {
     const sqlinsert =
         "INSERT INTO `madrasatic`.`declarations` " +
-        "(`date`, `titre`, `description`, `image`, `emetteur`, `localisation`, `type`, `etat`) " +
+        "(`date`, `titre`, `description`, `image_path`, `emetteur`, `localisation`, `type`, `etat`) " +
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?);"
 
     const data =
@@ -22,7 +22,6 @@ async function getAllDeclaration() {
     const selectQuery = "SELECT * FROM declarations";
     const [result] = await connection.query(selectQuery);
         return result;
-    
 }
 
 async function getDeclarationById(id) {
@@ -34,6 +33,14 @@ async function getDeclarationById(id) {
         return { declarationFound: false }
 }
 
+async function getNonRejectedDeclarationsByService(service) {
+    const selectQuery = "SELECT * FROM declarations WHERE declarations.service = ?\n" +
+        "                             AND\n" +
+        "                               declarations.etat <> ?";
+    const [result] = await connection.query(selectQuery, [service, "rejeter"]);
+    return result;
+}
+
 async function getDeclarationsOfTheEmail(email) {
     const selectQuery = "SELECT * FROM declarations WHERE emetteur = ?";
     const [result] = await connection.query(selectQuery, [email]);
@@ -43,9 +50,17 @@ async function getDeclarationsOfTheEmail(email) {
         return {declarationsFound: false}
 }
 
-async function changeDeclarationState(id, newState) {
-    const updateQuery = "UPDATE declarations SET etat = ? WHERE id_dec = ?";
-    return await connection.query(updateQuery, [newState, id]);
+async function changeDeclarationState(id, newState, remarque) {
+    let updateQuery
+    if(remarque) {
+        updateQuery = "UPDATE `madrasatic`.`declarations` SET `etat` = ?," +
+            " `remarques_de_responsable` = ? WHERE (`id_dec` = ?);\n";
+        return await connection.query(updateQuery, [newState, remarque ,id]);
+    }
+    else {
+        updateQuery = "UPDATE declarations SET etat = ? WHERE id_dec = ?";
+        return await connection.query(updateQuery, [newState, id]);
+    }
 }
 
 async function changeDeclarationService(id, service) {
@@ -62,4 +77,5 @@ async function saveImagePathToDB(path, id) {
 
 module.exports = {saveDeclaration,
     getAllDeclaration, getDeclarationById, getDeclarationsOfTheEmail,
-    changeDeclarationState, changeDeclarationService, saveImagePathToDB}
+    changeDeclarationState, changeDeclarationService, saveImagePathToDB,
+    getNonRejectedDeclarationsByService}

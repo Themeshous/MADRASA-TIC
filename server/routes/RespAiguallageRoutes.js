@@ -2,14 +2,19 @@ const express = require('express');
 const router = express.Router();
 const {fetchAllDeclarations,
     fetchDeclarationsForEmail, fetchDeclarationById,updateDeclarationState,
-    uplaodDeclarationImage} = require('../controllers/Resp-Aiguallage-controller');
+    uplaodDeclarationImage, getDeclarationImage, fetchDeclarationsByService} = require('../controllers/Resp-Aiguallage-controller');
 
 
 router.get('/consulterDeclartions', fetchAllDeclarations);
 router.get('/userDeclarations', fetchDeclarationsForEmail);
+router.get('/userDeclarations/getImage',getDeclarationImage);
 router.get('/userDeclarations/:id', fetchDeclarationById);
+router.get('/consulterDeclarations/:service', fetchDeclarationsByService);
+
 router.patch('/userDeclarations/changeState', updateDeclarationState);
+
 router.post('/userDeclarations/uplaodImage',uplaodDeclarationImage);
+
 
 
 
