@@ -44,10 +44,7 @@ async function getNonRejectedDeclarationsByService(service) {
 async function getDeclarationsOfTheEmail(email) {
     const selectQuery = "SELECT * FROM declarations WHERE emetteur = ?";
     const [result] = await connection.query(selectQuery, [email]);
-    if (result.length !== 0)
-        return result;
-    else
-        return {declarationsFound: false}
+    return result;
 }
 
 async function changeDeclarationState(id, newState, remarque) {
