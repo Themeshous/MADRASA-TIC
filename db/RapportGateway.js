@@ -27,7 +27,7 @@ async function updateRapport(titre,description,fichier,service,etat,ID) {
 async function deleteRapport(ID) {
     const delsql = "UPDATE rapports SET Supp = true WHERE id_rap = ?"; //faut njibou id hada men fornt 
     const result = await connection.query(delsql, [ID]);
-    console.log("rapport deleted");
+    console.log("rapport archived");
 }
 
 async function deleteRapportarchive(ID) {
@@ -67,9 +67,9 @@ async function getRapportrespoagg(){
 
 }
 
-async function getRapportEtat(Etat,Service){
-    const selectsql = "SELECT * FROM rapports WHERE etat = ?AND service = ? AND Supp = false AND Suppint = false";
-    const [result]= await connection.query(selectsql,[Etat,Service]);
+async function getRapportEtat(Etat){
+    const selectsql = "SELECT * FROM rapports WHERE etat = ? AND Supp = false AND Suppint = false";
+    const [result]= await connection.query(selectsql,[Etat]);
     if (result)
         return result;
     else
@@ -89,6 +89,7 @@ async function getRapportid(ID) {
 async function changeRapportEtat(id,etat){
     const sqlupdate = "UPDATE rapports SET etat = ? WHERE id_rap = ?"; 
     return await connection.query(sqlupdate, [etat, id]);
+    
 
 }
 
@@ -98,6 +99,11 @@ async function upfileRapport (id,path){
     console.log("file uploaded in db");
 
 }
+
+async function Declarattach(){
+
+}
+
 
 
 

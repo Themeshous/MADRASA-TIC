@@ -73,8 +73,8 @@ async function showRapportotale(req,res) {
  
 async function showRapportEtat(req,res) {
     const State =req.params.etat;
-    const Service = req.params.service;
-    const result = await getRapportEtat(State,Service);
+    
+    const result = await getRapportEtat(State);
 
     res.json({result});
 
