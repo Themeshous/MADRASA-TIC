@@ -36,21 +36,30 @@ async function deleteRapportarchive(ID) {
     console.log("rapport deleted from archive");
 }
 
-async function getRapports() {
-    const selectsql = "SELECT * FROM rapports WHERE Supp = false AND Suppint = false";
-    const [result] = await connection.query(selectsql);
-        return result;
+async function RestoreRapport(ID) {
+    const delsql = "UPDATE rapports SET Supp = false WHERE id_rap = ?"; //faut njibou id hada men fornt 
+    const result = await connection.query(delsql, [ID]);
+    console.log("rapport restore");
 }
 
-async function getRapportsarchive() {
-    const selectsql = "SELECT * FROM rapports WHERE Supp = true AND Suppint = false";
-    const [result] = await connection.query(selectsql);
-        return result;
+async function getRapports(Service) {
+    const selectsql = "SELECT * FROM rapports WHERE service = ? AND Supp = false AND Suppint = false";
+    const [result] = await connection.query(selectsql,[Service]);
+    return result;
 }
 
-async function getRapportservice(Service){
-    const selectsql = "SELECT * FROM rapports WHERE service = ?";
-    const [result]= await connection.query(selectsql,[Service]);
+async function getRapportsarchive(Service) {
+    const selectsql = "SELECT * FROM rapports WHERE service = ? AND Supp = true AND Suppint = false";
+    const [result] = await connection.query(selectsql,[Service]);
+    if (result)
+        return result;
+    else
+        return { RapportFound: false }
+}
+
+async function getRapportrespoagg(){
+    const selectsql = "SELECT * FROM rapports ";
+    const [result]= await connection.query(selectsql);
     if (result)
         return result;
     else
@@ -58,9 +67,9 @@ async function getRapportservice(Service){
 
 }
 
-async function getRapportEtat(Etat){
-    const selectsql = "SELECT * FROM rapports WHERE etat = ?";
-    const [result]= await connection.query(selectsql,[Etat]);
+async function getRapportEtat(Etat,Service){
+    const selectsql = "SELECT * FROM rapports WHERE etat = ?AND service = ? AND Supp = false AND Suppint = false";
+    const [result]= await connection.query(selectsql,[Etat,Service]);
     if (result)
         return result;
     else
@@ -93,4 +102,4 @@ async function upfileRapport (id,path){
 
 
 module.exports = { setRapport,upfileRapport, updateRapport, deleteRapport,getRapports,
-                   getRapportid,getRapportservice,getRapportEtat,changeRapportEtat,getRapportsarchive,deleteRapportarchive};
+                   getRapportid,getRapportrespoagg,getRapportEtat,RestoreRapport,changeRapportEtat,getRapportsarchive,deleteRapportarchive};

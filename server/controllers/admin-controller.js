@@ -20,7 +20,7 @@ async function createUser(req, res) {
 async function getAllUserTokens(req, res) {
     const result = await getAllUsers();
     const usersTable = hideSensitiveInformations(result);
-    res.send({ usersTable });
+    res.send({usersTable});
 }
 
     function hideSensitiveInformations(result) {

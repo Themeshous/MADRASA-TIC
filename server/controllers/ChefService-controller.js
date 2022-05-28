@@ -1,6 +1,7 @@
 
 
-const {setRapport,updateRapport,deleteRapport,deleteRapportarchive,getRapports, getRapportid, getRapportservice,getRapportEtat,changeRapportEtat,upfileRapport,getRapportsarchive} = require('../../db/RapportGateway');
+const {setRapport,updateRapport,deleteRapport,deleteRapportarchive,getRapports,RestoreRapport, getRapportid,
+    getRapportEtat,changeRapportEtat,upfileRapport,getRapportsarchive, getRapportrespoagg} = require('../../db/RapportGateway');
 
 const path = require('path');
 
@@ -46,25 +47,34 @@ async function suppRapportarchive(req, res) {
 }
 
 async function fetchRapports(req, res) {
-    const result = await getRapports();
+    const Service = req.params.service;
+    const result = await getRapports(Service);
     res.json({ result });
 }
 
 async function fetchRapportsarchive(req, res) {
-    const result = await getRapportsarchive();
+    const Service =req.params.service;
+    const result = await getRapportsarchive(Service);
     res.json({ result });
 }
 
-async function showRapportservice(req,res) {
-    const Service =req.params.service;
-    const result = await getRapportservice(Service);
+async function showRapportotale(req,res) {
+    const result = await getRapportrespoagg();
     res.json({ result });
  
  }
+
+ async function RestoreArchive(req, res) {
+    const ID = req.params.id;
+    
+    const data = await RestoreRapport(ID);
+    res.json({data});
+} 
  
 async function showRapportEtat(req,res) {
     const State =req.params.etat;
-    const result = await getRapportEtat(State);
+    const Service = req.params.service;
+    const result = await getRapportEtat(State,Service);
 
     res.json({ result });
  
@@ -100,4 +110,4 @@ async function upRapportFile(req,res){
 
 
 module.exports = {saveRapport,upRapport,supRapport,suppRapportarchive,fetchRapports,showRapport,
-                  showRapportservice,showRapportEtat,upEtatRapport,upRapportFile,fetchRapportsarchive}
+                  showRapportotale,showRapportEtat,RestoreArchive,upEtatRapport,upRapportFile,fetchRapportsarchive}
