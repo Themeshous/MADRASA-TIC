@@ -1,7 +1,7 @@
 CREATE TABLE `madrasatic`.`declarations`
 (
     `id_dec`                   INT          NOT NULL AUTO_INCREMENT,
-    `date`                     VARCHAR(45)  NOT NULL,
+    `date`                     DATE  NOT NULL,
     `titre`                    VARCHAR(100) NOT NULL,
     `description`              TEXT         NULL,
     `image_path`               varchar(255) NULL,
