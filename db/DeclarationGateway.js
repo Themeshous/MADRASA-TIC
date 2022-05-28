@@ -54,7 +54,7 @@ async function changeDeclarationState(id, newState, remarque) {
     let updateQuery
     if(remarque) {
         updateQuery = "UPDATE `madrasatic`.`declarations` SET `etat` = ?," +
-            " `remarques_de_responsable` = ? WHERE (`id_dec` = ?);\n";
+            " `remarques_de_responsable` = ? WHERE (`id_dec` = ?);";
         return await connection.query(updateQuery, [newState, remarque ,id]);
     }
     else {

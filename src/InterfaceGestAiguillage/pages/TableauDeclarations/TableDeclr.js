@@ -32,6 +32,7 @@ export const TableDeclr = () => {
   }, [])
   const columns = useMemo(() => Colonnes, [])
   const data = items
+
  
   const TableInstance = useTable({
     columns,
