@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const {saveDeclarationToDB} = require('../controllers/user-controller');
+const {saveDeclarationToDB, fetchAllNonRejetedDeclarations} = require('../controllers/user-controller');
 
 
 router.post('/saveDeclaration',  saveDeclarationToDB);
+router.get('/getDeclarations',  fetchAllNonRejetedDeclarations);
+
 
 
 
