@@ -8,6 +8,7 @@ require('dotenv').config({
 function createToken(user) {
     const token = createJWT(user)
     return {
+        id: user.id_user,
         nom: user.Nom,
         prenom: user.Prenom,
         email: user.Email,

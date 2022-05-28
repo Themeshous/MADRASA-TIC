@@ -6,6 +6,7 @@ const {
 } = require('../../db/DeclarationGateway');
 
 const path = require('path');
+const fs = require("fs");
 
 async function fetchAllDeclarations(req, res) {
     const declarations = await getAllDeclaration();
@@ -58,11 +59,22 @@ async function uplaodDeclarationImage(request, response) {
 }
 
 async function getDeclarationImage(request, response) {
+    const images  = fs.readdirSync('./db/declarations_images');
+    console.log(images)
+    const objArray = [];
+    images.forEach((image) => {
+        let obj    = {};
+        const file = fs.readFileSync('./db/declarations_images/' + image);
+        obj.folder = image;
+        obj.files  = file;
+        objArray.push(obj);
+    });
 
+    response.json(objArray);
 }
 
 module.exports = {
     fetchAllDeclarations, fetchDeclarationsForEmail, fetchDeclarationById,
     updateDeclarationState, uplaodDeclarationImage, getDeclarationImage,
-    fetchDeclarationsByService
+    fetchDeclarationsByService,
 }

@@ -1,7 +1,7 @@
 CREATE TABLE `madrasatic`.`declarations`
 (
     `id_dec`                   INT          NOT NULL AUTO_INCREMENT,
-    `date`                     VARCHAR(45)  NOT NULL,
+    `date`                     DATE         NOT NULL,
     `titre`                    VARCHAR(100) NOT NULL,
     `description`              TEXT         NULL,
     `image_path`               varchar(255) NULL,
@@ -13,6 +13,7 @@ CREATE TABLE `madrasatic`.`declarations`
     `Supp`                     BOOLEAN DEFAULT FALSE, /*faut ajouter ça pour nous aider a la suppression*/
     `IDrap`                    INT          NULL,
     `remarques_de_responsable` TEXT         NULL,
+    `mobile_archived`          BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (`id_dec`),
     INDEX `declarer_idx` (`emetteur` ASC) VISIBLE,
     CONSTRAINT `declarer`
