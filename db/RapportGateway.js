@@ -102,4 +102,5 @@ async function upfileRapport (id,path){
 
 
 module.exports = { setRapport,upfileRapport, updateRapport, deleteRapport,getRapports,
-                   getRapportid,getRapportrespoagg,getRapportEtat,RestoreRapport,changeRapportEtat,getRapportsarchive,deleteRapportarchive};
+                   getRapportid,getRapportrespoagg,getRapportEtat,RestoreRapport,changeRapportEtat,
+                   getRapportsarchive,deleteRapportarchive};
