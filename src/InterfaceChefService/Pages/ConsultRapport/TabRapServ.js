@@ -22,7 +22,7 @@ const TabRapServ = () => {
   
       const fetchItems = async () => {
         try {
-          const response = await fetch("http://localhost:2000/rapport/consultRapportService/"+user.prof.toString());//route rapport par service
+          const response = await fetch("http://localhost:2000/rapport/consulterRapports/"+user.prof.toString());//route rapport par service
           if (!response.ok) throw Error("les données n'ont pas été reçus");
          
           const listItems = await response.json();
