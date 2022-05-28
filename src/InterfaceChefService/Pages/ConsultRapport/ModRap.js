@@ -111,12 +111,12 @@ export const ModRap = () => {
             setsucces(true);
             if (!(rapport.etat === "Envoyé")) {
                   setmsg('Le rapport a été archivé')
-                  axios.post("http://localhost:2000/rapport/majRapport/" + id, {
+                  axios.post("http://localhost:2000/rapport/suppRapport/" + id, {
                         titre: ((values.titre)?(values.titre):(rapport.titre)),
                         description: ((values.description)?(values.description):(rapport.description)),
                         fichier: "",
                         service: user.prof,
-                        etat: "Archivé"
+                        etat: rapport.etat
 
                   }).then((Response) => {
                         console.log(Response);
@@ -188,7 +188,7 @@ export const ModRap = () => {
                                                       <p> Enregistrer </p></button>
 
                                                 <button type='submit' className='form-input-btn-par Archiver' onClick={executearch}>
-                                                      <a href='/' className='lien-archiv'> Archiver </a></button>
+                                                      <a href='/chefserv/Archive' className='lien-archiv'> Archiver </a></button>
                                           </div>
                                           <button type='submit' className='form-input-btn-par Envoyer' onClick={executeenvoy} >
                                                 <p> Envoyer </p></button>

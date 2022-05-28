@@ -1,17 +1,25 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotateBackward, faTrash } from '@fortawesome/free-solid-svg-icons'
-
+import axios from "axios";
 const SuppRapp = ({ searchkey }) => {
     const [showsupp, setshowsupp] = useState(false)
     const [showsupprest, setshowsupprest] = useState(false)
     const executesupp = () => {
-        //suppression
+        //suppression 
         setshowsupp(false)
+        axios.post("http://localhost:2000/rapport/suppRapportarchive/"+searchkey, {
+      }).then((Response) => {
+            console.log(Response);
+      });
     }
     const executerest = () => {
         //restaurer
         setshowsupprest(false)
+        axios.post("http://localhost:2000/rapport/restorerRapport/"+searchkey, {
+        }).then((Response) => {
+              console.log(Response);
+        });
     }
     return (<div>
         <div className='last-col-rap'>
@@ -30,7 +38,7 @@ const SuppRapp = ({ searchkey }) => {
                         <p> Annuler</p>
                     </button>
                     <button className='btn-conf confirmer'  onClick={executesupp}>
-                        <p> confirmer</p>
+                    <a href='/chefserv/Archive' className='lien-archiv'> confirmer</a>
                     </button>
                 </div>
             </div>)
@@ -43,7 +51,7 @@ const SuppRapp = ({ searchkey }) => {
                         <p> Annuler</p>
                     </button>
                     <button className='btn-conf confirmer'  onClick={executerest}>
-                        <p> confirmer</p>
+                        <a href='/chefserv/Archive' className='lien-archiv'> confirmer</a>
                     </button>
                 </div>
             </div>)

@@ -15,7 +15,7 @@ const TabArchRap = () => {
   
       const fetchItems = async () => {
         try {
-          const response = await fetch("http://localhost:2000/rapport/consulterRapportsarchive"+user.prof.toString());//route rapport par service
+          const response = await fetch("http://localhost:2000/rapport/consulterRapportsarchive/"+user.prof.toString());//route rapport par service
           if (!response.ok) throw Error("les données n'ont pas été reçus");
          
           const listItems = await response.json();
@@ -28,7 +28,7 @@ const TabArchRap = () => {
         }
       }
   
-      setTimeout(() => fetchItems(), 2000);
+      setTimeout(() => fetchItems(), 1000);
   
     }, [])
     const columns = useMemo(() => ColArch, [])

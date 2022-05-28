@@ -35,17 +35,18 @@ const UseLogin = (callback, ValidateLog) => {
       password: val.pswd,
     };
     const { data } = await axios.post("http://localhost:2000/auth/connect", loginUser);
-
+    console.log(data);
     if (data.requestSucceeded) {
 
       seterrors(ValidateLog(val, false, false));
-
+ 
       const roles = data.role
       const name = data.nom
       const name2 = data.prenom
       const email = data.email
       const prof = data.profession
-      localStorage.setItem("user",JSON.stringify({ name, name2, email, roles,prof }));
+      const id = data.id_user
+      localStorage.setItem("user",JSON.stringify({ name, name2, email, roles,prof ,id}));
       
       const p = "/" + (roles.replace(/\s/g, ''))
       const from = (p !== "/") ? p : location.pathname;

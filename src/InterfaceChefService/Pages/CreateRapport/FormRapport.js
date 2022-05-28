@@ -52,14 +52,16 @@ export const CreerRapp = () => {
       useEffect(() => {
             setInterval(() => { setsucces(false); }, 7000)
       }, [succes])
+
       console.log(fileSelected);
+
       const executeenreg = () => {
             if (!((values.description === '') && (values.titre === ''))) {
-                    axios.post("http://localhost:2000/rapport/remplirRapport", {
+                  axios.post("http://localhost:2000/rapport/remplirRapport", {
                         date: "24 / 05 / 2002",
                         titre: values.titre,
                         description: values.description,
-                        fichier:null,
+                        fichier: null,
                         service: user.prof,
                         etat: 'Enregistré'
 
@@ -68,7 +70,13 @@ export const CreerRapp = () => {
                   });
                   setsucces(true);
                   setmsg('Le rapport a été enregistré')
-                
+                  // Create an object of formData
+                  const formData = new FormData();
+                  // Update the formData object
+                  formData.append(fileSelected);
+                  // Details of the uploaded file
+                  console.log(this.state.selectedFile);
+                  axios.post("http://localhost:2000/rapport/fichRapport", formData);
 
                   //ajouter le rapport si n'existe pas 
                   //modifier l'état de rapport dans la table des rapport si existe déja vers enregistré
@@ -86,13 +94,20 @@ export const CreerRapp = () => {
                         date: "24 / 05 / 2002",
                         titre: values.titre,
                         description: values.description,
-                        fichier:null,
+                        fichier: fileSelected,
                         service: user.prof,
                         etat: 'Envoyé'
 
                   }).then((Response) => {
                         console.log(Response);
                   });
+                  // Create an object of formData
+                  const formData = new FormData();
+                  // Update the formData object
+                  formData.append(fileSelected);
+                  // Details of the uploaded file
+                  console.log(this.state.selectedFile);
+                  axios.post("http://localhost:2000/rapport/fichRapport", formData);
                   //ajouter le rapport si n'existe pas 
                   //modifier l'état de rapport dans la table des rapport si existe déja vers envoyé
             }
@@ -104,56 +119,56 @@ export const CreerRapp = () => {
                         <form className='form-rapp' onSubmit={HandleSubmit}>
                               <h2 className='form-tit'>Compte-Rendu </h2>
                               <div className='content-form-rapp'>
-                              <h3 className='titl'> Titre rapport (*)</h3>
-                              <div className='form-iput'>
-                                    <div className='form-inputs' >
-                                          <label className='form-label-rap'>Saisissez le titre de votre rapport</label>
-                                          <input id="titre" type="text"
-                                                name="titre"
-                                                className='input-title'
-                                                placeholder='Ajoutez un titre...'
-                                                value={values.titre}
-                                                onChange={handlechange}
-                                          />
-                                          {errors.titre && <p>{errors.titre}</p>}
-                                    </div>
+                                    <h3 className='titl'> Titre rapport (*)</h3>
+                                    <div className='form-iput'>
+                                          <div className='form-inputs' >
+                                                <label className='form-label-rap'>Saisissez le titre de votre rapport</label>
+                                                <input id="titre" type="text"
+                                                      name="titre"
+                                                      className='input-title'
+                                                      placeholder='Ajoutez un titre...'
+                                                      value={values.titre}
+                                                      onChange={handlechange}
+                                                />
+                                                {errors.titre && <p>{errors.titre}</p>}
+                                          </div>
 
-                              </div>
-                              <h3 className='titl'>Description rapport (*)</h3>
-                              <div className='form-iput'>
-                                    <div className='form-inputs'>
-                                          <textarea id="description" type="text"
-                                                name="description"
-                                                placeholder='Ajoutez une description...'
-                                                className='ta-description'
-                                                value={values.description}
-                                                onChange={handlechange}
-                                          />
-                                          {errors.description && <p>{errors.description}</p>}
                                     </div>
-                              </div>
-                              <h3 className='titl'>  Fichier attaché </h3>
-                              <div className='form-inputs' >
-                                    <label className='form-label-rap'>Selectionner un Document <b>PDF</b> pour votre rapport</label>
-                                    <div className='file-c'>
-                                          <div className='file-i'>
-
-                                                <button className='Upload'>
-                                                      <i>
-                                                            <FontAwesomeIcon icon={faFileDownload} />Importer
-                                                      </i>
-                                                      <input id='fichier'
-                                                            name='fichier'
-                                                            type="file"
-                                                            onChange={SelectFile}
-                                                      />
-                                                </button>
-                                                {fileSelected && <div className='fichier-selectionné'>
-                                                      {fileSelected.name}
-                                                </div>}
+                                    <h3 className='titl'>Description rapport (*)</h3>
+                                    <div className='form-iput'>
+                                          <div className='form-inputs'>
+                                                <textarea id="description" type="text"
+                                                      name="description"
+                                                      placeholder='Ajoutez une description...'
+                                                      className='ta-description'
+                                                      value={values.description}
+                                                      onChange={handlechange}
+                                                />
+                                                {errors.description && <p>{errors.description}</p>}
                                           </div>
                                     </div>
-                              </div>
+                                    <h3 className='titl'>  Fichier attaché </h3>
+                                    <div className='form-inputs' >
+                                          <label className='form-label-rap'>Selectionner un Document <b>PDF</b> pour votre rapport</label>
+                                          <div className='file-c'>
+                                                <div className='file-i'>
+
+                                                      <button className='Upload'>
+                                                            <i>
+                                                                  <FontAwesomeIcon icon={faFileDownload} />Importer
+                                                            </i>
+                                                            <input id='fichier'
+                                                                  name='fichier'
+                                                                  type="file"
+                                                                  onChange={SelectFile}
+                                                            />
+                                                      </button>
+                                                      {fileSelected && <div className='fichier-selectionné'>
+                                                            {fileSelected.name}
+                                                      </div>}
+                                                </div>
+                                          </div>
+                                    </div>
                               </div>
                               <div className='form-button'>
                                     <button type='submit' className='form-input-btn-par Enregistrer' onClick={executeenreg} >
