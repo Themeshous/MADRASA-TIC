@@ -64,7 +64,7 @@ async function setNewPassword(password, email) {
 
 async function updateuser(User,Id){
   const hashpswd = await bcrypt.hash(User.Password, 8);
-  const sqlupdate = "UPDATE users SET Email=? ,Profession = ?, Password =? ,Password1 = ? NumTel = ? WHERE id_user = ?";  
+  const sqlupdate = "UPDATE users SET Email=? ,Profession = ?, Password =? ,Password1 = ? ,NumTel = ? WHERE id_user = ?";
   const data = [User.Email, User.Profession, hashpswd, User.Password, Id ]
   try {
     await connection.query(sqlupdate, data); 
