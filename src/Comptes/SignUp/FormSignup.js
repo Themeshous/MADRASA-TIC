@@ -3,7 +3,7 @@ import UseForm from './UseForm'
 import ValidateInfo from './ValidateInfo';
 import './FormLog.css';
 import axios from 'axios';
-import { useState } from 'react';
+
 
 const FormSignup = ({submitForm}) => {
 
@@ -112,7 +112,7 @@ const signup = () => {
                            <option value="Choisir un rôle" selected> Choisir un rôle</option>
                            <option value="administrateur-secondaire">administrateur-secondaire</option>
                            <option value="responsable d'aiguillage">responsable d'aiguillage</option>
-                           <option value="responsable des relations extérieures">responsable des relations extérieures</option>
+                           <option value="responsable des RE">responsable des RE</option>
                            <option value="chef de service">chef de service</option>
              </select>  
                {errors.role && <p>{errors.role}</p>}

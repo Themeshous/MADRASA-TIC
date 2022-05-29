@@ -48,15 +48,12 @@ const FormParam = () => {
         if (formsucceeded && values.pswdn) {   ///après tu rajoute que le mot de passe ancien doit etre = au mot de passe encien introduit
             setalertemsg(true)
             console.log('true on enregistre dans la bdd');
-            axios.post("http://localhost:2000/auth/updateUser/", {
-                nom: values.nom,
-                prenom: values.prenom,
-                email: values.email,
-                numero: values.numero,
-                role: values.role,
-                profession: values.profession,
-                password: values.pswd,
-                password1: values.pswd1
+            axios.post("http://localhost:2000/auth/updateUser/"+user.id.toString(), {
+                Email:user.email,
+                Profession:user.prof,   
+                password: values.pswdn,
+                password1: values.pswdc,
+                NumTel:"0553556677"
 
             }).then((Response) => {
                 console.log(Response);

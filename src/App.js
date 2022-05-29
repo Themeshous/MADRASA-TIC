@@ -33,6 +33,10 @@ import AideChefServ from './InterfaceChefService/Pages/AideChefServ'
 import AidRespAig from './InterfaceGestAiguillage/pages/AideRespAig'
 import SavoirPage from './EnSavoirPlus/EnSavoirPlus';
 
+import { AideRRE } from './InterfaceRRE/pages/AideRRE.js';
+import { CreateAnnonce } from './InterfaceRRE/pages/CreateAnnonce.js';
+import ProfileRRE from './InterfaceRRE/pages/ProfileRRE.js';
+
 import { VoirArch } from './InterfaceChefService/Pages/VoirArch'
 
 function App() {
@@ -85,6 +89,14 @@ function App() {
             <Route path='/chefserv/Archive' element={<VoirArch />} />
           </Route>
 
+
+          <Route element={<RequireAuth allowedRoles={["responsable des RE"]} />}>
+            <Route path='/responsabledesRE' element={<CreateAnnonce />} />
+            <Route path='/RRE/aide' element={<AideRRE />} />
+            <Route path='/responsabledesRE/Profile' element={<ProfileRRE/>} />
+          </Route>
+
+          
           <Route path="/auth/signup" element={<FormCreat />} />
 
 
