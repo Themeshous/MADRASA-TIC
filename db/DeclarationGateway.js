@@ -1,36 +1,74 @@
 const connection = require('./connection');
+const fs = require("fs");
+const FormData = require('form-data');
+const path = require('path');
 
 async function saveDeclaration(declaration) {
-    const sqlinsert =
+    const insert =
         "INSERT INTO `madrasatic`.`declarations` " +
-        "(`date`, `titre`, `description`, `image_path`, `emetteur`, `localisation`, `type`, `etat`) " +
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?);"
+        "(`date`, `titre`, `description`, `emetteur`, `localisation`, `type`, `etat`) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?);"
 
     const data =
         [declaration.date, declaration.titre, declaration.description,
-            declaration.image, declaration.emetteur, declaration.localisation, declaration.type, declaration.etat]
+            declaration.emetteur, declaration.localisation, declaration.type, declaration.etat]
     try {
-        await connection.query(sqlinsert, data);
+        const [{insertId: declarationID}] = await connection.query(insert, data);
+        saveImageFile(declaration.imageFile, declarationID);
     } catch (error) {
         return {declarationSaved: false, message: error.sqlMessage};
     }
     console.log("declaration saved");
     return {declarationSaved: true};
+
+    function saveImageFile(image, id) {
+        if (!image) return;
+        const declarationImage = image;
+        if (!declarationImage.mimetype.startsWith('image'))
+            return;
+        const imagePath = path.join(__dirname, `./declarations_images/${id}`);
+        declarationImage.mv(imagePath);
+        saveImagePathToDB(`/${id}.jpg`, id);
+    }
 }
+
+function attachImageToDeclarationAndReturnIt(declaration) {
+    declaration.imageFile = getDeclarationImage(declaration.image_path);
+    delete declaration.image_path;
+    return declaration;
+
+    function getDeclarationImage(imagePath) {
+        try {
+            return constructImageFormData();
+        } catch (error) {
+            console.log(error);
+        }
+
+        function constructImageFormData() {
+            const imagesFolderPath = path.resolve(__dirname, './declarations_images/');
+            const imageFile = fs.readFileSync(imagesFolderPath + '/' + imagePath);
+            const formData = new FormData();
+            formData.append('image', imageFile);
+            return formData;
+        }
+    }
+}
+
 
 async function getAllDeclaration() {
     const selectQuery = "SELECT * FROM declarations";
     const [result] = await connection.query(selectQuery);
-        return result;
+    result.forEach(attachImageToDeclarationAndReturnIt)
+    return result;
 }
 
 async function getDeclarationById(id) {
     const selectQuery = "SELECT * FROM declarations WHERE id_dec = ?";
     const [[result]] = await connection.query(selectQuery, [id]);
     if (result)
-        return result;
+        return attachImageToDeclarationAndReturnIt(result);
     else
-        return { declarationFound: false }
+        return {declarationFound: false}
 }
 
 async function getNonRejectedDeclarationsByService(service) {
@@ -38,23 +76,24 @@ async function getNonRejectedDeclarationsByService(service) {
         "                             AND\n" +
         "                               declarations.etat <> ?";
     const [result] = await connection.query(selectQuery, [service, "rejeter"]);
+    result.forEach(attachImageToDeclarationAndReturnIt)
     return result;
 }
 
 async function getDeclarationsOfTheEmail(email) {
     const selectQuery = "SELECT * FROM declarations WHERE emetteur = ?";
     const [result] = await connection.query(selectQuery, [email]);
+    result.forEach(attachImageToDeclarationAndReturnIt)
     return result;
 }
 
 async function changeDeclarationState(id, newState, remarque) {
     let updateQuery
-    if(remarque) {
+    if (remarque) {
         updateQuery = "UPDATE `madrasatic`.`declarations` SET `etat` = ?," +
             " `remarques_de_responsable` = ? WHERE (`id_dec` = ?);";
-        return await connection.query(updateQuery, [newState, remarque ,id]);
-    }
-    else {
+        return await connection.query(updateQuery, [newState, remarque, id]);
+    } else {
         updateQuery = "UPDATE declarations SET etat = ? WHERE id_dec = ?";
         return await connection.query(updateQuery, [newState, id]);
     }
@@ -70,9 +109,9 @@ async function saveImagePathToDB(path, id) {
     return await connection.query(updateQuery, [path, id]);
 }
 
-
-
-module.exports = {saveDeclaration,
+module.exports = {
+    saveDeclaration,
     getAllDeclaration, getDeclarationById, getDeclarationsOfTheEmail,
     changeDeclarationState, changeDeclarationService, saveImagePathToDB,
-    getNonRejectedDeclarationsByService}
+    getNonRejectedDeclarationsByService
+}
