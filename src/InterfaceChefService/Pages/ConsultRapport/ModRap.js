@@ -182,7 +182,7 @@ export const ModRap = () => {
                                                 </div>
                                           </div>
                                     </div>
-                                    <div className='form-button'>
+                                    <div className='form-button-rap'>
                                           <div className='btn-inline'>
                                                 <button type='submit' className='form-input-btn-par Enregistrer' onClick={executeenreg} >
                                                       <p> Enregistrer </p></button>

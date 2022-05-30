@@ -78,7 +78,7 @@ const DetRapServ = () => {
 
             <h1 className='Grand-titre'>{rapport.titre.slice(0, 1).toUpperCase() + rapport.titre.slice(1,)}</h1>
             {!(rapport.etat === "Envoyé") && (<div className='btn-modifier'>
-              <a href={`/chefserv/consulter/modifier/rapinfo?id=${id}`} className="text-next-rapp" >{/** lien vers form rapport avec id du rapport */}
+              <a href={`/chefserv/consulter/modifier/rapinfo?id=${id}`} className="text-next-rapp-mod" >{/** lien vers form rapport avec id du rapport */}
                 Modifier <FontAwesomeIcon icon={faPen} className="icon-next" />
               </a>
             </div>)}

@@ -73,13 +73,15 @@ export const ModDecServ = () => {
               </h1>
               <div className='inline-items-declaration'>
 
-                <button className='submit traité' type='submit'
-                  onClick={ChangeStatedeclarationtrait}>
-                  Traité <FontAwesomeIcon icon={faCheck} className="icon-next" /></button>
+                
 
                 <button className='submit  EnCours' type='submit'
                   onClick={ChangeStatedeclarationcour}>
                   En Cours <FontAwesomeIcon icon={faSpinner} className="icon-next" /></button>
+                  
+                  <button className='submit traité' type='submit'
+                  onClick={ChangeStatedeclarationtrait}>
+                  Traité <FontAwesomeIcon icon={faCheck} className="icon-next" /></button>
 
               </div>
             </div>
@@ -106,7 +108,7 @@ export const ModDecServ = () => {
               </div>
             </div>
             <button className='attacher' type='submit'>
-                  <a href="/chefdeservice/Create" className="text-next-rapp" >
+                  <a href="/chefdeservice/Create" className="text-next-rapp-attacher" >
                     Attacher un fichier <FontAwesomeIcon icon={faAdd} className="icon-next" />
                   </a></button>
             {ShowconfCour && <div className="alerte-msg">Vous avez modifié l'état de la déclaration vers en cours de traitement</div>}

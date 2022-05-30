@@ -5,7 +5,7 @@
 }
 .Grand-titre{
     font-size: xx-large;
-    color: rgb(248, 95, 7); 
+    color: #455de0;
 }
 .sous-titre{
     margin-left: 10%; 
@@ -75,15 +75,21 @@ color: #020930c0;
     float: right;
     margin-right: 1%;
     border-radius: 5px;
-    background: #020c42;
+  
     width: 14%;
     text-align: center;
     justify-content: center;
     align-items: center;
 }
-.btn-modifier:hover{
-    background-color: #f2f2f2;
-    color: #020930;
+.text-next-rapp-mod{
+      font-size: large;
+    font-weight: bold;
+    color: #455de0;
+    text-decoration: none;
+}
+.text-next-rapp-mod:hover{
+    font-size: larger;
+    color: chocolate;
 }
 .text-next-rapp{
     color: aliceblue;
@@ -96,7 +102,16 @@ color: #020930c0;
 .text-next-rapp:hover{
     color: #020930;
 }
-
+.text-next-rapp-attacher{
+    text-decoration: none;
+    font-size: large;
+    font-weight: bold;
+    color: #455de0;
+}
+.text-next-rapp-attacher:hover{
+    font-size: larger;
+    color: chocolate;
+}
 .inline-items-declaration{
     padding: 3%;
     display: flex;
@@ -118,7 +133,8 @@ color: #020930c0;
   
 }
 .attacher{
-    background-color:#020930;
+    color:#020930;
+    background-color: transparent;
     padding: 0% 2% 0% 2%;
     border-radius: 5px;
     border: none;
@@ -130,15 +146,22 @@ color: #020930c0;
 }
 .traité{
     background-color: #62df1a;
+    
 }
 .EnCours{
-    background-color:rgb(248, 95, 7); 
+    color:rgb(248, 95, 7); 
+    background-color: transparent;
+    font-weight: bold;
 }
 .valider{
     background-color: #62df1a;
 }
 .rejeter{
-    background-color:#020930a6;
+    color:rgb(248, 95, 7) ;/*#455de0;*/
+    
+    background-color: transparent;
+    font-weight: bold;
+    font-size: large;
 }
 .confirmation-déclaration{
     position:absolute;

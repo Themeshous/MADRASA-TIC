@@ -7,14 +7,14 @@
 .content-form-rapp{
     margin-top: 1%;
     padding-top: 2%;
-   background-color: #faecbffa; 
+    background-color: rgba(165, 164, 164, 0.555);
    margin-bottom: 4%;
    border-radius: 10px;
 }
 
 .form-tit{
     font-size: xx-large;
-    color: rgb(248, 95, 7); 
+    color: #455de0;
 }
 
 .titl {
@@ -49,7 +49,7 @@
 }
 
 .input-title {
-   background-color: #d1d1d4;
+   background-color: white;
    border-radius: 10px;
    width: 330px;
    padding: 12px;
@@ -59,7 +59,7 @@
 }
 
 .ta-description {
-    background-color: #d1d1d4;
+    background-color:white;
     border-radius: 10px;
     width: 700px;
     padding: 12px;
@@ -97,6 +97,11 @@
   
   margin-bottom: 8%;
   display: flex;
+  float: right;
+}
+.form-button-rap{
+    margin-bottom: 8%;
+    display: flex;
 }
 .Archiver{
     background-color: #ec1818;
@@ -204,7 +209,7 @@
     position: absolute;
     top: 39%;
     left: 40%;
-    background-color: #a8aab4;
+    background-color: #cfd0d3;
     width: 500px;
     height: 150px;
     padding: 3%;
