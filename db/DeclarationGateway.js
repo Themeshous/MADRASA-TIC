@@ -33,7 +33,8 @@ async function saveDeclaration(declaration) {
 }
 
 function attachImageToDeclarationAndReturnIt(declaration) {
-    declaration.imageFile = getDeclarationImage(declaration.image_path);
+    if (declaration.image_path)
+        declaration.imageFile = getDeclarationImage(declaration.image_path);
     delete declaration.image_path;
     return declaration;
 
@@ -49,7 +50,7 @@ function attachImageToDeclarationAndReturnIt(declaration) {
             const imageFile = fs.readFileSync(imagesFolderPath + '/' + imagePath);
             const formData = new FormData();
             formData.append('image', imageFile);
-            return formData;
+            return formData.getBuffer();
         }
     }
 }
