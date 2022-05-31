@@ -18,6 +18,7 @@ export const TableDeclr = () => {
         const response = await fetch("http://localhost:2000/declaration/consulterDeclartions");
         if (!response.ok) throw Error("les données n'ont pas été reçus");
         const listItems = await response.json();
+        console.log(listItems[2].imageFile.data);
         setItems(listItems);
         setFetchError(null);
       } catch (err) {

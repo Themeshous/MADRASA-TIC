@@ -5,6 +5,8 @@ const {
     saveImagePathToDB, getNonRejectedDeclarationsByService
 } = require('../../db/DeclarationGateway');
 
+const FormData = require('form-data');
+
 const path = require('path');
 const fs = require("fs");
 
@@ -59,18 +61,11 @@ async function uplaodDeclarationImage(request, response) {
 }
 
 async function getDeclarationImage(request, response) {
-    const images  = fs.readdirSync('./db/declarations_images');
-    console.log(images)
-    const objArray = [];
-    images.forEach((image) => {
-        let obj    = {};
-        const file = fs.readFileSync('./db/declarations_images/' + image);
-        obj.folder = image;
-        obj.files  = file;
-        objArray.push(obj);
-    });
-
-    response.json(objArray);
+    const images  = fs.readdirSync('../db/declarations_images');
+    const imageFile = fs.readFileSync('../db/declarations_images/' + images[1]);
+    const formData = new FormData();
+    formData.append('image',imageFile);
+    response.json(formData);
 }
 
 module.exports = {
