@@ -7,6 +7,8 @@ import { ColDecSer } from './ColDecSer';
 import "../../../InterfaceAdmin/Pages/ConsultationComptes/Tableau.css"
 
 export const TabDecServ= () => {
+ 
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const [items, setItems] = useState([]);
   const [fetchError, setFetchError] = useState(null);
@@ -15,7 +17,7 @@ export const TabDecServ= () => {
 
     const fetchItems = async () => {
       try {
-        const response = await fetch("http://localhost:2000/declaration/consulterDeclartions");//get que les déclarations validé et service==service
+        const response = await fetch("http://localhost:2000/declaration/consulterdeclarations/"+user.prof.toString());//get que les déclarations validé et service==service
         if (!response.ok) throw Error("les données n'ont pas été reçus");
         const listItems = await response.json();
         setItems(listItems);

@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ValidateParam from './ValidateParam';
 import '../SignUp/FormLog.css'
+import axios from 'axios';
 
-const FormParam = () => { 
+const FormParam = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const [values, setvalues] = useState({
         nom: '',
@@ -26,34 +27,47 @@ const FormParam = () => {
         e.preventDefault();
         seterrors(ValidateParam(values));
     }
-  
-      useEffect(() => {
+
+    useEffect(() => {
         if ((!(errors.pswd)) && !(errors.pswdc) && !(errors.pswdn)) {
             setformsucceeded(true)
-           
-         
-         }
-         if ((errors.pswd) || (errors.pswdc) || (errors.pswdn)){
-             setformsucceeded(false)
-             setalertemsg(false)             }
-      }, [errors])
 
-        useEffect(() => {
-        setInterval(()=>{setalertemsg(false)},4000)
-      }, [])
-      console.log(formsucceeded);
-      const executesauvegarder= () => {
-          if (formsucceeded && values.pswdn) {   ///après tu rajoute que le mot de passe ancien doit etre = au mot de passe encien introduit
-               setalertemsg(true)
-                   console.log('true on enregistre dans la bdd');
-              //if formucceeded and {values.pswdn} le nouveau mot de passe ==! vide ''
+
+        }
+        if ((errors.pswd) || (errors.pswdc) || (errors.pswdn)) {
+            setformsucceeded(false)
+            setalertemsg(false)
+        }
+    }, [errors])
+
+    useEffect(() => {
+        setInterval(() => { setalertemsg(false) }, 4000)
+    }, [])
+    console.log(user);
+    const executesauvegarder = () => {
+        if (formsucceeded && values.pswdn) {   ///après tu rajoute que le mot de passe ancien doit etre = au mot de passe encien introduit
+            setalertemsg(true)
+            console.log('true on enregistre dans la bdd');
+            axios.post("http://localhost:2000/auth/updateUser/"+user.id.toString(), {
+                Email:user.email,
+                Profession:user.prof,   
+                password: values.pswdn,
+                password1: values.pswdc,
+                NumTel:"0553556677"
+
+            }).then((Response) => {
+                console.log(Response);
+            });
+
+            //if formucceeded and {values.pswdn} le nouveau mot de passe ==! vide ''
             //modifier le mot de passe de l'utilisateur avec email est {user.email}
             //vers nouveau mot de passe= {values.pswdn} if ce nouveau mot de passe ==! vide ''
-              }
+            //http://localhost:2000/auth/updateUser/
+        }
 
-          
-      }
-   
+
+    }
+
     return (
         <form className='form-param' onSubmit={HandleSubmit}>
             <h2 className='modification'>Mon Compte </h2>
@@ -121,7 +135,7 @@ const FormParam = () => {
             </div>
             <button type='submit' className='submit-parametre' onClick={executesauvegarder} >
                 <p>Sauvegarder</p></button>
-                {alertemsg && <div className="alerte-msg">Les modifications ont été bien enregistrés</div>}
+            {alertemsg && <div className="alerte-msg">Les modifications ont été bien enregistrés</div>}
         </form>
     )
 }

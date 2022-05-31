@@ -1,0 +1,99 @@
+.form-annonce{
+    width: 78%;
+    margin-left: 22%;
+    padding: 7%;
+    
+}
+.content-form-annonce{
+    margin: 2%;
+    padding: 5%;
+    border-radius: 10px;
+    background-color: rgba(165, 164, 164, 0.555);
+}
+
+.form-inputs-annonce{
+
+ margin-top: 3%;
+    display: block;
+}
+.error-msg{
+    color: red;
+    margin-left: 50%;
+    margin-top: 1%;
+}
+.titre-annonce{
+     color: #253072;
+}
+.titl-annonce{
+    margin-left: 5%;
+    margin-top: 2%;
+   
+}
+.form-label-annonce{
+    margin-left: 12%;   
+   
+}
+.input-title-annonce{
+    margin-left: 3%;
+    height: 45px;
+    border-radius: 15px;
+    width: 50%;
+}
+.input-description{
+    margin-left: 20%;
+    border-radius: 15px;
+    border: none;
+    padding: 2%;
+    width: 77%;
+    height: 100px;
+}
+.des-cont{
+    margin-top: 4%;
+}
+
+.btn-next-annonce-self{
+    background-color:transparent;
+    color: #455de0;
+    font-weight:bold;
+    font-size: large;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+border: none;
+border-radius: 10px;
+padding: 1.5% 2.5% 1.5% 2.5%;
+margin-top: 0.3%;
+float: right;
+}
+.btn-next-annonce-self:hover{
+    font-size: larger;
+    color: chocolate;
+}
+.btn-next-annonce-préc-self{
+    
+    background-color:transparent;
+    color: #455de0;
+    font-weight:bold;
+    font-size: large;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+border: none;
+border-radius: 10px;
+padding: 1.5% 2.5% 1.5% 2.5%;
+margin-bottom: 2%;
+}
+.btn-next-annonce-préc-self:hover{
+    font-size: larger;
+    color: chocolate;
+}
+.btn-lastp-ann{
+    justify-content:space-between;
+    text-align: center;
+    align-items: center;
+}
+.form-button-annonce{
+    float: right;
+    display: flex;
+    margin-right: 2%;
+}

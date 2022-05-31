@@ -15,11 +15,23 @@ const DetRapServ = () => {
   const [showbtnleft, setshowbtnleft] = useState(true);
   const [showbtnright, setshowbtnright] = useState(true)
 
-  const id_rap = parseInt(id)
-  const taille = localStorage.getItem("legthrapserv")
-
+  const id_rap = parseInt(id) 
+  function removeItemAll(arr, value) {
+    var i = 0;
+    while (i < arr.length) {
+      if (arr[i] === value) {
+        arr.splice(i, 1);
+      } else {
+        ++i;
+      }
+    }
+    return arr;
+  }
+  const tab =removeItemAll(Array.from(localStorage.getItem("legthrapserv")),',')
+  const taille = tab.length;
+  const ind =tab.indexOf(id)
   function next() {
-    if (id_rap > (taille-1)) {//à changer : on remplace 1 par lataille de la table-1 locale storage 
+    if (ind > (taille - 2)) {//à changer : on remplace 1 par lataille de la table-1 locale storage 
       setshowbtnright(false)
     }
     else {
@@ -27,7 +39,7 @@ const DetRapServ = () => {
     }
   }
   function prev() {
-    if (id_rap < 2) {
+    if (ind < 1) {
       setshowbtnleft(false)
     }
     else {
@@ -54,7 +66,7 @@ const DetRapServ = () => {
 
     setTimeout(() => fetchItems(), 1000);
 
-  }, [id,next,prev,rapport])
+  }, [id, next, prev, rapport])
 
 
 
@@ -63,47 +75,52 @@ const DetRapServ = () => {
       {isLoading ? (<p className='loading'>Chargement...</p>) :
         fetchError ? (<p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>) :
           <div className='rapport-container'>
-            
-              <h1 className='Grand-titre'>{rapport.titre.slice(0, 1).toUpperCase() + rapport.titre.slice(1,)}</h1>
-              <div className='btn-modifier'>
-                <a href={`/chefserv/consulter/modifier/rapinfo?id=${id}`} className="text-next-rapp" >{/** lien vers form rapport avec id du rapport */}
-                  Modifier <FontAwesomeIcon icon={faPen} className="icon-next" />
-                </a>
-              </div>
-          
+
+            <h1 className='Grand-titre'>{rapport.titre.slice(0, 1).toUpperCase() + rapport.titre.slice(1,)}</h1>
+            {!(rapport.etat === "Envoyé") && (<div className='btn-modifier'>
+              <a href={`/chefserv/consulter/modifier/rapinfo?id=${id}`} className="text-next-rapp-mod" >{/** lien vers form rapport avec id du rapport */}
+                Modifier <FontAwesomeIcon icon={faPen} className="icon-next" />
+              </a>
+            </div>)}
+
+
             <div className='sous-titre'>
               <h1 className='sous-titre-elem'> Date :
                 <p className='head-related-info'>{rapport.date}</p>
               </h1>
 
             </div>
-            <div className='elem-rapport'>
-              <h1 className='titre-elem'>Description</h1>
-              <div className='related-info'>{rapport.description ? (rapport.description) : ("Ce rapport ne contient pas de description")}</div>
-            </div>
-            <div className='elem-rapport'>
-              <h1 className='titre-elem'>Etat</h1>
-              <div className='related-info'>{rapport.etat}</div>
-            </div>
-            <div className='elem-rapport'>
-              <div className='inline-items'>
-                <h1 className='titre-elem'> Fichier attaché</h1>
-                {rapport.fichier ? (<a href="/lien de fichier" download>
-                  <FontAwesomeIcon icon={faFileDownload} className="icon-rapport" />
-                </a>) : ("")}
+            <div className='element-line'>
+              <div className='elem-rapport'>
+                <h1 className='titre-elem'>Description</h1>
+                <div className='related-info'>{rapport.description ? (rapport.description) : ("Ce rapport ne contient pas de description")}</div>
               </div>
 
-              <div className='related-info'>{rapport.fichier ? (rapport.fichier) : ("Aucun fichier attaché")}</div>
+              <div className='elem-rapport'>
+                <h1 className='titre-elem'>Etat</h1>
+                <div className='related-info'>{rapport.etat}</div>
+              </div>
             </div>
+            <div className='element-line'>
+              <div className='elem-rapport'>
+                <div className='inline-items'>
+                  <h1 className='titre-elem'> Fichier attaché</h1>
+                  {rapport.fichier ? (<a href="/lien de fichier" download>
+                    <FontAwesomeIcon icon={faFileDownload} className="icon-rapport" />
+                  </a>) : ("")}
+                </div>
 
+                <div className='related-info'>{rapport.fichier ? (rapport.fichier) : ("Aucun fichier attaché")}</div>
+              </div>
+            </div>
             <div className='btn-rapport'>
               {showbtnleft ? (<div className='btn-next'>
-                <a href={`/chefserv/consulter/rapinfo?id=${(id_rap - 1).toString()}`} className="text-next-rapp" >
+                <a href={`/chefserv/consulter/rapinfo?id=${(tab[ind- 1] )}`} className="text-next-rapp" >
                   <FontAwesomeIcon icon={faChevronLeft} className="icon-next" />Précédent
                 </a>
               </div>) : (<div className="white-point"> </div>)}
               {showbtnright ? (<div className='btn-next'>
-                <a href={`/chefserv/consulter/rapinfo?id=${(id_rap + 1).toString()}`} className="text-next-rapp" >Suivant
+                <a href={`/chefserv/consulter/rapinfo?id=${(tab[ind+1] )}`} className="text-next-rapp" >Suivant
                   <FontAwesomeIcon icon={faChevronRight} className="icon-next" />
                 </a>
               </div>) : (<div className="white-point"></div>)}

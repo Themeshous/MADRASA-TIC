@@ -34,14 +34,15 @@ async function fetchDeclarationsByService(request, response) {
 }
 
 async function updateDeclarationState(request, response) {
-    const {id, newState, newService, remarque} = request.body;
+    const { id, newState, newService, remarque } = request.body;
+    console.log(newState);
     if (newState === "rejeter")
         await changeDeclarationState(id, newState, remarque);
     else
         await changeDeclarationState(id, newState);
 
-    if(newService)
-        await changeDeclarationService(id, newService);
+    if (newService)
+        await changeDeclarationService(id,newService);
 
     response.send("declartion state has been changed");
 }
