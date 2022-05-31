@@ -4,11 +4,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareCheck, faSquareXmark } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import axios from "axios";
+import imagetoshow from '../../../img/alerting.jpg'
+import {Buffer} from 'buffer';
 export const Edit = () => {
+
+ const arrayBufferToBase64 = buffer => {
+    let binary = '';
+    let bytes = new Uint8Array(buffer);
+    let len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa(binary);
+  };
+
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get('id')
-
+ 
+  const [base64String, setbase64String] = useState(null)
+  const [image, setimage] = useState(null)
   const [declaration, setdeclaration] = useState(null);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +39,8 @@ export const Edit = () => {
         if (!response.ok) throw Error("les données n'ont pas été reçus");
         const listItems = await response.json();
         setdeclaration(listItems);
-
+        setimage(declaration.imageFile );
+        image && setbase64String(arrayBufferToBase64(image.data));
         setFetchError(null);
 
       } catch (err) {
@@ -37,8 +54,8 @@ export const Edit = () => {
 
 
   }, [id, declaration])
-
-
+ 
+  
   const handlechange = e => {
     const { name, value } = e.target
     setvalues({
@@ -71,7 +88,12 @@ export const Edit = () => {
       { id: declaration.id_dec, newState: "valider", newService: values.service });
     //Send to user la declation est prise en compte
   }
+//console.log('"' + image.data + '" converted to Base64 is "' + image.data.toString('base64')+ '"')
 
+let imgs = [
+  '../../../img/alerting.jpg',
+  'data:image/png;base64,'+base64String,
+];
   return (
     <>
       {isLoading ? (<p className='loading'>Chargement...</p>) :
@@ -125,11 +147,13 @@ export const Edit = () => {
             <div className='element-line'>
               <div className='elem-rapport'>
                 <h1 className='titre-elem'>Image</h1>
-                <div className='related-info'>{declaration.image ? (declaration.image) : ("Cette déclaration ne contient pas d'image")}</div>
+                <div className='related-info'>{declaration.imageFile ? (<img src={imgs[1]} alt="image attachée"/>) : ("Cette déclaration ne contient pas d'image")}</div>
               </div>
             </div>
 
-
+            <div className='element-line'>
+            <div className='related-info'><img src={imgs[0]} alt='image'/></div> 
+            </div>
             {Showconfrej && <div className="confirmation-déclaration-valider">
               <h4 className="texte-xonfirmation">
                 Voulez vous vraiment rejeter ce compte ?

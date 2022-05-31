@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileDownload, faCircleChevronLeft, faCircleChevronRight } from '@fortawesome/free-solid-svg-icons'
 import validator from 'validator'
 import './Annonce.css'
-import { table } from 'console'
 export const AnnonceForm = () => {
     //const user = JSON.parse(localStorage.getItem("user"));
     const [values, setValues] = useState({
