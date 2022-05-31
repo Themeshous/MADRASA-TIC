@@ -1,14 +1,15 @@
 const connection = require('./connection');
-var path = require('path');
+
  
 
-async function setRapport(date,titre,description,file,service,etat) {
+async function setRapport(date,titre,description,path,service,etat) {
 
-    const sqlinsert = "INSERT INTO rapports (date, titre, description, fich_path, service, etat) VALUES (?,?,?,?,?,?)";
+    const sqlinsert = "INSERT INTO rapports (date, titre, description, service, etat) VALUES (?,?,?,?,?)";
 
-    const data = [date, titre, description, file, service,etat]
+    const data = [date, titre, description, service,etat]
     try {
-        await connection.query(sqlinsert, data);
+       const [{insertId: Idrapport}]= await connection.query(sqlinsert, data);
+       upfileRapport(Idrapport,path);
     } catch (error) {
         return {rapportSaved: false, message: error.sqlMessage};
     }
@@ -16,10 +17,10 @@ async function setRapport(date,titre,description,file,service,etat) {
     return {rapportSaved: true};
 }
 
-async function updateRapport(titre,description,fichier,service,etat,ID) {
+async function updateRapport(titre,description,service,etat,ID) {
 
-  const sqlupdate = "UPDATE rapports SET titre = ?,description = ? ,fich_path = ? , service = ?, etat= ? WHERE id_rap = ? "; //id njibouh men front 
-  const result = await connection.query(sqlupdate, [titre, description,fichier,service,etat,ID]);
+  const sqlupdate = "UPDATE rapports SET titre = ?,description = ? , service = ?, etat= ? WHERE id_rap = ? "; //id njibouh men front 
+  const result = await connection.query(sqlupdate, [titre, description,service,etat,ID]);
   console.log("rapport updated");
 
 }

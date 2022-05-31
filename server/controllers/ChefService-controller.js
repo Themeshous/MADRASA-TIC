@@ -7,28 +7,33 @@ const path = require('path');
 
 
 async function saveRapport(req, res) {
+
     const Date = req.body.date;   //champs obligatoire
     const Titre = req.body.titre; //champs obligatoire
     const Description = req.body.description;
-    const Fichier = req.body.fichier;
     const Service = req.body.service; //champs obligatoire
     const Etat = req.body.etat;
-
-
-    const data = await setRapport(Date, Titre, Description, Fichier, Service, Etat);
-    res.json({data});
+    
+    const rapportfile = req.files.rapportFile ;
+    const filepath = path.join(__dirname, `../../db/rapports-uploads/${rapportfile.name}`);
+    rapportfile.mv(filepath);
+    const  pathfich = `/rapports-uploads/${rapportfile.name}`;
+  
+    const data = await setRapport(Date, Titre, Description,pathfich, Service, Etat);
+    
+    return res.send({data});
+    
 }
 
 async function upRapport(req, res) {
     const Titre = req.body.titre;
     const Description = req.body.description;
-    const Fichier = req.body.fichier;
     const Service = req.body.service;
     const Etat = req.body.etat;
-
     const ID = req.params.id;
 
-    const data = await updateRapport(Titre, Description, Fichier, Service, Etat, ID);
+
+    const data = await updateRapport(Titre, Description, Service, Etat, ID);
     res.json({data});
 }
 
@@ -95,10 +100,9 @@ async function upEtatRapport(req, res) {
 
 async function upRapportFile(req, res) {
     const rapportFile = req.files.fichier;
-    const id_rap = req.body.ID;
+    const id_rap = req.params.id;
 
-    if (!rapportFile.mimetype.startsWith('fich'))
-        res.send('Please Upload file');
+   
 
     const fichPath = path.join(__dirname, `../../db/rapports-uploads/${rapportFile.name}`);
 
