@@ -14,6 +14,8 @@ async function saveRapport(req, res) {
     const Service = req.body.service; //champs obligatoire
     const Etat = req.body.etat;
     
+    const sonDeclar = req.body.soniddec;
+    
     const rapportfile = req.files.rapportFile ;
 
 
@@ -22,7 +24,7 @@ async function saveRapport(req, res) {
     rapportfile.mv(filepath);
     const  pathfich = `/rapports-uploads/${rapportfile.name}`;
   
-    const data = await setRapport(Date, Titre, Description,pathfich, Service, Etat);
+    const data = await setRapport(Date, Titre, Description,pathfich, Service, Etat,sonDeclar);
     
     return res.send({data});
     
