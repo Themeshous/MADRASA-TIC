@@ -7,6 +7,7 @@ import axios from 'axios';
 export const CreerRapp = () => {
 
       const user = JSON.parse(localStorage.getItem("user"));
+        const formData = new FormData();
       const [values, setValues] = useState({
             titre: '',
             description: '',
@@ -57,11 +58,17 @@ export const CreerRapp = () => {
 
       const executeenreg = () => {
             if (!((values.description === '') && (values.titre === ''))) {
+                     // Create an object of formData
+                     // Update the formData object
+                     formData.append(fileSelected);
+                     // Details of the uploaded file
+                     console.log(this.state.selectedFile);
+              
                   axios.post("http://localhost:2000/rapport/remplirRapport", {
                         date: "24 / 05 / 2002",
                         titre: values.titre,
                         description: values.description,
-                        fichier: null,
+                        fichier: formData,
                         service: user.prof,
                         etat: 'Enregistré'
 
@@ -70,13 +77,6 @@ export const CreerRapp = () => {
                   });
                   setsucces(true);
                   setmsg('Le rapport a été enregistré')
-                  // Create an object of formData
-                  const formData = new FormData();
-                  // Update the formData object
-                  formData.append(fileSelected);
-                  // Details of the uploaded file
-                  console.log(this.state.selectedFile);
-                  axios.post("http://localhost:2000/rapport/fichRapport", formData);
 
                   //ajouter le rapport si n'existe pas 
                   //modifier l'état de rapport dans la table des rapport si existe déja vers enregistré
@@ -90,6 +90,12 @@ export const CreerRapp = () => {
             if (!((values.description === '') && (values.titre === ''))) {
                   setsucces(true);
                   setmsg('Le rapport a été envoyé')
+                    // Create an object of formData
+               
+                    // Update the formData object
+                    formData.append(fileSelected);
+                    // Details of the uploaded file
+                    console.log(this.state.selectedFile);
                   axios.post("http://localhost:2000/rapport/remplirRapport", {
                         date: "24 / 05 / 2002",
                         titre: values.titre,
@@ -101,15 +107,7 @@ export const CreerRapp = () => {
                   }).then((Response) => {
                         console.log(Response);
                   });
-                  // Create an object of formData
-                  const formData = new FormData();
-                  // Update the formData object
-                  formData.append(fileSelected);
-                  // Details of the uploaded file
-                  console.log(this.state.selectedFile);
-                  axios.post("http://localhost:2000/rapport/fichRapport", formData);
-                  //ajouter le rapport si n'existe pas 
-                  //modifier l'état de rapport dans la table des rapport si existe déja vers envoyé
+       
             }
             if ((values.description === '') || (values.titre === '')) { setsucces(false) }
       }
