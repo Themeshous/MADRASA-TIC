@@ -39,7 +39,7 @@ const SuppArch = ({Searchkey}) => {
                         <p> Annuler</p>
                     </button>
                     <button className='btn-conf confirmer'  onClick={executesupp}>
-                    <a href='/chefserv/Archive' className='lien-archiv'> confirmer</a>
+                    <a href='/responsabledesRE/archive' className='lien-archiv'> confirmer</a>
                     </button>
                 </div>
             </div>)
@@ -52,7 +52,7 @@ const SuppArch = ({Searchkey}) => {
                         <p> Annuler</p>
                     </button>
                     <button className='btn-conf confirmer'  onClick={executerest}>
-                        <a href='/chefserv/Archive' className='lien-archiv'> confirmer</a>
+                        <a href='/responsabledesRE/archive' className='lien-archiv'> confirmer</a>
                     </button>
                 </div>
             </div>)

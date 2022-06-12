@@ -1,6 +1,6 @@
 import SuppArch from './SuppArch'
 
-export const ColArch= [
+export const ColArchAnn= [
 
     {
       Header: "ID",

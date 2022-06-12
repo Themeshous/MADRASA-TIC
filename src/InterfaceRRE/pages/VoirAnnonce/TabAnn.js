@@ -3,10 +3,10 @@ import { useTable } from 'react-table/dist/react-table.development'
 import { useGlobalFilter, useSortBy } from "react-table";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { ColArchAnn} from './ColArchAnn'
+import { ColAnn} from './ColAnn'
 import "../../../InterfaceAdmin/Pages/ConsultationComptes/Tableau.css"
 
-const TabArchAnn = () => {
+const TabAnn = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const [items, setItems] = useState([]);
     const [fetchError, setFetchError] = useState(null);
@@ -31,7 +31,7 @@ const TabArchAnn = () => {
       setTimeout(() => fetchItems(), 1000);
   
     }, [])
-    const columns = useMemo(() => ColArchAnn, [])
+    const columns = useMemo(() => ColAnn, [])
     const data = items
   
     const TableInstance = useTable({
@@ -97,4 +97,4 @@ const TabArchAnn = () => {
     )
 }
 
-export default TabArchAnn
+export default TabAnn

@@ -35,7 +35,7 @@ export const NavGauchRRE = () => {
                     </NavLink>
    
            
-                    <NavLink  to="/RRE/Archive"
+                    <NavLink  to="/RRE/archive"
                               className={(navData) => (navData.isActive ? 'active' : 'link')}> 
                               <FontAwesomeIcon icon={faSliders} className="icon-left" />
                                <p>Consulter l'archive</p>

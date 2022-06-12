@@ -57,7 +57,7 @@ function attachImageToDeclarationAndReturnIt(declaration) {
 
 
 async function getAllDeclaration() {
-    const selectQuery = "SELECT * FROM declarations";
+    const selectQuery = "SELECT * FROM declarations where mobile_archived<>1";
     const [result] = await connection.query(selectQuery);
     result.forEach(attachImageToDeclarationAndReturnIt)
     return result;

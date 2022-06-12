@@ -7,6 +7,15 @@ import axios from 'axios';
 export const CreerRapp = () => {
 
       const user = JSON.parse(localStorage.getItem("user"));
+  
+       const [date,setdate]= useState("")
+       useEffect(() => {
+         let today=new Date();
+         let date = today.getFullYear()+ "/" +(today.getMonth()+1)+"/"+today.getDate();
+         setdate(date)
+       }, []);
+        
+
       const [values, setValues] = useState({
             titre: '',
             description: '',
@@ -58,7 +67,7 @@ export const CreerRapp = () => {
       const executeenreg = () => {
             if (!((values.description === '') && (values.titre === ''))) {
                   axios.post("http://localhost:2000/rapport/remplirRapport", {
-                        date: "24 / 05 / 2002",
+                        date: date,
                         titre: values.titre,
                         description: values.description,
                         fichier: null,
@@ -91,7 +100,7 @@ export const CreerRapp = () => {
                   setsucces(true);
                   setmsg('Le rapport a été envoyé')
                   axios.post("http://localhost:2000/rapport/remplirRapport", {
-                        date: "24 / 05 / 2002",
+                        date: date,
                         titre: values.titre,
                         description: values.description,
                         fichier: fileSelected,

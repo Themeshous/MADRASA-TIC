@@ -40,6 +40,7 @@ import ProfileRRE from './InterfaceRRE/pages/ProfileRRE.js';
 import ProposPage from './ProposNous/Propos-de-nous.js';
 
 import { VoirArch } from './InterfaceChefService/Pages/VoirArch'
+import TableArchAnn from "./InterfaceRRE/pages/TableArchAnn"
 
 function App() {
   return (
@@ -97,6 +98,7 @@ function App() {
             <Route path='/responsabledesRE' element={<CreateAnnonce />} />
             <Route path='/RRE/aide' element={<AideRRE />} />
             <Route path='/responsabledesRE/Profile' element={<ProfileRRE/>} />
+            <Route path='/RRE/archive' element={<TableArchAnn/>} />
           </Route>
 
           
