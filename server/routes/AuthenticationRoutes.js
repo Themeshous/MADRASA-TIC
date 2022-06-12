@@ -3,7 +3,6 @@ const {login, signup, reset, forgetpassword,updparmUser} = require('../controlle
 const router = express.Router();
 
 
-
 router.post('/connect', login);
 router.post('/create', signup);
 router.post('/reset', reset);

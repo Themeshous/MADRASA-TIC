@@ -21,16 +21,24 @@ async function saveDeclaration(declaration) {
     console.log("declaration saved");
     return {declarationSaved: true};
 
-    function saveImageFile(image, id) {
-        if (!image) return;
-        const declarationImage = image;
-        if (!declarationImage.mimetype.startsWith('image'))
-            return;
-        const imagePath = path.join(__dirname, `./declarations_images/${id}`);
-        declarationImage.mv(imagePath);
-        saveImagePathToDB(`/${id}.jpg`, id);
-    }
 }
+
+function saveImageFile(image, id) {
+    if (!image) return;
+    const declarationImage = image;
+    if (!declarationImage.mimetype.startsWith('image'))
+        return;
+    const imagePath = path.join(__dirname, `./declarations_images/${id}`);
+    declarationImage.mv(imagePath);
+    saveImagePathToDB(`/${id}.jpg`, id);
+}
+
+
+async function saveImagePathToDB(path, id) {
+    const updateQuery = "UPDATE declarations SET image_path = ? WHERE id_dec = ?";
+    return await connection.query(updateQuery, [path, id]);
+}
+
 
 function attachImageToDeclarationAndReturnIt(declaration) {
     if (declaration.image_path)
@@ -55,9 +63,8 @@ function attachImageToDeclarationAndReturnIt(declaration) {
     }
 }
 
-
 async function getAllDeclaration() {
-    const selectQuery = "SELECT * FROM declarations";
+    const selectQuery = "SELECT * FROM declarations WHERE mobile_archived = 0";
     const [result] = await connection.query(selectQuery);
     result.forEach(attachImageToDeclarationAndReturnIt)
     return result;
@@ -105,14 +112,28 @@ async function changeDeclarationService(id, service) {
     return await connection.query(updateQuery, [service, id]);
 }
 
-async function saveImagePathToDB(path, id) {
-    const updateQuery = "UPDATE declarations SET image_path = ? WHERE id_dec = ?";
-    return await connection.query(updateQuery, [path, id]);
+async function modifyDeclaration(declaration) {
+    const query = "UPDATE `madrasatic`.`declarations` " +
+        "SET `date` = ?, `titre` = ?, `description` = ?, `localisation` = ?, " +
+        "`etat` = ?, `service` = ?, `mobile_archived` = ? WHERE (`id_dec` = ?);"
+
+    const data =
+        [declaration.date, declaration.titre, declaration.description,
+            declaration.localisation, declaration.etat, declaration.service,
+            declaration.mobile_archived, declaration.id_dec];
+
+    try {
+        saveImageFile(declaration.imageFile, declaration.id_dec);
+    } catch (error) {
+        return {declarationSaved: false, message: error.sqlMessage};
+    }
+
+    return await connection.query(query, data);
 }
 
 module.exports = {
     saveDeclaration,
     getAllDeclaration, getDeclarationById, getDeclarationsOfTheEmail,
     changeDeclarationState, changeDeclarationService, saveImagePathToDB,
-    getNonRejectedDeclarationsByService
+    getNonRejectedDeclarationsByService, modifyDeclaration
 }
