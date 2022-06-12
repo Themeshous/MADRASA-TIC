@@ -2,6 +2,7 @@ import "./Propos.css"
 import profile1 from "../img/alerting.jpg"
 import Hidaya from "../img/Hidaya.jpg"
 import Meriem from "../img/Meriem.jpg"
+import Houssem from "../img/Houssem.jpg"
 import Byters from "../img/Byters.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
@@ -67,7 +68,7 @@ const Propos = () => {
                     </div>
                 </div>
                 <div class="teams">
-                    <img src={profile1} className="ProfileImg" />
+                    <img src={Houssem} className="ProfileImg" />
                     <div class="name"> Achref Houssem Saidoune </div>
                     <div class="desig">Backend Developer</div>
                     <div class="about">Etudiant en 3 ème année à l'école nationale supérieure d'informatique ESI-SBA</div>
