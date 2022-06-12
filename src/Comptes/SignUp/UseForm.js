@@ -6,6 +6,7 @@ const UseForm = (callback ,ValidateInfo) => {
       nom:'',
       prenom: '',
       email: '',
+      numero:'',
       role: '',
       profession: '',
       pswd:'',

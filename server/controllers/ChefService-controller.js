@@ -15,6 +15,9 @@ async function saveRapport(req, res) {
     const Etat = req.body.etat;
     
     const rapportfile = req.files.rapportFile ;
+
+
+
     const filepath = path.join(__dirname, `../../db/rapports-uploads/${rapportfile.name}`);
     rapportfile.mv(filepath);
     const  pathfich = `/rapports-uploads/${rapportfile.name}`;

@@ -11,6 +11,13 @@ export const TabRapports = () => {
   const [items, setItems] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  function getDeclarationsIds(items) {
+    var arr1 = [];
+    items.map((items) => arr1.push(items.id_rap) )
+    return arr1;
+  }
+
   useEffect(() => {
 
     const fetchItems = async () => {
@@ -19,7 +26,8 @@ export const TabRapports = () => {
         if (!response.ok) throw Error("les données n'ont pas été reçus");
         const listItems = await response.json();
         setItems(listItems.result);
-        localStorage.setItem("legthrapaig",listItems.result.length);
+        localStorage.removeItem("legthrapaig");
+        localStorage.setItem("legthrapaig",getDeclarationsIds(listItems.result));
         setFetchError(null);
       } catch (err) {
         setFetchError(err.message);

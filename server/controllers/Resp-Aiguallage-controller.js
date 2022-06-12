@@ -5,7 +5,10 @@ const {
     saveImagePathToDB, getNonRejectedDeclarationsByService
 } = require('../../db/DeclarationGateway');
 
+const FormData = require('form-data');
+
 const path = require('path');
+const fs = require("fs");
 
 async function fetchAllDeclarations(req, res) {
     const declarations = await getAllDeclaration();
@@ -31,12 +34,15 @@ async function fetchDeclarationsByService(request, response) {
 }
 
 async function updateDeclarationState(request, response) {
-    const {id, newState, newService, remarque} = request.body;
+    const { id, newState, newService, remarque } = request.body;
+    console.log(newState);
     if (newState === "rejeter")
         await changeDeclarationState(id, newState, remarque);
+    else
+        await changeDeclarationState(id, newState);
 
-    if(newService)
-        await changeDeclarationService(id, newService);
+    if (newService)
+        await changeDeclarationService(id,newService);
 
     response.send("declartion state has been changed");
 }
@@ -55,11 +61,15 @@ async function uplaodDeclarationImage(request, response) {
 }
 
 async function getDeclarationImage(request, response) {
-
+    const images  = fs.readdirSync('../db/declarations_images');
+    const imageFile = fs.readFileSync('../db/declarations_images/' + images[1]);
+    const formData = new FormData();
+    formData.append('image',imageFile);
+    response.json(formData);
 }
 
 module.exports = {
     fetchAllDeclarations, fetchDeclarationsForEmail, fetchDeclarationById,
     updateDeclarationState, uplaodDeclarationImage, getDeclarationImage,
-    fetchDeclarationsByService
+    fetchDeclarationsByService,
 }

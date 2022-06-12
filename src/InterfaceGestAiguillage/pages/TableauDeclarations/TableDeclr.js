@@ -18,6 +18,7 @@ export const TableDeclr = () => {
         const response = await fetch("http://localhost:2000/declaration/consulterDeclartions");
         if (!response.ok) throw Error("les données n'ont pas été reçus");
         const listItems = await response.json();
+      
         setItems(listItems);
         setFetchError(null);
       } catch (err) {
@@ -26,12 +27,14 @@ export const TableDeclr = () => {
         setIsLoading(false);
       }
     }
-
-    setTimeout(() => fetchItems(), 1000);
+ // console.log(listItems[2].imageFile.data);
+    setTimeout(() => fetchItems(), 0);
 
   }, [])
+  console.log(items);
   const columns = useMemo(() => Colonnes, [])
   const data = items
+
  
   const TableInstance = useTable({
     columns,

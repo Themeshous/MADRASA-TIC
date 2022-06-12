@@ -46,7 +46,7 @@
 /*Css du menu descendant du profil*/
 .profil-content{
     background-color:rgb(218, 218, 245);
-    border-radius: 5px;
+    border-radius: 4px;
     padding: 0.8%;
     width:16.01%;
     float: right;
@@ -60,7 +60,7 @@
     right: 4.4%;
     width: 20px;
     height: 20px;
-    border-radius: 5px;
+    border-radius: 4px;
     background-color:rgb(218, 218, 245);
     transform: rotate(45deg);
 }
@@ -100,8 +100,9 @@ margin-bottom: 5%;
 }
 
 .profile:hover , .log-out:hover{
+    border-radius: 4px;
     background-color:#4545464f;
-    border-radius: 10px;
+   
     cursor: pointer;
 }
 /* Css de la bare à gauche the logo is perfect adjust please the other elements */
@@ -149,7 +150,7 @@ margin-bottom: 5%;
     margin: 5%;
     color: rgba(255, 255, 255, 0.452);
     align-items: center;
-    border-radius: 10px;
+    border-radius: 4px;
     background-color:#4545464f;
     cursor: pointer;  
     text-decoration: none;
@@ -157,8 +158,8 @@ margin-bottom: 5%;
 }
 
 .link:hover { 
-   border-radius: 10px;
    background-color:#4545464f;
+   border-radius: 4px;
    color: #020930;
    cursor: pointer;
 }
@@ -179,14 +180,17 @@ margin-bottom: 5%;
 .active .icon-left{
     color: #020930;
 }
+/*page statiqtiques*/
 .satat{
     display: flex;
 }
 
 .chars-admin{
-    padding: 7%;
+    display: flex;
+    padding:3% 3% 0% 7%;
     margin-left: 18%;
-    width: 70%;
+    width: 82%;
+    justify-content: space-between;
 }
 .char-titre{
     font-size: larger;
@@ -194,7 +198,10 @@ margin-bottom: 5%;
     margin-bottom: 10%;
 }
 .Bar-char{
-    margin-left: 10%;
-    width: 60%;
-    height: 60%;
+   padding-top: 30px;
+   padding-left: 10px;
+   padding-right: 10px;
+    width: 450px;
+    height: 450px;
+    border: #020930 solid;
 }

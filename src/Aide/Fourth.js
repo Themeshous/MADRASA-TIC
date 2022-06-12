@@ -6,25 +6,25 @@ const Fourth = () => {
             <h2> Compte et Notifications </h2>
             <div className="Content">
                 <h3> Profile </h3>
-                <p> Chaque utilisateur peut visualiser les informations de son compte aprés son authentifcation (nom ,</p>
-                <p> prénom , mail , role ....) , tout simplement en appuyant sur son profile</p>
+                <p> Chaque utilisateur peut visualiser les informations de son compte après son authentifcation (nom ,
+                 prénom , email , role ....) , tout simplement en appuyant sur son le bouton mon compte qui se trouve dans le menu descendant de son profile sur l'entete.</p>
             </div>
             <div className="Content">
                 <h3> Sécurité </h3>
-                <p> L'utilisateur peut changer son mot de passe en tappant l'ancien mot de passer puis introduire un </p>
-                <p> nouveau , il doit aller à son profile s'il désire le changer</p>
+                <p> L'utilisateur peut changer son mot de passe en tappant l'ancien mot de passer puis introduisant un
+                 nouveau et le confirmer, pour cela il doit aller à son profile .</p>
             </div>
             <div className="Content">
                 <h3> Notifications </h3>
-                <p> Lorsque un utilisateur dépose un nouveau signalement , le responsable d'aiguillage sera notifié par ce</p>
-                <p> dernier. </p>
+                <p> Lorsque un utilisateur dépose une nouvelle déclaration, le responsable d'aiguillage sera notifié par ce
+                 dernier. </p>
                 <br />
-                <p> Lorsque le responsable d'aiguillage valide la déclaration elle sera transmis vers le chef service , ce </p>
-                <p> dernier recoit une notification qu'il prend en charge ce signalement et de le traiter le plus tôt possible .</p>
+                <p> Lorsque le responsable d'aiguillage valide la déclaration elle sera transmise vers le chef service , ce 
+                 dernier recoit une notification indicant qu'il faut prendre en charge ce signalement et de le traiter le plus tôt possible .</p>
                 <br />
-                <p> Lorsque le problème est résolu le chef service crée le rapport et l'envoyer, le responsable d'aiguillage </p>
-                <p> recoit une notification sur le rapport . </p>
-                <p> Si un utilisateur veut consulter ses notifications , il peut cliquer sur l'icone de notifications .</p>
+                <p> Lorsque le problème est résolu le chef service crée un rapport et l'envoie au responsable d'aiguillage 
+                aui va recevoir une notification sur ce rapport . </p>
+                <p> Si un utilisateur veut consulter ses notifications , il peut cliquer sur l'icone de  ou sur  notification qui se trouve dans le menu gauche de sa plateforme .</p>
 
             </div>
         </div>
