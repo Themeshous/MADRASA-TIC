@@ -2,7 +2,7 @@ const Gateway = require('./DeclarationGateway');
 
 describe('Declaration Gateway test', () => {
     const declaration = {
-        date: "12/12/1212",
+        date: "1212/12/12",
         titre: "titre",
         description: "mkljsdlkj",
         image: "null",
@@ -60,4 +60,11 @@ describe('Declaration Gateway test', () => {
         const result = await Gateway.getNonRejectedDeclarationsByService(service);
         expect(result.length).toBeGreaterThan(0);
     });
+
+    it('should modify a declaration', async () => {
+        const newDeclaration = {id_dec: 1, ...declaration, mobile_archived: 0}
+        const [result] = await Gateway.modifyDeclaration(newDeclaration);
+        console.log(result);
+        expect(result.affectedRows).toBe(1);
+    })
 });

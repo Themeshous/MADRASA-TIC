@@ -29,3 +29,5 @@ yarn-error.log*
 /db/declarations_images/*
 
 .idea
+
+tmp
