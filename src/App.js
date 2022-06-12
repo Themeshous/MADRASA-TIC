@@ -37,6 +37,8 @@ import { AideRRE } from './InterfaceRRE/pages/AideRRE.js';
 import { CreateAnnonce } from './InterfaceRRE/pages/CreateAnnonce.js';
 import ProfileRRE from './InterfaceRRE/pages/ProfileRRE.js';
 
+import ProposPage from './ProposNous/Propos-de-nous.js';
+
 import { VoirArch } from './InterfaceChefService/Pages/VoirArch'
 
 function App() {
@@ -53,7 +55,8 @@ function App() {
           <Route path="/auth/Reset" element={<Reset />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path='/aide' element={<AidePage />} />
-          <Route path='/Ensavoirplus' element={<SavoirPage />} />
+          <Route path='/En-savoir-plus' element={<SavoirPage />} />
+          <Route path='/Propos-de-nous' element={<ProposPage />} />
           {/*private*/}
 
 

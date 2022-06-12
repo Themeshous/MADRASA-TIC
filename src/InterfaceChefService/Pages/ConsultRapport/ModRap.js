@@ -81,6 +81,14 @@ export const ModRap = () => {
                   }).then((Response) => {
                         console.log(Response);
                   });
+                   // Create an object of formData
+                   const formData = new FormData();
+                   // Update the formData object
+                   formData.append(fileSelected);
+                   // Details of the uploaded file
+                   console.log(this.state.selectedFile);
+                   axios.post("http://localhost:2000/rapport/fichRapport", formData);
+
             } else { setmsg('Le rapport a été envoyé , les modifications ne peuvent pas etre enregistrées') }
 
 
@@ -105,6 +113,13 @@ export const ModRap = () => {
             });
             //ajouter le rapport si n'existe pas 
             //modifier l'état de rapport dans la table des rapport si existe déja vers envoyé
+             // Create an object of formData
+             const formData = new FormData();
+             // Update the formData object
+             formData.append(fileSelected);
+             // Details of the uploaded file
+             console.log(this.state.selectedFile);
+             axios.post("http://localhost:2000/rapport/fichRapport", formData);
       }
 
       const executearch = async () => {
@@ -121,6 +136,13 @@ export const ModRap = () => {
                   }).then((Response) => {
                         console.log(Response);
                   });
+                   // Create an object of formData
+                   const formData = new FormData();
+                   // Update the formData object
+                   formData.append(fileSelected);
+                   // Details of the uploaded file
+                   console.log(this.state.selectedFile);
+                   axios.post("http://localhost:2000/rapport/fichRapport", formData);
             } else { setmsg('Le rapport a été envoyé , ne peut pas etre archivé') }
             //archiver le rapport
       }

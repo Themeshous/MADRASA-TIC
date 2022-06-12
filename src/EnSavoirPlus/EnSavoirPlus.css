@@ -1,57 +1,13 @@
-.propos{ 
-    font-family: Open Sans, sans-serif;
-   
-}
+
 .En-Savoir-Plus{
      margin-top: 10%;
     margin-left: 10%;
     padding: 10%;
-    width: 80%;
-}
-.propos h2 {
-    margin-top: 30px;
-    margin-left: 3.5%;
-    color: #090909;
-    font-size: 30px;
-}
-
-.propos h3 {
-    margin-top: 10px;
-    margin-left: 5%;
-    margin-bottom: 1%;
-    font-size: 22px;
-    color: #151556;
+    width: 100%;
 }
 
 .first img {
     margin-left: 2.5%;
-}
-
-.line {
-    width: 5px;
-    height: 150px;
-    border-right: 0.5px solid #948181;
-    background-color: #728197;
-    margin: 20px;
-}
-
-.propos h4 {
-    font-family: Open Sans, sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    color: #151556;
-}
-
-
-
-
-.propos p {
-    line-height: 1.5rem;
-    color: #42425a;
-    font-size: 16px;
-    margin-left: 6%
 }
 
 .propos img {
