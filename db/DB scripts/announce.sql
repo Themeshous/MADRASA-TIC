@@ -8,7 +8,9 @@ CREATE TABLE `announce` (
     `fichier`       BLOB         NULL,  /*on fera le path du fichier plus tard*/
     `img`    BLOB         NULL,         /* // */
     `lien` VARCHAR (100) NULL ,         /* par lien de googleform (inscription) */
-    `etatpost`  BOOLEAN  DEFAULT FALSE, /* au cas de suppression */
+     /* au cas de suppression */
+    `archive` BOOLEAN NULL DEFAULT FALSE,
+    `supp` BOOLEAN NULL DEFAULT FALSE
     
       PRIMARY KEY (`id_post`)
     

@@ -21,11 +21,13 @@ async function getAllUserTokens(req, res) {
     const result = await getAllUsers();
     const usersTable = hideSensitiveInformations(result);
     res.send({usersTable});
-}
-
+    
     function hideSensitiveInformations(result) {
         return result.map(createUserViewForAdmin);
     }
+}
+
+    
 
 async function activateOrDeactivateUser(request, response) {
     const email = request.body.email;

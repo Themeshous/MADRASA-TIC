@@ -48,7 +48,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "concurrently \"node server/app\" \"npm start\""
+    "deploy": "concurrently \"nodemon server/app --watch server\" \"npm start\""
   },
   "eslintConfig": {
     "extends": [

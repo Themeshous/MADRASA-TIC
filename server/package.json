@@ -4,6 +4,7 @@
   "description": "projet1cs",
   "main": "intro.js",
   "scripts": {
+    "start": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "houssem",
@@ -23,6 +24,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.3",
+    "path": "^0.12.7",
     "sequelize": "^6.19.0"
   }
 }
