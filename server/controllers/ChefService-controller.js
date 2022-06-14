@@ -13,27 +13,13 @@ async function saveRapport(req, res) {
     const Description = req.body.description;
     const Service = req.body.service; //champs obligatoire
     const Etat = req.body.etat;
-    
     const sonDeclar = req.body.soniddec;
     
-   //const rapportfile = req.files.rapportFile ;
-
     
     const data = await setRapport(Date, Titre, Description, Service, Etat,sonDeclar);
-    
     return res.send({data}); 
     
-    /*else{
-
-    const rapportfile = req.files.rapportFile ;
-    const filepath = path.join(__dirname, `../../db/rapports-uploads/${rapportfile.name}`);
-    rapportfile.mv(filepath);
-    const  pathfich = `/rapports-uploads/${rapportfile.name}`;
-  
-    const data = await setRapport(Date, Titre, Description,pathfich, Service, Etat,sonDeclar);
     
-    return res.send({data});
-    }*/
     
 }
 
@@ -42,6 +28,7 @@ async function upRapport(req, res) {
     const Description = req.body.description;
     const Service = req.body.service;
     const Etat = req.body.etat;
+
     const ID = req.params.id;
 
 
@@ -112,18 +99,22 @@ async function upEtatRapport(req, res) {
 
 async function upRapportFile(req, res) {
 
-    
-    const rapportFile = req.files.fichier;
+    //const rapportFile = req.files;
     const id_rap = req.params.id;
 
-    
+    if (req.files){
 
-    const fichPath = path.join(__dirname, `../../db/rapports-uploads/${rapportFile.name}`);
+        const rapportFile = req.files;
+        const fichPath = path.join(__dirname, `../../db/rapports-uploads/${rapportFile.file.name}`);
+        await rapportFile.file.mv(fichPath);
 
-    await rapportFile.mv(fichPath);
+        await upfileRapport(id_rap, `/rapports-uploads/${rapportFile.file.name}`);
+        return res.send("fichier sauvegarder");
 
-    await upfileRapport(id_rap, `/rapportsFiles/${rapportFile.name}`);
-    return res.send("fichier sauvegarder");
+    } else {
+        await upfileRapport(id_rap, 'Null');
+        
+    }
 
 }
 

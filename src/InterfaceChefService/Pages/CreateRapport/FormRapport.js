@@ -66,7 +66,7 @@ export const CreerRapp = () => {
        
             if (!((values.description === '') && (values.titre === ''))) {
               
-              /*    axios.post("http://localhost:2000/rapport/remplirRapport", {
+                  axios.post("http://localhost:2000/rapport/remplirRapport", {
                         date: date,
                         titre: values.titre,
                         description: values.description,
@@ -75,19 +75,20 @@ export const CreerRapp = () => {
                         soniddec:"2"
 
                   }).then((Response) => {
-                        console.log(Response);
-                        console.log(Response.data.data.rapport_cree);
-                        setId(Response.data.data.rapport_cree.toString()) 
-                        console.log("je suis rentré",Id);
-                  });*/
-                   const id="5";
-                   const formData = new FormData();
-                   // Update the formData object
-                   formData.append('file',fileSelected);
-                   axios.post("http://localhost:2000/rapport/fichRapport"+id,{
-                              fichier:formData,
-                             
-               }); 
+                        //console.log(Response);
+                        console.log(Response.data.data.idrap);
+                        const Id = Response.data.data.idrap.toString();
+                        const formData = new FormData();
+                        // Update the formData object
+                        console.log(fileSelected);
+                        formData.append("file",fileSelected);
+                        
+                        axios.put("http://localhost:2000/rapport/fichRapport/"+Id,formData)
+                        console.log(formData);
+                                  
+                    
+                  });
+ 
                   setsucces(true);
                   setmsg('Le rapport a été enregistré')
 

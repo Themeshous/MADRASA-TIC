@@ -2,7 +2,7 @@ const connection = require('./connection');
 var path = require('path');
  
 
-async function setAnnounce(Announce,fich,pic) {
+async function setAnnounce(Announce) {
 
     const sqlinsert = "INSERT INTO announce (datepost, titre, organisateur, description, lien) VALUES (?,?,?,?,?)";
     
@@ -10,9 +10,9 @@ async function setAnnounce(Announce,fich,pic) {
     
     try {
        const [{insertId: Idannounce}]=  await connection.query(sqlinsert, data);
+       return{idann:Idannounce};
 
-       updatefile(Idannounce,fich);
-       updateimg(Idannounce,pic);
+       //updatefile(Idannounce,fich);updateimg(Idannounce,pic);
 
     } catch (error) {
         return {AnnounceSaved: false, message: error.sqlMessage};

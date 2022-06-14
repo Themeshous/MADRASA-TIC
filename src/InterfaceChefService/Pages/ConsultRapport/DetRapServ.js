@@ -105,12 +105,12 @@ const DetRapServ = () => {
               <div className='elem-rapport'>
                 <div className='inline-items'>
                   <h1 className='titre-elem'> Fichier attaché</h1>
-                  {rapport.fichier ? (<a href="/lien de fichier" download>
+                  {rapport.fich_path ? (<a href="/lien de fichier" download>
                     <FontAwesomeIcon icon={faFileDownload} className="icon-rapport" />
                   </a>) : ("")}
                 </div>
 
-                <div className='related-info'>{rapport.fichier ? (rapport.fichier) : ("Aucun fichier attaché")}</div>
+                <div className='related-info'>{rapport.fich_path ? (rapport.fich_path) : ("Aucun fichier attaché")}</div>
               </div>
             </div>
             <div className='btn-rapport'>
