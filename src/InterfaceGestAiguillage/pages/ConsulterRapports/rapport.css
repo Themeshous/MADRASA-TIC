@@ -47,6 +47,9 @@
     padding: 10px;
     border-radius: 5px;
 }
+.related-info>a{
+    color: #020930;
+}
 .inline-items{
     display: flex;
     justify-content: space-between;

@@ -87,7 +87,7 @@ const DetAnn = () => {
 
           <div className='sous-titre'>
             <h1 className='sous-titre-elem'> Date :
-              <p className='head-related-info'>{announce.datepost}</p>
+              <p className='head-related-info'>{announce.datepost.slice(0, 10)}</p>
             </h1>
 
           </div>
@@ -105,7 +105,9 @@ const DetAnn = () => {
           <div className='element-line'>
             <div className='elem-rapport'>
               <h1 className='titre-elem'>lien</h1>
-              <div className='related-info'>{announce.lien ? (announce.lien) : ("Cette annonce ne contient pas de lien")}</div>
+              <div className='related-info'>  {announce.lien ? (<a href={announce.lien}>{announce.lien}</a>) : ("Cette annonce ne contient pas de lien")}</div>
+            
+              
             </div>
             <div className='elem-rapport'>
               <div className='inline-items'>
