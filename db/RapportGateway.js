@@ -9,7 +9,7 @@ async function setRapport(date,titre,description,service,etat,Iddecetrange) {
     const data = [date, titre, description, service,etat]
     try {
        const [{insertId: Idrapport}]= await connection.query(sqlinsert, data);
-       //upfileRapport(Idrapport,path);
+       upfileRapport(Idrapport,path);
        ExchnageClef(Idrapport,Iddecetrange);
        return {rapport_cree: Idrapport};
 
@@ -27,7 +27,7 @@ async function setRapport(date,titre,description,service,etat,Iddecetrange) {
         connection.query(sqlinsert_dec, datadec);         
 
     }
-    console.log("rapport saved");
+   
     //return {rapportSaved: true,rapport_cree:Idrapport};
     
 }
