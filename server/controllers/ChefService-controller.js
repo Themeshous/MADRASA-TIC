@@ -16,10 +16,16 @@ async function saveRapport(req, res) {
     
     const sonDeclar = req.body.soniddec;
     
+   //const rapportfile = req.files.rapportFile ;
+
+    if (!req.files){
+        const data = await setRapport(Date, Titre, Description,'Null', Service, Etat,sonDeclar);
+    
+        return res.send({data}); 
+    }
+    else{
+
     const rapportfile = req.files.rapportFile ;
-
-
-
     const filepath = path.join(__dirname, `../../db/rapports-uploads/${rapportfile.name}`);
     rapportfile.mv(filepath);
     const  pathfich = `/rapports-uploads/${rapportfile.name}`;
@@ -27,6 +33,7 @@ async function saveRapport(req, res) {
     const data = await setRapport(Date, Titre, Description,pathfich, Service, Etat,sonDeclar);
     
     return res.send({data});
+    }
     
 }
 
