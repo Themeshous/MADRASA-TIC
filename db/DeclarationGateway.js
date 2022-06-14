@@ -6,12 +6,13 @@ const path = require('path');
 async function saveDeclaration(declaration) {
     const insert =
         "INSERT INTO `madrasatic`.`declarations` " +
-        "(`date`, `titre`, `description`, `emetteur`, `localisation`, `type`, `etat`) " +
-        "VALUES (?, ?, ?, ?, ?, ?, ?);"
+        "(`date`, `titre`, `description`, `emetteur`, `localisation`, `type`, `etat`, `priority`) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?);"
 
     const data =
         [declaration.date, declaration.titre, declaration.description,
-            declaration.emetteur, declaration.localisation, declaration.type, declaration.etat]
+            declaration.emetteur, declaration.localisation, declaration.type,
+            declaration.etat, declaration.priority]
     try {
         const [{insertId: declarationID}] = await connection.query(insert, data);
         saveImageFile(declaration.imageFile, declarationID);
@@ -28,9 +29,16 @@ function saveImageFile(image, id) {
     const declarationImage = image;
     if (!declarationImage.mimetype.startsWith('image'))
         return;
-    const imagePath = path.join(__dirname, `./declarations_images/${id}`);
+
+    const imageName = getImageName();
+    const imagePath = path.join(__dirname, `./declarations_images/${imageName}.jpg`);
     declarationImage.mv(imagePath);
-    saveImagePathToDB(`/${id}.jpg`, id);
+    saveImagePathToDB(`/${imageName}.jpg`, id);
+
+    function getImageName() {
+        const {v4: uuid} = require('uuid');
+        return uuid();
+    }
 }
 
 
@@ -112,6 +120,12 @@ async function changeDeclarationService(id, service) {
     return await connection.query(updateQuery, [service, id]);
 }
 
+async function changeDeclarationPriority(id, priority) {
+    const updateQuery = "UPDATE declarations SET priority = ? WHERE id_dec = ?";
+    return await connection.query(updateQuery, [priority, id]);
+}
+
+
 async function modifyDeclaration(declaration) {
     const query = "UPDATE `madrasatic`.`declarations` " +
         "SET `date` = ?, `titre` = ?, `description` = ?, `localisation` = ?, " +
@@ -125,7 +139,7 @@ async function modifyDeclaration(declaration) {
     try {
         saveImageFile(declaration.imageFile, declaration.id_dec);
     } catch (error) {
-        return {declarationSaved: false, message: error.sqlMessage};
+        console.log(error);
     }
 
     return await connection.query(query, data);
@@ -135,5 +149,5 @@ module.exports = {
     saveDeclaration,
     getAllDeclaration, getDeclarationById, getDeclarationsOfTheEmail,
     changeDeclarationState, changeDeclarationService, saveImagePathToDB,
-    getNonRejectedDeclarationsByService, modifyDeclaration
+    getNonRejectedDeclarationsByService, modifyDeclaration, changeDeclarationPriority
 }

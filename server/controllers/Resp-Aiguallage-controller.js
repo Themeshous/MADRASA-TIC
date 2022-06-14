@@ -2,7 +2,7 @@ const {
     getAllDeclaration,
     getDeclarationsOfTheEmail,
     getDeclarationById, changeDeclarationState, changeDeclarationService,
-    saveImagePathToDB, getNonRejectedDeclarationsByService
+    saveImagePathToDB, getNonRejectedDeclarationsByService, changeDeclarationPriority
 } = require('../../db/DeclarationGateway');
 
 const FormData = require('form-data');
@@ -35,7 +35,6 @@ async function fetchDeclarationsByService(request, response) {
 
 async function updateDeclarationState(request, response) {
     const { id, newState, newService, remarque } = request.body;
-    console.log(newState);
     if (newState === "rejeter")
         await changeDeclarationState(id, newState, remarque);
     else
@@ -47,16 +46,28 @@ async function updateDeclarationState(request, response) {
     response.send("declartion state has been changed");
 }
 
+async function updateDeclarationPriority(request, response) {
+    const {id, priority} = request.body;
+    await changeDeclarationPriority(id, priority);
+    response.send("declaration priorty has been changed");
+}
+
 async function uplaodDeclarationImage(request, response) {
     const declarationImage = request.files.image;
     const id = request.body.declarationID;
     if (!declarationImage.mimetype.startsWith('image'))
         response.send('Please Upload Image');
 
-    const imagePath = path.join(__dirname, `../../db/declarations_images/${declarationImage.name}`);
+    const imageName = getImageName();
+    const imagePath = path.join(__dirname, `../../db/declarations_images/${imageName}.jpg`);
     await declarationImage.mv(imagePath);
-    await saveImagePathToDB(`/declarationsImages/${declarationImage.name}`, id);
+    await saveImagePathToDB(`${imageName}.jpg`, id);
     return response.send("image has been saved");
+
+    function getImageName() {
+        const {v4: uuid} = require('uuid');
+        return uuid();
+    }
 
 }
 
@@ -71,5 +82,5 @@ async function getDeclarationImage(request, response) {
 module.exports = {
     fetchAllDeclarations, fetchDeclarationsForEmail, fetchDeclarationById,
     updateDeclarationState, uplaodDeclarationImage, getDeclarationImage,
-    fetchDeclarationsByService,
+    fetchDeclarationsByService, updateDeclarationPriority
 }
