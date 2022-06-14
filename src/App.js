@@ -41,6 +41,8 @@ import ProposPage from './ProposNous/Propos-de-nous.js';
 
 import { VoirArch } from './InterfaceChefService/Pages/VoirArch'
 import TableArchAnn from "./InterfaceRRE/pages/TableArchAnn"
+import TableAnn from "./InterfaceRRE/pages/TableAnn"
+import ModAnnPg from "./InterfaceRRE/pages/ModAnnPg"
 
 function App() {
   return (
@@ -99,6 +101,8 @@ function App() {
             <Route path='/RRE/aide' element={<AideRRE />} />
             <Route path='/responsabledesRE/Profile' element={<ProfileRRE/>} />
             <Route path='/RRE/archive' element={<TableArchAnn/>} />
+            <Route path='/RRE/Consulter' element={<TableAnn/>}/>
+            <Route path='/RRE/Consulter/modifier' element={<ModAnnPg/>}/>
           </Route>
 
           

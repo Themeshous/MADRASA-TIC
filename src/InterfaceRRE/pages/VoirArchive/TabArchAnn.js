@@ -15,9 +15,9 @@ const TabArchAnn = () => {
   
       const fetchItems = async () => {
         try {
-          const response = await fetch("http://localhost:2000/rapport/consulterRapportsarchive/");//route rapport par service
+          const response = await fetch("http://localhost:2000/announce/consulterArchiveAnnounce");//route rapport par service
           if (!response.ok) throw Error("les données n'ont pas été reçus");
-         
+          console.log(response);
           const listItems = await response.json();
           setItems(listItems.result);
           setFetchError(null);

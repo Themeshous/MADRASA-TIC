@@ -17,7 +17,7 @@ export const ColAnn= [
     {
       Header: "Titre",
       accessor:"titre" ,
-      Cell:({value,row}) => { return (<>{value}   {"  ... "}<a href={`/chefdeservice/modifier?id=${row.original.id_post.toString()}`} ><FontAwesomeIcon icon={faPen} className="icon" /></a></>)}
+      Cell:({value,row}) => { return (<>{value}   {"  ... "}<a href={`/RRE/Consulter/modifier?id=${row.original.id_post.toString()}`} ><FontAwesomeIcon icon={faPen} className="icon" /></a></>)}
      
     }
   ] 

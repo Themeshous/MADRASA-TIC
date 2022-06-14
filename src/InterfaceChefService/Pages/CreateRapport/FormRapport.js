@@ -15,8 +15,7 @@ export const CreerRapp = () => {
          setdate(date)
        }, []);
         
-
-        const formData = new FormData();
+     
       const [values, setValues] = useState({
             titre: '',
             description: '',
@@ -54,11 +53,8 @@ export const CreerRapp = () => {
 
       const SelectFile = e => {
             setfileSelected(e.target.files[0])
-            setValues({
-                  ...values,
-                  fichier: fileSelected
-            })
-      }
+      } 
+         
       useEffect(() => {
             setInterval(() => { setsucces(false); }, 7000)
       }, [succes])
@@ -66,20 +62,18 @@ export const CreerRapp = () => {
       console.log(fileSelected);
 
       const executeenreg = () => {
+            const data = new FormData();
+            data.append('File',fileSelected);
             if (!((values.description === '') && (values.titre === ''))) {
-                     // Create an object of formData
-                     // Update the formData object
-                     formData.append(fileSelected);
-                     // Details of the uploaded file
-                     console.log(this.state.selectedFile);
               
                   axios.post("http://localhost:2000/rapport/remplirRapport", {
                         date: date,
                         titre: values.titre,
                         description: values.description,
-                        fichier: formData,
+                        fichier:data,
                         service: user.prof,
-                        etat: 'Enregistré'
+                        etat: 'Enregistré',
+                        soniddec:"2"
 
                   }).then((Response) => {
                         console.log(Response);
@@ -96,22 +90,20 @@ export const CreerRapp = () => {
       }
 
       const executeenvoy = () => {
+            const data = new FormData();
+            data.append('File',fileSelected);
             if (!((values.description === '') && (values.titre === ''))) {
                   setsucces(true);
                   setmsg('Le rapport a été envoyé')
-                    // Create an object of formData
-               
-                    // Update the formData object
-                    formData.append(fileSelected);
-                    // Details of the uploaded file
-                    console.log(this.state.selectedFile);
+                
                   axios.post("http://localhost:2000/rapport/remplirRapport", {
                         date: date,
                         titre: values.titre,
                         description: values.description,
-                        fichier: fileSelected,
+                        fichier: data,
                         service: user.prof,
-                        etat: 'Envoyé'
+                        etat: 'Envoyé',
+                        soniddec:"2"
 
                   }).then((Response) => {
                         console.log(Response);

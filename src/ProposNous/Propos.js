@@ -5,6 +5,7 @@ import Meriem from "../img/Meriem.jpg"
 import Houssem from "../img/Houssem.jpg"
 import Byters from "../img/Byters.png"
 import Chiheb from "../img/Chiheb.jpg"
+import Madjid from "../img/Madjid.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -58,7 +59,7 @@ const Propos = () => {
                     </div>
                 </div>
                 <div class="teams">
-                    <img src={profile1} className="ProfileImg" />
+                    <img src={Madjid} className="ProfileImg" />
                     <div class="name"> AbdelmadjidChergui </div>
                     <div class="desig">Backend Developer</div>
                     <div class="about">Etudiant en 3 ème année à l'école nationale supérieure d'informatique ESI-SBA </div>

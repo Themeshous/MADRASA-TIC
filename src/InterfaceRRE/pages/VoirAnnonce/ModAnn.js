@@ -10,7 +10,7 @@ const ModAnn = () => {
     const urlParams = new URLSearchParams(queryString);
     const id = urlParams.get('id')
   
-    const [declaration, setdeclaration] = useState(null);
+    const [announce, setannounce] = useState(null);
     const [fetchError, setFetchError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [ShowconfCour, setShowconfcour] = useState(false);
@@ -19,10 +19,10 @@ const ModAnn = () => {
   
       const fetchItems = async () => {
         try {
-          const response = await fetch("http://localhost:2000/declaration/userDeclarations/" + id);
+          const response = await fetch("http://localhost:2000/announce/majAnnounce/" + id);
           if (!response.ok) throw Error("les données n'ont pas été reçus");
           const listItems = await response.json();
-          setdeclaration(listItems);
+          setannounce(listItems);
   
           setFetchError(null);
   
@@ -35,14 +35,12 @@ const ModAnn = () => {
   
       setTimeout(() => fetchItems(), 1000);
   
-    }, [id, declaration])
+    }, [id, announce])
   
-    useEffect(() => {
-      setInterval(() => { setShowconfcour(false); setShowconftrait(false) }, 7000)
-    }, [])
   
   return (
     <>
+    ceci form detail d'une announce cliquer sur modifier pour la modofoer 
     </>
   )
 }

@@ -126,7 +126,7 @@ export const ModRap = () => {
             setsucces(true);
             if (!(rapport.etat === "Envoyé")) {
                   setmsg('Le rapport a été archivé')
-                /*  axios.post("http://localhost:2000/rapport/suppRapport/" + id, {
+                  axios.post("http://localhost:2000/rapport/suppRapport/" + id, {
                         titre: ((values.titre)?(values.titre):(rapport.titre)),
                         description: ((values.description)?(values.description):(rapport.description)),
                         fichier: "",
@@ -135,14 +135,14 @@ export const ModRap = () => {
 
                   }).then((Response) => {
                         console.log(Response);
-                  });*/
-                   // Create an object of formData
+                  });
+                /*   // Create an object of formData
                    const formData = new FormData();
                    // Update the formData object
                    formData.append(fileSelected);
                    // Details of the uploaded file
                    console.log(this.state.selectedFile);
-                   axios.post("http://localhost:2000/rapport/fichRapport", formData);
+                   axios.post("http://localhost:2000/rapport/fichRapport", formData);*/
             } else { setmsg('Le rapport a été envoyé , ne peut pas etre archivé') }
             //archiver le rapport
       }

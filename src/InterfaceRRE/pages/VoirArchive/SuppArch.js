@@ -9,7 +9,7 @@ const SuppArch = ({Searchkey}) => {
     const executesupp = () => {
         //suppression 
         setshowsupp(false)
-        axios.post(""+Searchkey, {
+        axios.post("http://localhost:2000/announce/suppAnnounce/"+Searchkey, {
       }).then((Response) => {
             console.log(Response);
       });
@@ -17,7 +17,7 @@ const SuppArch = ({Searchkey}) => {
     const executerest = () => {
         //restaurer
         setshowsupprest(false)
-        axios.post(""+Searchkey, {
+        axios.post("http://localhost:2000/announce/restorerannounce/"+Searchkey, {
         }).then((Response) => {
               console.log(Response);
         });
@@ -39,7 +39,7 @@ const SuppArch = ({Searchkey}) => {
                         <p> Annuler</p>
                     </button>
                     <button className='btn-conf confirmer'  onClick={executesupp}>
-                    <a href='/responsabledesRE/archive' className='lien-archiv'> confirmer</a>
+                    <a href='/RRE/archive' className='lien-archiv'> confirmer</a>
                     </button>
                 </div>
             </div>)
@@ -52,7 +52,7 @@ const SuppArch = ({Searchkey}) => {
                         <p> Annuler</p>
                     </button>
                     <button className='btn-conf confirmer'  onClick={executerest}>
-                        <a href='/responsabledesRE/archive' className='lien-archiv'> confirmer</a>
+                        <a href='/RRE/archive' className='lien-archiv'> confirmer</a>
                     </button>
                 </div>
             </div>)

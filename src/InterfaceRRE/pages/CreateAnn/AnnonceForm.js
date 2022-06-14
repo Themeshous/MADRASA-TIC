@@ -8,6 +8,7 @@ export const AnnonceForm = () => {
     const [values, setValues] = useState({
         titre: '',
         description: '',
+        organisateur:'',
         fichier: null,
         image: null,
         lien: '',
@@ -42,6 +43,9 @@ export const AnnonceForm = () => {
         } if (!(validator.isURL(values.lien)) &&(values.lien.trim())) {
           errors.lien = "le lien est non valide " 
 
+        }
+        if (!values.organisateur.trim()) {
+            errors.organisateur="vous devez spécifier un organisateur"
         }
         if (!values.dated.trim()) {
             errors.dated = "La date début est requise"
@@ -109,6 +113,22 @@ export const AnnonceForm = () => {
                                     onChange={handlechange}
                                 />
                                 {errors.titre && <p className='error-msg'>{errors.titre}</p>}
+                            </div>
+
+                        </div>
+                        <h3 className='titl-annonce'>L'organisateur</h3>
+                        <div className='form-iput-annonce'>
+                            <div className='form-inputs-annonce' >
+                                <label className='form-label-annonce'>Qui est l'organisateur de l'evennement</label>
+
+                                <input id="organisateur" type="text"
+                                    name="organisateur"
+                                    className='input-org-annonce'
+                                    placeholder='Ajoutez un organisateur...'
+                                    value={values.organisateur}
+                                    onChange={handlechange}
+                                />
+                                {errors.organisateur && <p className='error-msg'>{errors.organisateur}</p>}
                             </div>
 
                         </div>
