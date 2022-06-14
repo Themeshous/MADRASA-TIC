@@ -2,7 +2,7 @@ const connection = require('./connection');
 
  
 
-async function setRapport(date,titre,description,service,etat,Iddecetrange) {
+async function setRapport(date,titre,description,path,service,etat,Iddecetrange) {
 
     const sqlinsert = "INSERT INTO rapports (date, titre, description, service, etat) VALUES (?,?,?,?,?)";
 
@@ -11,8 +11,6 @@ async function setRapport(date,titre,description,service,etat,Iddecetrange) {
        const [{insertId: Idrapport}]= await connection.query(sqlinsert, data);
        upfileRapport(Idrapport,path);
        ExchnageClef(Idrapport,Iddecetrange);
-       return {rapport_cree: Idrapport};
-
     } catch (error) {
         return {rapportSaved: false, message: error.sqlMessage};
     }
@@ -27,8 +25,9 @@ async function setRapport(date,titre,description,service,etat,Iddecetrange) {
         connection.query(sqlinsert_dec, datadec);         
 
     }
-   
-    //return {rapportSaved: true,rapport_cree:Idrapport};
+    console.log("rapport saved");
+    
+    return {rapportSaved: true};
     
 }
 
