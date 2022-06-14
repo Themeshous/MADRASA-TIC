@@ -45,15 +45,14 @@ const ModAnn = () => {
     fichier: null,
     image: null,
     lien: '',
-    dated: '',
-    datef: '',
+    dated: ''
 })
 const [errors, seterrors] = useState({})
 const [succes, setsucces] = useState()
 const [showfirst, setshowfirst] = useState(true)
 const [fileSelected, setfileSelected] = useState(null);
 const [showconf, setshowconf] = useState(false)
-
+const [showconfarch, setshowconfarch] = useState(false)
 const SelectFile = e => {
     setfileSelected(e.target.files[0])
 
@@ -94,7 +93,8 @@ const execprec = () => {
 }
 
 const ExecSubmitEnr=()=>{
-  setshowconf(true)
+    setshowconfarch(false)
+    setshowconf(true)
   //afficher menu confirmation
 }
 const ExecSubmitconf = () => {
@@ -103,9 +103,40 @@ const ExecSubmitconf = () => {
         setsucces(true);
         setshowconf(false)
         //enregistrer l'annonce dans la BDD
+        axios.post("http://localhost:2000/announce/sauvgAnnounce/" + id, {
+            titre:  ((values.titre)?(values.titre):(announce.titre)),
+            description: ((values.description)?(values.description):(announce.description)),
+            fichier: "",
+            service: user.prof,
+            etat: "Enregistré"
+
+      }).then((Response) => {
+            console.log(Response);
+      });
     }
 }
-  
+const ExecSubmitArch = () =>{
+    setshowconfarch(true)
+    setshowconf(false)
+    
+}
+const ExecSubmitconfarch = () => {
+    if( (!(validator.isURL(values.lien)) &&(values.lien.trim()))) { setsucces(false) }
+    if  ((!(!(validator.isURL(values.lien)) &&(values.lien.trim())))) {
+        setsucces(true);
+        setshowconfarch(false)
+        axios.post("http://localhost:2000/announce/archiveAnnounce/" + id, {
+            titre:  ((values.titre)?(values.titre):(announce.titre)),
+            description: ((values.description)?(values.description):(announce.description)),
+            service: user.prof,
+            etat: "Enregistré"
+
+      }).then((Response) => {
+            console.log(Response);
+      });
+        //archiver
+    }
+}
   return (
     <>
    {isLoading ? (<p className='loading'>Chargement...</p>) :
@@ -199,25 +230,10 @@ const ExecSubmitconf = () => {
                               <input id="dated" type="text"
                                   name="dated"
                                   className='input-title-annonce'
-                                  placeholder={announce.datepost}
+                                  placeholder={announce.datepost.slice(0, 10)}
                                   value={values.dated}
                                   onChange={handlechange}
                                 
-                              />
-                          </div>
-
-                      </div>
-                      <div className='form-iput-annonce'>
-                          <div className='form-inputs-annonce' >
-                              <label className='form-label-annonce'>Date de fin d'apparition :</label>
-
-                              <input id="datef" type="text"
-                                  name="datef"
-                                  className='input-title-annonce'
-                                  placeholder={announce.datepost}
-                                  value={values.datef}
-                                  onChange={handlechange}
-                             
                               />
                           </div>
 
@@ -252,18 +268,33 @@ const ExecSubmitconf = () => {
               </div>
 
               <div className='form-button-annonce'>
+                 <button type='submit' className='form-input-btn-par Archiver' onClick={ExecSubmitArch} >
+                      <p> Archiver </p></button>
                   <button type='submit' className='form-input-btn-par Envoyer' onClick={ExecSubmitEnr} >
                       <p> Envoyer </p></button>
+                     
                       {/**ajouter un boutton archiver */}
                       {/*/menu de confirmation/*/}
                       {showconf && (<div className='menu-envoyer'>
-                <h4 className='titre-supp-conf'>si vous envoyer cette annonce va etre partagée!</h4>
+                <h4 className='titre-supp-conf'>si vous envoyer , les modifications vont etre partagée!</h4>
                 <div className="btn-in-line">
                     <button className='btn-conf annuler'  onClick={() => setshowconf(showconf => false) }>
                         <p> Annuler</p>
                     </button>
                     <button className='btn-conf confirmer'  onClick={ExecSubmitEnr}>
                         <a href='/RRE/Consulter' className='lien-archiv'> confirmer</a>
+                    </button>
+                </div>
+            </div>)
+        }
+         {showconfarch && (<div className='menu-envoyer'>
+                <h4 className='titre-supp-conf'>si vous archiver cette annonce elle ne sera plus partagée avec les utilisateurs!</h4>
+                <div className="btn-in-line">
+                    <button className='btn-conf annuler'  onClick={() => setshowconfarch(showconfarch => false) }>
+                        <p> Annuler</p>
+                    </button>
+                    <button className='btn-conf confirmer'  onClick={ExecSubmitconfarch}>
+                        <a href='/RRE/archive' className='lien-archiv'> confirmer</a>
                     </button>
                 </div>
             </div>)
