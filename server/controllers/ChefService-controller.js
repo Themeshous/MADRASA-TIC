@@ -111,6 +111,8 @@ async function upEtatRapport(req, res) {
 }
 
 async function upRapportFile(req, res) {
+
+    
     const rapportFile = req.files.fichier;
     const id_rap = req.params.id;
 

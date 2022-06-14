@@ -15,6 +15,7 @@ router.post('/archiveAnnounce/:id', archAnnounce);
 router.post('/restorerannounce/:id', RestoreArchive);
 
 router.get('/consulterArchiveAnnounce', fetchAnnounceArchive);
+
 router.get('/consulterAnnounce', fetchAnnounce);
 
 router.get('/consultAnnounce/:id', showAnnounce);

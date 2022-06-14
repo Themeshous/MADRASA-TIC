@@ -26,6 +26,7 @@ async function setRapport(date,titre,description,path,service,etat,Iddecetrange)
 
     }
     console.log("rapport saved");
+    
     return {rapportSaved: true};
     
 }
