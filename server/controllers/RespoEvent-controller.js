@@ -6,8 +6,18 @@ const path = require('path');
 
 async function saveAnnounce(req, res) {
    
-    const Announce = req.body ;
-    const announcefile = req.files.announceFile ;
+    const DATE = req.body.datepost ;
+    const TITRE = req.body.titre ;
+    const ORGA = req.body.organisateur ;
+    const DESC = req.body.description ;
+    const LINK = req.body.lien ;
+
+
+    const data = await setAnnounce(DATE,TITRE,ORGA,DESC,LINK);
+    console.log("announce saved");
+    res.json({data});
+
+    /*const announcefile = req.files.announceFile ;
     const announceimg = req.files.announceImage;
 
     const filepath = path.join(__dirname, `../../db/announce-uploads/${announcefile.name}`);
@@ -17,26 +27,26 @@ async function saveAnnounce(req, res) {
     announceimg.mv(imgpath);
     
     const  pathfich = `/announce-uploads/${announcefile.name}`;
-    const  pathpic = `/announce-uploads/${announceimg.name}`;
-
-    const data = await setAnnounce(Announce,pathfich,pathpic);
-    res.json({data});
+    const  pathpic = `/announce-uploads/${announceimg.name}`;*/
 }
 
 async function updateFiles(req,res){
     const id = req.params.id;
-    const file = req.files.announceFile ;
-    const image = req.files.announceImage;
 
-    const filepath = path.join(__dirname, `../../db/announce-uploads/${file.name}`);
-    const imgpath = path.join(__dirname, `../../db/announce-uploads/${image.name}`);
 
-    file.mv(filepath);
-    image.mv(imgpath);
-
-    await updatefile(id,`/announce-uploads/${file.name}`);
-    await updateimg(id,`/announce-uploads/${image.name}`);
-    console.log('files updated');
+    if (req.files){
+    //const file = req.files.announceFile ;
+    const image = req.files;
+    //const filepath = path.join(__dirname, `../../db/announce-uploads/${file.name}`);
+    const imgpath = path.join(__dirname, `../../db/announce-uploads/${image.file.name}`);
+    //file.mv(filepath);
+    await image.file.mv(imgpath);
+    //await updatefile(id,`/announce-uploads/${file.name}`);
+    await updateimg(id,`/announce-uploads/${image.file.name}`);
+   
+    }else{
+        await updateimg(id, 'Null');
+    }
 }
 
 

@@ -1,24 +1,24 @@
-CREATE TABLE `madrasatic`.`declarations`
+create table declarations
 (
-    `id_dec`                   INT          NOT NULL AUTO_INCREMENT,
-    `date`                     DATE         NOT NULL,
-    `titre`                    VARCHAR(100) NOT NULL,
-    `description`              TEXT         NULL,
-    `image_path`               varchar(255) NULL,
-    `emetteur`                 VARCHAR(45)  NOT NULL,
-    `localisation`             VARCHAR(45)  NOT NULL,
-    `service`                  VARCHAR(50)  NULL,
-    `type`                     VARCHAR(45)  NOT NULL,
-    `etat`                     VARCHAR(45)  NOT NULL,
-    `Supp`                     BOOLEAN DEFAULT FALSE, /*faut ajouter ça pour nous aider a la suppression*/
-    `IDrap`                    INT          NULL,
-    `remarques_de_responsable` TEXT         NULL,
-    `mobile_archived`          BOOLEAN DEFAULT FALSE,
-    PRIMARY KEY (`id_dec`),
-    INDEX `declarer_idx` (`emetteur` ASC) VISIBLE,
-    CONSTRAINT `declarer`
-        FOREIGN KEY (`emetteur`)
-            REFERENCES `madrasatic`.`users` (`Email`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
+    id_dec                   int auto_increment
+        primary key,
+    date                     date                 not null,
+    titre                    varchar(100)         not null,
+    description              text                 null,
+    image_path               text                 null,
+    emetteur                 varchar(45)          not null,
+    localisation             varchar(45)          not null,
+    type                     varchar(45)          not null,
+    etat                     varchar(45)          not null,
+    Supp                     tinyint(1) default 0 null,
+    service                  varchar(50)          null,
+    remarques_de_responsable text                 null,
+    mobile_archived          tinyint(1) default 0 not null,
+    priority                 varchar(45)          not null,
+    constraint declarer
+        foreign key (emetteur) references users (Email)
 );
+
+create index declarer_idx
+    on declarations (emetteur);
+
