@@ -25,6 +25,7 @@ export const CreerRapp = () => {
       const [errors, seterrors] = useState({})
       const [succes, setsucces] = useState()
       const [msg, setmsg] = useState('')
+      const [Id, setId] = useState()
       const handlechange = e => {
             const { name, value } = e.target
             setValues({
@@ -62,22 +63,31 @@ export const CreerRapp = () => {
       console.log(fileSelected);
 
       const executeenreg = () => {
-            const data = new FormData();
-            data.append('File',fileSelected);
+       
             if (!((values.description === '') && (values.titre === ''))) {
               
-                  axios.post("http://localhost:2000/rapport/remplirRapport", {
+              /*    axios.post("http://localhost:2000/rapport/remplirRapport", {
                         date: date,
                         titre: values.titre,
                         description: values.description,
-                        fichier:data,
                         service: user.prof,
                         etat: 'Enregistré',
                         soniddec:"2"
 
                   }).then((Response) => {
                         console.log(Response);
-                  });
+                        console.log(Response.data.data.rapport_cree);
+                        setId(Response.data.data.rapport_cree.toString()) 
+                        console.log("je suis rentré",Id);
+                  });*/
+                   const id="5";
+                   const formData = new FormData();
+                   // Update the formData object
+                   formData.append('file',fileSelected);
+                   axios.post("http://localhost:2000/rapport/fichRapport"+id,{
+                              fichier:formData,
+                             
+               }); 
                   setsucces(true);
                   setmsg('Le rapport a été enregistré')
 
