@@ -43,6 +43,7 @@ import { VoirArch } from './InterfaceChefService/Pages/VoirArch'
 import TableArchAnn from "./InterfaceRRE/pages/TableArchAnn"
 import TableAnn from "./InterfaceRRE/pages/TableAnn"
 import ModAnnPg from "./InterfaceRRE/pages/ModAnnPg"
+import DetAnnPg from "./InterfaceRRE/pages/DetAnnPg"
 
 function App() {
   return (
@@ -103,6 +104,7 @@ function App() {
             <Route path='/RRE/archive' element={<TableArchAnn/>} />
             <Route path='/RRE/Consulter' element={<TableAnn/>}/>
             <Route path='/RRE/Consulter/modifier' element={<ModAnnPg/>}/>
+            <Route path='/RRE/Consulter/details' element={<DetAnnPg/>}/>
           </Route>
 
           
