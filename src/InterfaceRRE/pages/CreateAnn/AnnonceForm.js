@@ -8,6 +8,7 @@ export const AnnonceForm = () => {
     const [values, setValues] = useState({
         titre: '',
         description: '',
+        organisateur:'',
         fichier: null,
         image: null,
         lien: '',
@@ -19,6 +20,7 @@ export const AnnonceForm = () => {
     const [msg, setmsg] = useState('')
     const [showfirst, setshowfirst] = useState(true)
     const [fileSelected, setfileSelected] = useState(null);
+    const [showconf, setshowconf] = useState(false)
 
     const SelectFile = e => {
         setfileSelected(e.target.files[0])
@@ -43,6 +45,9 @@ export const AnnonceForm = () => {
           errors.lien = "le lien est non valide " 
 
         }
+        if (!values.organisateur.trim()) {
+            errors.organisateur="vous devez spécifier un organisateur"
+        }
         if (!values.dated.trim()) {
             errors.dated = "La date début est requise"
         } if (!values.datef.trim()) {
@@ -62,31 +67,26 @@ export const AnnonceForm = () => {
     }, [succes])
 
     const execsuiv = () => {
-        if (!((values.description === '') && (values.titre === ''))) {
+        if (!((values.description === '') && (values.titre === '') && (values.organisateur === ''))) {
             setshowfirst(false)
             //passer à la page suivante
         }
-        if ((values.description === '') || (values.titre === '')) { setshowfirst(true) }
+        if ((values.description === '') || (values.titre === '')||(values.organisateur === '')) { setshowfirst(true) }
     }
     const execprec = () => {
         setshowfirst(true) 
 
     }
-    const ExecSubmitEnr = () => {
-        if( (!(validator.isURL(values.lien)) &&(values.lien.trim()))||(!values.dated.trim())||(!values.datef.trim())) { setsucces(false) }
-        if  ((!(!(validator.isURL(values.lien)) &&(values.lien.trim())))&&(values.dated.trim())&&(values.dated.trim())) {
-            setsucces(true);
-            setmsg("L'annonce a été enregistrée")
-            //enregistrer l'annonce dans la BDD
-        }
-    }
-
+    const ExecSubmitEnr=()=>{
+        setshowconf(true)
+        //afficher menu confirmation
+      }
+     
     const ExecSubmitEnv = () => {
         if( (!(validator.isURL(values.lien)) &&(values.lien.trim()))||(!values.dated.trim())||(!values.datef.trim())) { setsucces(false) }
         if  ((!(!(validator.isURL(values.lien)) &&(values.lien.trim())))&&(values.dated.trim())&&(values.dated.trim())) {
             setsucces(true);
-            setmsg("L'annonce va etre partagée le jour " + values.dated)
-
+            setshowconf(false)
             //partager l'annonce
         }
     }
@@ -109,6 +109,22 @@ export const AnnonceForm = () => {
                                     onChange={handlechange}
                                 />
                                 {errors.titre && <p className='error-msg'>{errors.titre}</p>}
+                            </div>
+
+                        </div>
+                        <h3 className='titl-annonce'>L'organisateur</h3>
+                        <div className='form-iput-annonce'>
+                            <div className='form-inputs-annonce' >
+                                <label className='form-label-annonce'>Qui est l'organisateur de l'évènnement</label>
+
+                                <input id="organisateur" type="text"
+                                    name="organisateur"
+                                    className='input-org-annonce'
+                                    placeholder='Ajoutez un organisateur...'
+                                    value={values.organisateur}
+                                    onChange={handlechange}
+                                />
+                                {errors.organisateur && <p className='error-msg'>{errors.organisateur}</p>}
                             </div>
 
                         </div>
@@ -140,7 +156,7 @@ export const AnnonceForm = () => {
                             <FontAwesomeIcon icon={faCircleChevronLeft} /> précédent </button>
                     </div>
                     
-                    <h2 className='titre-annonce'> Ajoutez plus de détails por votre annonce:</h2>
+                    <h2 className='titre-annonce'> Ajoutez plus de détails pour votre annonce:</h2>
 
                     <div className='content-form-annonce'>
                         <h3 className='titl-annonce'> Ajoutez un lien :</h3>
@@ -222,15 +238,22 @@ export const AnnonceForm = () => {
                     </div>
 
                     <div className='form-button-annonce'>
-                        <button type='submit' className='form-input-btn-par Enregistrer' onClick={ExecSubmitEnr} >
-                            <p> Enregistrer </p></button>
-
-                        <button type='submit' className='form-input-btn-par Envoyer' onClick={ExecSubmitEnv} >
+                        <button type='submit' className='form-input-btn-par Envoyer' onClick={ ExecSubmitEnr} >
                             <p> Envoyer </p></button>
-
-
                     </div>
-                    {succes && <div className="alerte-msg">{msg}</div>}</>)}
+                    {showconf && (<div className='menu-envoyer'>
+                <h4 className='titre-supp-conf'>si vous envoyer cette annonce va etre partagée!</h4>
+                <div className="btn-in-line">
+                    <button className='btn-conf annuler'  onClick={() => setshowconf(showconf => false) }>
+                        <p> Annuler</p>
+                    </button>
+                    <button className='btn-conf confirmer'  onClick={ExecSubmitEnr}>
+                        <a href='/RRE/Consulter' className='lien-archiv'> confirmer</a>
+                    </button>
+                </div>
+            </div>)
+        }
+                    {succes && <div className="alerte-msg">{"L'annonce va etre partagée le jour " + values.dated}</div>}</>)}
             </form>
         </div>
     )

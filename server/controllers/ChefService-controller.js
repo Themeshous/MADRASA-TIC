@@ -18,12 +18,12 @@ async function saveRapport(req, res) {
     
    //const rapportfile = req.files.rapportFile ;
 
-    if (!req.files){
-        const data = await setRapport(Date, Titre, Description,'Null', Service, Etat,sonDeclar);
     
-        return res.send({data}); 
-    }
-    else{
+    const data = await setRapport(Date, Titre, Description, Service, Etat,sonDeclar);
+    
+    return res.send({data}); 
+    
+    /*else{
 
     const rapportfile = req.files.rapportFile ;
     const filepath = path.join(__dirname, `../../db/rapports-uploads/${rapportfile.name}`);
@@ -33,7 +33,7 @@ async function saveRapport(req, res) {
     const data = await setRapport(Date, Titre, Description,pathfich, Service, Etat,sonDeclar);
     
     return res.send({data});
-    }
+    }*/
     
 }
 
@@ -116,7 +116,7 @@ async function upRapportFile(req, res) {
     const rapportFile = req.files.fichier;
     const id_rap = req.params.id;
 
-   
+    
 
     const fichPath = path.join(__dirname, `../../db/rapports-uploads/${rapportFile.name}`);
 

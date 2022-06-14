@@ -37,7 +37,13 @@ import { AideRRE } from './InterfaceRRE/pages/AideRRE.js';
 import { CreateAnnonce } from './InterfaceRRE/pages/CreateAnnonce.js';
 import ProfileRRE from './InterfaceRRE/pages/ProfileRRE.js';
 
+import ProposPage from './ProposNous/Propos-de-nous.js';
+
 import { VoirArch } from './InterfaceChefService/Pages/VoirArch'
+import TableArchAnn from "./InterfaceRRE/pages/TableArchAnn"
+import TableAnn from "./InterfaceRRE/pages/TableAnn"
+import ModAnnPg from "./InterfaceRRE/pages/ModAnnPg"
+import DetAnnPg from "./InterfaceRRE/pages/DetAnnPg"
 
 function App() {
   return (
@@ -53,7 +59,8 @@ function App() {
           <Route path="/auth/Reset" element={<Reset />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path='/aide' element={<AidePage />} />
-          <Route path='/Ensavoirplus' element={<SavoirPage />} />
+          <Route path='/En-savoir-plus' element={<SavoirPage />} />
+          <Route path='/Propos-de-nous' element={<ProposPage />} />
           {/*private*/}
 
 
@@ -94,6 +101,10 @@ function App() {
             <Route path='/responsabledesRE' element={<CreateAnnonce />} />
             <Route path='/RRE/aide' element={<AideRRE />} />
             <Route path='/responsabledesRE/Profile' element={<ProfileRRE/>} />
+            <Route path='/RRE/archive' element={<TableArchAnn/>} />
+            <Route path='/RRE/Consulter' element={<TableAnn/>}/>
+            <Route path='/RRE/Consulter/modifier' element={<ModAnnPg/>}/>
+            <Route path='/RRE/Consulter/details' element={<DetAnnPg/>}/>
           </Route>
 
           

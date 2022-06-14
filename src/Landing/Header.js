@@ -1,39 +1,28 @@
-import './Landing.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAlignJustify as fa } from '@fortawesome/free-solid-svg-icons'
+import './Header.css'
 import logo from "../img/SmallerLogo.png"
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 const Header = () => {
     return (
-        <header className="header">
-            <nav className="nav-container">
+        <header className="header-outer header">
+            <nav className="nav-container-outer nav-container">
                 <a href="/">
-                <img src={logo}  className="lg" />
+                    <img src={logo} className="lg" />
                 </a>
                 <ul className="navbar">
                     <li className="nav-el">
-                        <NavLink exact to="/4" className="nav-btn">Nos services</NavLink>
+                        <NavLink exact to="/Aide" className="nav-btn">Aide</NavLink>
                     </li>
                     <li className="nav-el">
-                        <NavLink exact to="/4" className="nav-btn">Comment ça marche</NavLink>
-                    </li>
-                    <li className="nav-el">
-                        <NavLink exact to="/aide" className="nav-btn">Aide</NavLink>
+                        <NavLink exact to="/Propos-de-nous" className="nav-btn">A-propos</NavLink>
                     </li>
                     <li className="nav-el">
                         <NavLink exact to="/auth/connect" className="nav-btn">
-                            Log In
+                            Se connecter
                         </NavLink>
-
-
-                    </li>
-                    <li className="check">
-                        <FontAwesomeIcon icon={fa} className="fa" />
                     </li>
                 </ul>
             </nav>
         </header>
-
     )
 }
 export default Header;

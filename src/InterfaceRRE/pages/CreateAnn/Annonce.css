@@ -39,6 +39,12 @@
     border-radius: 15px;
     width: 50%;
 }
+.input-org-annonce{
+    margin-left: 3%;
+    height: 45px;
+    border-radius: 15px;
+    width: 45%;
+}
 .input-description{
     margin-left: 20%;
     border-radius: 15px;
@@ -96,4 +102,12 @@ margin-bottom: 2%;
     float: right;
     display: flex;
     margin-right: 2%;
+}
+.menu-envoyer{
+    position: absolute;
+    top: 60%;
+    border-radius: 3px;
+    left: 45%;
+    background-color:white;
+    padding: 2%;
 }
