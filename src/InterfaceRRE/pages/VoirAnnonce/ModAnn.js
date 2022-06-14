@@ -103,15 +103,21 @@ const ExecSubmitconf = () => {
         setsucces(true);
         setshowconf(false)
         //enregistrer l'annonce dans la BDD
-        axios.post("http://localhost:2000/announce/sauvgAnnounce/" + id, {
-            titre:  ((values.titre)?(values.titre):(announce.titre)),
-            description: ((values.description)?(values.description):(announce.description)),
-            fichier: "",
-            service: user.prof,
-            etat: "Enregistré"
+        axios.post("http://localhost:2000/announce/majAnnounce/" + id, {
+            
+            datepost:((values.dated)?(values.dated):(announce.dated)),
+            titre:((values.titre)?(values.titre):(announce.titre)),
+            organisateur:((values.organisateur)?(values.organisateur):(announce.organisateur)),
+            description:((values.description)?(values.description):(announce.description)),
+            lien:((values.lien)?(values.lien):(announce.lien))
 
       }).then((Response) => {
             console.log(Response);
+            const formData = new FormData();
+                // Update the formData object
+                formData.append("file",fileSelected);
+                axios.put("http://localhost:2000/announce/majAnnouncefiles/"+id,formData)
+                console.log(formData);
       });
     }
 }
@@ -126,10 +132,11 @@ const ExecSubmitconfarch = () => {
         setsucces(true);
         setshowconfarch(false)
         axios.post("http://localhost:2000/announce/archiveAnnounce/" + id, {
-            titre:  ((values.titre)?(values.titre):(announce.titre)),
-            description: ((values.description)?(values.description):(announce.description)),
-            service: user.prof,
-            etat: "Enregistré"
+            datepost:((values.dated)?(values.dated):(announce.dated)),
+            titre:((values.titre)?(values.titre):(announce.titre)),
+            organisateur:((values.organisateur)?(values.organisateur):(announce.organisateur)),
+            description:((values.description)?(values.description):(announce.description)),
+            lien:((values.lien)?(values.lien):(announce.lien))
 
       }).then((Response) => {
             console.log(Response);
@@ -281,7 +288,7 @@ const ExecSubmitconfarch = () => {
                     <button className='btn-conf annuler'  onClick={() => setshowconf(showconf => false) }>
                         <p> Annuler</p>
                     </button>
-                    <button className='btn-conf confirmer'  onClick={ExecSubmitEnr}>
+                    <button className='btn-conf confirmer'  onClick={ExecSubmitconf}>
                         <a href='/RRE/Consulter' className='lien-archiv'> confirmer</a>
                     </button>
                 </div>

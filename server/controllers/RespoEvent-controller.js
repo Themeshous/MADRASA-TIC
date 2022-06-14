@@ -6,8 +6,15 @@ const path = require('path');
 
 async function saveAnnounce(req, res) {
    
-    const Announce = req.body ;
-    const data = await setAnnounce(Announce);
+    const DATE = req.body.datepost ;
+    const TITRE = req.body.titre ;
+    const ORGA = req.body.organisateur ;
+    const DESC = req.body.description ;
+    const LINK = req.body.lien ;
+
+
+    const data = await setAnnounce(DATE,TITRE,ORGA,DESC,LINK);
+    console.log("announce saved");
     res.json({data});
 
     /*const announcefile = req.files.announceFile ;
@@ -36,7 +43,7 @@ async function updateFiles(req,res){
     await image.file.mv(imgpath);
     //await updatefile(id,`/announce-uploads/${file.name}`);
     await updateimg(id,`/announce-uploads/${image.file.name}`);
-    console.log('image de announce updated');
+   
     }else{
         await updateimg(id, 'Null');
     }

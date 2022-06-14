@@ -2,11 +2,11 @@ const connection = require('./connection');
 var path = require('path');
  
 
-async function setAnnounce(Announce) {
+async function setAnnounce(datepost,titre,organisateur,description,lien) {
 
     const sqlinsert = "INSERT INTO announce (datepost, titre, organisateur, description, lien) VALUES (?,?,?,?,?)";
     
-    const data = [Announce.datepost, Announce.titre, Announce.organisateur, Announce.description,Announce.lien]
+    const data = [datepost,titre, organisateur, description,lien]
     
     try {
        const [{insertId: Idannounce}]=  await connection.query(sqlinsert, data);
@@ -31,7 +31,7 @@ async function updatefile(id,path){
 async function updateimg(id,path){
   const sqlupdate = "UPDATE announce SET img = ? WHERE id_post = ?";
   const result = await connection.query(sqlupdate, [path, id]);
-  console.log("image uploaded in db");
+  console.log("image saved");
 
 }
 
