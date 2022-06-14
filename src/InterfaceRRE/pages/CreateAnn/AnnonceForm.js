@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileDownload, faCircleChevronLeft, faCircleChevronRight } from '@fortawesome/free-solid-svg-icons'
 import validator from 'validator'
 import './Annonce.css'
+import axios from "axios";
 export const AnnonceForm = () => {
     //const user = JSON.parse(localStorage.getItem("user"));
     const [values, setValues] = useState({
@@ -12,8 +13,7 @@ export const AnnonceForm = () => {
         fichier: null,
         image: null,
         lien: '',
-        dated: '',
-        datef: '',
+        dated: ''
     })
     const [errors, seterrors] = useState({})
     const [succes, setsucces] = useState()
@@ -50,8 +50,6 @@ export const AnnonceForm = () => {
         }
         if (!values.dated.trim()) {
             errors.dated = "La date début est requise"
-        } if (!values.datef.trim()) {
-            errors.datef = "La date fin est requise"
         }
         return errors;
     }
@@ -83,11 +81,18 @@ export const AnnonceForm = () => {
       }
      
     const ExecSubmitEnv = () => {
-        if( (!(validator.isURL(values.lien)) &&(values.lien.trim()))||(!values.dated.trim())||(!values.datef.trim())) { setsucces(false) }
-        if  ((!(!(validator.isURL(values.lien)) &&(values.lien.trim())))&&(values.dated.trim())&&(values.dated.trim())) {
+        if( (!(validator.isURL(values.lien)) &&(values.lien.trim()))||(!values.dated.trim())) { setsucces(false) }
+        if  ((!(!(validator.isURL(values.lien)) &&(values.lien.trim())))&&(values.dated.trim())) {
             setsucces(true);
             setshowconf(false)
             //partager l'annonce
+            axios.post("http://localhost:2000/announce/remplirAnnounce", {
+      
+
+          }).then((Response) => {
+                console.log(Response);
+          });
+
         }
     }
     
@@ -190,22 +195,6 @@ export const AnnonceForm = () => {
                                       
                                     />
                                     {errors.dated && <p className='error-msg'>{errors.dated}</p>}
-                                </div>
-
-                            </div>
-                            <div className='form-iput-annonce'>
-                                <div className='form-inputs-annonce' >
-                                    <label className='form-label-annonce'>Date de fin d'apparition :</label>
-
-                                    <input id="datef" type="date"
-                                        name="datef"
-                                        className='input-title-annonce'
-                                        placeholder="mm/jj/aaaa"
-                                        value={values.datef}
-                                        onChange={handlechange}
-                                   
-                                    />
-                                    {errors.datef && <p className='error-msg'>{errors.datef}</p>}
                                 </div>
 
                             </div>
