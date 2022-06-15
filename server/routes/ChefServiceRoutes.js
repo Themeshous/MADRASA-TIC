@@ -13,7 +13,7 @@ router.post('/suppRapport/:id', supRapport);
 router.post('/restorerRapport/:id', RestoreArchive);
 router.post('/suppRapportarchive/:id', suppRapportarchive);
 
-router.post('/fichRapport/:id',upRapportFile);
+router.put('/fichRapport/:id',upRapportFile);
 
 router.patch('/etatRapport/changer',upEtatRapport );
 

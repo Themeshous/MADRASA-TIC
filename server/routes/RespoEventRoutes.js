@@ -6,7 +6,7 @@ const {saveAnnounce,upAnnounce,supAnnounce, fetchAnnounce,showAnnounce,archAnnou
 router.post('/remplirAnnounce', saveAnnounce);
 router.post('/majAnnounce/:id', upAnnounce);
 
-router.post('/majAnnouncefiles/:id', updateFiles);
+router.put('/majAnnouncefiles/:id', updateFiles);
 
 router.post('/sauvgAnnounce', saveAnnounce);
 
@@ -15,6 +15,7 @@ router.post('/archiveAnnounce/:id', archAnnounce);
 router.post('/restorerannounce/:id', RestoreArchive);
 
 router.get('/consulterArchiveAnnounce', fetchAnnounceArchive);
+
 router.get('/consulterAnnounce', fetchAnnounce);
 
 router.get('/consultAnnounce/:id', showAnnounce);
