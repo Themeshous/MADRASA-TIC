@@ -87,10 +87,22 @@ export const AnnonceForm = () => {
             setshowconf(false)
             //partager l'annonce
             axios.post("http://localhost:2000/announce/remplirAnnounce", {
+                datepost:values.dated,
+                titre:values.titre,
+                organisateur:values.organisateur,
+                description:values.description,
+                lien:values.lien ? values.lien:""
       
 
           }).then((Response) => {
-                console.log(Response);
+                
+                console.log(Response.data.data.idann);
+                const Id = Response.data.data.idann.toString();
+                const formData = new FormData();
+                // Update the formData object
+                formData.append("file",fileSelected);
+                axios.put("http://localhost:2000/announce/majAnnouncefiles/"+Id,formData)
+                console.log(formData);
           });
 
         }
@@ -236,7 +248,7 @@ export const AnnonceForm = () => {
                     <button className='btn-conf annuler'  onClick={() => setshowconf(showconf => false) }>
                         <p> Annuler</p>
                     </button>
-                    <button className='btn-conf confirmer'  onClick={ExecSubmitEnr}>
+                    <button className='btn-conf confirmer'  onClick={ExecSubmitEnv}>
                         <a href='/RRE/Consulter' className='lien-archiv'> confirmer</a>
                     </button>
                 </div>
@@ -255,7 +267,6 @@ export const AnnonceForm = () => {
           fichier: null,
           service: user.prof,
           etat: 'Enregistré'
-
     }).then((Response) => {
           console.log(Response);
     });*/

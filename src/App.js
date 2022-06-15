@@ -44,7 +44,7 @@ import TableArchAnn from "./InterfaceRRE/pages/TableArchAnn"
 import TableAnn from "./InterfaceRRE/pages/TableAnn"
 import ModAnnPg from "./InterfaceRRE/pages/ModAnnPg"
 import DetAnnPg from "./InterfaceRRE/pages/DetAnnPg"
-
+import ParamServCat from './InterfaceAdmin/Pages/ParamServCat.js';
 function App() {
   return (
     <>
@@ -72,6 +72,7 @@ function App() {
             <Route path="/administrateur-secondaire/Profile" element={<ParamComp />} />
             <Route path='/Admin/statistiques' element={<StatisAdmin />} />
             <Route path='/Admin/aide' element={<AideAdmin />} />
+            <Route path='/Admin/parametres' element ={<ParamServCat/>}/>
           </Route>
 
           <Route element={<RequireAuth allowedRoles={["responsable d'aiguillage"]} />}>
