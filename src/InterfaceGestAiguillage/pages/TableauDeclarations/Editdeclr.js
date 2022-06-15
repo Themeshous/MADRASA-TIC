@@ -73,19 +73,31 @@ export const Edit = () => {
 
     setShowconfrej(Showconfrej => false)
     setsuccess(true);
-    setmsg('La déclaration a été rejetée')
+   
     console.log(id);
-    await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
+    if(declaration.etat==="pas encore orienté"){
+      await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
       { id: declaration.id_dec, newState: "rejeter", newService: values.service ,remarque:values.remarque});
+       setmsg('La déclaration a été rejetée')
+    }else{
+      setmsg('La déclaration ne peut pas etre rejetée , elle est déjas validée et prise en compte')
+    }
+    
   }
 
   const ChangeStatedeclarationval = async () => {
 
     setShowconfval(Showconfval => false)
     setsuccess(true);
-    setmsg('La déclaration a été validée et envoyée au chef de service')
+ 
+    if(declaration.etat==="pas encore orienté"){
     await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
-      { id: declaration.id_dec, newState: "valider", newService: values.service });
+      { id: declaration.id_dec, newState: "valider", newService: values.service }); 
+      setmsg('La déclaration a été validée et envoyée au chef de service')
+    }else{
+      setmsg('La déclaration ne peut pas etre rejetée , elle est déjas validée et prise en compte')
+    }
+
     //Send to user la declation est prise en compte
   }
 //console.log('"' + image.data + '" converted to Base64 is "' + image.data.toString('base64')+ '"')
