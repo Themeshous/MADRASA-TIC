@@ -1,7 +1,7 @@
 import React from 'react'
 import "../../../InterfaceGestAiguillage/pages/ConsulterRapports/rapport.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAdd, faCheck, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faAdd, faCheck, faEye, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import axios from "axios";
 export const ModDecServ = () => {
@@ -78,10 +78,10 @@ export const ModDecServ = () => {
                 <button className='submit  EnCours' type='submit'
                   onClick={ChangeStatedeclarationcour}>
                   En Cours <FontAwesomeIcon icon={faSpinner} className="icon-next" /></button>
-                  
-                  <button className='submit traité' type='submit'
+                  {declaration.IDrap && <button className='submit traité' type='submit'
                   onClick={ChangeStatedeclarationtrait}>
-                  Traité <FontAwesomeIcon icon={faCheck} className="icon-next" /></button>
+                  Traité <FontAwesomeIcon icon={faCheck} className="icon-next" /></button>}
+                  
 
               </div>
             </div>
@@ -107,10 +107,14 @@ export const ModDecServ = () => {
                 <div className='related-info'>{declaration.image ? (declaration.image) : ("Cette déclaration ne contient pas d'image")}</div>
               </div>
             </div>
-            <button className='attacher' type='submit'>
+            {declaration.IDrap?(<button className='attacher' type='submit'>
+                  <a href={`/chefserv/consulter/rapinfo?id=${declaration.IDrap.toString()}`} className="text-next-rapp-attacher" >
+                  Visualiser le rapport attaché <FontAwesomeIcon icon={faEye} className="icon-next" />
+                  </a></button>):( <button className='attacher' type='submit'>
                   <a href="/chefdeservice/Create" className="text-next-rapp-attacher" >
                     Attacher un fichier <FontAwesomeIcon icon={faAdd} className="icon-next" />
-                  </a></button>
+                  </a></button>)}
+           
             {ShowconfCour && <div className="alerte-msg">Vous avez modifié l'état de la déclaration vers en cours de traitement</div>}
             {ShowconfTrait && <div className="alerte-msg">Vous avez modifié l'état de la déclaration vers traitée</div>}
 
