@@ -2,7 +2,7 @@ import React from 'react'
 import './Admin.css'
 import Logo from '../../img/SmallerLogo.png' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell , faChartPie, faCircleExclamation,  faSliders, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faBell , faChartPie, faCircleExclamation,  faCogs,  faSliders, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom'   
    
 const user = JSON.parse(localStorage.getItem("user"));
@@ -52,7 +52,13 @@ export const NavGauche = () => {
          
         </div>
         <div className="left-elements">
-         
+                        
+                     
+                    <NavLink  to="/Admin/parametres"
+                              className={(navData) => (navData.isActive ? 'active' : 'link')}> 
+                              <FontAwesomeIcon icon={faCogs} className="icon-left" />
+                               <p>Gérer les paramètres</p>
+                    </NavLink>
                     
                     <NavLink  to="/Admin/aide"
                               className={(navData) => (navData.isActive ? 'active' : 'link')}> 

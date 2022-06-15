@@ -1,4 +1,4 @@
-export default function validateLog(val ,emailErrors,passworderrors){
+export default function validateLog(val ,emailErrors,passworderrors,validationerror){
     let errors = {}
 
     if(!val.email){
@@ -18,6 +18,9 @@ export default function validateLog(val ,emailErrors,passworderrors){
     else if (passworderrors) {
         errors.pswd = "Le mot de passe est incorrecte";
       }
+    if (validationerror) {
+      errors.pswd = "Le compte est désactivé , vous ne pouvez pas vous connecter!";
+    }
       return errors;
     
 }

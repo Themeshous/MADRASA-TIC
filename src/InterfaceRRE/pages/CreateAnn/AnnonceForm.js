@@ -267,7 +267,6 @@ export const AnnonceForm = () => {
           fichier: null,
           service: user.prof,
           etat: 'Enregistré'
-
     }).then((Response) => {
           console.log(Response);
     });*/

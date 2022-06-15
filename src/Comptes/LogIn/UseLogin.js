@@ -38,7 +38,7 @@ const UseLogin = (callback, ValidateLog) => {
     console.log(data);
     if (data.requestSucceeded) {
 
-      seterrors(ValidateLog(val, false, false));
+      seterrors(ValidateLog(val, false, false,false));
  
       const roles = data.role
       const name = data.nom
@@ -54,9 +54,12 @@ const UseLogin = (callback, ValidateLog) => {
 
     } else {
       if (!data.emailFound) {
-        seterrors(ValidateLog(val, true, false));
-      } else {
-        seterrors(ValidateLog(val, false, true));
+        seterrors(ValidateLog(val, true, false,false));
+      } else if(data.isActive===0) {
+        
+        seterrors(ValidateLog(val, false,false,true));
+      }else{
+        seterrors(ValidateLog(val,true,false,false));
       }
     }
     setisconnecting(true)
