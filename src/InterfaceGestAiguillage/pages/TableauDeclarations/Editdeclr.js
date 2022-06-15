@@ -94,6 +94,7 @@ let imgs = [
   '../../../img/alerting.jpg',
   'data:image/png;base64,'+base64String,
 ];
+const imageURL = "http://localhost:2000/images/e985db7b-c10a-4893-8b96-352b3d6e01ec.jpg";
   return (
     <>
       {isLoading ? (<p className='loading'>Chargement...</p>) :
@@ -147,7 +148,7 @@ let imgs = [
             <div className='element-line'>
               <div className='elem-rapport'>
                 <h1 className='titre-elem'>Image</h1>
-                <div className='related-info'>{declaration.imageFile ? (<img src={imgs[1]} alt="image attachée"/>) : ("Cette déclaration ne contient pas d'image")}</div>
+                <div className='related-info'>{declaration.imageFile ? (<img src={imageURL} alt="image attachée"/>) : ("Cette déclaration ne contient pas d'image")}</div>
               </div>
             </div>
 

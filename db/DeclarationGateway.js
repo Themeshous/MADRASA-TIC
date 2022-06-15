@@ -62,11 +62,12 @@ function attachImageToDeclarationAndReturnIt(declaration) {
         }
 
         function constructImageFormData() {
-            const imagesFolderPath = path.resolve(__dirname, './declarations_images/');
-            const imageFile = fs.readFileSync(imagesFolderPath + '/' + imagePath);
-            const formData = new FormData();
-            formData.append('image', imageFile);
-            return formData.getBuffer();
+            // const imagesFolderPath = path.resolve(__dirname, './declarations_images/');
+            // const imageFile = fs.readFileSync(imagesFolderPath + '/' + imagePath);
+            // const formData = new FormData();
+            // formData.append('image', imageFile);
+            // return formData.getBuffer();
+            return imagePath;
         }
     }
 }

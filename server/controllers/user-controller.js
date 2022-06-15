@@ -1,5 +1,7 @@
-const {saveDeclaration, getAllDeclaration,
-    getDeclarationsOfTheEmail, modifyDeclaration} = require('../../db/DeclarationGateway');
+const {
+    saveDeclaration, getAllDeclaration,
+    getDeclarationsOfTheEmail, modifyDeclaration
+} = require('../../db/DeclarationGateway');
 
 async function saveDeclarationToDB(req, res) {
     const declaration = req.body;
@@ -10,10 +12,9 @@ async function saveDeclarationToDB(req, res) {
 
 async function fetchAllNonRejetedDeclarations(req, res) {
     const declarations = await getAllDeclaration();
-    res.json(declarations.filter((declaration) => {
-        const rejectedState = "rejeter";
-        return declaration.etat !== rejectedState;
-    }));
+    res.json(
+        declarations.filter(declaration => declaration.etat === "validé" || declaration.etat === "en cours")
+    );
 }
 
 async function fetchArchivedDeclarationsByEmail(req, res) {
@@ -31,5 +32,7 @@ async function modifyArchivedDeclaration(request, response) {
     response.json("declartion has been modified");
 }
 
-module.exports = {saveDeclarationToDB, fetchAllNonRejetedDeclarations, fetchArchivedDeclarationsByEmail
-,modifyArchivedDeclaration}
+module.exports = {
+    saveDeclarationToDB, fetchAllNonRejetedDeclarations, fetchArchivedDeclarationsByEmail
+    , modifyArchivedDeclaration
+}
