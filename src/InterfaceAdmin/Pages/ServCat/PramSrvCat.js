@@ -1,50 +1,30 @@
 import React from 'react'
-import { useState, useEffect } from "react";
+import Service from './Service';
+import Categorie from './Categorie';
+import "./ServCat.css"
 const PramSrvCat = () => {
-    const [items, setItems] = useState([]);
-    const [fetchError, setFetchError] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    useEffect(() => {
-
-        const fetchItems = async () => {
-          try {
-            const response = await fetch("");
-            if (!response.ok) throw Error("les données n'ont pas été reçus");
-            const listItems = await response.json();
-            setItems(listItems);
-            setFetchError(null);
-          } catch (err) {
-            setFetchError(err.message);
-          } finally {
-            setIsLoading(false);
-          }
-        }
-    
-        setTimeout(() => fetchItems(), 1000);
-    
-      }, [])
-      useEffect(() => {
-
-        const fetchItems = async () => {
-          try {
-            const response = await fetch("");
-            if (!response.ok) throw Error("les données n'ont pas été reçus");
-            const listItems = await response.json();
-            setItems(listItems);
-            setFetchError(null);
-          } catch (err) {
-            setFetchError(err.message);
-          } finally {
-            setIsLoading(false);
-          }
-        }
-    
-        setTimeout(() => fetchItems(), 1000);
-    
-      }, [])
 
   return (
-    <div>PramSrvCat</div>
+    <div className='contenu-service-categorie'>
+     
+        <div className='service-categorie-middle-content'>
+          <div className='service-categorie-header'>
+            <h2 className='service-categorie-titre'>
+              Services
+            </h2>
+             <Service />
+          </div>
+          
+        </div>
+      <div className='service-categorie-middle-content'>
+          <div className='service-categorie-header'>
+            <h2 className='service-categorie-titre'>
+              Catégories
+            </h2>
+          <Categorie />
+      </div>
+      </div> 
+      </div>
   )
 }
 

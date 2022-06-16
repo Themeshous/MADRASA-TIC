@@ -14,6 +14,7 @@ export const ModDecServ = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [ShowconfCour, setShowconfcour] = useState(false);
   const [ShowconfTrait, setShowconftrait] = useState(false);
+  const [msg, setmsg] = useState("")
   useEffect(() => {
 
     const fetchItems = async () => {
@@ -43,10 +44,16 @@ export const ModDecServ = () => {
   const ChangeStatedeclarationcour = async () => {
     setShowconfcour(true);
     setShowconftrait(ShowconfTrait => false)
-    await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
+    if (!(declaration.etat==='Traité')) {
+      await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
       { id: declaration.id_dec, newState: "Encours", newService: declaration.service });
     //change etat to Encour
     //send to user that En cour de traitement
+    setmsg("Vous avez modifié l'état de la déclaration vers en cours de traitement")
+    } else {
+      setmsg("On ne peut pas changer l'état de cette déclaration car elle est déjà traitée!")
+    }
+    
   }
 
   const ChangeStatedeclarationtrait = async () => {
@@ -88,7 +95,7 @@ export const ModDecServ = () => {
             <div className='element-line'>
               <div className='elem-rapport'>
                 <h1 className='titre-elem'> Date</h1>
-                <div className='related-info'>{declaration.date}</div>
+                <div className='related-info'>{declaration.date.slice(0,10)}</div>
               </div>
               <div className='elem-rapport'>
                 <h1 className='titre-elem'> Etat</h1>
@@ -98,24 +105,24 @@ export const ModDecServ = () => {
             <div className='element-line'>
               <div className='elem-rapport'>
                 <h1 className='titre-elem'>Description</h1>
-                <div className='related-info'>{declaration.declaration ? (declaration.declaration) : ("Cette déclaration ne contient pas de description")}</div>
+                <div className='related-info'>{declaration.description ? (declaration.description) : ("Cette déclaration ne contient pas de description")}</div>
               </div>
             </div>
             <div className='element-line'>
               <div className='elem-rapport'>
                 <h1 className='titre-elem'>Image</h1>
-                <div className='related-info'>{declaration.image ? (declaration.image) : ("Cette déclaration ne contient pas d'image")}</div>
+                <div className='related-info'>{declaration.imageFile ? (<img src={"http://localhost:2000/images/" + declaration.imageFile} className='image-declaration'/>) : ("Cette déclaration ne contient pas d'image")}</div>
               </div>
             </div>
             {declaration.IDrap?(<button className='attacher' type='submit'>
                   <a href={`/chefserv/consulter/rapinfo?id=${declaration.IDrap.toString()}`} className="text-next-rapp-attacher" >
                   Visualiser le rapport attaché <FontAwesomeIcon icon={faEye} className="icon-next" />
                   </a></button>):( <button className='attacher' type='submit'>
-                  <a href="/chefdeservice/Create" className="text-next-rapp-attacher" >
-                    Attacher un fichier <FontAwesomeIcon icon={faAdd} className="icon-next" />
+                  <a href={`/chefdeservice/Create?id=${declaration.id_dec.toString()}`} className="text-next-rapp-attacher" >
+                    Attacher un rapport <FontAwesomeIcon icon={faAdd} className="icon-next" />
                   </a></button>)}
            
-            {ShowconfCour && <div className="alerte-msg">Vous avez modifié l'état de la déclaration vers en cours de traitement</div>}
+            {ShowconfCour && <div className="alerte-msg">{msg}</div>}
             {ShowconfTrait && <div className="alerte-msg">Vous avez modifié l'état de la déclaration vers traitée</div>}
 
           </div>

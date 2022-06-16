@@ -221,3 +221,29 @@ color: #020930c0;
     color: #595959;
     font-size: 12px;
 }
+.form-input-declaration-priority{
+    display: block;
+    padding: 5px;
+    outline: none;
+    border-radius: 10px;
+    height: 50px;
+    width: 70%;
+    border: none;
+    background-color:#f2f2f2;;
+    color: #595959;
+    font-size: 12px;
+}
+.lien-vers-rapport{
+    font-weight: bold;
+    color: #455de0;
+    font-size: large;
+    margin-left: 4%;
+    margin-top: 4%;
+}
+.lien-vers-rapport:hover{
+    font-size: larger;
+    color: chocolate;}
+.image-declaration{
+    width: 400px;
+    height:400px;
+}

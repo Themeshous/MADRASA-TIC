@@ -105,7 +105,7 @@ const ExecSubmitconf = () => {
         //enregistrer l'annonce dans la BDD
         axios.post("http://localhost:2000/announce/majAnnounce/" + id, {
             
-            datepost:((values.dated)?(values.dated):(announce.dated)),
+            datepost:((values.dated)?(values.dated):(announce.datepost)),
             titre:((values.titre)?(values.titre):(announce.titre)),
             organisateur:((values.organisateur)?(values.organisateur):(announce.organisateur)),
             description:((values.description)?(values.description):(announce.description)),
@@ -132,7 +132,7 @@ const ExecSubmitconfarch = () => {
         setsucces(true);
         setshowconfarch(false)
         axios.post("http://localhost:2000/announce/archiveAnnounce/" + id, {
-            datepost:((values.dated)?(values.dated):(announce.dated)),
+            datepost:((values.dated)?(values.dated):(announce.datepost)),
             titre:((values.titre)?(values.titre):(announce.titre)),
             organisateur:((values.organisateur)?(values.organisateur):(announce.organisateur)),
             description:((values.description)?(values.description):(announce.description)),

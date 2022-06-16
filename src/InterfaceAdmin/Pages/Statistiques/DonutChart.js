@@ -66,7 +66,7 @@ const DoughnutChart = () => {
                     '#00A6B4',
                     '#A3CAE5'
                 ],
-              data: [nombreserv('administrateur'), nombreserv('administrateur-secondaire'), nombreserv('chef de service'), nombreserv('responsable des relations extérieures'), nombreserv("responsable d'aiguillage")]
+              data: [nombreserv('administrateur'), nombreserv('administrateur-secondaire'), nombreserv('chef de service'), nombreserv('responsable des RE'), nombreserv("responsable d'aiguillage")]
         
             }
         ]

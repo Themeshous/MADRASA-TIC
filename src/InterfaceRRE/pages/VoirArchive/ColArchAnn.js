@@ -15,7 +15,7 @@ export const ColArchAnn= [
       Header: "Date de publication",
       accessor:"datepost",
        Cell:({value,row}) => {return (<div className='col-arch-line'>
-          {value}   {"  ... "} < SuppArch Searchkey={row.original.id_post.toString()}/>
+          {value.slice(0, 10)}   {"  ... "} < SuppArch Searchkey={row.original.id_post.toString()}/>
           </div>)},
      },
   
