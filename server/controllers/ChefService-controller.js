@@ -1,9 +1,11 @@
 
 
 const {setRapport,updateRapport,deleteRapport,deleteRapportarchive,getRapports,RestoreRapport, getRapportid,
-    getRapportEtat,changeRapportEtat,upfileRapport,getRapportsarchive, getRapportrespoagg} = require('../../db/RapportGateway');
+    getRapportEtat,changeRapportEtat,upfileRapport,getPathfile,getRapportsarchive, getRapportrespoagg} = require('../../db/RapportGateway');
 
 const path = require('path');
+const FormData = require('form-data');
+const fs = require("fs");
 
 
 async function saveRapport(req, res) {
@@ -108,7 +110,7 @@ async function upRapportFile(req, res) {
         const fichPath = path.join(__dirname, `../../db/rapports-uploads/${rapportFile.file.name}`);
         await rapportFile.file.mv(fichPath);
 
-        await upfileRapport(id_rap, `/rapports-uploads/${rapportFile.file.name}`);
+        await upfileRapport(id_rap, `/db/rapports-uploads/${rapportFile.file.name}`);
         return res.send("fichier sauvegarder");
 
     } else {
@@ -118,6 +120,20 @@ async function upRapportFile(req, res) {
 
 }
 
+async function getrapportfile(req, res) {
+
+    const idpath=req.body.ID;
+    const test = "50";
+    const path = await getPathfile(test);
+    console.log(path.fich_path);
+    
+    const fich = fs.readFileSync(`..${path.fich_path}`);
+    
+    const formData = new FormData();
+    formData.append('file',fich);
+    res.json(formData);
+}
+
 
 module.exports = {saveRapport,upRapport,supRapport,suppRapportarchive,fetchRapports,showRapport,
-                  showRapportotale,showRapportEtat,RestoreArchive,upEtatRapport,upRapportFile,fetchRapportsarchive}
+                  showRapportotale,showRapportEtat,getrapportfile,RestoreArchive,upEtatRapport,upRapportFile,fetchRapportsarchive}

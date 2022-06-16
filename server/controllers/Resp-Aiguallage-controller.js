@@ -74,6 +74,7 @@ async function uplaodDeclarationImage(request, response) {
 async function getDeclarationImage(request, response) {
     const images  = fs.readdirSync('../db/declarations_images');
     const imageFile = fs.readFileSync('../db/declarations_images/' + images[1]);
+    
     const formData = new FormData();
     formData.append('image',imageFile);
     response.json(formData);

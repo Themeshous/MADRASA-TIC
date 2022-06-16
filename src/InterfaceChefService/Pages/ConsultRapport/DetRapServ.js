@@ -3,7 +3,14 @@ import { useEffect, useState } from 'react'
 import "../../../InterfaceGestAiguillage/pages/ConsulterRapports/rapport.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight, faFileDownload, faPen } from '@fortawesome/free-solid-svg-icons'
+
+
+
 const DetRapServ = () => {
+
+
+
+  const [base64String, setbase64String] = useState(null);  
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -68,7 +75,32 @@ const DetRapServ = () => {
 
   }, [id, next, prev, rapport])
 
+  const [fichierrap, setfichierrap] = useState(null); 
+  useEffect(() => { 
+ 
+    const fetchItems = async () => { 
+      try { 
+        const response = await fetch("http://localhost:2000/rapport/getRapport/" );  
+        if (!response.ok) throw Error("les données n'ont pas été reçus"); 
+        const listItems = await response.json(); 
+        setfichierrap(listItems); 
+        
+        //fichierrap && setbase64String(arrayBufferToBase64(fichierrap._streams.data));
+        setFetchError(null); 
+      } catch (err) { 
+        setFetchError(err.message); 
+      } finally { 
+        setIsLoading(false); 
+      } 
+     
+    } 
+ 
+    setTimeout(() => fetchItems(), 1000); 
+ 
+  }, [id, fichierrap])
 
+  console.log(fichierrap);
+  
 
   return (
     <>
@@ -105,12 +137,12 @@ const DetRapServ = () => {
               <div className='elem-rapport'>
                 <div className='inline-items'>
                   <h1 className='titre-elem'> Fichier attaché</h1>
-                  {rapport.fich_path ? (<a href="/lien de fichier" download>
+                  {rapport.fich_path ? (<a href= "" download>
                     <FontAwesomeIcon icon={faFileDownload} className="icon-rapport" />
                   </a>) : ("")}
                 </div>
 
-                <div className='related-info'>{rapport.fich_path ? (rapport.fich_path) : ("Aucun fichier attaché")}</div>
+                <div className='related-info'>{rapport.fich_path ? (fichierrap) : ("Aucun fichier attaché")}</div>
               </div>
             </div>
             <div className='btn-rapport'>

@@ -117,7 +117,13 @@ async function upfileRapport (id,path){
 
 }
 
-async function Declarattach(){
+async function getPathfile(ID){
+    const selectsql = "SELECT fich_path FROM rapports WHERE id_rap = ?";
+    const [[result ]]=await connection.query(selectsql,[ID]);
+    if (result)
+        return result;
+    else
+        return { Pathexist: false }
 
 }
 
@@ -126,4 +132,4 @@ async function Declarattach(){
 
 module.exports = { setRapport,upfileRapport, updateRapport, deleteRapport,getRapports,
                    getRapportid,getRapportrespoagg,getRapportEtat,RestoreRapport,changeRapportEtat,
-                   getRapportsarchive,deleteRapportarchive};
+                   getRapportsarchive,getPathfile,deleteRapportarchive};

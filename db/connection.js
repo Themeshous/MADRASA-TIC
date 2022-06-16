@@ -7,10 +7,10 @@ require('dotenv').config({
 const {MYSQL_DB, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_USER} = process.env; 
  
 const db = mysql.createConnection({ 
-    host:MYSQL_HOST,
-    user:MYSQL_USER,
-    password:MYSQL_PASSWORD,
-    database:MYSQL_DB
+    host:'localhost',
+    user:'root',
+    password:'root',
+    database:'madrasatic'
 }); 
  
 db.connect(function (err) {
