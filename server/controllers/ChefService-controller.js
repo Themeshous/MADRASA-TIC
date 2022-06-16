@@ -16,7 +16,7 @@ async function saveRapport(req, res) {
     const Service = req.body.service; //champs obligatoire
     const Etat = req.body.etat;
     const sonDeclar = req.body.soniddec;
-    
+   
     
     const data = await setRapport(Date, Titre, Description, Service, Etat,sonDeclar);
     return res.send({data}); 

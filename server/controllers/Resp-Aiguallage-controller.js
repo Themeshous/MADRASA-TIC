@@ -54,7 +54,7 @@ async function updateDeclarationPriority(request, response) {
 
 async function uplaodDeclarationImage(request, response) {
     const declarationImage = request.files.image;
-    const id = request.body.declarationID;
+    const id = request.params.id;
     if (!declarationImage.mimetype.startsWith('image'))
         response.send('Please Upload Image');
 
