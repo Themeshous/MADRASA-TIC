@@ -74,14 +74,23 @@ export const ModRap = () => {
                   axios.post("http://localhost:2000/rapport/majRapport/" + id, {
                         titre:  ((values.titre)?(values.titre):(rapport.titre)),
                         description: ((values.description)?(values.description):(rapport.description)),
-                        fichier: "",
                         service: user.prof,
                         etat: "Enregistré"
 
                   }).then((Response) => {
-                        console.log(Response);
+                        
+                        const formData = new FormData();
+                        // Update the formData object
+                        console.log(fileSelected);
+                        formData.append("file",fileSelected);
+                        
+                        axios.put("http://localhost:2000/rapport/fichRapport/"+id,formData)
+                        console.log(formData);
                   });
-            } else { setmsg('Le rapport a été envoyé , les modifications ne peuvent pas etre enregistrées') }
+                   
+
+            } else 
+            { setmsg('Le rapport a été envoyé , les modifications ne peuvent pas etre enregistrées') }
 
 
 
@@ -96,15 +105,20 @@ export const ModRap = () => {
             axios.post("http://localhost:2000/rapport/majRapport/" + id, {
                   titre:  ((values.titre)?(values.titre):(rapport.titre)),
                   description:((values.description)?(values.description):(rapport.description)),
-                  fichier: "",
                   service: user.prof,
                   etat: "Envoyé"
 
             }).then((Response) => {
                   console.log(Response);
+                  const formData = new FormData();
+                  // Update the formData object
+                  console.log(fileSelected);
+                  formData.append("file",fileSelected);
+                  
+                  axios.put("http://localhost:2000/rapport/fichRapport/"+id,formData)
+                  console.log(formData);
             });
-            //ajouter le rapport si n'existe pas 
-            //modifier l'état de rapport dans la table des rapport si existe déja vers envoyé
+            
       }
 
       const executearch = async () => {
@@ -112,15 +126,11 @@ export const ModRap = () => {
             if (!(rapport.etat === "Envoyé")) {
                   setmsg('Le rapport a été archivé')
                   axios.post("http://localhost:2000/rapport/suppRapport/" + id, {
-                        titre: ((values.titre)?(values.titre):(rapport.titre)),
-                        description: ((values.description)?(values.description):(rapport.description)),
-                        fichier: "",
-                        service: user.prof,
-                        etat: rapport.etat
-
+                       
                   }).then((Response) => {
                         console.log(Response);
                   });
+
             } else { setmsg('Le rapport a été envoyé , ne peut pas etre archivé') }
             //archiver le rapport
       }

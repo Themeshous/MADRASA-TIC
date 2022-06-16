@@ -3,22 +3,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileDownload, faCircleChevronLeft, faCircleChevronRight } from '@fortawesome/free-solid-svg-icons'
 import validator from 'validator'
 import './Annonce.css'
+import axios from "axios";
 export const AnnonceForm = () => {
     //const user = JSON.parse(localStorage.getItem("user"));
     const [values, setValues] = useState({
         titre: '',
         description: '',
+        organisateur:'',
         fichier: null,
         image: null,
         lien: '',
-        dated: '',
-        datef: '',
+        dated: ''
     })
     const [errors, seterrors] = useState({})
     const [succes, setsucces] = useState()
     const [msg, setmsg] = useState('')
     const [showfirst, setshowfirst] = useState(true)
     const [fileSelected, setfileSelected] = useState(null);
+    const [showconf, setshowconf] = useState(false)
 
     const SelectFile = e => {
         setfileSelected(e.target.files[0])
@@ -43,10 +45,11 @@ export const AnnonceForm = () => {
           errors.lien = "le lien est non valide " 
 
         }
+        if (!values.organisateur.trim()) {
+            errors.organisateur="vous devez spécifier un organisateur"
+        }
         if (!values.dated.trim()) {
             errors.dated = "La date début est requise"
-        } if (!values.datef.trim()) {
-            errors.datef = "La date fin est requise"
         }
         return errors;
     }
@@ -62,32 +65,46 @@ export const AnnonceForm = () => {
     }, [succes])
 
     const execsuiv = () => {
-        if (!((values.description === '') && (values.titre === ''))) {
+        if (!((values.description === '') && (values.titre === '') && (values.organisateur === ''))) {
             setshowfirst(false)
             //passer à la page suivante
         }
-        if ((values.description === '') || (values.titre === '')) { setshowfirst(true) }
+        if ((values.description === '') || (values.titre === '')||(values.organisateur === '')) { setshowfirst(true) }
     }
     const execprec = () => {
         setshowfirst(true) 
 
     }
-    const ExecSubmitEnr = () => {
-        if( (!(validator.isURL(values.lien)) &&(values.lien.trim()))||(!values.dated.trim())||(!values.datef.trim())) { setsucces(false) }
-        if  ((!(!(validator.isURL(values.lien)) &&(values.lien.trim())))&&(values.dated.trim())&&(values.dated.trim())) {
-            setsucces(true);
-            setmsg("L'annonce a été enregistrée")
-            //enregistrer l'annonce dans la BDD
-        }
-    }
-
+    const ExecSubmitEnr=()=>{
+        setshowconf(true)
+        //afficher menu confirmation
+      }
+     
     const ExecSubmitEnv = () => {
-        if( (!(validator.isURL(values.lien)) &&(values.lien.trim()))||(!values.dated.trim())||(!values.datef.trim())) { setsucces(false) }
-        if  ((!(!(validator.isURL(values.lien)) &&(values.lien.trim())))&&(values.dated.trim())&&(values.dated.trim())) {
+        if( (!(validator.isURL(values.lien)) &&(values.lien.trim()))||(!values.dated.trim())) { setsucces(false) }
+        if  ((!(!(validator.isURL(values.lien)) &&(values.lien.trim())))&&(values.dated.trim())) {
             setsucces(true);
-            setmsg("L'annonce va etre partagée le jour " + values.dated)
-
+            setshowconf(false)
             //partager l'annonce
+            axios.post("http://localhost:2000/announce/remplirAnnounce", {
+                datepost:values.dated,
+                titre:values.titre,
+                organisateur:values.organisateur,
+                description:values.description,
+                lien:values.lien ? values.lien:""
+      
+
+          }).then((Response) => {
+                
+                console.log(Response.data.data.idann);
+                const Id = Response.data.data.idann.toString();
+                const formData = new FormData();
+                // Update the formData object
+                formData.append("file",fileSelected);
+                axios.put("http://localhost:2000/announce/majAnnouncefiles/"+Id,formData)
+                console.log(formData);
+          });
+
         }
     }
     
@@ -109,6 +126,22 @@ export const AnnonceForm = () => {
                                     onChange={handlechange}
                                 />
                                 {errors.titre && <p className='error-msg'>{errors.titre}</p>}
+                            </div>
+
+                        </div>
+                        <h3 className='titl-annonce'>L'organisateur</h3>
+                        <div className='form-iput-annonce'>
+                            <div className='form-inputs-annonce' >
+                                <label className='form-label-annonce'>Qui est l'organisateur de l'évènnement</label>
+
+                                <input id="organisateur" type="text"
+                                    name="organisateur"
+                                    className='input-org-annonce'
+                                    placeholder='Ajoutez un organisateur...'
+                                    value={values.organisateur}
+                                    onChange={handlechange}
+                                />
+                                {errors.organisateur && <p className='error-msg'>{errors.organisateur}</p>}
                             </div>
 
                         </div>
@@ -140,7 +173,7 @@ export const AnnonceForm = () => {
                             <FontAwesomeIcon icon={faCircleChevronLeft} /> précédent </button>
                     </div>
                     
-                    <h2 className='titre-annonce'> Ajoutez plus de détails por votre annonce:</h2>
+                    <h2 className='titre-annonce'> Ajoutez plus de détails pour votre annonce:</h2>
 
                     <div className='content-form-annonce'>
                         <h3 className='titl-annonce'> Ajoutez un lien :</h3>
@@ -177,22 +210,6 @@ export const AnnonceForm = () => {
                                 </div>
 
                             </div>
-                            <div className='form-iput-annonce'>
-                                <div className='form-inputs-annonce' >
-                                    <label className='form-label-annonce'>Date de fin d'apparition :</label>
-
-                                    <input id="datef" type="date"
-                                        name="datef"
-                                        className='input-title-annonce'
-                                        placeholder="mm/jj/aaaa"
-                                        value={values.datef}
-                                        onChange={handlechange}
-                                   
-                                    />
-                                    {errors.datef && <p className='error-msg'>{errors.datef}</p>}
-                                </div>
-
-                            </div>
                         </div>
                         <h3 className='titl-annonce'>  Attachez un fichier ou une image: </h3>
                         <div className='form-iput-annonce'>
@@ -222,15 +239,22 @@ export const AnnonceForm = () => {
                     </div>
 
                     <div className='form-button-annonce'>
-                        <button type='submit' className='form-input-btn-par Enregistrer' onClick={ExecSubmitEnr} >
-                            <p> Enregistrer </p></button>
-
-                        <button type='submit' className='form-input-btn-par Envoyer' onClick={ExecSubmitEnv} >
+                        <button type='submit' className='form-input-btn-par Envoyer' onClick={ ExecSubmitEnr} >
                             <p> Envoyer </p></button>
-
-
                     </div>
-                    {succes && <div className="alerte-msg">{msg}</div>}</>)}
+                    {showconf && (<div className='menu-envoyer'>
+                <h4 className='titre-supp-conf'>si vous envoyer cette annonce va etre partagée!</h4>
+                <div className="btn-in-line">
+                    <button className='btn-conf annuler'  onClick={() => setshowconf(showconf => false) }>
+                        <p> Annuler</p>
+                    </button>
+                    <button className='btn-conf confirmer'  onClick={ExecSubmitEnv}>
+                        <a href='/RRE/Consulter' className='lien-archiv'> confirmer</a>
+                    </button>
+                </div>
+            </div>)
+        }
+                    {succes && <div className="alerte-msg">{"L'annonce va etre partagée le jour " + values.dated}</div>}</>)}
             </form>
         </div>
     )
@@ -243,7 +267,6 @@ export const AnnonceForm = () => {
           fichier: null,
           service: user.prof,
           etat: 'Enregistré'
-
     }).then((Response) => {
           console.log(Response);
     });*/

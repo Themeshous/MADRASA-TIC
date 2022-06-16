@@ -5,9 +5,20 @@ import { faFileDownload } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 
 export const CreerRapp = () => {
-
+      
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const id = urlParams.get('id')
       const user = JSON.parse(localStorage.getItem("user"));
-        const formData = new FormData();
+  
+       const [date,setdate]= useState("")
+       useEffect(() => {
+         let today=new Date();
+         let date = today.getFullYear()+ "/" +(today.getMonth()+1)+"/"+today.getDate();
+         setdate(date)
+       }, []);
+        
+     
       const [values, setValues] = useState({
             titre: '',
             description: '',
@@ -45,11 +56,8 @@ export const CreerRapp = () => {
 
       const SelectFile = e => {
             setfileSelected(e.target.files[0])
-            setValues({
-                  ...values,
-                  fichier: fileSelected
-            })
-      }
+      } 
+         
       useEffect(() => {
             setInterval(() => { setsucces(false); }, 7000)
       }, [succes])
@@ -57,24 +65,32 @@ export const CreerRapp = () => {
       console.log(fileSelected);
 
       const executeenreg = () => {
+       
             if (!((values.description === '') && (values.titre === ''))) {
-                     // Create an object of formData
-                     // Update the formData object
-                     formData.append(fileSelected);
-                     // Details of the uploaded file
-                     console.log(this.state.selectedFile);
               
                   axios.post("http://localhost:2000/rapport/remplirRapport", {
-                        date: "24 / 05 / 2002",
+                        date: date,
                         titre: values.titre,
                         description: values.description,
-                        fichier: formData,
                         service: user.prof,
-                        etat: 'Enregistré'
+                        etat: 'Enregistré',
+                        soniddec:id
 
                   }).then((Response) => {
-                        console.log(Response);
+                        //console.log(Response);
+                        console.log(Response.data.data.idrap);
+                        const Id = Response.data.data.idrap.toString();
+                        const formData = new FormData();
+                        // Update the formData object
+                        console.log(fileSelected);
+                        formData.append("file",fileSelected);
+                        
+                        axios.put("http://localhost:2000/rapport/fichRapport/"+Id,formData)
+                        console.log(formData);
+                                  
+                    
                   });
+ 
                   setsucces(true);
                   setmsg('Le rapport a été enregistré')
 
@@ -87,22 +103,20 @@ export const CreerRapp = () => {
       }
 
       const executeenvoy = () => {
+            const data = new FormData();
+            data.append('File',fileSelected);
             if (!((values.description === '') && (values.titre === ''))) {
                   setsucces(true);
                   setmsg('Le rapport a été envoyé')
-                    // Create an object of formData
-               
-                    // Update the formData object
-                    formData.append(fileSelected);
-                    // Details of the uploaded file
-                    console.log(this.state.selectedFile);
+                
                   axios.post("http://localhost:2000/rapport/remplirRapport", {
-                        date: "24 / 05 / 2002",
+                        date: date,
                         titre: values.titre,
                         description: values.description,
-                        fichier: fileSelected,
+                        fichier: data,
                         service: user.prof,
-                        etat: 'Envoyé'
+                        etat: 'Envoyé',
+                        soniddec:id
 
                   }).then((Response) => {
                         console.log(Response);

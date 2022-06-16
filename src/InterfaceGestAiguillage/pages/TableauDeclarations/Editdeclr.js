@@ -4,25 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareCheck, faSquareXmark } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import axios from "axios";
-import imagetoshow from '../../../img/alerting.jpg'
-import {Buffer} from 'buffer';
+import { Buffer } from 'buffer';
 export const Edit = () => {
-
- const arrayBufferToBase64 = buffer => {
-    let binary = '';
-    let bytes = new Uint8Array(buffer);
-    let len = bytes.byteLength;
-    for (let i = 0; i < len; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    return window.btoa(binary);
-  };
-
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get('id')
- 
+
   const [base64String, setbase64String] = useState(null)
   const [image, setimage] = useState(null)
   const [declaration, setdeclaration] = useState(null);
@@ -30,7 +18,9 @@ export const Edit = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [Showconfrej, setShowconfrej] = useState(false);
   const [Showconfval, setShowconfval] = useState();
-  const [values, setvalues] = useState({ service: '', remarque: '' });
+  const [Services, setServices] = useState([]);
+  const [values, setvalues] = useState({ service: '', remarque: '', priority: '' });
+  const [errors, seterrors] = useState({})
   useEffect(() => {
 
     const fetchItems = async () => {
@@ -39,8 +29,7 @@ export const Edit = () => {
         if (!response.ok) throw Error("les données n'ont pas été reçus");
         const listItems = await response.json();
         setdeclaration(listItems);
-        setimage(declaration.imageFile );
-        image && setbase64String(arrayBufferToBase64(image.data));
+        setimage(declaration.imageFile);
         setFetchError(null);
 
       } catch (err) {
@@ -54,14 +43,39 @@ export const Edit = () => {
 
 
   }, [id, declaration])
- 
-  
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await fetch("http://localhost:2000/service");
+        if (!response.ok) throw Error("les données n'ont pas été reçus");
+        const listItems = await response.json();
+        setServices(listItems);
+        setFetchError(null);
+      } catch (err) {
+        setFetchError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    setTimeout(() => fetchItems(), 1000);
+
+  }, [])
+
+
   const handlechange = e => {
     const { name, value } = e.target
     setvalues({
       ...values,
       [name]: value
     })
+  }
+  const validate = (values) => {
+    let errors = {}
+    if (!values.remarque.trim()) {//si new service appartient à la table
+      errors.remarque = "La remarque est obligatoire"
+    }
+    return errors;
   }
   useEffect(() => {
     setInterval(() => { setsuccess(false); }, 7000)
@@ -73,28 +87,38 @@ export const Edit = () => {
 
     setShowconfrej(Showconfrej => false)
     setsuccess(true);
-    setmsg('La déclaration a été rejetée')
+
     console.log(id);
-    await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
-      { id: declaration.id_dec, newState: "rejeter", newService: values.service ,remarque:values.remarque});
+    if (declaration.etat === "pas encore orienté") {
+      await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
+        { id: declaration.id_dec, newState: "rejeter", newService: values.service, remarque: values.remarque });
+      await axios.patch('http://localhost:2000/declaration/userDeclarations/changepriority',
+        { id: declaration.id_dec, priority: values.priority });
+      setmsg('La déclaration a été rejetée')
+    } else {
+      setmsg('La déclaration ne peut pas etre rejetée , elle est déjas validée et prise en compte')
+    }
+
   }
 
   const ChangeStatedeclarationval = async () => {
 
     setShowconfval(Showconfval => false)
     setsuccess(true);
-    setmsg('La déclaration a été validée et envoyée au chef de service')
-    await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
-      { id: declaration.id_dec, newState: "valider", newService: values.service });
-    //Send to user la declation est prise en compte
-  }
-//console.log('"' + image.data + '" converted to Base64 is "' + image.data.toString('base64')+ '"')
 
-let imgs = [
-  '../../../img/alerting.jpg',
-  'data:image/png;base64,'+base64String,
-];
-const imageURL = "http://localhost:2000/images/e985db7b-c10a-4893-8b96-352b3d6e01ec.jpg";
+    if (declaration.etat === "pas encore orienté") {
+      await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
+        { id: declaration.id_dec, newState: "valider", newService: values.service });
+      await axios.patch('http://localhost:2000/declaration/userDeclarations/changepriority',
+        { id: declaration.id_dec, priority: values.priority });
+      setmsg('La déclaration a été validée et envoyée au chef de service',values.service)
+    } else {
+      setmsg('on ne peut pas revalider cette déclaration car elle est déjas validée et prise en compte')
+    }
+
+  }
+
+  const imageURL = "http://localhost:2000/images/e985db7b-c10a-4893-8b96-352b3d6e01ec.jpg";
   return (
     <>
       {isLoading ? (<p className='loading'>Chargement...</p>) :
@@ -105,16 +129,16 @@ const imageURL = "http://localhost:2000/images/e985db7b-c10a-4893-8b96-352b3d6e0
               <h1 className='sous-titre-elem'>Lieu:
                 <p className='head-related-info'>{declaration.localisation}</p>
               </h1>
-              
-            <div className='inline-items-declaration'>
-              <button className='submit rejeter' type='submit'
-                onClick={() => { setShowconfrej(true); setShowconfval(false) }} >
-                Rejeter <FontAwesomeIcon icon={faSquareXmark} className="icon-next" /></button>
-              <button className='submit valider' type='submit'
-                onClick={() => { setShowconfval(true); setShowconfrej(false) }}>
-                Valider <FontAwesomeIcon icon={faSquareCheck} className="icon-next" /></button>
 
-            </div>
+              <div className='inline-items-declaration'>
+                <button className='submit rejeter' type='submit'
+                  onClick={() => { setShowconfrej(true); setShowconfval(false) }} >
+                  Rejeter <FontAwesomeIcon icon={faSquareXmark} className="icon-next" /></button>
+                <button className='submit valider' type='submit'
+                  onClick={() => { setShowconfval(true); setShowconfrej(false) }}>
+                  Valider <FontAwesomeIcon icon={faSquareCheck} className="icon-next" /></button>
+
+              </div>
 
             </div>
 
@@ -126,7 +150,7 @@ const imageURL = "http://localhost:2000/images/e985db7b-c10a-4893-8b96-352b3d6e0
               </div>
               <div className='elem-rapport'>
                 <h1 className='titre-elem'> Date</h1>
-                <div className='related-info'>{declaration.date}</div>
+                <div className='related-info'>{declaration.date.slice(0,10)}</div>
               </div>
             </div>
             <div className='element-line'>
@@ -142,19 +166,62 @@ const imageURL = "http://localhost:2000/images/e985db7b-c10a-4893-8b96-352b3d6e0
             <div className='element-line'>
               <div className='elem-rapport'>
                 <h1 className='titre-elem'>Description</h1>
-                <div className='related-info'>{declaration.declaration ? (declaration.declaration) : ("Cette déclaration ne contient pas de description")}</div>
+                <div className='related-info'>{declaration.description ? (declaration.description) : ("Cette déclaration ne contient pas de description")}</div>
+              </div>
+              <div className='elem-rapport'>
+                <h1 className='titre-elem'>Priorité</h1>
+                <div className='related-info'>
+                  <select
+                    id='priority'
+                    type="text"
+                    name='priority'
+                    className='form-input-declaration-priority'
+                    placeholder={declaration.priority}
+                    value={values.priority}
+                    onChange={handlechange} >
+                    {
+                      (declaration.priority === 'Basse') ? (<>
+                        <option value="Basse" selected>Basse</option>
+                        <option value="Moyenne">Moyenne</option>
+                        <option value="Haute">Haute</option></>)
+                        : (declaration.priority === 'Haute') ? <>
+                          <option value="Haute" selected>Haute</option>
+                          <option value="Moyenne">Moyenne</option>
+                          <option value="Basse" >Basse</option>
+
+                        </>
+                          : (<><option value="Moyenne" selected>Moyenne</option>
+                            <option value="Basse" >Basse</option>
+                            <option value="Haute">Haute</option>
+                          </>)
+
+
+                    }
+
+                  </select>
+                </div>
               </div>
             </div>
             <div className='element-line'>
               <div className='elem-rapport'>
                 <h1 className='titre-elem'>Image</h1>
-                <div className='related-info'>{declaration.imageFile ? (<img src={imageURL} alt="image attachée"/>) : ("Cette déclaration ne contient pas d'image")}</div>
+                <div className='related-info'>{declaration.imageFile ? (<img src={imageURL} alt="image-declaration" className='image-declaration' />) : ("Cette déclaration ne contient pas d'image")}</div>
               </div>
             </div>
-
-            <div className='element-line'>
-            <div className='related-info'><img src={imgs[0]} alt='image'/></div> 
-            </div>
+            {
+              declaration.IDrap? 
+              (<div className='element-line'>
+              <div className='elem-rapport'>
+                <h1 className='titre-elem'>Rapport</h1>
+              <a href={`/ResAig/rapports/rapinfo/?id=${declaration.IDrap.toString()}`}  className='lien-vers-rapport'>Voir le rapport attaché</a></div>
+              
+            </div>) :  (<div className='element-line'>
+              <div className='elem-rapport'>
+                <h1 className='titre-elem'>Rapport</h1>
+                <div className='related-info'>Aucun rapport attaché</div>
+              </div>
+              </div>)
+            }
             {Showconfrej && <div className="confirmation-déclaration-valider">
               <h4 className="texte-xonfirmation">
                 Voulez vous vraiment rejeter ce compte ?
@@ -167,6 +234,7 @@ const imageURL = "http://localhost:2000/images/e985db7b-c10a-4893-8b96-352b3d6e0
                 placeholder='Saisir pourquoi vous avez rejeté cette déclaration'
                 value={values.remarque}
                 onChange={handlechange} />
+                {errors.remarque && <p>{errors.remarque}</p>}
               <div className="btn-in-line">
                 <button className='btn-conf annuler' type='submit' onClick={() => setShowconfrej(Showconfrej => false)}>
                   <p> Annuler</p>
@@ -194,10 +262,10 @@ const imageURL = "http://localhost:2000/images/e985db7b-c10a-4893-8b96-352b3d6e0
                   value={values.service}
                   onChange={handlechange}>
                   <option value="choisir" selected>Choisir ...</option>
-                  <option value="Technique">Technique</option>
-                  <option value="sécurité">Sécurité</option>
-                  <option value="médecin">médecin</option>
-                  <option value="maintenance">maintenance</option>
+                  {Services.map((serv) =>
+
+                    <option key={serv} value={serv}>{serv}</option>
+                  )}
                 </select>
 
               </div>

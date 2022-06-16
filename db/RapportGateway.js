@@ -2,15 +2,16 @@ const connection = require('./connection');
 
  
 
-async function setRapport(date,titre,description,path,service,etat,Iddecetrange) {
+async function setRapport(date,titre,description,service,etat,Iddecetrange) {
 
     const sqlinsert = "INSERT INTO rapports (date, titre, description, service, etat) VALUES (?,?,?,?,?)";
 
     const data = [date, titre, description, service,etat]
     try {
        const [{insertId: Idrapport}]= await connection.query(sqlinsert, data);
-       upfileRapport(Idrapport,path);
+       //upfileRapport(Idrapport,path);
        ExchnageClef(Idrapport,Iddecetrange);
+       return {idrap: Idrapport};
     } catch (error) {
         return {rapportSaved: false, message: error.sqlMessage};
     }
@@ -26,6 +27,7 @@ async function setRapport(date,titre,description,path,service,etat,Iddecetrange)
 
     }
     console.log("rapport saved");
+    
     return {rapportSaved: true};
     
 }
@@ -115,7 +117,13 @@ async function upfileRapport (id,path){
 
 }
 
-async function Declarattach(){
+async function getPathfile(ID){
+    const selectsql = "SELECT fich_path FROM rapports WHERE id_rap = ?";
+    const [[result ]]=await connection.query(selectsql,[ID]);
+    if (result)
+        return result;
+    else
+        return { Pathexist: false }
 
 }
 
@@ -124,4 +132,4 @@ async function Declarattach(){
 
 module.exports = { setRapport,upfileRapport, updateRapport, deleteRapport,getRapports,
                    getRapportid,getRapportrespoagg,getRapportEtat,RestoreRapport,changeRapportEtat,
-                   getRapportsarchive,deleteRapportarchive};
+                   getRapportsarchive,getPathfile,deleteRapportarchive};

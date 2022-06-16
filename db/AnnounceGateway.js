@@ -2,17 +2,17 @@ const connection = require('./connection');
 var path = require('path');
  
 
-async function setAnnounce(Announce,fich,pic) {
+async function setAnnounce(datepost,titre,organisateur,description,lien) {
 
     const sqlinsert = "INSERT INTO announce (datepost, titre, organisateur, description, lien) VALUES (?,?,?,?,?)";
     
-    const data = [Announce.datepost, Announce.titre, Announce.organisateur, Announce.description,Announce.lien]
+    const data = [datepost,titre, organisateur, description,lien]
     
     try {
        const [{insertId: Idannounce}]=  await connection.query(sqlinsert, data);
+       return{idann:Idannounce};
 
-       updatefile(Idannounce,fich);
-       updateimg(Idannounce,pic);
+       //updatefile(Idannounce,fich);updateimg(Idannounce,pic);
 
     } catch (error) {
         return {AnnounceSaved: false, message: error.sqlMessage};
@@ -31,7 +31,7 @@ async function updatefile(id,path){
 async function updateimg(id,path){
   const sqlupdate = "UPDATE announce SET img = ? WHERE id_post = ?";
   const result = await connection.query(sqlupdate, [path, id]);
-  console.log("image uploaded in db");
+  console.log("image saved");
 
 }
 
@@ -85,23 +85,13 @@ async function Restoreannounce(ID) {
 async function getAnnounce(){
     const selectsql = "SELECT * FROM announce WHERE archive = false AND supp = false";
     const [result] = await connection.query(selectsql);
-    if (result.length !== 0) {
-        return result;
-    } else {
-        return {AnnounceFound: false}
-    }
-    
+    return result;    
 }
 
 async function getAnnouncearchive(){
   const selectsql = "SELECT * FROM announce WHERE archive = true AND supp = false";
   const [result] = await connection.query(selectsql);
-  if (result.length !== 0) {
-      return result;
-  } else {
-      return {AnnounceFound: false}
-  }
-  
+  return result;  
 }
 
 

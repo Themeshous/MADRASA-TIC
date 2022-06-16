@@ -1,0 +1,161 @@
+.propos {
+    margin: 50px;
+    font-family: Open Sans, sans-serif;
+}
+
+.propos p {
+    margin-left: 6%;
+    
+    line-height: 1.5rem;
+    color: #42425a;
+    font-size: 16px;
+}
+
+.propos h2 {
+    padding: 10px;
+    margin-top: -10px;
+    margin-bottom: 50px;
+
+    font-size: 30px;
+    color: #050505a5;
+}
+
+.propos h3 {
+    padding: 10px;
+    margin: 10px 0 1% 5%;
+    width: 25%;
+    text-align: center;
+    font-size: 22px;
+    color: #151556;
+    background-color: rgba(235, 236, 242, 0.815);
+    border-radius: 10%;
+}
+
+.propos h4 {
+    padding: 10px;
+        
+    font-size: 18px;
+    font-weight: bold;
+    color: #151556;
+    background-color: rgba(235, 236, 242, 0.815);
+    border-radius: 10%;
+    
+}
+
+.first {
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+
+
+.propos img {
+    vertical-align: middle;
+    width: 30%;
+}
+
+.first img {
+    margin-left: 4%;
+}
+
+.line {
+    width: 5px;
+    height: 150px;
+    border-right: 0.5px solid #948181;
+    background-color: #728197;
+    margin: 20px;
+}
+
+.first .context {
+    width: 80%;
+}
+
+.line-title {
+    margin: 5% 0 2% 4%;
+    display: flex;
+    align-items: center;
+}
+
+.small_line {
+    width: 22px;
+    height: 5px;
+    
+    border-right: 0.5px solid #948181;
+    background-color: #728197;
+    transform: rotate(-90deg);
+}
+
+.sub-container {
+    padding: 30px 0;
+    margin: auto;
+    max-width: 1200px;
+    
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.teams {
+    padding: 22px 45px;
+    margin: 4%;
+    max-width: 25%;
+    
+    cursor: pointer;
+    background: rgba(222, 216, 216, 0.699);
+    box-sizing: border-box;
+    border-radius: 12px;
+
+}
+
+.teams:hover {
+    background: linear-gradient(to top, rgb(222, 216, 216), rgba(191, 163, 139, 0.515));
+    border-radius: 4%;
+}
+
+.teams img {
+
+ width: 200px;
+ height: 200px;
+    
+}
+.ProfileImg{
+    
+ border-radius: 50%; 
+}
+
+.name {
+    padding: 5px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.desig {
+    font-style: italic;
+    color: #888;
+}
+
+.about {
+    margin: 20px 0;
+    font-weight: lighter;
+    color: #4e4e4e;
+}
+
+.social-links {
+    margin: 14px;
+}
+
+.social-links a {
+    margin-right: 4%;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    color: rgb(17, 17, 91);
+    transition: 0.4s;
+}
+
+.social-links a:hover {
+    transform: scale(1.5);
+}
