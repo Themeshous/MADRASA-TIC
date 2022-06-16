@@ -42,7 +42,7 @@ async function updateFiles(req,res){
     //file.mv(filepath);
     await image.file.mv(imgpath);
     //await updatefile(id,`/announce-uploads/${file.name}`);
-    await updateimg(id,`/announce-uploads/${image.file.name}`);
+    await updateimg(id,`${image.file.name}`);
    
     }else{
         await updateimg(id, 'Null');

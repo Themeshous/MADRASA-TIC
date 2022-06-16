@@ -31,7 +31,7 @@ async function updatefile(id,path){
 async function updateimg(id,path){
   const sqlupdate = "UPDATE announce SET img = ? WHERE id_post = ?";
   const result = await connection.query(sqlupdate, [path, id]);
-  console.log("image saved");
+  console.log("file/img uploaded");
 
 }
 
@@ -88,7 +88,7 @@ async function getAnnounce(){
     if (result.length !== 0) {
         return result;
     } else {
-        return {AnnounceFound: false}
+        return {result}
     }
     
 }

@@ -71,7 +71,7 @@ async function getRapportsarchive(Service) {
     if (result)
         return result;
     else
-        return { RapportFound: false }
+        return result;
 }
 
 async function getRapportrespoagg(){

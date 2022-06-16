@@ -110,7 +110,7 @@ async function upRapportFile(req, res) {
         const fichPath = path.join(__dirname, `../../db/rapports-uploads/${rapportFile.file.name}`);
         await rapportFile.file.mv(fichPath);
 
-        await upfileRapport(id_rap, `/db/rapports-uploads/${rapportFile.file.name}`);
+        await upfileRapport(id_rap, `${rapportFile.file.name}`);
         return res.send("fichier sauvegarder");
 
     } else {
