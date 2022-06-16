@@ -22,7 +22,7 @@ async function saveRapport(req, res) {
 
     const filepath = path.join(__dirname, `../../db/rapports-uploads/${rapportfile.name}`);
     rapportfile.mv(filepath);
-    const  pathfich = `/rapports-uploads/${rapportfile.name}`;
+    const  pathfich = `${rapportfile.name}`;
   
     const data = await setRapport(Date, Titre, Description,pathfich, Service, Etat,sonDeclar);
     
