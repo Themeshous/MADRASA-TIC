@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import "../../../InterfaceGestAiguillage/pages/ConsulterRapports/rapport.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight, faFileDownload, faPen } from '@fortawesome/free-solid-svg-icons'
+import { response } from 'express'
 
 
 
@@ -84,7 +85,7 @@ const DetRapServ = () => {
         if (!response.ok) throw Error("les données n'ont pas été reçus"); 
         const listItems = await response.json(); 
         setfichierrap(listItems); 
-        
+
         //fichierrap && setbase64String(arrayBufferToBase64(fichierrap._streams.data));
         setFetchError(null); 
       } catch (err) { 
@@ -100,6 +101,7 @@ const DetRapServ = () => {
   }, [id, fichierrap])
 
   console.log(fichierrap);
+  console.log(response.pathfile);
   
 
   return (
@@ -137,7 +139,7 @@ const DetRapServ = () => {
               <div className='elem-rapport'>
                 <div className='inline-items'>
                   <h1 className='titre-elem'> Fichier attaché</h1>
-                  {rapport.fich_path ? (<a href= "" download>
+                  {rapport.fich_path ? (<a href={response.pathfile} download>
                     <FontAwesomeIcon icon={faFileDownload} className="icon-rapport" />
                   </a>) : ("")}
                 </div>

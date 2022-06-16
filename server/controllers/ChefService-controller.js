@@ -132,6 +132,7 @@ async function getrapportfile(req, res) {
     const formData = new FormData();
     formData.append('file',fich);
     res.json(formData);
+    return {pathfile:`..${path.fich_path}` };
 }
 
 
