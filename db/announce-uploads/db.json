@@ -1,0 +1,28 @@
+{
+  "Medicaments": [
+      {
+        "nom": "Doliprane",
+        "prix": "1000da",
+        "quantité": "30 boites",
+        "id": 1,
+        "date" : "12-03-2023",
+        "etat" : "disponible"
+      },
+      {
+        "nom": "Tirlor",
+        "prix": "1000da",
+        "quantité": "50 boites",
+        "id": 2,
+        "date" : "12-03-2023",
+        "etat" : "disponible"
+      },
+      {
+        "nom": "Xydol-gen",
+        "prix": "1000da",
+        "quantité": "60 boites",
+        "id": 3,
+        "date" : "12-03-2023",
+        "etat" : "disponible"
+      }
+    ]
+}

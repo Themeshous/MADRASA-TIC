@@ -112,23 +112,23 @@ const DetAnn = () => {
             <div className='elem-rapport'>
               <div className='inline-items'>
                 <h1 className='titre-elem'> Fichier attaché</h1>
-                {announce.fichier ? (<a href="/lien de fichier" download>
+                {announce.img ? (<a href={"http://localhost:2000/announces/"+announce.img.slice(18,)} download>
                   <FontAwesomeIcon icon={faFileDownload} className="icon-rapport" />
                 </a>) : ("")}
               </div>
 
-              <div className='related-info'>{announce.fichier ? (announce.fichier) : ("Aucun fichier attaché")}</div>
+              <div className='related-info'>{announce.img? (announce.img.slice(18,)) : ("Aucun fichier attaché")}</div>
             </div>
             
           </div>
           <div className='btn-rapport'>
             {showbtnleft ? (<div className='btn-next'>
-              <a href={`/RRE/Consulter/details?id=${(tab[ind- 1] )}`} className="text-next-rapp" >
+              <a href={`/RRE/Consulter/details/?id=${(tab[ind- 1] )}`} className="text-next-rapp" >
                 <FontAwesomeIcon icon={faChevronLeft} className="icon-next" />Précédent
               </a>
             </div>) : (<div className="white-point"> </div>)}
             {showbtnright ? (<div className='btn-next'>
-              <a href={`/RRE/Consulter/details?id=${(tab[ind+1] )}`} className="text-next-rapp" >Suivant
+              <a href={`/RRE/Consulter/details/?id=${(tab[ind+1] )}`} className="text-next-rapp" >Suivant
                 <FontAwesomeIcon icon={faChevronRight} className="icon-next" />
               </a>
             </div>) : (<div className="white-point"></div>)}

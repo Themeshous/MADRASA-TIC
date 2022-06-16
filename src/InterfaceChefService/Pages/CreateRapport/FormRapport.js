@@ -5,7 +5,10 @@ import { faFileDownload } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 
 export const CreerRapp = () => {
-
+      
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const id = urlParams.get('id')
       const user = JSON.parse(localStorage.getItem("user"));
   
        const [date,setdate]= useState("")
@@ -25,7 +28,6 @@ export const CreerRapp = () => {
       const [errors, seterrors] = useState({})
       const [succes, setsucces] = useState()
       const [msg, setmsg] = useState('')
-      const [Id, setId] = useState()
       const handlechange = e => {
             const { name, value } = e.target
             setValues({
@@ -72,7 +74,7 @@ export const CreerRapp = () => {
                         description: values.description,
                         service: user.prof,
                         etat: 'Enregistré',
-                        soniddec:"2"
+                        soniddec:id
 
                   }).then((Response) => {
                         //console.log(Response);
@@ -114,7 +116,7 @@ export const CreerRapp = () => {
                         fichier: data,
                         service: user.prof,
                         etat: 'Envoyé',
-                        soniddec:"2"
+                        soniddec:id
 
                   }).then((Response) => {
                         console.log(Response);

@@ -71,7 +71,7 @@ export const TableComptes = () => {
         </div>
         <div className='tableau'>
           <table {...getTableProps()}>
-            <thead style={{border: '1px solid black',borderRadius: '15px!important'}}>
+            <thead>
               {headerGroups.map(headerGroup => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
