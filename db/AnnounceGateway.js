@@ -85,23 +85,13 @@ async function Restoreannounce(ID) {
 async function getAnnounce(){
     const selectsql = "SELECT * FROM announce WHERE archive = false AND supp = false";
     const [result] = await connection.query(selectsql);
-    if (result.length !== 0) {
-        return result;
-    } else {
-        return {AnnounceFound: false}
-    }
-    
+    return result;    
 }
 
 async function getAnnouncearchive(){
   const selectsql = "SELECT * FROM announce WHERE archive = true AND supp = false";
   const [result] = await connection.query(selectsql);
-  if (result.length !== 0) {
-      return result;
-  } else {
-      return {AnnounceFound: false}
-  }
-  
+  return result;  
 }
 
 

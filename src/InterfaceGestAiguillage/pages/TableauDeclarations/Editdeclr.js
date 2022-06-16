@@ -20,6 +20,7 @@ export const Edit = () => {
   const [Showconfval, setShowconfval] = useState();
   const [Services, setServices] = useState([]);
   const [values, setvalues] = useState({ service: '', remarque: '', priority: '' });
+  const [errors, seterrors] = useState({})
   useEffect(() => {
 
     const fetchItems = async () => {
@@ -68,6 +69,13 @@ export const Edit = () => {
       ...values,
       [name]: value
     })
+  }
+  const validate = (values) => {
+    let errors = {}
+    if (!values.remarque.trim()) {//si new service appartient à la table
+      errors.remarque = "La remarque est obligatoire"
+    }
+    return errors;
   }
   useEffect(() => {
     setInterval(() => { setsuccess(false); }, 7000)
@@ -226,6 +234,7 @@ export const Edit = () => {
                 placeholder='Saisir pourquoi vous avez rejeté cette déclaration'
                 value={values.remarque}
                 onChange={handlechange} />
+                {errors.remarque && <p>{errors.remarque}</p>}
               <div className="btn-in-line">
                 <button className='btn-conf annuler' type='submit' onClick={() => setShowconfrej(Showconfrej => false)}>
                   <p> Annuler</p>
