@@ -1,12 +1,12 @@
 const bcrypt = require('../server/node_modules/bcryptjs');
 const connection = require('./connection');
 
-async function saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1, Numero) {
+async function saveUser(Nom, Prenom, Email, Role, Profession, Password, Password1, Numero,Code) {
     const hashpswd = await bcrypt.hash(Password, 8);
 
-    const sqlinsert = "INSERT INTO users (Nom, Prenom, Email, Role, Profession, Password, Password1, NumTel) VALUES (?,?,?,?,?,?,?,?)";
+    const sqlinsert = "INSERT INTO users (Nom, Prenom, Email, Role, Profession, Password, Password1, NumTel,CodeVer) VALUES (?,?,?,?,?,?,?,?,?)";
     try {
-        await connection.query(sqlinsert, [Nom, Prenom, Email, Role, Profession, hashpswd, Password1, Numero], (err) => {
+        await connection.query(sqlinsert, [Nom, Prenom, Email, Role, Profession, hashpswd, Password1, Numero,Code], (err) => {
             if (err) console.log(err);
         });
     } catch (error) {
@@ -63,9 +63,10 @@ async function setNewPassword(password, email) {
 }
 
 async function updateuser(User, Id) {
+
     const hashpswd = await bcrypt.hash(User.Password, 8);
-    const sqlupdate = "UPDATE users SET Email=? ,Profession = ?, Password =? ,Password1 = ? ,NumTel = ? WHERE id_user = ?";
-    const data = [User.Email, User.Profession, hashpswd, User.Password, Id]
+    const sqlupdate = "UPDATE users SET Password =? ,Password1 = ? ,NumTel = ? WHERE id_user = ?";
+    const data = [hashpswd, User.Password,User.NumTel, Id]
     try {
         await connection.query(sqlupdate, data);
     } catch (error) {
@@ -76,4 +77,11 @@ async function updateuser(User, Id) {
 
 }
 
-module.exports = {saveUser, findUser, setActiveUser, getAllUsers, setNewPassword, updateuser};
+async function getCode(Email) {
+    const query = "SELECT CodeVer FROM users WHERE Email = ?";
+    const [[result]] = await connection.query(query,[Email]);
+    return result;
+}
+
+
+module.exports = {saveUser, findUser, getCode,setActiveUser, getAllUsers, setNewPassword, updateuser};

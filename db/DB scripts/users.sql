@@ -12,6 +12,7 @@ CREATE TABLE `users` (
     `Profession` VARCHAR(50),
     `Password` VARCHAR(200) NOT NULL,
     `Password1` VARCHAR(50),
+    `CodeVer` DOUBLE NULL DEFAULT '0' ,
     `isActive`BOOLEAN DEFAULT TRUE,
      PRIMARY KEY (`id_user`)
 );
