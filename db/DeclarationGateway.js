@@ -16,11 +16,11 @@ async function saveDeclaration(declaration) {
     try {
         const [{insertId: declarationID}] = await connection.query(insert, data);
         saveImageFile(declaration.imageFile, declarationID);
+        console.log("declaration saved");
+        return {declarationID};
     } catch (error) {
         return {declarationSaved: false, message: error.sqlMessage};
     }
-    console.log("declaration saved");
-    return {declarationSaved: true};
 
 }
 
