@@ -4,14 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareCheck, faSquareXmark } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import axios from "axios";
-import { Buffer } from 'buffer';
+
 export const Edit = () => {
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get('id')
 
-  const [base64String, setbase64String] = useState(null)
   const [image, setimage] = useState(null)
   const [declaration, setdeclaration] = useState(null);
   const [fetchError, setFetchError] = useState(null);
@@ -73,9 +72,14 @@ export const Edit = () => {
   const validate = (values) => {
     let errors = {}
     if (!values.remarque.trim()) {//si new service appartient à la table
-      errors.remarque = "La remarque est obligatoire"
+      errors.remarque = "Vous devez spécifier pourquoi vous rejetez cette déclaration"
     }
     return errors;
+  }
+  const HandleSubmit = e => {
+    e.preventDefault();
+    seterrors(validate(values));
+
   }
   useEffect(() => {
     setInterval(() => { setsuccess(false); }, 7000)
@@ -84,19 +88,22 @@ export const Edit = () => {
   const [msg, setmsg] = useState('')
 
   const ChangeStatedeclarationrej = async () => {
-
-    setShowconfrej(Showconfrej => false)
     setsuccess(true);
 
     console.log(id);
-    if (declaration.etat === "pas encore orienté") {
+    if (declaration.etat === "pas encore orienté" && values.remarque) {
       await axios.patch('http://localhost:2000/declaration/userDeclarations/changeState',
         { id: declaration.id_dec, newState: "rejeter", newService: values.service, remarque: values.remarque });
       await axios.patch('http://localhost:2000/declaration/userDeclarations/changepriority',
         { id: declaration.id_dec, priority: values.priority });
       setmsg('La déclaration a été rejetée')
+      setShowconfrej(Showconfrej => false)
+    } else if (!values.remarque) {
+      setsuccess(false);
+      setShowconfrej(Showconfrej => true)
     } else {
       setmsg('La déclaration ne peut pas etre rejetée , elle est déjas validée et prise en compte')
+      setShowconfrej(Showconfrej => false)
     }
 
   }
@@ -111,7 +118,7 @@ export const Edit = () => {
         { id: declaration.id_dec, newState: "valider", newService: values.service });
       await axios.patch('http://localhost:2000/declaration/userDeclarations/changepriority',
         { id: declaration.id_dec, priority: values.priority });
-      setmsg('La déclaration a été validée et envoyée au chef de service',values.service)
+      setmsg('La déclaration a été validée et envoyée au chef de service', values.service)
     } else {
       setmsg('on ne peut pas revalider cette déclaration car elle est déjas validée et prise en compte')
     }
@@ -150,7 +157,7 @@ export const Edit = () => {
               </div>
               <div className='elem-rapport'>
                 <h1 className='titre-elem'> Date</h1>
-                <div className='related-info'>{declaration.date.slice(0,10)}</div>
+                <div className='related-info'>{declaration.date.slice(0, 10)}</div>
               </div>
             </div>
             <div className='element-line'>
@@ -209,41 +216,51 @@ export const Edit = () => {
               </div>
             </div>
             {
-              declaration.IDrap? 
-              (<div className='element-line'>
+              declaration.etat === "rejeter" &&  <div className='element-line'>
               <div className='elem-rapport'>
-                <h1 className='titre-elem'>Rapport</h1>
-              <a href={`/ResAig/rapports/rapinfo/?id=${declaration.IDrap.toString()}`}  className='lien-vers-rapport'>Voir le rapport attaché</a></div>
-              
-            </div>) :  (<div className='element-line'>
-              <div className='elem-rapport'>
-                <h1 className='titre-elem'>Rapport</h1>
-                <div className='related-info'>Aucun rapport attaché</div>
+                <h1 className='titre-elem'>remarque</h1>
+                <div className='related-info'>{declaration.remarques_de_responsable}</div>
               </div>
-              </div>)
+            </div>
+            }
+            {
+              declaration.IDrap ?
+                (<div className='element-line'>
+                  <div className='elem-rapport'>
+                    <h1 className='titre-elem'>Rapport</h1>
+                    <a href={`/ResAig/rapports/rapinfo/?id=${declaration.IDrap.toString()}`} className='lien-vers-rapport'>Voir le rapport attaché</a></div>
+
+                </div>) : (<div className='element-line'>
+                  <div className='elem-rapport'>
+                    <h1 className='titre-elem'>Rapport</h1>
+                    <div className='related-info'>Aucun rapport attaché</div>
+                  </div>
+                </div>)
             }
             {Showconfrej && <div className="confirmation-déclaration-valider">
               <h4 className="texte-xonfirmation">
                 Voulez vous vraiment rejeter ce compte ?
               </h4>
-              <input
-                id='remarque'
-                type="text"
-                name='remarque'
-                className='form-input-declaration-rej'
-                placeholder='Saisir pourquoi vous avez rejeté cette déclaration'
-                value={values.remarque}
-                onChange={handlechange} />
-                {errors.remarque && <p>{errors.remarque}</p>}
-              <div className="btn-in-line">
-                <button className='btn-conf annuler' type='submit' onClick={() => setShowconfrej(Showconfrej => false)}>
-                  <p> Annuler</p>
-                </button>
-                <button className='btn-conf confirmer' type='submit'
-                  onClick={ChangeStatedeclarationrej}>
-                  <p> confirmer</p>
-                </button>
-              </div>
+              <form onSubmit={HandleSubmit}>
+                <input
+                  id='remarque'
+                  type="text"
+                  name='remarque'
+                  className='form-input-declaration-rej'
+                  placeholder='Saisir pourquoi vous avez rejeté cette déclaration'
+                  value={values.remarque}
+                  onChange={handlechange} />
+                {errors.remarque && <p className='remarque-error'>{errors.remarque}</p>}
+                <div className="btn-in-line">
+                  <button className='btn-conf annuler' type='submit' onClick={() => setShowconfrej(Showconfrej => false)}>
+                    <p> Annuler</p>
+                  </button>
+                  <button className='btn-conf confirmer' type='submit'
+                    onClick={ChangeStatedeclarationrej}>
+                    <p> confirmer</p>
+                  </button>
+                </div>
+              </form>
             </div>
             }
             {Showconfval && <div className="confirmation-déclaration-valider">

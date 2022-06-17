@@ -55,11 +55,11 @@ const UseLogin = (callback, ValidateLog) => {
     } else {
       if (!data.emailFound) {
         seterrors(ValidateLog(val, true, false,false));
-      } else if(data.isActive===0) {
-        
+      } else if (!data.passwordFound){
+          seterrors(ValidateLog(val,false,true,false));
+      }
+      if((data.isActive)===false){
         seterrors(ValidateLog(val, false,false,true));
-      }else{
-        seterrors(ValidateLog(val,true,false,false));
       }
     }
     setisconnecting(true)

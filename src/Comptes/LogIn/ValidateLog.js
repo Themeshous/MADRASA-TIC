@@ -18,7 +18,7 @@ export default function validateLog(val ,emailErrors,passworderrors,validationer
     else if (passworderrors) {
         errors.pswd = "Le mot de passe est incorrecte";
       }
-    if (validationerror) {
+    else if (validationerror) {
       errors.pswd = "Le compte est désactivé , vous ne pouvez pas vous connecter!";
     }
       return errors;
