@@ -15,14 +15,14 @@ const SupCatServ = ({keysearch,name}) => {
         setsuccess(true)
         if (name==='service') {
             setmsg("Le service est supprimé!")
-            axios.delete("http://localhost:2000/service", {service:"Igiène" })
+            console.log(keysearch);
+            axios.delete("http://localhost:2000/service/" + keysearch);
         } else {
             //supprimer la qategory key
             setmsg("La catégorie est supprimée!")
-            axios.delete("http://localhost:2000/category", {service:keysearch })
+            axios.delete("http://localhost:2000/category/" + keysearch);
         }
     }
-   console.log(keysearch);
   return (
     <div>
                 <button onClick={() => setShowsuppservice(true)} className='services-categorie-btn-sup'>

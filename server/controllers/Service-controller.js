@@ -7,14 +7,12 @@ async function getServices(req, res) {
 
 async function addService(req, res) {
     const newService = req.body.service;
-    await Gateway.addService(newService);
-    res.json("service added");
+    res.json(await Gateway.addService(newService));
 }
 
 async function deleteService(req, res) {
-    const service = req.body.service;
-    await Gateway.deleteService(service);
-    res.json("service deleted");
+    const service = req.params.service;
+    res.json(await Gateway.deleteService(service));
 }
 
 module.exports = {getServices, addService, deleteService};
