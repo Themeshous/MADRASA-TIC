@@ -1,0 +1,61 @@
+.services-categorie{
+    width: 420px;
+}
+.contenu-service-categorie{
+    width: 80%;
+    padding: 5%;
+    margin-left: 20%;
+    display: flex;
+    justify-content: space-between;
+}
+.service-categorie-titre{
+    margin-bottom: 10%;
+}
+.ligne-servcie-cat{
+    display: flex;
+    justify-content: space-between;
+}
+.services-categorie-btn-sup{
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+.services-categorie-ajouter{
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    color: #455de0;
+    font-size: large;
+    margin-left: 53%;
+    margin-bottom: 10%;
+}
+.services-categorie-ajouter:hover{
+    font-size: larger;
+    color: chocolate;
+}
+.services-categorie-confirmation{
+    position: absolute;
+    left: 45%;
+    top: 40%;
+    background-color: #bdbdc2;
+    padding:3% 6%  3% 6%;
+}
+.form-category{
+    display:grid;
+}
+.services-categorie-conf-text{
+    color: rgba(0, 0, 0, 0.815);
+    margin-bottom: 5%;    
+}
+.form-input-declaration-services-categorie{
+    border-radius: 5px;
+    margin-bottom: 10%;
+    width: 110%;
+    color: rgba(0, 0, 0, 0.753);
+}
+.remarque-error-category{
+    color: red;
+}
+.form-iput-catégory{
+    width: 110%;    
+}
