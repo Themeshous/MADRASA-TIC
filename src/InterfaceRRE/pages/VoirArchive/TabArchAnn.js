@@ -52,9 +52,9 @@ const TabArchAnn = () => {
   
     const { globalFilter } = state;
     return (<>
-      { isLoading?(<p className = 'loading' > Chargement...</p>):
-      fetchError?(<p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>):
-      (items.length === 0)?(<p className = 'loading' > la table est vide!</p>):
+      {isLoading ? (<p className='loading' > Chargement...</p>) :
+      fetchError ? (<p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>) :
+        (items.length === 0) ? (<p className='loading' > la table est vide!</p>) :
     <div className='milieu-consultation'>
       <div className='barre-recherche'>
         <FontAwesomeIcon icon={faSearch} className="icon" />

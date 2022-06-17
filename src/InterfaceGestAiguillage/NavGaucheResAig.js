@@ -25,13 +25,6 @@ export const NavGaucheResAig = () => {
                                <p>Consulter les déclarations</p> 
                     </NavLink>
                    
-                    <NavLink  to="/ResAig/rapports"
-                              className={(navData) => (navData.isActive ? 'active' : 'link')}> 
-                               <FontAwesomeIcon icon={faEdit} className="icon-left" />
-                               <p>Consulter les rapports</p> 
-                    </NavLink>
-
-                    
                     <NavLink  to="/ResAig/notification"
                               className={(navData) => (navData.isActive ? 'active' : 'link')}> 
                              <FontAwesomeIcon icon={faBell} className="icon-left" /> 

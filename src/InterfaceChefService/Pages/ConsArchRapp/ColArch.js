@@ -4,17 +4,15 @@ import SuppRapp from './SuppRapp'
 export const ColArch= [
 
     {
-      Header: "ID",
-      accessor:"id_rap" 
-    },
-    {
-      Header: "Date",
-      accessor:"date" 
-     },
-    {
       Header: "Titre",
       accessor:"titre" 
     },
+    {
+      Header: "Date",
+      accessor:"date" ,
+      Cell:({value}) => { return (<>{value.slice(0,10)}  </>)}
+     },
+  
     
     {
       Header: "Description",

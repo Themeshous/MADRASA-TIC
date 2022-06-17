@@ -1,18 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPen } from '@fortawesome/free-solid-svg-icons'
 export const Colonnes = [
-    {
-      Header: "ID",
-      accessor:"id_dec" 
-    },
-    {
-      Header: "Date",
-      accessor:"date" 
-     },
-    {
+{
       Header: "Titre",
       accessor:"titre" 
     },
+    {
+      Header: "Date",
+      accessor:"date" ,
+      Cell:({value})=> { return (<>{value.slice(0,10)}  </>)}
+     },
+    
     
     {
       Header: "Emetteur",
