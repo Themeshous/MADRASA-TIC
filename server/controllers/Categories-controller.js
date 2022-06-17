@@ -12,7 +12,7 @@ async function addCategory(req, res) {
 }
 
 async function deleteCategory(req, res) {
-    const category = req.body.category;
+    const category = req.params.category;
     await Gateway.deleteCategory(category);
     res.json("category deleted");
 }

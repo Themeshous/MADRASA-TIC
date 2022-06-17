@@ -8,14 +8,12 @@ const Aide = () => {
     const images = [<First />, <Second />, <Third />, <Fourth />, <Fifth />];
 
     const [page, setpage] = useState(0);
-    let precedent = true;
-    let suivant = true;
+    let precedent;
+    let suivant;
 
-    if (page == 0) { precedent = false; }
-    else { precedent = true }
+    precedent = page !== 0;
 
-    if (page == (images.length - 1)) { suivant = false }
-    else { suivant = true }
+    suivant = page !== (images.length - 1);
 
     return (
         <div className="CenterContent">

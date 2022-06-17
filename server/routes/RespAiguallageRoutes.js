@@ -14,7 +14,7 @@ router.get('/consulterDeclarations/:service', fetchDeclarationsByService);
 router.patch('/userDeclarations/changeState', updateDeclarationState);
 router.patch('/userDeclarations/changepriority', updateDeclarationPriority);
 
-router.post('/userDeclarations/uplaodImage',uplaodDeclarationImage);
+router.post('/userDeclarations/uplaodImage/:id',uplaodDeclarationImage);
 
 
 

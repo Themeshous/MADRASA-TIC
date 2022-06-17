@@ -16,8 +16,8 @@ async function setRapport(date,titre,description,service,etat,Iddecetrange) {
         return {rapportSaved: false, message: error.sqlMessage};
     }
     function ExchnageClef(idrap,iddec){
-        sqlinsert_rap = "UPDATE rapports SET IDdec = ? WHERE id_rap = ?";
-        sqlinsert_dec = "UPDATE declarations SET IDrap = ? WHERE id_dec = ?";
+        const sqlinsert_rap = "UPDATE rapports SET idDec = ? WHERE id_rap = ?";
+        const sqlinsert_dec = "UPDATE declarations SET IDrap = ? WHERE id_dec = ?";
 
         const datarap = [iddec,idrap];
         const datadec = [idrap,iddec];

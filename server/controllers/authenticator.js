@@ -15,8 +15,8 @@ async function login(req, res) {
        return res.json({requestSucceeded: false, emailFound: false });
     if (!data.passwordFound)
        return res.json({requestSucceeded: false, emailFound: true, passwordIncorrect: true  });
-       if (!data.isActive)
-       return res.json({requestSucceeded: false, isActive: false  });
+   if (!data.isActive)
+       return res.json({requestSucceeded: false,emailFound: true,passwordIncorrect: true,isActive:false});
     else
        return res.json(createToken(data));
 

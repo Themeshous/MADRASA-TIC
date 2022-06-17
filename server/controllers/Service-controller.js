@@ -7,14 +7,22 @@ async function getServices(req, res) {
 
 async function addService(req, res) {
     const newService = req.body.service;
-    await Gateway.addService(newService);
-    res.json("service added");
+    res.json(AddServiceAndEnableAssociatedHeadOfServiceAccount());
+
+    function AddServiceAndEnableAssociatedHeadOfServiceAccount() {
+        Gateway.addService(newService)
+        return Gateway.enableHeadsOfServiceAccounts(newService);
+    }
 }
 
 async function deleteService(req, res) {
-    const service = req.body.service;
-    await Gateway.deleteService(service);
-    res.json("service deleted");
+    const service = req.params.service;
+    res.json( await deleteServiceAndDesableAssociatedHeadOfServiceAccount() );
+
+    function deleteServiceAndDesableAssociatedHeadOfServiceAccount() {
+        Gateway.deleteService(service)
+        return Gateway.disableHeadsOfServiceAccounts(service);
+    }
 }
 
 module.exports = {getServices, addService, deleteService};
