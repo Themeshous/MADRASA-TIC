@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get('/' , getServices);
 router.post('/', addService);
-router.delete('/', deleteService);
+router.delete('/:service', deleteService);
 
 module.exports = router;
