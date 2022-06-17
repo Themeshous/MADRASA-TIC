@@ -5,6 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileDownload, faPen } from '@fortawesome/free-solid-svg-icons'
 const DetRapServ = () => {
 
+
+
+  const [base64String, setbase64String] = useState(null);  
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get('id')
