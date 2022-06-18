@@ -12,10 +12,6 @@ const Header = () => {
     <>
       <nav className='Header-for-interface'>
         <div className='nav-container'>
-
-          <div className="nav-elem" >
-            <FontAwesomeIcon icon={faBell} className="icon" />
-          </div>
           <div className="nav-elem" >
             <div className="prfl">
               <p className='profile-letters'>{d}</p>

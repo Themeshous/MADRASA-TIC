@@ -94,7 +94,7 @@ const Categorie = () => {
     <div>
       {isLoading ? (<p className='loading'>Chargement...</p>) :
         fetchError ? (<p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>) :
-          (categorie.length === 0) ? (<p className='loading' > la table est vide!</p>) :
+          (categorie.length === 0) ? (<p className='loading' >La table des catégories est vide!</p>) :
             <div className='services-categorie'>
               <button className='services-categorie-ajouter' onClick={() => { setShowaddcat(true) }}>Ajouter une catégorie +</button>
               <div className='services-categorie-side'>
@@ -158,7 +158,7 @@ const Categorie = () => {
                     {errors.service && <p className='remarque-error'>{errors.service}</p>}
                   </div>
                   <div className="btn-in-line">
-                    <button className='btn-conf annuler' type='submit' onClick={() => setShowaddcat(Showaddcat => false)}>
+                    <button className='btn-conf annuler ' type='submit' onClick={() => setShowaddcat(Showaddcat => false)}>
                       <p> Annuler</p>
                     </button>
                     <button className='btn-conf confirmer' type='submit' onClick={Ajoutercategorie}>

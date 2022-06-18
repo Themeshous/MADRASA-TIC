@@ -118,18 +118,18 @@ table {
  border-radius: 5px;
  border-style: none;
 }
-.annuler{
+.confirmer{
   background-color: #62df1ac0;
 }
-.annuler:hover{
+.confirmer:hover{
   background-color: #62df1a;
   color: white;
   cursor: pointer;
 }
-.confirmer{
+.annuler{
   background-color: #eb32329d;
 }
-.confirmer:hover{
+.annuler:hover{
   background-color: #f31c1c;
   color: white;
   cursor: pointer;

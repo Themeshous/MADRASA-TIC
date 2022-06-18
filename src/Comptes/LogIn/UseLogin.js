@@ -36,9 +36,12 @@ const UseLogin = (callback, ValidateLog) => {
     };
     const { data } = await axios.post("http://localhost:2000/auth/connect", loginUser);
     console.log(data);
-    if (data.requestSucceeded) {
+    if (data.role==="standard user") {
+      seterrors(ValidateLog(val, false, false,false,true))
+    }
+    else if (data.requestSucceeded) {
 
-      seterrors(ValidateLog(val, false, false,false));
+      seterrors(ValidateLog(val, false, false,false,false));
  
       const roles = data.role
       const name = data.nom
@@ -54,12 +57,12 @@ const UseLogin = (callback, ValidateLog) => {
 
     } else {
       if (!data.emailFound) {
-        seterrors(ValidateLog(val, true, false,false));
+        seterrors(ValidateLog(val, true, false,false,false));
       } else if (!data.passwordFound){
-          seterrors(ValidateLog(val,false,true,false));
+          seterrors(ValidateLog(val,false,true,false,false));
       }
       if((data.isActive)===false){
-        seterrors(ValidateLog(val, false,false,true));
+        seterrors(ValidateLog(val, false,false,true,false));
       }
     }
     setisconnecting(true)

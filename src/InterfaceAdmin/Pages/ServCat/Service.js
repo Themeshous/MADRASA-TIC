@@ -58,9 +58,8 @@ const Service = () => {
   }
   const validate = (values) => {
     let errors = {}
-    if (Services.includes(values.newservice)) {//si new service appartient à la table
-      errors.newservice = "Ce service existe déjà"
-    }
+    if (!values.newservice.trim()) {//si new service appartient à la table
+      errors.newservice = "le service est requis"    }
     return errors;
   }
   const HandleSubmit = e => {
@@ -72,7 +71,7 @@ const Service = () => {
   const Ajouterservice = () => {
    
     //ajouter le service si il n y a pas d erreur
-    if (!(Services.includes(values.newservice))) {
+    if (values.newservice) {
        setShowaddserv(false)
        axios.post("http://localhost:2000/service",{service:values.newservice})
     }else{
@@ -135,7 +134,7 @@ const Service = () => {
                     placeholder='Nom de nouveau service'
                     value={values.newservice}
                     onChange={handlechange} />
-                  {errors.newservice && <p>{errors.newservice}</p>}
+                  {errors.newservice && <p className='remarque-error'>{errors.newservice}</p>}
                   <div className="btn-in-line">
                     <button className='btn-conf annuler' type='submit' onClick={() => setShowaddserv(Showaddserv => false)}>
                       <p> Annuler</p>

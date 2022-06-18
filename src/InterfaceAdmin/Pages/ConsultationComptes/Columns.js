@@ -13,10 +13,10 @@ export const Columns = [
     Header: "Email",
     accessor:"email"
   },
-  {
+  /*{
     Header: "Téléphone",
     accessor:"telephone"
-  },
+  },*/
   {
     Header: "Rôle",
     accessor: "role"
