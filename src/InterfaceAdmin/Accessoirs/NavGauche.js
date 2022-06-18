@@ -32,17 +32,7 @@ export const NavGauche = () => {
                               className={(navData) => (navData.isActive ? 'active' : 'link')}> 
                               <FontAwesomeIcon icon={faSliders} className="icon-left" />
                                <p>Consulter les comptes</p>
-                    </NavLink>
-   
-           
-                    
-                    <NavLink  to="/Admin/notification"
-                              className={(navData) => (navData.isActive ? 'active' : 'link')}> 
-                             <FontAwesomeIcon icon={faBell} className="icon-left" /> 
-                            <p>Notifications</p> 
-                    </NavLink>
-          
-       
+                    </NavLink>       
                    
                    <NavLink  to="/Admin/statistiques"
                               className={(navData) => (navData.isActive ? 'active' : 'link')}> 

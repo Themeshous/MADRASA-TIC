@@ -39,13 +39,7 @@ export const NavGauchRRE = () => {
                               className={(navData) => (navData.isActive ? 'active' : 'link')}> 
                               <FontAwesomeIcon icon={faSliders} className="icon-left" />
                                <p>Consulter l'archive</p>
-                    </NavLink>
-                    <NavLink  to="/RRE/notification"
-                              className={(navData) => (navData.isActive ? 'active' : 'link')}> 
-                             <FontAwesomeIcon icon={faBell} className="icon-left" /> 
-                            <p>Notifications</p> 
-                    </NavLink>
-          
+                    </NavLink>       
        
                    
                    <NavLink  to="/RRE/statistiques"

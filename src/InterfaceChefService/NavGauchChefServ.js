@@ -30,15 +30,6 @@ export const NavGaucheChefSer = () => {
                   <p>Consulter l'archive</p>
                </NavLink>
 
-
-               <NavLink to="/ChefSer/notification"
-                  className={(navData) => (navData.isActive ? 'active' : 'link')}>
-                  <FontAwesomeIcon icon={faBell} className="icon-left" />
-                  <p>Notifications</p>
-               </NavLink>
-
-
-
                <NavLink to="/ChefSer/statistiques"
                   className={(navData) => (navData.isActive ? 'active' : 'link')}>
                   <FontAwesomeIcon icon={faChartPie} className="icon-left" />

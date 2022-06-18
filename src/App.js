@@ -43,6 +43,9 @@ import TableAnn from "./InterfaceRRE/pages/TableAnn"
 import ModAnnPg from "./InterfaceRRE/pages/ModAnnPg"
 import DetAnnPg from "./InterfaceRRE/pages/DetAnnPg"
 import ParamServCat from './InterfaceAdmin/Pages/ParamServCat.js';
+import ChefservStat from './InterfaceChefService/Pages/ChefservStat.js';
+import StatRre from './InterfaceRRE/pages/StatRre.js';
+
 function App() {
   return (
     <>
@@ -91,6 +94,7 @@ function App() {
             <Route path='/chefserv/consulter/modifier/rapinfo' element={<ModRapServ />} />
             <Route path='/chefserv/Aide' element={<AideChefServ />} />
             <Route path='/chefserv/Archive' element={<VoirArch />} />
+            <Route path='ChefSer/statistiques' element={<ChefservStat/>}/>
           </Route>
 
 
@@ -102,6 +106,7 @@ function App() {
             <Route path='/RRE/Consulter' element={<TableAnn/>}/>
             <Route path='/RRE/Consulter/modifier' element={<ModAnnPg/>}/>
             <Route path='/RRE/Consulter/details' element={<DetAnnPg/>}/>
+            <Route path='/RRE/statistiques' element={<StatRre/>}/>
           </Route>
 
           

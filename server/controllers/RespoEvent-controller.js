@@ -44,9 +44,9 @@ async function updateFiles(req,res){
     //await updatefile(id,`/announce-uploads/${file.name}`);
     await updateimg(id,`${image.file.name}`);
    
-    }else{
+    }/*else{
         await updateimg(id, 'Null');
-    }
+    }*/
 }
 
 

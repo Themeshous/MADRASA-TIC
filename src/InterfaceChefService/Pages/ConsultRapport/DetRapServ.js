@@ -7,8 +7,6 @@ const DetRapServ = () => {
 
 
 
-  const [base64String, setbase64String] = useState(null);  
-
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get('id')
@@ -74,12 +72,12 @@ const DetRapServ = () => {
               <div className='elem-rapport'>
                 <div className='inline-items'>
                   <h1 className='titre-elem'> Fichier attaché</h1>
-                  {rapport.fich_path ? (<a href={"http://localhost:2000/rapports/"+rapport.fich_path.slice(21,)} download>
+                  {rapport.fich_path ? (<a href={"http://localhost:2000/rapports/"+rapport.fich_path} download>
                     <FontAwesomeIcon icon={faFileDownload} className="icon-rapport" />
                   </a>) : ("")}
                 </div>
 
-                <div className='related-info'>{rapport.fich_path ? (rapport.fich_path.slice(21,)) : ("Aucun fichier attaché")}</div>
+                <div className='related-info'>{rapport.fich_path ? (rapport.fich_path) : ("Aucun fichier attaché")}</div>
               </div>
             </div>
          {

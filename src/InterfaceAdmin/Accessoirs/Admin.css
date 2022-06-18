@@ -183,6 +183,7 @@ margin-bottom: 5%;
 /*page statiqtiques*/
 .satat{
     display: flex;
+    margin-bottom: 30%;
 }
 
 .chars-admin{
@@ -198,10 +199,10 @@ margin-bottom: 5%;
     margin-bottom: 10%;
 }
 .Bar-char{
-   padding-top: 30px;
-   padding-left: 10px;
-   padding-right: 10px;
+   padding: 25px 12px 25px 12px;
     width: 450px;
     height: 450px;
     border: #020930 solid;
+    border-width: 1px;
+    border-radius: 10px;
 }

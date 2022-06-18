@@ -1,4 +1,4 @@
-export default function validateLog(val ,emailErrors,passworderrors,validationerror){
+export default function validateLog(val ,emailErrors,passworderrors,validationerror,mobile){
     let errors = {}
 
     if(!val.email){
@@ -12,7 +12,7 @@ export default function validateLog(val ,emailErrors,passworderrors,validationer
     if (!val.pswd) {
         errors.pswd= 'Le mot de passe est requis';
       } 
-     else if (val.pswd.length < 8) {
+     else if (val.pswd.length < 3) {
         errors.pswd = 'Le mot de passe doit contenir 8 symboles ou plus';
       }
     else if (passworderrors) {
@@ -20,6 +20,9 @@ export default function validateLog(val ,emailErrors,passworderrors,validationer
       }
     else if (validationerror) {
       errors.pswd = "Le compte est désactivé , vous ne pouvez pas vous connecter!";
+    }
+    else if(mobile){
+      errors.pswd = "Les utilisateurs mobiles non pas accès à l'interface web!";
     }
       return errors;
     
