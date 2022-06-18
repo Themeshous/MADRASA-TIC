@@ -123,14 +123,14 @@ async function forgetpassword(req,res){
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'esiuser22@gmail.com',
-        pass: 'rootroot',
+        user: 'a.saidoune@esi-sba.dz',
+        pass: 'sbajamais21',
       }
 
     });
     
     var mailOptions = {
-      from: 'esiuser22@gmail.com',
+      from: 'a.saidoune@esi-sba.dz',
       to: req.body.email,
       subject: 'Reset password',
       text: 'To reset your password, please click the link below.\n\nhttp://localhost:3000/auth/reset',
@@ -152,7 +152,7 @@ async function forgetpassword(req,res){
 async function updparmUser(req,res){
     const iduser= req.params.id;
     const user = req.body;
-    //console.log(req.body);    
+    console.log(req.body);    
     const data = await updateuser(user,iduser);
     res.json({data});
 

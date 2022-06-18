@@ -22,7 +22,7 @@ export const FormConnect = () => {
           <div className='btn-retour'>
             <a href='/' className='retour-aceuil'>
             <FontAwesomeIcon icon={faArrowAltCircleLeft} className="icon" />
-                Page d'aceuil
+                Page d'accueil
             </a>
           </div>
           </div>
