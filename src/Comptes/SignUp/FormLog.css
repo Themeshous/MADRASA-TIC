@@ -292,3 +292,9 @@
 .profession-service{
   list-style: none;
 }
+.form-success-rest-msg{
+  background-color: rgba(255, 255, 255, 0.589);
+  padding: 7%;
+  margin-top: 20%;
+  margin-left: 20%;
+}

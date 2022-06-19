@@ -125,7 +125,6 @@ export const Edit = () => {
 
   }
 
-  const imageURL = "http://localhost:2000/images/e985db7b-c10a-4893-8b96-352b3d6e01ec.jpg";
   return (
     <>
       {isLoading ? (<p className='loading'>Chargement...</p>) :
@@ -212,7 +211,7 @@ export const Edit = () => {
             <div className='element-line'>
               <div className='elem-rapport'>
                 <h1 className='titre-elem'>Image</h1>
-                <div className='related-info'>{declaration.imageFile ? (<img src={imageURL} alt="image-declaration" className='image-declaration' />) : ("Cette déclaration ne contient pas d'image")}</div>
+                <div className='related-info'>{declaration.imageFile ? (<img src={ "http://localhost:2000/images/"+declaration.imageFile} alt="image-declaration" className='image-declaration' />) : ("Cette déclaration ne contient pas d'image")}</div>
               </div>
             </div>
             {
