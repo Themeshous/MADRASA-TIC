@@ -47,6 +47,7 @@ const FormSignup = ({ submitForm }) => {
     }, [])
 
     const { handlechange, values, HandleSubmit, errors } = UseForm(submitForm, ValidateInfo);
+    let tab = Services.map((serv) => serv.service)
     return (
         <div className='form-content-right'>
             <form className='form-signup' onSubmit={HandleSubmit} noValidate>
@@ -153,7 +154,7 @@ const FormSignup = ({ submitForm }) => {
 
                             {
                                 (values.role === 'chef de service') ? <>
-                                    {Services.map((serv) =>
+                                    {tab.map((serv) =>
 
                                         <option key={serv} value={serv}>{serv}</option>
                                     )}

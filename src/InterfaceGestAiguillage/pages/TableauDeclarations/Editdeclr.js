@@ -124,7 +124,7 @@ export const Edit = () => {
     }
 
   }
-
+  let tab = Services.map((serv) => serv.service)
   return (
     <>
       {isLoading ? (<p className='loading'>Chargement...</p>) :
@@ -211,16 +211,16 @@ export const Edit = () => {
             <div className='element-line'>
               <div className='elem-rapport'>
                 <h1 className='titre-elem'>Image</h1>
-                <div className='related-info'>{declaration.imageFile ? (<img src={ "http://localhost:2000/images/"+declaration.imageFile} alt="image-declaration" className='image-declaration' />) : ("Cette déclaration ne contient pas d'image")}</div>
+                <div className='related-info'>{declaration.imageFile ? (<img src={"http://localhost:2000/images/" + declaration.imageFile} alt="image-declaration" className='image-declaration' />) : ("Cette déclaration ne contient pas d'image")}</div>
               </div>
             </div>
             {
-              declaration.etat === "rejeter" &&  <div className='element-line'>
-              <div className='elem-rapport'>
-                <h1 className='titre-elem'>remarque</h1>
-                <div className='related-info'>{declaration.remarques_de_responsable}</div>
+              declaration.etat === "rejeter" && <div className='element-line'>
+                <div className='elem-rapport'>
+                  <h1 className='titre-elem'>remarque</h1>
+                  <div className='related-info'>{declaration.remarques_de_responsable}</div>
+                </div>
               </div>
-            </div>
             }
             {
               declaration.IDrap ?
@@ -278,7 +278,7 @@ export const Edit = () => {
                   value={values.service}
                   onChange={handlechange}>
                   <option value="choisir" selected>Choisir ...</option>
-                  {Services.map((serv) =>
+                  {tab.map((serv) =>
 
                     <option key={serv} value={serv}>{serv}</option>
                   )}
