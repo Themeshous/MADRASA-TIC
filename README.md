@@ -1,3 +1,12 @@
+# The idea of Madrasa-tic project 
+
+Madrasa-tic: is a web/mobile platform that allows students and users of the school to easily report a problem at the school, this platform allows the technical services of the school to intervene more quickly when an anomaly is encountered within the school and to follow the school and to follow up on the reported problem.
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
